@@ -930,7 +930,7 @@ module ApplicationHelper
 
   def select_logo
     [
-      ["SEMINARIO", "logo_inicio_bacara.png"]
+      ["BACARA", "logo_inicio_bacara.png"]
     ]
   end
 

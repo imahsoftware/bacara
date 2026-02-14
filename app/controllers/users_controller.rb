@@ -352,7 +352,7 @@ class UsersController < ApplicationController
     @user.unlock_token = nil
     @user.locked_at = nil
     @user.save(validate: false)
-    mensaje = "SEMINARIO: Estimad@ #{@user.nombres}, nos permitimos enviar su usuario #{@user.identificacion} y contrasena #{@user.identificacion} para el ingreso a la plataforma de ASEAR, la cual sera una herramienta clave para el seguimiento y control de los colaboradores. - Url: https://appasearesp.com".html_safe
+    mensaje = "BACARA: Estimad@ #{@user.nombres}, nos permitimos enviar su usuario #{@user.identificacion} y contrasena #{@user.identificacion} para el ingreso a la plataforma de ASEAR, la cual sera una herramienta clave para el seguimiento y control de los colaboradores. - Url: https://appasearesp.com".html_safe
     Bacarasms::SendsmsServices.new.send_sms_users(@user.id, mensaje)
     flash['success'] = "Desbloqueado correctamente y mensaje enviado al celular: #{@user.celular.to_s}"
     redirect_to users_path
