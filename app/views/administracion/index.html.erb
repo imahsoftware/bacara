@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs pull-right ui-sortable-handle">
+        <li class="pull-left header"><strong>Base de Datos</strong></li>
+        <li><a href="#tab1" data-toggle="tab"><i class="fa fa-calendar-times-o"></i> <span></span> SQL En Ejecución</a></li>
+        <li><a href="#tab2" data-toggle="tab"><i class="fa fa-calendar-times-o"></i> <span></span> Jobs En Ejecución</a></li>
+        <li class="active"><a href="#tab3" data-toggle="tab"><i class="fa fa-calendar-times-o"></i> <span></span> Espacio en tablespace</a></li>
+      </ul>
+      <div class="tab-content" style="padding-bottom: 9px; border-bottom: 1px solid #ddd;">
+        <div class="tab-pane" id="tab1">
+          <%= render '/administracion/sqlruning' %>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <%= render '/administracion/jobs' %>
+        </div>
+        <div class="tab-pane active" id="tab3">
+          <%= render '/administracion/tablespace' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

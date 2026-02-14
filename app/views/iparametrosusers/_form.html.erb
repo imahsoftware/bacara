@@ -1,0 +1,23 @@
+<%= simple_form_for @iparametrosuser, remote: true do |f| %>
+  <%= hidden_field_tag :iparametro_id, params[:iparametro_id], value: params[:iparametro_id] %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :user_id, collection: User.where(["tipoconsulta not in ('PERSONA','CANDIDATO') and activo = 'S'"]).order(:nombre).collect {|p| [ p.nombrecompleto, p.id ] }, input_html: { class: 'select2 clean' }, as: :select,  include_blank: true, label: "Supervisor" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @iparametrosuser.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#iparametrosuser_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", iparametrosuser_path(@iparametrosuser), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br/>

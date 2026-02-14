@@ -1,0 +1,36 @@
+<% title @user.nombre %>
+<% if @user.etapa.to_s != "A" %>
+  <section class="content-header" style="margin-top: -39px; margin-left: -12px;">
+    <h4><%= @user.nombre rescue nil %>
+      <small><%= @user.username %></small>
+    </h4>
+  </section>
+<% end %>
+<% if @user.etapa.to_s == "A" %>
+  <% if is_sygma %>
+    <%= render partial: "form", locals: {user: @user} %>
+  <% else %>
+    <%= render partial: "formotros", locals: {user: @user} %>
+  <% end %>
+  <% unless @user.new_record? %>
+    <% if is_auth_c('copiarusuario') %>
+      <%= render "copyuser" %>
+    <% end %>
+  <% end %>
+<% elsif @user.etapa.to_s == "B" %>
+  <%= render 'usersmodulos/usersmodulos' %>
+<% elsif @user.etapa.to_s == "C" %>
+  <%= render 'userspermisos/userspermisos' %>
+<% elsif @user.etapa.to_s == "V" %>
+  <%= render 'usersvisitas/usersvisitas' %>
+<% elsif @user.etapa.to_s == "I" %>
+  <%= render 'usersreportes/usersreportes' %>
+<% elsif @user.etapa.to_s == "J" %>
+  <%= render 'migracionesusers/migracionesusers' %>
+<% elsif @user.etapa.to_s == "E" %>
+    <% @usersimagenes.each do |p| %>
+      <%= render '/usersimagenes/usersimagenes', :p, p %>
+    <% end %>
+<% elsif @user.etapa.to_s == "K" %>
+  <%= render 'usersparametros/usersparametros' %>
+<% end %>

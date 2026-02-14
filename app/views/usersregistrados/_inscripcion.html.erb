@@ -1,0 +1,140 @@
+<style>
+  body {
+    font-family: "Lato", sans-serif;
+  }
+
+
+  .main-head {
+    height: 150px;
+    background: #FFF;
+
+  }
+
+  .sidenav {
+    height: 100%;
+    background-color: #5FABE4;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+
+  .main {
+    padding: 0px 10px;
+  }
+
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    .login-form {
+      margin-top: 10%;
+    }
+
+    .register-form {
+      margin-top: 10%;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .main {
+      margin-left: 40%;
+    }
+
+    .sidenav {
+      width: 40%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+
+    .login-form {
+      margin-top: 80%;
+    }
+
+    .register-form {
+      margin-top: 20%;
+    }
+  }
+
+
+  .login-main-text {
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+  }
+
+  .login-main-text h2 {
+    font-weight: 300;
+  }
+
+  .btn-black {
+    background-color: #000 !important;
+    color: #fff;
+  }
+</style>
+
+
+
+
+
+<div class="sidenav">
+  <div class="login-main-text" style="padding: 150px;">
+    <%= image_tag 'logo_inicio.png', class: 'user-image', size: '350x180' %>
+  </div>
+</div>
+<div class="main">
+  <div class="col-md-12 col-sm-12">
+    <div class="login-form" style="margin-top: 0% !important;">
+      <%= simple_form_for(@usersregistrado) do |f| %>
+        <script>
+            function justNumbers(e) {
+                var keynum = window.event ? window.event.keyCode : e.which;
+                if ((keynum == 8) || (keynum == 46))
+                    return true;
+
+                return /\d/.test(String.fromCharCode(keynum));
+            }
+        </script>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tab-content">
+              <div class="box-body">
+                <legend><strong>
+                  <div align="left">Datos básicos de registro de usuario</div>
+                </strong></legend>
+                <div class="row">
+                  <div class="col-md-12"><%= f.input :nombres, input_html: {:onchange => "javascript:this.value=this.value.toUpperCase();"}, label: "Nombres" %></div>
+                  <div class="col-md-12"><%= f.input :email, label: "Correo Electronico" %></div>
+                  <div class="col-md-12">
+                    <label>Contraseña</label>
+                    <%= f.input :password, autocomplete: "off", class: "form-control", placeholder: "Contraseña", label: false %>
+                  </div>
+                  <div class="col-md-12">
+                    <label>Confirmar contraseña</label>
+                    <%= f.input :confirma_password, autocomplete: "off", class: "form-control", placeholder: "Confirmar Contraseña", label: false %>
+                  </div>
+                </div><br/>
+                <ul class="list-unstyled list-inline pull-right">
+                  <li><%= link_to root_url, class: 'btn btn-flat btn-primary' do %>
+                      Regresar
+                    <% end -%>
+                  </li>
+                  <li><%= f.button :submit, "Guardar", class: 'btn btn-flat btn-danger' do %>
+                      <i class="fa fa-check"></i>
+                    <% end -%>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<%= render 'layouts/flash_messages', flash: flash %>

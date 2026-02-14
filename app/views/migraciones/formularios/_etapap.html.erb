@@ -1,0 +1,52 @@
+<% isadmin = current_user.id
+   is_auth_c_contratacionaprobar = is_auth_c("contratacionaprobar")
+%>
+<% if Personasformulario.select("contrato_id").where("estado = '#{@estado}'").present? %>
+  <div class="pull-right">
+    <%= link_to informe_datas_path(infgrupo_id: 68, portafolio_id: @estado, format: :xlsx), data: { toggle: 'tooltip' }, title: 'Informe Completo' do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i> Generar Informe</button>
+    <% end %>
+    <%= link_to informe_datas_path(infgrupo_id: 69, portafolio_id: @estado, format: :xlsx), data: { toggle: 'tooltip' }, title: 'Informe Lilly' do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i> Generar Lilly</button>
+    <% end %>
+    <%= link_to informedat_datas_path(infgrupo_id: 74, format: :xlsx), data: { toggle: 'tooltip' }, title: 'Informe Don Alberto' do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i> Generar info Don Alberto</button>
+    <% end %>
+  </div><br/><br/>
+  <table class="table table-bordered table-condensed table-striped">
+    <%
+      consultarallconv = is_auth_c("consultarallconv")
+      Personasformulario.select("contrato_id, (select concat(c.nro_contrato,' - ',e.nombre) 
+                                              from contratos c, empresas e where c.id = personasformularios.contrato_id
+                                              and c.empresa_id = e.id) nombrecontrato, count(0) cantidad")
+                        .where("estado = '#{@estado}'").distinct.group("contrato_id").each do |contrato|
+    %>
+      <tr>
+        <td>
+          <div id="abrir_contratos<%= contrato.contrato_id %><%= @estado.downcase.gsub(" ", '_') %>" class="pull-left">
+            <%= link_to show_detalle_contratos_menus_path(contrato_id: contrato.contrato_id, estado: @estado, ruta: 'ABRIR', consultarallconv: consultarallconv, is_auth_c_contratacionaprobar: is_auth_c_contratacionaprobar), remote: true do %>
+              <i class="fa fa-arrow-circle-down" data-toggle="tooltip" style="color:green;" data-original-title="Pulsa aquí para Ver Contrato"></i>
+              <%= contrato.nombrecontrato rescue nil %> (<%= contrato.cantidad rescue nil %>)
+            <% end %>
+          </div>
+          <div id="cerrar_contratos<%= contrato.contrato_id %><%= @estado.downcase.gsub(" ", '_') %>" class="pull-left hide">
+            <%= link_to show_detalle_contratos_menus_path(contrato_id: contrato.contrato_id, estado: @estado, ruta: 'CERRAR', consultarallconv: consultarallconv, is_auth_c_contratacionaprobar: is_auth_c_contratacionaprobar), remote: true do %>
+              <i class="fa fa-arrow-circle-up" data-toggle="tooltip" style="color:red;" data-original-title="Pulsa aquí para Ver Contrato"></i>
+              <%= contrato.nombrecontrato rescue nil %> (<%= contrato.cantidad rescue nil %>)
+            <% end %>
+          </div>
+        </td>
+      </tr>
+      <tr id="tr_show_contratos<%= contrato.contrato_id %><%= @estado.downcase.gsub(" ", '_') %>" class="hidden">
+        <td>
+          <div id="abrir_detalle_contratos<%= contrato.contrato_id %><%= @estado.downcase.gsub(" ", '_') %>" style="padding-left: 30px; padding-right: 30px;"></div>
+        </td>
+      </tr>
+
+    <% end %>
+  </table>
+<% else %>
+  <div class="alert alert-danger">
+    <h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4><%= t :atencion_msj %></div>
+<% end %>
+

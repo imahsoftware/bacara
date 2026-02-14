@@ -1,0 +1,17 @@
+<tr id="objeto_<%= objeto.id %>">
+  <td class="text-center">
+    <%# if is_auth_a('objeto') %>
+      <%= link_to edit_objeto_path(objeto), remote: true, class: 'edit_objeto_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+    <%# end %>
+    <%# if is_auth_e('objeto') %>
+      <%= link_to objeto, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <%# end %>
+   </td>
+  <td><%= objeto.descripcion %></td>
+  <td><%= objeto.descripcion_ampliada %></td>
+  <td><%= objeto.autorizado %></td>
+</tr>

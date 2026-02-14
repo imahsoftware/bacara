@@ -1,0 +1,17 @@
+$("#objeto_form").collapse("hide");
+
+$("#objeto_form").empty();
+
+<% if @active_record.present? %>
+	$("#objeto_<%= @active_record.id %>").replaceWith("<%= j render 'tr', objeto: @active_record %>");
+<% end %>
+
+$("#objeto_<%= @objeto.id %>").html("<td colspan='7'><%= j render 'form' %></td>");
+
+$("#objeto_<%= @objeto.id %>").addClass("active_objeto");
+
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,18 @@
+<%= simple_form_for([@user, @usersparametro], remote: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.input :campo, collection: Iparametro.select("campo").where("campo not in (select campo from usersparametros where user_id = #{@user.id})").distinct.order('campo').collect { |p| [p.campo, p.campo] }, input_html: { class: 'select2' }, label: 'Campo Permitido' %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @usersparametro.new_record? %>
+        <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersparametro_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+      <% else %>
+        <%= link_to "#{t :cancelar}", user_usersparametro_path(@user, @usersparametro), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+    </div>
+  </div>
+<% end %>

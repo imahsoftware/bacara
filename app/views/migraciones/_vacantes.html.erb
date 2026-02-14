@@ -1,0 +1,121 @@
+<% isadmin = current_user.id
+   @vacantes = Objeto.find_by_sql("SELECT e.`autobuscar`, c.nro_contrato, cc.perfil, cc.salario, cc.cantidad, cc.asignados, cc.disponibles, cc.id contratoscargo_id, cc.contrato_id,
+                                         (select distinct 'X' from contratoscargospersonas where contratoscargo_id = cc.id) existepersona,
+                                         cc.detalle_perfil
+                                  FROM   contratoscargos cc, contratos c, empresas e, contratoscargospersonas cp
+                                  WHERE  cp.contratoscargo_id = cc.id
+                                  AND    cc.`contrato_id` = c.`id`
+                                  AND    c.`empresa_id` = e.id
+                                  ORDER BY e.`id`")
+%>
+<br/>
+<legend style="margin-top: -19px;">Vacantes registradas</legend>
+<div class="box box-danger">
+  <div class="box-body">
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+      <tr class="thcolor">
+        <th width="20%" class="text-left">Cliente</th>
+        <th class="text-left">Perfil</th>
+        <th width="5%" class="text-center">Cant.</th>
+        <th width="5%" class="text-center">Asig.</th>
+        <th width="5%" class="text-center">Disp.</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @vacantes.each do |p| %>
+        <tr>
+          <td class="text-left" style="font-size:10px;" rowspan="2">
+            <%= p.autobuscar rescue nil%>
+            <br/><%= link_to edit_contrato_path(id: p.contrato_id, etapa: 'A'), data: {toggle: 'tooltip'}, title: 'Ir al contrato' do %>
+              <i class="fa fa-list-alt"></i>
+            <% end %>
+            Nro Contrato: <%= p.nro_contrato rescue nil%>
+          </td>
+          <td class="text-left" style="font-size:10px;"><%= p.perfil rescue nil%>
+            <% if p.detalle_perfil.to_s == "" %><div style="font-size:8px;">Sin Info del perfil</div><% else %><div style="font-size:8px;"><strong>Perfil: </strong><%=p.detalle_perfil.to_s%></div><%end %>
+          </td>
+          <td class="text-center" style="font-size:11px;"><%= p.cantidad rescue nil%></td>
+          <td class="text-center" style="font-size:11px;"><%= p.asignados rescue nil%></td>
+          <td class="text-center" style="font-size:11px;"><%= p.disponibles rescue nil%></td>
+        </tr>
+        <tr>
+          <td colspan="4">
+            <table class="table table-bordered table-condensed table-striped">
+              <thead>
+              <tr class="thcolor">
+                <td width="8%"><div align="center"></div></td>
+                <td class="text-left" width="40%">Identificacion - Nombre</td>
+                <td class="text-left">Detalle</td>
+                <td class="text-center" width="10%">Estado</td>
+              </tr>
+              </thead>
+              <tbody id="tbody_contratoscargospersonas">
+              <% Contratoscargospersona.where(contratoscargo_id: p.contratoscargo_id).each do |contratoscargospersona| %>
+                <tr id="contratoscargospersona_<%=contratoscargospersona.id %>">
+                <td class="text-center">
+                  <%= link_to informe_datas_path(infgrupo_id: 82, portafolio_id: contratoscargospersona.id, format: :xlsx), data: { toggle: 'tooltip' }, title: 'Informe Completo' do %>
+                    <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i></button>
+                  <% end %>
+                  <button class="btn btn-xs btn-info"><span data-toggle="tooltip" data-html="true" data-original-title="<div align='left'>
+                    <%= contratoscargospersona.created_at.strftime("%Y-%m-%d %X") rescue nil %>- <%= contratoscargospersona.user.username rescue nil %>
+                      <br/><%= contratoscargospersona.updated_at.strftime("%Y-%m-%d %X") rescue nil %> - <%= User.find(contratoscargospersona.user_anula).username rescue nil %>
+                    </div>"><i class="fa fa-user" aria-hidden="true"></i></span></button>
+                </td>
+                <td class="text-left" style="font-size: 11px;"><%= contratoscargospersona.identificacion rescue nil %><%= contratoscargospersona.nombre rescue nil %> <%= contratoscargospersona.primer_apellido rescue nil %> <%= contratoscargospersona.segundo_apellido rescue nil %>
+                  <br/>
+                  <% if contratoscargospersona.estado.to_s == 'PENDIENTE' %>
+                    <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'APROBADO'), data: { toggle: 'tooltip' }, title: "Aprobar" do %>
+                      <button class="btn btn-xs btn-primary"><i class="fa fa-check"></i> Aprobar</button>
+                    <% end %>
+                    <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'RECHAZADO'), data: { toggle: 'tooltip' }, title: "Rechazar" do %>
+                      <button class="btn btn-xs btn-danger"><i class="fa fa-close"></i> Rechazar</button>
+                    <% end %>
+                    <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'DESISTE'), data: { toggle: 'tooltip' }, title: "Desiste" do %>
+                      <button class="btn btn-xs btn-primary"><i class="fa fa-check"></i> Desiste</button>
+                    <% end %>
+                    <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'SINCONTACTO'), data: { toggle: 'tooltip' }, title: "Sin Contacto" do %>
+                      <button class="btn btn-xs btn-info"><i class="fa fa-close"></i> Sin Contacto</button>
+                    <% end %>
+                <% else %>
+                    <% if ['RECHAZADO', 'DESISTE','SINCONTACTO'].exclude?(contratoscargospersona.estado) %>
+                      <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'DESISTE'), data: { toggle: 'tooltip' }, title: "Desiste" do %>
+                        <button class="btn btn-xs btn-primary"><i class="fa fa-check"></i> Desiste</button>
+                      <% end %>
+                      <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'RECHAZADO'), data: { toggle: 'tooltip' }, title: "Rechazar" do %>
+                        <button class="btn btn-xs btn-danger"><i class="fa fa-close"></i> Rechazar</button>
+                      <% end %>
+                      <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'SINCONTACTO'), data: { toggle: 'tooltip' }, title: "Sin Contacto" do %>
+                        <button class="btn btn-xs btn-info"><i class="fa fa-close"></i> Sin Contacto</button>
+                      <% end %>
+                    <% end %>
+                    <% if ['APROBADO'].include?(contratoscargospersona.estado) %>
+                      <%= link_to cambioestado_contratoscargospersonas_path(id: p.id, estado: 'DEVUELTO'), data: { toggle: 'tooltip' }, title: "Devuelto" do %>
+                        <button class="btn btn-xs btn-warning"><i class="fa fa-sign-out"></i> Devolver</button>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td class="text-left" style="font-size: 11px;">
+                  <div style="font-size:8px;">Celular: <%= contratoscargospersona.celular rescue nil %></div>
+                  <div style="font-size:8px;">Celular2: <%= contratoscargospersona.celular2 rescue nil %></div>
+                  <div style="font-size:8px;">Email: <%= contratoscargospersona.correo rescue nil %></div>
+                  <div style="font-size:8px;">Recomendado por: <%= contratoscargospersona.recomendado_por rescue nil %></div>
+                  <div style="font-size:8px;">Doc Digital
+                    <% if contratoscargospersona.cargoimagen_file_name.to_s != "" %>
+                        <%= link_to contratoscargospersona.cargoimagen.url(:original, false), data: { toggle: 'tooltip' }, title: 'Ver documento', onclick: 'window.open(this.href,"new_window","height=450,width=600,scrollbars=yes");return false;' do %>
+                          <i class="fa fa-cloud-download text-danger"></i> <%=contratoscargospersona.cargoimagen_file_name %>
+                        <% end %>
+                    <% end %></div></td>
+                <td class="text-center" style="font-size: 11px;"><%= contratoscargospersona.estado rescue nil %></td>
+              </tr>
+            <% end %>
+            </tbody>
+            </table>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

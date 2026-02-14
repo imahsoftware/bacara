@@ -1,0 +1,22 @@
+<tr id="modulo_<%= modulo.id %>">
+  <td class="text-center">
+    <%# if is_auth_a('modulo') %>
+      <%= link_to edit_modulo_path(modulo), remote: true, class: 'edit_modulo_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+    <%# end %>
+    <%# if is_auth_e('modulo') %>
+      <%= link_to modulo, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <%# end %>
+   </td>
+  <td><%= modulo.descripcion %></td>
+  <td><%= modulo.controlador %></td>
+  <td><%= modulo.imagen %></td>
+  <td><%= modulo.mensaje %></td>
+  <td><%= modulo.nivel %></td>
+  <td><%= modulo.autorizado %></td>
+  <!-- #modulo.grupo -->
+  <!-- #modulo.color -->
+</tr>

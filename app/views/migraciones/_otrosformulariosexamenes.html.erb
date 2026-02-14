@@ -1,0 +1,42 @@
+<% if is_auth_c("examensst") %>
+  <div class="box-body paddin-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="<%= @etapap == "1" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "1") do %>
+                <i class="fa fa-file-excel-o"></i> Lotes
+              <% end %></li>
+            <li class="<%= @etapap == "2" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "2", tipo: "PROGRAMACION", codigomigracion: 13) do %>
+                <i class="fa fa-cloud-upload"></i> Programación
+              <% end %></li>
+            <li class="<%= @etapap == "3" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "3", tipo: "ACTUALIZACION", codigomigracion: 14) do %>
+                <i class="fa fa-bullseye"></i> Actualización
+              <% end %></li>
+            <li class="<%= @etapap == "4" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "4", tipo: "ESTADO", codigomigracion: 15) do %>
+                <i class="fa fa-cubes"></i> Actualizacion Estados
+              <% end %></li>
+          </ul>
+          <div class="tab-content">
+            <% if ["1"].include?(@etapap) %>
+              <%= render 'migraciones/formularios/etapal' %>
+            <% elsif ["2", "3"].include?(@etapap) %>
+              <%= render 'migraciones/formularios/etapac' %>
+            <% elsif ["4"].include?(@etapap) %>
+              <%= render 'migraciones/formularios/etapae' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="alert alert-danger">
+    <h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4>Usted No tiene Acceso a este proceso</div>
+  </div>
+<% end %>
+
+
+
+
+

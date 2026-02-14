@@ -1,0 +1,10 @@
+<% if @portafolio.etapa.to_s == "A" %>
+  <% if is_sygma %>
+    <%= render partial: "geintac", locals: { portafolio: @portafolio } %>
+  <% else %>
+    <%= render partial: 'nogeintac', locals: { portafolio: @portafolio } %>
+  <% end %>
+<br/>
+<% elsif @portafolio.etapa.to_s == "B" %>
+  <%= render 'portafoliospersonas/portafoliospersonas' %>
+<% end %>

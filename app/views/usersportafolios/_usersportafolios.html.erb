@@ -1,0 +1,21 @@
+<div class="box box-primary">
+  <div class="box-header">
+    <legend>Portafolios</legend>
+    <div class="box-tools pull-right">
+      <%= link_to new_user_usersportafolio_path(@user), id: 'new_usersportafolio_button', class: 'btn btn-sm btn-info', remote: true do %>
+        <i class="fa fa-plus-square"> </i> <span><%=t :agregar%></span>
+      <% end %>
+    </div>
+  </div>
+  <div class="flash_messages"></div>
+  <div class="box-body">
+    <div id="usersportafolio_form" class="collapse"></div>
+    <div id="usersportafolios">
+      <% if @user.usersportafolios.present? %>
+        <%= render 'usersportafolios/tabla' %>
+      <% else %>
+        <div class="alert alert-warning"><h4><i class="icon fa fa-info"></i> <%=t :atencion%></h4><%=t :atencion_msj%></div>
+      <% end %>
+    </div>
+  </div>
+</div>

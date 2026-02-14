@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+   <title>S I S</title>
+    <style type="text/css" media="screen">
+      h3 { color: #7185B9; }
+      ul { list-style: none; }
+      #some-id { font-size:2em; }
+      .some-class { color:red; }
+    </style>
+</head>
+<body>
+<img src="http://190.0.34.154:6001/images/logo_g_intac.png"/>
+<br/><br/><br/>
+<div align="justify" style="font-size: 15px; font-family: Verdana, Geneva, sans-serif;">
+Medellín, 28 de Agosto de 2014<br/><br/>
+Señor(a)<br/>
+<strong><%=@persona.nombres rescue nil%> - <%=@persona.identificacion rescue nil%><br/>
+<%=@persona.email rescue nil%><br/>
+<%=@persona.perdireccion rescue nil%><br/>
+<%=@persona.perciudad rescue nil%>
+</strong><br/><br/><br/>
+Asunto: Notificación por Aviso de Resolución.<br/><br/>
+Saludos<br/><br/>
+Considerando que el día <%=@persona.fecha_envio.strftime("%Y-%m-%d") rescue nil%> le fue enviada al correo electrónico registrado en su expediente al momento de inscripción dentro del Fondo EPM, 
+la citación para la diligencia de notificación personal, sin que usted se hubiese hecho presente para materializar el acto de notificación personal y dado 
+que el término de comparecencia se encuentra vencido, me permito notificar por aviso el contenido de la resolución No. <%=@persona.nro_resolucion rescue nil%> 
+del 06 de agosto de 2014, emanada del Director General de <strong>LA AGENCIA DE EDUCACIÓN SUPERIOR DE MEDELLÍN– G-Intac-</strong>, por medio de la cual 
+se consolida el estado del crédito de un beneficiario del fondo Medellín-EPM-Universidades.<br/><br/>
+Para el efecto, se acompaña (archivo adjunto) copia íntegra de respectivo acto administrativo.<br/><br/>
+Contra la resolución que se notifica procede el recurso de reposición, el cual deberá interponerse ante el Director General de G-Intac dentro de
+los diez (10) días, siguientes a aquél en que se entienda perfeccionada la notificación, en las instalaciones de la entidad o a través de medios
+electrónicos.<br/><br/>
+Se advierte que la notificación se entiende surtida, al finalizar el día siguiente al de entrega (recibo en bandeja del correo electrónico)
+de este aviso.<br/><br/>
+Atentamente,<br/><br/><br/>
+<strong>RICARDO GIL PADILLA.<br/>
+Subdirector Administrativo, Financiero y de Apoyo a la Gestión.<br/>
+Agencia Educación Superior-G-Intac-
+</strong>
+</div>
+<br/><br/>
+<div align="justify" style="font-size: 11px; font-family: Verdana, Geneva, sans-serif;">
+  <strong>S I S - Sistema de Informacion G-Intac- <%=Time.now.strftime("%Y-%m-%d %X")%><br/>***Por favor no conteste este mensaje, ha sido enviado desde un e-mail automático y no recibirá respuesta.***</strong>
+</div>
+</body>
+</html>

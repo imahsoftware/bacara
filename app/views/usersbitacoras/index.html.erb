@@ -1,0 +1,26 @@
+<h1>Listing usersbitacoras</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Usertransaccion</th>
+    <th>Tipo</th>
+    <th>Transaccion</th>
+  </tr>
+
+<% @usersbitacoras.each do |usersbitacora| %>
+  <tr>
+    <td><%=h usersbitacora.user %></td>
+    <td><%=h usersbitacora.usertransaccion_id %></td>
+    <td><%=h usersbitacora.tipo %></td>
+    <td><%=h usersbitacora.transaccion %></td>
+    <td><%= link_to 'Show', usersbitacora %></td>
+    <td><%= link_to 'Edit', edit_usersbitacora_path(usersbitacora) %></td>
+    <td><%= link_to 'Destroy', usersbitacora, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New usersbitacora', new_usersbitacora_path %>

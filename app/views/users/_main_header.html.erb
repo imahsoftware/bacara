@@ -1,0 +1,53 @@
+<aside class="main-sidebar">
+
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel">
+      <div class="pull-left info">
+        <p>Usuarios</p>
+        <%= link_to users_path do %>
+                    <i class="fa fa-circle text-success"></i><span>Regresar</span>
+          <% end %>
+      </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header"><%=t :menu%></li>
+      <!-- Optionally, you can add icons to the links -->
+      <% unless @user.new_record? %>
+      <li class="treeview">
+        <li>
+          <%= link_to edit_user_path(etapa: "A", id: @user.id) do %>
+                    <i class="fa fa-bullseye"></i><span>Datos basicos</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to edit_user_path(etapa: "B", id: @user.id) do %>
+                    <i class="fa fa-bullseye"></i> <span>Modulos</span>
+          <% end %>
+        </li>
+        <li>
+           <%= link_to edit_user_path(etapa: "C", id: @user.id) do %>
+                  <i class="fa fa-bullseye"></i> <span>Permisos</span>
+           <% end %>
+        </li>
+        <li>
+           <%= link_to edit_user_path(etapa: "D", id: @user.id) do %>
+                  <i class="fa fa-bullseye"></i> <span>Agenda</span>
+           <% end %>
+        </li>
+        <li>
+           <%= link_to edit_user_path(etapa: "E", id: @user.id) do %>
+                  <i class="fa fa-bullseye"></i> <span>Imagenes</span>
+           <% end %>
+        </li>
+      </li>
+      <% end %>
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

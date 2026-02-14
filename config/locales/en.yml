@@ -1,0 +1,586 @@
+en:
+  editar_perfil: Edit Profile
+  salir: Log Out
+  ver_todos: See all
+  hay: There are
+  buscar: Search
+  indicadores_presupuesto_ejecucion: Indicadores de Presupuesto vs Ejecución
+  soportes_pendientes: Soportes Pendientes
+  parametros_consulta: Parametros de la Consulta
+  activos: Activos
+  total_activos: Total Activos
+  total_creditos: Total Creditos
+  al_dia: Al Dia
+  en_mora: En Mora
+  recaudo_mes: Recaudo Mes
+  recaudos: Recaudos
+  recaudo_aldia: Recaudos al día
+  recaudomora_30: Recaudos Mora Menor a 30 días
+  recaudosmora_90: Recaudos Mora entre 31 - 90 días
+  recaudosmora_180: Recaudos Mora entre 91 - 180 días
+  recaudosmora_100: Recados Mora Mayor a 180 días
+  ppto_activos: Ppto Activos
+  nuevos_activos: Nuevos Activos
+  ppto_nuevos_activos: Ppto Nuevos Activos
+  antiguos_activos: Antiguos Activos
+  ppto_antiguos_activos: Ppto Antiguos Activos
+  en_proceso: En Proceso
+  inactivos: Inactivos
+  total: Total
+  resumen_de_estados: Resumen de Estados
+  inscripcion_basica: Inscripción Básica
+  pago_cuota_inicial: Pagó Estudio Edupol (No Reembolsable).
+  selecciono_forma_de_pago: Seleccionó Forma de Pago
+  gestion_documental_aprobada: Gestión Documental Aprobada
+  indicadores_recaudo_presupuesto: Indicadores de Recaudo vs Presupuesto
+  antiguos: Antiguos
+  buscador_de_personas: Buscador de Personas
+  tipo_de_consulta: Tipo de consulta
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"
+  activerecord:
+    attributes:
+      coactivoscontrol:
+       causal_devolucion: 'Causal de devolución'
+       coactivostipo: 'Type'
+       empresa_correo: 'Empresa de correo'
+       fecha: 'Fecha de notificación'
+       fecha_devolucion: 'Fecha de devolución'
+       fecha_recibo_correo: 'Fecha en que se recibio el correo'
+      coactivosinvinmueble:
+        ciudad_notaria: 'Ciudad de la notaria'
+        direccion: 'Dirección'
+        fecha_anotacion: 'Fecha de la anotación'
+        fecha_escritura: 'Fecha escritura de compra venta'
+        matricula: 'Matricula inmobiliaria'
+        nro_anotacion: 'Número de la anotación'
+        nro_escritura: 'Número de escritura de compra venta'
+        oficina_instrumentos: 'Oficina de instrumentos públicos'
+      coactivosinvlaboral:
+        direccion: 'Dirección'
+        email_rh: 'Email'
+        nit: 'NIT'
+        nombre_rh: 'Nombre jefe recursos humanos'
+        telefono_rh: 'Teléfono'
+      coactivosinvvehiculo:
+        oficina: 'Cuidad de la placa'
+      coactivostramite:
+        coactivospospropone: 'Propuesta'
+        decision: 'Decisión'
+        fecha_decision: 'Fecha decisión'
+        observaciones: 'Considerando'
+        user_decision_id: 'Usuario decisión'
+      procesosactuacion:
+        actuacion_requeridad: Actuaciones previas requeridas
+      cohorte:
+        periodosconvocatoria_id: Periodo Académico
+        nombre: Cohorte
+        descripcion: Descripcion detallada
+        fecha_inicio: Fecha inicio
+        fecha_fin: Fecha terminacion
+        fecha1: Fecha limite de pago
+        inicial1: Valor inscripción
+        valor1: Valor cuota inicial
+        fecha2: Fecha limite de pago
+        inicial2: Valor inscripción
+        valor2: Valor cuota inicial
+        fecha3: Fecha limite de pago
+        inicial3: Valor inscripción
+        valor3: Valor cuota inicial
+      cohortesprogreincredito:
+        identificacion: identificación
+        maximo_credito: Creditos Maximos
+      portafoliossucursal:
+        cuenta_proveedor: Cuenta del estudio
+      cohortesprograma:
+        opc_valor: Pago parcial
+        opc_inicial1: Pago parcial
+        opc_inicial2: Pago parcial
+        opc_inicial3: Pago parcial
+        opc_rinicial1: Pago parcial
+        opc_rinicial2: Pago parcial
+        opc_rinicial1: Pago parcial
+        opc_valor1: Pago parcial
+        opc_valor2: Pago parcial
+        opc_valor3: Pago parcial
+        opc_rvalor1: Pago parcial
+        opc_rvalor2: Pago parcial
+        opc_rvalor3: Pago parcial
+        estado: Estado del programa
+        universidadesprograma_id: Universidad y programa
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        fecha1: Fecha Límite
+        fecha2: Fecha Límite
+        fecha3: Fecha Límite
+        rfecha1: Fecha Límite
+        rfecha2: Fecha Límite
+        rfecha3: Fecha Límite
+        inicial1: Estudio Edupol (No Reembolsable)
+        inicial2: Estudio Edupol (No Reembolsable)
+        inicial3: Estudio Edupol (No Reembolsable)
+        rinicial1: Estudio Edupol (No Reembolsable)
+        rinicial2: Estudio Edupol (No Reembolsable)
+        rinicial1: Estudio Edupol (No Reembolsable)
+        valor1: Valor Inscripción
+        valor2: Valor Inscripción
+        valor3: Valor Inscripción
+        rvalor1: Valor Inscripción
+        rvalor2: Valor Inscripción
+        rvalor3: Valor Inscripción
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      formulario:
+        tiposdocumento_id: Tipo de documento
+        direccion: Dirección residencia
+        email: Correo electrónico
+        clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
+        nacimiento_municipio_id: Municipio de nacimiento
+        email_institucional: Correo Institucional
+        discapacidad: ¿Tiene alguna discapacidad?
+        tiposdiscapacidad_id: Tipo de discapacidad
+        medio: ¿Por cuál medio se enteró de EDUPOL?
+        zona: Zona de residencia
+        residencia_municipio_id: Municipio de la residencia
+        universidadesprograma_id: Programa Académico
+        cohorte_id: Periodo Académico
+        centro_id: Centro de Apoyo
+        comercial_user_id: Cazador
+        ciudadexpedicion_id: 'Ciudad de Expedición'
+      persona:
+        tiposdocumento_id: Document type
+        direccion: Residence Adress
+        email: Email
+        email_institucional: Correo Institucional
+        clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
+        nacimiento_municipio_id: Municipio de nacimiento
+        zona: Zona de residencia
+        discapacidad: ¿Tiene alguna discapacidad?
+        tiposdiscapacidad_id: Tipo de discapacidad
+        residencia_municipio_id: Municipio de la residencia
+        universidadesprograma_id: Universidad y programa
+        cohorte_id: Cohorte
+        centro_id: Centro de Apoyo
+        medio: ¿Por cuál medio se enteró de EDUPOL?
+        ciudadexpedicion_id: 'Ciudad de Expedición'
+        zona: Zona
+        codclavecic: Codclavecic
+        nacionalidad: Nacionalidad
+        gps_codigo_sensible: Codigo Sensible
+        gps_fch_deteccion: Fecha de Detección
+      personasprograma:
+        universidadesprograma_id: Programa Académico
+        cohorte_id: Periodo Académico a Cursar
+        centro_id: Centro de Apoyo
+        comercial_user_id: Cazador
+        ciudad_colegio_bachiller: Ciudad donde se graduó de bachiller
+        nombre_colegio_bachiller: Nombre del Colegio
+        fecha_finalizacion_bachiller: Fecha de Finalización bachiller
+        codigo_snp_examen_estado: Código snp del examen de estado
+        fecha_presentacion_examen: Fecha Presentación del examen
+        puntuacion_lenguaje: Lenguaje
+        puntuacion_matematicas: Matemáticas
+        puntuacion_cienciassociales: Ciencias Sociales
+        puntuacion_electiva: Electiva
+        puntuacion_biologia: Biología
+        puntuacion_quimica: Química
+        puntuacion_ingles: Inglés
+        puntuacion_filosofia: Filosofía
+        origen_dineropago: Origen del Dinero para pago de Estudios
+        actividad_economica: Actividad Económica
+        nombre_empresa: Nombre de Empresa
+        telefono_empresa: Teléfono de la empresa
+        direccion_empresa: Dirección de la Empresa
+        ciudad_empresa: Ciudad de la Empresa
+        cargo_empresa: Cargo
+        salario: Salario Y/O Ingresos
+        tiempo_vinculacion: Tiempo Vinculación en Meses
+        entidad_salud: Entidad Promotora de Salud
+        fondo_pensiones: Fondo de Pensiones y Cesantias
+        tipo_vivienda: Tipo de Vivienda
+        servicios_publicos: Servicios Públicos
+        requiere_ayudafinanciera: ¿Requiere Ayuda Financiera?
+        padece_enfermedad_cronica: ¿Padece Alguna Enfermedad Crónica?
+        enfermedad: ¿Que enfermedad?
+      personasdireccion:
+        coordenada_x: Coordenada X
+        coordenada_y: Coordenada Y
+      personashipotecaria:
+        garantia_liberada: Type of Resolution – Collateral
+        tipo_inmueble: Tipo Inmueble
+        direccion: Address
+        municipio: City
+        numero_matricula: Número Matricula
+        oficina_intrumentos: Oficina Instrumentos
+        nombre_propietario: Nombre Propietario
+        identificacion_propietario: Identificación Propietario
+        fecha_adq: Fecha Adquisición
+        escritura_adq: Escritura Adquisición
+        valor_avaluo: Valor Avalúo
+        fecha_avaluo: Fecha Avalúo
+        deuda_adm: Deuda de Administración
+        fecha_deuda: Fecha Deuda
+        tipo_garantia: Tipo de Hipoteca
+        garantia_compartida: Garantía Compartida
+        tipo_viv: Tipo de Vivienda
+        perumunicipio: Municipio
+        ciudad_nothipoteca: Ciudad notaria hipoteca
+        hipoteca_afavor: Hipoteca a favor de
+        garantia_retirada: La garantía ha sido retirada
+        garantia_retira_fecha: Fecha en la cual se levantó la garantía
+        valor_tasacion: Ult. monto afectación
+        origen: Origen del dato
+        referencia_catastral: Referencia Catastral
+        situacion_juridica: Situación Juridica del inmueble
+      personasinvinmueble:
+        origen: Origen del dato
+        referencia_catastral: Referencia Catastral
+        situacion_juridica: Situación Juridica del inmueble
+      personasinvvehiculo:
+        origen: Origen del dato
+        organismo: Organismo de Transito
+        direccion_organismo: Dirección Organismo de Transito
+        municipio_org: Municipio Organismo
+      inmueble:
+        tipo_inmueble: Tipo Inmueble
+        direccion: Dirección
+        municipio: Municipio
+        numero_matricula: Número Matricula
+        oficina_intrumentos: Oficina Instrumentos
+        nombre_propietario: Nombre Propietario
+        identificacion_propietario: Identificación Propietario
+        fecha_adq: Fecha Adquisición
+        escritura_adq: Escritura Adquisición
+        valor_avaluo: Valor Avalúo
+        fecha_avaluo: Fecha Avalúo
+        deuda_adm: Deuda de Administración
+        fecha_deuda: Fecha Deuda
+        tipo_garantia: Tipo de Hipoteca
+        garantia_compartida: Garantía Compartida
+        tipo_viv: Tipo de Vivienda
+        perumunicipio: Municipio
+        ciudad_nothipoteca: Ciudad notaria hipoteca
+        hipoteca_afavor: Hipoteca a favor de
+        garantia_retirada: La garantía ha sido retirada
+        garantia_retira_fecha: Fecha en la cual se levantó la garantía
+        valor_tasacion: Ult. monto afectación
+      portafoliosvehiculo:
+        porcentaje_negociacion: Porcentaje Negociación 1
+        porcentaje2_negociacion: Porcentaje Negociación 2
+        porcentaje3_negociacion: Porcentaje Negociación 3
+        porcentaje3_negociacion: Porcentaje Negociación 4
+      personascredito:
+        originador: Originador
+        fecha_compra: Fecha Compra
+        tipo_producto: Tipo de Producto
+        linea_credito: Linea de Credito
+        denominacion: Denominacion
+        tasa_corriente: Interes Corriente E.A.
+        tasa_mora: Mora E.A.
+        fecha_desembolso: Fecha Desembolso
+        fecha_vencimiento: Fecha Vencmto
+        valor_desembolsado: Valor Desembolsado
+        plazo: Plazo
+        altura: Altura
+        pagadas: Pagadas
+        en_mora: En Mora
+        por_facturar: Por Facturar
+        fecha_inicio_mora: Fecha Inicio Mora
+        dias_mora: Dias Mora
+        calificacion: Calificacion
+        estado: Estado
+        vencido_cuota: Valor Cuota Vencida
+        vencido_mora: Valor Mora
+        vencido_seguro: Valor Seguro Vencido
+        vencido_total: Saldo en Mora
+        mes_capital: Valor Cuota
+        mes_corriente: Valor Intereses
+        mes_seguro: Valor Seguro
+        mes_total: Cuota Neta
+        final_capital: Saldo Capital
+        final_corriente: Intereses Corrientes
+        final_mora: Interes de Mora
+        final_seguros: Seguros
+        final_deuda: Saldo Deuda
+      cohortesprogreingreso:
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        periodosconvocatoria_id: Periodo Académico
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      cohortesprogperiodo:
+        valor: Valor Contado
+        valor_financiacion: Valor a Cuotas
+        tasa_corriente: Interes E.A.
+        fecha_inicio: Fecha inicio Financiación
+        plazo_financiacion: Plazo Financiación
+        periodosconvocatoria_id: Periodo Académico
+        aplica_pp: Aplica Pronto Pago
+        aplica_pp_dias: Días Pronto Pago
+      personasacuerdo:
+        situacion_econo: Situación Económica
+        ocupacion: Ocupación
+        salario: Salario
+        nombre_empresa: Nombre Empresa
+        direccion_empresa: Dirección de la Empresa
+        telefono_empresa: Teléfono de la Empresa
+        inv_nombres: Nombre Completo
+        inv_identificacion: Identificación
+        inv_telefono: Teléfono
+        inv_email: Correo Electrónico
+        antecedentes_resolucion: Resolution Strategy
+      personasacuerdosdetalle:
+        amortiza: Capital
+        plazo: Nro de cuotas
+        tasa_final: Interes E.A.
+      personasprogasto:
+        igv: IGV (en Soles)
+        valor: Valor (en Soles)
+        igv_lega: IGV (en Soles)
+        valor_lega: Valor (en Soles)
+        ruc_emisor: RUC Emisor
+        fch_pago: Fecha pago
+        cuenta_detraccion: Cuenta de tracción proveedor
+      personashipoavaluo:
+        valor: Valor avaluo
+        denominacion: Denominación
+        fecha: Fecha avaluo
+        valor_soles: Valor en Soles
+        valor_dolares: Valor en Dolares
+        valor_euros: Valor en Euros
+        valor_construccion: Valor construcción
+        deno_construccion: Moneda construcción
+        valor_terreno: Valor terreno
+        deno_terreno: Moneda terreno
+        valor_anexo: Valor anexo
+        deno_anexo: Moneda anexo
+        avaluador: Nombre avaluador
+        observaciones: Comentarios BPO
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    abbr_day_names:
+    - sun
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    abbr_month_names:
+    -
+    - jan
+    - feb
+    - mar
+    - apr
+    - may
+    - jun
+    - jul
+    - aug
+    - sep
+    - oct
+    - nov
+    - dec
+    day_names:
+    - sunday
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    - saturday
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - january
+    - february
+    - march
+    - april
+    - may
+    - june
+    - july
+    - august
+    - september
+    - october
+    - november
+    - december
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} year
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than 1 minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: more than 1 year
+        other: more than %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can not be blank
+      present: it must be blank
+      confirmation: it does not match
+      empty: it cant be empty
+      equal_to: it must be equal to %{count}
+      even: debe ser un número par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluido en la lista
+      invalid: is invalid
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: solo números
+      not_an_integer: debe ser un entero
+      odd: debe ser un número impar
+      required: debe existir
+      taken: it has already been taken
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
+      other_than: debe ser distinto de %{count}
+    template:
+      body: 'Revise que los siguientes campos sean válidos:'
+      header:
+        one: "%{model} no pudo guardarse debido a 1 error"
+        other: "%{model} no pudo guardarse debido a %{count} errores"
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: To update %{model}
+  number:
+    # Used in number_to_currency()
+    currency:
+      format:
+        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+        format: "%n %u"
+        unit: "$"
+        # These three are to override number.format and are optional
+        separator: ","
+        delimiter: "."
+        precision: 2
+    format:
+      delimiter: ","
+      precision: 2
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delimiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ","
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ","
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y a las %I:%M %p"
+      short: "%d de %b a las %H:%M hrs"
+    pm: pm
+
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Latest &raquo;"
+      previous: "&lsaquo; Previous"
+      next: "Next &rsaquo;"
+      truncate: "..."

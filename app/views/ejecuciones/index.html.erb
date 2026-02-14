@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ejecuciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Periodosliquidacion</th>
+      <th>Estado</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ejecuciones.each do |ejecucion| %>
+      <tr>
+        <td><%= ejecucion.user %></td>
+        <td><%= ejecucion.periodosliquidacion %></td>
+        <td><%= ejecucion.estado %></td>
+        <td><%= link_to 'Show', ejecucion %></td>
+        <td><%= link_to 'Edit', edit_ejecucion_path(ejecucion) %></td>
+        <td><%= link_to 'Destroy', ejecucion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ejecucion', new_ejecucion_path %>

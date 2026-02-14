@@ -1,0 +1,95 @@
+wd = xlsx_package.workbook
+wd.styles do |style|
+  title = wd.styles.add_style(b: true, bg_color: "FF045FB4",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  header = wd.styles.add_style(b: true, bg_color: "FF7DB4F4",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  header1 = wd.styles.add_style(b: true, bg_color: "FFE87F07",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  header2 = wd.styles.add_style(b: true, bg_color: "FF5EFF33",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  header3 = wd.styles.add_style(b: true, bg_color: "FF417932",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  header4 = wd.styles.add_style(b: true, bg_color: "FFE16E28",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  datosiz = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :left, :vertical => :center})
+  datoscent = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center})
+  datosder = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :right, :vertical => :center})
+  fecha = wd.styles.add_style(sz: 11,font_name: "Calibri", :format_code => 'dd-mm-yyyy',:alignment=>{:horizontal => :center, :vertical => :center})
+  datosnumeros = wd.styles.add_style(:format_code => '#,###,###.#0',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :right, :vertical => :center})
+  
+  wd.add_worksheet(:name => "Informe Usuarios")  do |sheet|        
+    sheet.add_row ["ID IMAH",
+                "Identificacion",
+                "Nombre",
+                "Usuario",
+                "Email",
+                "Tipo de Consulta",
+                "Observaciones",
+                "Activo?",
+                "Proceso",
+                "Modulo",
+                "Permiso",
+                "Elimina",
+                "Actualiza",
+                "Crea",
+                 "Cargo"], :style => [header1,header1,header1,header1,header1,header1,header1,header1,header1,header3,header,header,header,header,header]
+    for p in @datos
+      sheet.add_row [p.id,
+                     p.identificacion,
+                     p.nombre,
+                     p.username,
+                     p.email,
+                     p.tipoconsulta,
+                     p.observaciones,
+                     p.estado,
+                     p.proceso,
+                     p.modulo,
+                     p.permiso,
+                     p.elimina,
+                     p.actualiza,
+                     p.crea,
+                     p.cargo], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datoscent,datoscent,datoscent,datosiz,datosiz,datoscent,datoscent,datoscent, datosiz]
+    end
+  end
+
+  wd.add_worksheet(:name => "Accesos")  do |sheet|
+    sheet.add_row ["ID IMAH",
+                   "Identificacion",
+                   "Nombre",
+                   "Usuario",
+                   "Email",
+                   "Fecha Ult. Acceso",
+                   "Tipo de Consulta",
+                   "Activo?"], :style => [header1,header1,header1,header1,header1,header1,header1,header1,header1]
+    for p in @datos1
+      sheet.add_row [p.id,
+                     p.identificacion,
+                     p.nombre,
+                     p.username,
+                     p.email,
+                     p.current_sign_in_at,
+                     p.tipoconsulta,
+                     p.estado], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datoscent,datoscent,datoscent,datosiz]
+    end
+  end
+
+  wd.add_worksheet(:name => "Informes")  do |sheet|
+    sheet.add_row ["ID IMAH",
+                   "Identificacion",
+                   "Nombre",
+                   "Usuario",
+                   "Email",
+                   "Tipo de Consulta",
+                   "Fecha Generación",
+                   "Nombre del Informe"], :style => [header,header,header,header,header,header,header,header,header,header]
+    for p in @datos2
+      if p.nombre_informe.to_s != ""
+        sheet.add_row [p.id,
+                       p.identificacion,
+                       p.nombre,
+                       p.username,
+                       p.email,
+                       p.tipoconsulta,
+                       p.fchgeneracion,
+                       p.nombre_informe], :style => [datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz,datosiz]
+      end
+    end
+  end
+
+
+end

@@ -1,0 +1,16 @@
+  <table class="table table-bordered table-striped">
+    <tr>
+    <th>Descripcion del Archivo</th>
+    <td><%= f.text_field :clase,{ :class => "span5",
+                :onChange=> "javascript:this.value=this.value.toUpperCase();"}%>
+    <%= f.error_message_on :clase, :css_class =>"cerror"%></td>
+  </tr>
+    <th>Archivo a cargar</th>
+     <td><%= f.file_field :usersimagen, { :class => "span5",
+              :size => 46,
+              :maxlength => 1000,
+              :onFocus => "this.style.border='1px solid #f00'",
+              :onBlur => "this.style.border='1px solid #bbb'" } %>
+     <%= f.error_message_on :user, :css_class =>"cerror"%></td>
+  </tr>
+</table>

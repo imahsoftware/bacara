@@ -1,0 +1,15 @@
+<tr id="usersmodulo_<%= usersmodulo.id %>">
+  <td class="text-center">
+    <%# if is_auth_a('usersmodulo') %>
+      <%= link_to edit_user_usersmodulo_path(@user, usersmodulo), remote: true, class: 'edit_usersmodulo_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+    <%# end %>
+    <%# if is_auth_e('usersmodulo') %>
+      <%= link_to user_usersmodulo_path(@user, usersmodulo), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <%# end %>
+  </td>
+  <td><%= usersmodulo.modulo.descripcion rescue nil%></td>
+</tr>

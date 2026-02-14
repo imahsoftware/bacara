@@ -1,0 +1,99 @@
+
+<header class="main-header">
+  <%= link_to root_path, class: 'logo' do %>
+    <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Bacara', width: '90%' %></span>
+    <span class="logo-lg" style="font-size: 18px;"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+  <% end %>
+
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top">
+    <div class="navbar-collapse collapse" id="navbar-collapse" aria-expanded="false" style="background-color: #000000;">
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <%# if Contratospersona.where("identificacion = '#{user.identificacion}'").first.present? %>
+              <!-- <li>
+                <%#= link_to abrir_datos_menus_path, remote: true, data: { toggle: 'tooltip' }, title: 'Actualizar Datos Basicos' do %>
+                  <i class="fa fa-futbol-o"></i>
+                <%# end %>
+              </li> -->
+            <%# end %>
+          <li class="dropdown user user-menu">
+            <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+              <%= image_tag user.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+              <span class="hidden-xs" style="color: white"><%= user.username %></span>
+            <% end %>
+            <ul class="dropdown-menu">
+
+              <li class="user-header">
+                <%= image_tag user.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+                <p style="font-size: 11px;">
+                  <%= user.nombre %>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <%= link_to edit_user_registration_path do %>
+                    <button class="btn btn-flat btn-default">
+                      <i class="fa fa-edit"> <b style="font-size: 11px;"><%= t :editar_perfil %></b></i></button>
+                  <% end %>
+                </div>
+                <div class="pull-right">
+                  <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{user.nombre}" + ' que quiere desconectarse?' } do %>
+                    <button class="btn btn-flat btn-default">
+                      <i class="fa fa-sign-in"> <b style="font-size: 11px;"><%= t :salir %></b></i></button>
+                  <% end %>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<div class="modal fade" id="menu">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="abrir_datos">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+
+<style>
+    .bor {
+        border-radius: 10px !important;
+    }
+
+    .main-header .logo {
+        text-align: left;
+    }
+
+    .main-header #navbar-search-input.form-control {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border-color: transparent !important;
+    }
+
+    .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+        z-index: -2;
+        margin-left: 0px !important;
+    }
+</style>
+
+
+
+
+
+
+
+
+

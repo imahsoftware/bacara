@@ -1,0 +1,49 @@
+<div class="box box-primary">
+  <div class="box-header">
+    <legend>
+      <% if is_auth_c('cargacazadores') %>
+        <%= link_to descargaedupol_procesos_path, data: { toggle: 'tooltip' }, title: 'Regresar' do %>
+          <i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
+        <% end %>
+      <% else %>
+        <%= link_to users_path, data: { toggle: 'tooltip' }, title: 'Regresar' do %>
+          <i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+      Proceso Masivo de Usuarios
+    </legend>
+  </div>
+  <div class="box-body">
+    <table class="table table-bordered">
+      <tr>
+        <td width="30%"><strong>Total Registros Validados </strong></td>
+        <td width="30%"><strong><div align="center"><%=@contotal.count%></div></strong></td>
+        <td width="40%" rowspan="3"><div align="center">
+          <% if @conconerror.count.to_i > 0 %>
+            <%= link_to inconsistencias_users_path(userreg_id: is_admin), class: 'btn btn-sm btn-danger' do %>
+              <i class="fa fa-plus-square"> </i> <span>Ver Inconsistencias</span>
+            <% end %>
+          <% end %>
+          <% if params[:carga] == 'S'%>
+            <%= link_to cargar_users_path(userreg_id: is_admin), data: { disable_with: "#{t :procesando}", confirm: 'Esta seguro que desea ejecutar el Cargue masivo de usuarios?' }, class: 'btn btn-sm btn-warning' do %>
+              <i class="fa fa-plus-square"> </i> <span>Confirmar cargue</span>
+            <% end %>
+          <% else %>
+            <%= link_to cargar2_users_path(userreg_id: is_admin), data: { disable_with: "#{t :procesando}", confirm: 'Esta seguro que desea ejecutar el Cargue masivo de usuarios para Inactivarlos?' }, class: 'btn btn-sm btn-warning' do %>
+              <i class="fa fa-plus-square"> </i> <span>Confirmar cargue</span>
+            <% end %>
+          <% end %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Total Registros Aprobados </strong></td>
+        <td><strong><div align="center"><%=@consinerror.count.to_i rescue 0%></div></strong></td>
+      </tr>
+      <tr>
+        <td><strong>Total Registros con Inconsistencias</strong></td>
+        <td><strong><div align="center"><%=@conconerror.count.to_i rescue 0%></div></strong></td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+    <thead>
+      <tr class="thcolor">
+        <% if is_auth_c('municipio') %>
+          <th width="10%"></th>
+        <% end %>
+        <th width="10%">ID</th>
+        <th>Municipio</th>
+        <th>Departamento</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_municipios">
+      <% @municipios.each do |municipio| %>
+        <%= render 'municipios/tr', municipio: municipio %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

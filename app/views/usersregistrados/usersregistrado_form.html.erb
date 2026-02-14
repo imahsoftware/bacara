@@ -1,0 +1,302 @@
+<% unless !@usersregistrado.new_record? %>
+  <%= render partial: "inscripcion", locals: {usersregistrado: @usersregistrado} %>
+<% else %>
+  <div class="box box-primary">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <div class="box-body">
+            <h1 style="text-shadow: 2px 3px 4px #E6E6E6;">
+              <div align="left">FORMULARIO DE INSCRIPCIÓN</div>
+            </h1>
+            <br/>
+            <div class="row">
+              <div class="col-md-12"><br/>
+                <div class="process">
+                  <%= render 'tabs' %>
+                </div>
+                <%= simple_form_for(@usersregistrado) do |f| %>
+                  <div class="tab-content">
+                    <% if @usersregistrado.etapa.to_s == 'A' %>
+                      <div id="menu1" class="tab-pane fade active in"><br/>
+                        <div class="box-body">
+                          <legend><strong>
+                            <div align="left">Datos básicos</div>
+                          </strong></legend>
+                          <div class="row">
+                            <div class="col-md-2">
+                              <%= f.input :identificacion, disabled: true %>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="box-header with-border">
+                          <legend><strong>
+                            <div align="left">Datos de ingreso a la Plataforma</div>
+                          </strong></legend>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6"><%#= f.input :email, disabled: true, label: 'Email' %></div>
+                          <div class="col-md-6"><%#= f.input :email_confirma, disabled: true, label: 'Email de confirmación' %></div>
+
+                        </div>
+                        <div class="row">
+                          <div class="form-group has-success col-md-6"><%#= f.input :clv, disabled: true, input_html: {type: :password} %></div>
+
+                        </div>
+                        <ul class="list-unstyled list-inline pull-right">
+                          <li><%= f.button :submit, "Guardar", class: 'btn btn-flat btn-danger' do %>
+                              <i class="fa fa-check"></i>
+                            <% end -%>
+                          </li>
+                        </ul>
+                      </div>
+                    <% elsif @usersregistrado.etapa.to_s == 'B' %>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="table-responsive">
+                            <legend><strong>
+                              <div align="left">Resultados Académicos</div>
+                              <h5 class="text-red">Nota: Por favor colocar en cada casillas los resultados finales de
+                                los grados 9° y 10° y los resultados parciales del grado 11° (Primer semestre)</h5>
+                            </strong></legend>
+                            <table class="table table-striped">
+                              <thead>
+                              <th></th>
+                              <th>Resultados Grado 9°</th>
+                              <th>Resultados Grado 10°</th>
+                              <th>Resultados Grado 11°</th>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                <td><strong>Matemáticas</strong></td>
+                                <td><%= f.input :mat_grado9, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :mat_grado10, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :mat_grado11, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                              </tr>
+                              <tr valign="top">
+                                <td><strong>Lenguaje</strong></td>
+                                <td><%= f.input :len_grado9, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :len_grado10, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :len_grado11, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                              </tr>
+                              <tr valign="top">
+                                <td><strong>Ciencias Naturales</strong></td>
+                                <td><%= f.input :nat_grado9, as: :select, collection: puntaje2, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :nat_grado10, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :nat_grado11, as: :select, collection: puntaje1, input_html: {class: 'select2'}, label: false %></td>
+                              </tr>
+                              <tr valign="top">
+                                <td><strong>Ciencias Sociales</strong></td>
+                                <td><%= f.input :soc_grado9, as: :select, collection: puntaje2, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :soc_grado10, as: :select, collection: puntaje2, input_html: {class: 'select2'}, label: false %></td>
+                                <td><%= f.input :soc_grado11, as: :select, collection: puntaje2, input_html: {class: 'select2'}, label: false %></td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-unstyled list-inline pull-right">
+                        <li><%= f.button :submit, "Guardar", class: 'btn btn-flat btn-danger' do %>
+                            <i class="fa fa-check"></i>
+                          <% end -%>
+                        </li>
+                      </ul>
+                    <% elsif @usersregistrado.etapa.to_s == 'C' %>
+                      <div class="box-body">
+                        <legend><strong>
+                          <div align="left">Datos del Programa</div>
+                        </strong></legend>
+                        <div class="row">
+                          <div class="col-md-7">
+                            <%= f.input :programa_aspira %>
+                          </div>
+                          <div class="col-md-5">
+                            <%= f.input :nivel, as: :select, collection: select_nivel, input_html: {class: 'select2'} %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-7">
+                            <%= f.input :universidad1_id, collection: Universidad.where(["periodo = '2019'"]).order("nombre").collect {|p| [p.nombre, p.id]}, as: :select, wrapper: false, include_blank: true %>
+                          </div>
+                          <div class="col-md-5">
+                            <%= f.input :presento, as: :select, collection: select_sino, input_html: {class: 'select2'} %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-7">
+                            <%= f.input :universidad2_id, collection: Universidad.where(["periodo = '2019'"]).order("nombre").collect {|p| [p.nombre, p.id]}, as: :select, wrapper: false, include_blank: true %>
+                          </div>
+                          <div class="col-md-5">
+                            <%= f.input :presento2, as: :select, collection: select_sino, input_html: {class: 'select2'} %>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-7">
+                            <%= f.input :universidad3_id, collection: Universidad.where(["periodo = '2019'"]).order("nombre").collect {|p| [p.nombre, p.id]}, as: :select, wrapper: false, include_blank: true %>
+                          </div>
+                          <div class="col-md-5">
+                            <%= f.input :presento3, as: :select, collection: select_sino, input_html: {class: 'select2'} %>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-unstyled list-inline pull-right">
+                        <li><%= f.button :submit, "Guardar", class: 'btn btn-flat btn-danger' do %>
+                            <i class="fa fa-check"></i>
+                          <% end -%>
+                        </li>
+                      </ul>
+                    <% elsif @usersregistrado.etapa.to_s == 'D' %>
+                      <div class="box-header with-border">
+                        <legend><strong>
+                          <div align="left">Datos del Padre de Familia o Acudiente (en caso de ser menor de edad)</div>
+                        </strong></legend>
+                      </div>
+                      <div class="box-body">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <label>Tipo de Documento</label>
+                            <%= f.input :documento_acud, as: :select, collection: select_documento, input_html: {class: 'select2'}, label: false %>
+                          </div>
+                          <div class="col-md-3">
+                            <%= f.input :identificacion_acud, label: "Identificación" %>
+                          </div>
+                          <div class="col-md-5">
+                            <%= f.input :nombres_acud %>
+                          </div>
+                          <div class="col-md-2">
+                            <%= f.input :telefono_acud %>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-md-2">
+                            <%= f.input :celular_acud %>
+                          </div>
+                          <div class="col-md-2">
+                            <%= f.input :otro_tel %>
+                          </div>
+                          <div class="col-md-4">
+                            <%= f.input :ocupacion %>
+                          </div>
+                          <div class="col-md-4">
+                            <%= f.input :email_acud %>
+                          </div>
+                        </div>
+                      </div>
+                      <ul class="list-unstyled list-inline pull-right">
+                        <li><%= f.button :submit, "Guardar", class: 'btn btn-flat btn-danger' do %>
+                            <i class="fa fa-check"></i>
+                          <% end -%>
+                        </li>
+                      </ul>
+                    <% elsif @usersregistrado.etapa.to_s == 'E' %>
+                      <%= render partial: "documentos", locals: {usersregistrado: @usersregistrado} %>
+                    <% end -%>
+                  </div>
+                <% end -%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end -%>
+
+<style>
+  .process-step .btn:focus {
+    outline: none
+  }
+
+  .process {
+    display: table;
+    width: 100%;
+    position: relative
+  }
+
+  .process-row {
+    display: table-row
+  }
+
+  .process-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important
+  }
+
+  .process-row:before {
+    top: 40px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #858D8A;
+    z-order: 0
+  }
+
+  .process-step {
+    display: table-cell;
+    text-align: center;
+    position: relative
+  }
+
+  .process-step p {
+    margin-top: 4px
+  }
+
+  .btn-circle {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 50px;
+    border-radius: 50%;
+    padding: 22px;
+  }
+
+  .letra {
+    color: #000;
+  }
+
+  .color-imagen {
+    background-color: #00acd6;
+    color: #fff;
+    border-color: #269abc;
+  }
+
+  .btn-info:hover, .btn-info:active, .btn-info.hover {
+    background-color: #1C2F53;
+  }
+
+  .btn-info:hover {
+    color: #fff;
+    background-color: #00acd6;
+    border-color: #269abc;
+  }
+</style>
+
+<script>
+    $(function () {
+        $('.btn-circle').on('click', function () {
+            $('.btn-circle.btn-info').removeClass('btn-info').addClass('btn-default');
+            $(this).addClass('btn-info').removeClass('btn-default').blur();
+        });
+
+        $('.next-step, .prev-step').on('click', function (e) {
+            var $activeTab = $('.tab-pane.active');
+
+            $('.btn-circle.btn-info').removeClass('btn-info').addClass('btn-default');
+
+            if ($(e.target).hasClass('next-step')) {
+                var nextTab = $activeTab.next('.tab-pane').attr('id');
+                $('[href="#' + nextTab + '"]').addClass('btn-info').removeClass('btn-default');
+                $('[href="#' + nextTab + '"]').tab('show');
+            } else {
+                var prevTab = $activeTab.prev('.tab-pane').attr('id');
+                $('[href="#' + prevTab + '"]').addClass('btn-info').removeClass('btn-default');
+                $('[href="#' + prevTab + '"]').tab('show');
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,27 @@
+<%= simple_form_for([@user, @usersfecha], remote: true) do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4"><%= f.input :fecha, label: 'Fecha de Asignacion inicial', as: :datetime_picker, input_html: { data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase clean', readonly: true } %></div>
+      <div class="col-md-4"><%= f.input :fch_fin, label: 'Fecha de Asignacion final', as: :datetime_picker, input_html: { data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase clean', readonly: true } %></div>
+      <div class="col-md-2"><%= f.input :hora_inicio, label: 'Hora Inicio', as: :datetime_picker, input_html: { data: { date_options: { format: 'LT', ignoreReadonly: true } }, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase clean', readonly: true } %></div>
+      <div class="col-md-2"><%= f.input :hora_fin, label: 'Hora Fin', as: :datetime_picker, input_html: { data: { date_options: { format: 'LT', ignoreReadonly: true } }, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase clean', readonly: true } %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"><%= f.input :intervalo, as: :select, collection: select_userintervalo, input_html: { class: 'clean select2' } %></div>
+      <div class="col-md-4"><%= f.input :cantidad, label: 'Personas por Intervalo', as: :select, collection: select_userpersonal, input_html: { class: 'clean select2' } %></div>
+      <div class="col-md-4"><%= f.input :estado,  as: :select, collection: select_estado, input_html: { class: 'clean select2' } %></div>
+    </div>
+     <div class="row">
+      <div class="col-md-6">
+        <% if @usersfecha.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersfecha_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", user_usersfecha_path(@user, @usersfecha), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>

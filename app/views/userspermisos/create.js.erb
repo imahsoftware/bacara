@@ -1,0 +1,28 @@
+$(".alert_flash").fadeOut(300, function() {
+	$(this).remove();
+});
+
+<% if @user.userspermisos.count == 1 %>
+	$("#userspermisos").html("<%= j render 'tabla' %>");
+<% else %>
+	$("#userspermisos").html("<%= j render 'tabla' %>");
+<% end %>
+
+$(".clean").val("").trigger('change');
+
+$("#userspermiso_form").collapse("hide");
+
+$("#userspermiso_form").empty();
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(300, function() {
+		$(this).remove();
+	});
+}, 5000);

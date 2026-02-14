@@ -1,0 +1,18 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Permiso</th>
+        <th>Crea</th>
+        <th>Actualiza</th>
+        <th>Elimina</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_userspermisos">
+	    <% @user.userspermisos.includes([:objeto]).order(updated_at: :desc).each do |userspermiso| %>
+	      <%= render 'userspermisos/tr', userspermiso: userspermiso %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

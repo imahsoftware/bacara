@@ -1,0 +1,2 @@
+class Erroresaporte < ApplicationRecord
+end

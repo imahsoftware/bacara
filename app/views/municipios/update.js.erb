@@ -1,0 +1,15 @@
+$(".alert_flash").fadeOut(1000, function() {
+	$(this).remove();
+});
+
+$("#municipio_<%= @municipio.id %>").replaceWith("<%= j render 'tr', municipio: @municipio %>");
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages2").html("<%= j render 'layouts/flash_messages' %>");
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(1000, function() {
+		$(this).remove();
+	});
+}, 5000);

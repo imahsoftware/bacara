@@ -1,0 +1,24 @@
+$(".alert_flash").fadeOut(300, function() {
+	$(this).remove();
+});
+
+<% if @user.usersfechas.count == 1 %>
+	$("#usersfechas").html("<%= j render 'tabla' %>");
+<% else %>
+	$("#tbody_usersfechas").prepend("<%= j render 'tr', usersfecha: @usersfecha %>");
+<% end %>
+
+$(".clean").val("").trigger('change');
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(300, function() {
+		$(this).remove();
+	});
+}, 5000);

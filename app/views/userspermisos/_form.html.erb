@@ -1,0 +1,28 @@
+<%= simple_form_for([@user, @userspermiso], remote: true) do |f|   %>
+  <div class="row">
+    <% if @userspermiso.id %>
+        <div class="col-md-6"><%= f.input :objeto_id, collection: Objeto.all.order('descripcion_ampliada').collect {|p| [ p.descripcionamp, p.id ] }, input_html: { class: 'select2' }, label: 'Permiso' %></div>
+    <% else %>
+        <div class="col-md-6"><%= f.input :objeto_id, collection: Objeto.where(["id not in (select objeto_id from userspermisos where user_id = #{@user.id})"]).collect {|p| [ p.descripcionamp, p.id ] }, input_html: { multiple: true, class: 'select2' }, label: 'Permiso' %></div>
+    <% end %>
+    <div class="col-md-2">
+      <label>Crea?</label><br><%= f.input :crea, as: :radio_buttons,collection: [['S','S'], ['N','N']],item_label_class: "radio-inline",item_wrapper_tag: false,  label: false %></div>
+    <div class="col-md-2">
+      <label>Actualiza?</label><br><%= f.input :actualiza, as: :radio_buttons,collection: [['S','S'], ['N','N']],item_label_class: "radio-inline",item_wrapper_tag: false,  label: false %></div>
+    <div class="col-md-2">
+      <label>Elimina?</label><br><%= f.input :elimina, as: :radio_buttons,collection: [['S','S'], ['N','N']],item_label_class: "radio-inline",item_wrapper_tag: false,  label: false %></div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @userspermiso.new_record? %>
+        <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#userspermiso_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+      <% else %>
+        <%= link_to "#{t :cancelar}", user_userspermiso_path(@user, @userspermiso), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+    </div>
+  </div>
+<% end %>

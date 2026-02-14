@@ -1,0 +1,66 @@
+<div class="box-body paddin-body">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <%= link_to generar_lote_datas_path(format: :xlsx, lote: -1), data: { toggle: 'tooltip' }, title: "Estructura Cargue (Programación - Actualización)" do %>
+            <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i>Generar Todos</button>
+          <% end %>
+          <%= link_to generar_lote_datas_path(format: :xlsx, lote: -2), data: { toggle: 'tooltip' }, title: "Estructura Cargue (Programación - Actualización)" do %>
+            <button class="btn btn-xs btn-danger"><i class="fa fa-file-excel-o"></i>Generar solo pendientes</button>
+          <% end %>
+          <%
+            datos = Objeto.find_by_sql(["select m.archivo_id, (SELECT documentos_file_name FROM archivos where id = m.archivo_id) archivodetalle,
+                                          SUM(CASE WHEN m.estado ='APLICADO' THEN 1 ELSE 0 END) aplicado, SUM(CASE WHEN m.estado ='NO APLICADO' THEN 1 ELSE 0 END) no_aplicado,
+                                          m.created_at, m.user_id
+                                  from  migracionespersonas m 
+                                  group by archivo_id, created_at, user_id
+                                  ORDER BY created_at DESC LIMIT 400 "])
+            if datos.present?
+          %>
+            <table class="table table-bordered table-condensed table-striped">
+              <thead class="thcolor">
+              <tr>
+                <td class="text-center" style="font-size: 10px;"><strong></strong></td>
+                <td class="text-center" style="font-size: 10px;"><strong>Nº Lote</strong></td>
+                <td class="text-left" width="15%" style="font-size: 10px;"><strong>Fecha Cargue</strong></td>
+                <td class="text-left" style="font-size: 10px;"><strong>Usuario que Cargo</strong></td>
+                <td class="text-left" style="font-size: 10px;"><strong>Archivo Cargado</strong></td>
+                <td class="text-center" width="8%" style="font-size: 10px;"><strong>Cargados</strong></td>
+                <td class="text-center" width="8%" style="font-size: 10px;"><strong>No Cargados</strong></td>
+              </tr>
+              </thead>
+              <tbody>
+              <% datos.each do |ma| %>
+                <tr>
+                  <td class="text-center">
+                    <%= link_to generar_lote_datas_path(format: :xlsx, lote: ma.archivo_id), data: { toggle: 'tooltip' }, title: "Estructura Cargue (Programación - Actualización)" do %>
+                      <button class="btn btn-xs btn-primary"><i class="fa fa-file-excel-o"></i></button>
+                    <% end %>
+                    <%= link_to generar_lote_estado_datas_path(format: :xlsx, lote: ma.archivo_id), data: { toggle: 'tooltip' }, title: "Estructura Cargue para Actualizar Estados" do %>
+                      <button class="btn btn-xs btn-warning"><i class="fa fa-file-excel-o"></i></button>
+                    <% end %>
+                  </td>
+                  <td class="text-center" style="font-size: 10px;"><%= ma.archivo_id rescue nil %></td>
+                  <td class="text-left" style="font-size: 10px;"><%= ma.created_at.strftime('%Y-%m-%d %X') rescue nil %></td>
+                  <td class="text-left" style="font-size: 10px;"><%= User.find(ma.user_id).nombre rescue nil %></td>
+                  <td class="text-left" style="font-size: 10px;"><%= ma.archivodetalle rescue nil %></td>
+                  <td class="text-center" style="font-size: 10px;"><%= ma.aplicado rescue nil %></td>
+                  <td class="text-center" style="font-size: 10px;"><%= ma.no_aplicado rescue nil %></td>
+                </tr>
+                <div class="modal fade" id="abrircargue<%= ma.archivo_id %>">
+                  <div class="modal-dialog modal-dialog-responsive" role="document">
+                    <div class="modal-content"></div>
+                  </div>
+                </div>
+              <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <%= render 'layouts/procesos/alert_message' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

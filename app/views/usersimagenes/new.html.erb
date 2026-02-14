@@ -1,0 +1,12 @@
+<div class="page-header"><h4>Documentos (<%=@user.nombre rescue nil%>) - <%= link_to 'Regresar',edit_user_path(@user), :class=>"btn btn-warning" %></h4></div>
+<% form_for(:usersimagen, @usersimagen, :url => user_usersimagenes_path(@user), :html => { :multipart => true }) do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+<table class="table">
+  <tr width="40%" valign="top">
+    <td><div align="right">
+         <%= f.submit "#{t :guardar}",:disable_with => "Guardando...", :class=>"btn btn-danger"%>
+        </div>
+      </td>
+  </tr>
+</table>
+<% end %>

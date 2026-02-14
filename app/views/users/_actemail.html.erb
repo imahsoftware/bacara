@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+  <h3 class="modal-title"><strong>Cambiar Correo Electrónico</strong></h3>
+</div>
+<%= simple_form_for @user, url: updateemailedu_users_path, remote: true, method: :post do |f| %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :persona_id %>
+  <%= hidden_field_tag :email_actual, @persona.email %>
+  <div class="flash_messages"></div>
+  <div class="modal-body">
+    <table class="table">
+      <tr>
+        <td width="20%"><strong>Nombre:</strong></td>
+        <td><%= @user.nombre %></td>
+      </tr>
+      <tr>
+        <td width="20%"><strong>Correo Actual:</strong></td>
+        <td><%= @user.email %></td>
+      </tr>
+    </table>
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :email %>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="pull-left btn btn-flat btn-default" data-dismiss="modal"><%=t :cancelar%></button>
+    <div class="box-tools pull-right">
+      <%= f.button :submit, 'Aceptar', class: 'btn btn-flat btn-primary' %>
+    </div>
+  </div>
+<% end %>

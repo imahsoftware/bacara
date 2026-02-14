@@ -1,0 +1,37 @@
+<%
+  permit = Usersmodulo.where(user_id: is_admin, modulo_id: 10281).exists?
+%>
+<!-- Control sidebar -->
+<aside class="control-sidebar control-sidebar-light">
+  <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+    <% if is_sygma or permit == true %>
+      <!-- <li class="active"><a href="#menuadmin" data-toggle="tab"><i class="fa fa-gears"></i></a></li> -->
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <% if is_sygma or permit == true %>
+      <div class="tab-pane active" id="menuadmin">
+        <h3 class="control-sidebar-heading">MENU DE CONTROL</h3>
+        <section class="sidebar">
+          <ul class="control-sidebar-menu" style="white-space: normal;">
+            <%
+              @modulosseguridad = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", is_sygma, 4]).select("modulos.*").order("modulos.descripcion")
+              #@modulosseguridad = Modulo.where(id: Usersmodulo.where(user_id: is_admin).pluck(:modulo_id), nivel: 4).order(:descripcion)
+              @modulosseguridad.each do |item| %>
+              <% if item.metodo.to_s == "" %>
+                <% item.metodo = 'GET' %>
+              <% end %>
+              <li>
+                <%= link_to item.controlador, class: 'a-control-sidebar' do %>
+                  <i class="<%= item.imagen.blank? ? 'fa fa-link' : item.imagen %>"></i>
+                  <span><%= item.descripcion %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </section>
+      </div>
+    <% end %>
+  </div>
+</aside>
+<div class="control-sidebar-bg"></div>

@@ -1,0 +1,184 @@
+<%
+  isadmin = is_admin
+  usr = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+<header class="main-header" style="position: fixed; top: 0; right: 0; left: 0">
+<%
+  permit = Usersmodulo.where(user_id: isadmin, modulo_id: 10281).exists?
+%>
+  <!-- Logo -->
+  <%= link_to root_path, class: 'logo' do %>
+    <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo IMAH', width: '90%' %></span>
+    <span class="logo-lg"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+  <% end %>
+
+  <!-- Header Navbar -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <div class="navbar-header2">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="true">
+        <i class="fa fa-building-o"></i>
+      </button>
+       -->
+    </div>
+    <div class="navbar-collapse pull-left collapse" id="navbar-collapse" aria-expanded="false">
+      <% if usr.etapa.to_s == 'GE' and ((params[:controller].to_s == 'personas' and params[:action].to_s != 'vista') or params[:controller].to_s == 'menus') %>
+        <%= form_tag buscarapido_personas_path, method: :post, class: 'navbar-form navbar-left' do %>
+          <div class="form-group">
+            <%= text_field_tag :identificacion, params[:identificacion], class: 'form-control', id: 'navbar-search-input', autocomplete: 'off', placeholder: 'Buscar por Identificación...' %>
+          </div>
+        <% end %>
+        <ul class="nav navbar-nav">
+          <li>
+            <% if @persona != nil %>
+              <%= link_to datosprimarios_personas_path(id: @persona.id), remote: true do %>
+                <%= @persona.autobuscar rescue nil %>
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      <% else %>
+        <ul class="nav navbar-nav">
+          <% if issygma %>
+            <% portafolios = Portafolio.all.where("id != #{isportafolio}").order("nombre") %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <%=is_portafolioname%> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <% portafolios.each do |p|%>
+                  <li><%=link_to p.nombre, cambioportafolio_users_path(id: isadmin, p: p.id)%></li>
+                <%end%>
+              </ul>
+            </li>
+          <% end %>
+          <% if usr.tipoconsulta2 != nil %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                PERFIL <%= usr.tipoconsulta rescue nil %> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'PERFIL ' + usr.tipoconsulta2, cambiotipoconsulta_users_path(id: isadmin, nueva: usr.tipoconsulta2, actual: usr.tipoconsulta )%></li>
+              </ul>
+            </li>
+          <% end %>
+          <% if usr.userssucursales.present? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                <%= usr.portafoliossucursal.descripcion rescue nil %> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <% usr.userssucursales.each do |s|%>
+                  <li><%= link_to s.portafoliossucursal.descripcion, cambiosucursal_users_path(id: isadmin, s: s.portafoliossucursal.id)%></li>
+                <%end%>
+              </ul>
+            </li>
+          <% end %>
+          <% if isportafolio.to_i == 10003 or isportafolio.to_i == 10005 or isportafolio.to_i == 10140 or isportafolio.to_i == 10141 %>
+            <li>
+              <IFRAME SRC=<%="/menus/call"%> name="framecall" WIDTH="1" HEIGHT="1" MARGINWIDTH=0 MARGINHEIGHT=0 FRAMEBORDER="NO" SCROLLING="NO" STYLE="border-width:0px;"></IFRAME>
+            </li>
+          <% end %>
+        </ul>
+        <% if current_user.user2_id.to_s != "" %>
+          <ul class="nav navbar-nav">
+            <li>
+              <%= link_to reestablecesusuario_users_path do %>
+                Reestablecer
+              <% end %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <!-- User Account Menu -->
+        <li class="dropdown user user-menu">
+          <!-- Menu Toggle Button -->
+					<%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+						<%= image_tag usr.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+            <% persona = Persona.find_by(identificacion: usr.identificacion, portafolio_id: 10100) %>
+            <% if is_tipoconsulta == 'ESTUDIANTE' %>
+              <span class="hidden-xs"><%= persona.primer_nombre rescue nil %> <%= persona.primer_apellido rescue nil %></span>
+            <% else %>
+						  <span class="hidden-xs"><%= usr.username %></span>
+            <% end %>
+					<% end %>
+
+          <ul class="dropdown-menu">
+            <!-- The user image in the menu -->
+            <li class="user-header">
+							<%= image_tag usr.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+
+              <p>
+								<%= usr.nombre %>
+              </p>
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-left">
+                <%= link_to edit_user_registration_path do %>
+                  <button class="btn btn-flat btn-default"><i class="fa fa-edit"> <b>Editar Perfil</b></i></button>
+                <% end %>
+              </div>
+              <div class="pull-right">
+                <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{usr.nombre}" + ' que quiere desconectarse?' } do %>
+                  <button class="btn btn-flat btn-default"><i class="fa fa-sign-in"> <b>Salir</b></i></button>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <!-- Control Sidebar Toggle Button -->
+        <% if issygma or permit == true %>
+          <li>
+            <a href="#" data-toggle="control-sidebar">
+              <i class="fa fa-gears"></i>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="modal fade" id="agendadia">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-default fade" id="vernoticia">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="verinfopersona">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="veragenda">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="abrirAgenda">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>

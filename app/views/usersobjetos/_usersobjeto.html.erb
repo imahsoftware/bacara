@@ -1,0 +1,18 @@
+<tr id="usersobjeto_<%= p.id %>">
+	<td><%= p.objeto.descripcion rescue nil %></td>
+	<td><%= p.crea %></td>
+	<td><%= p.actualiza %></td>
+	<td><%= p.elimina %></td>
+	<td>
+		<% if is_auth_a('usersobjeto') %>
+		  <%= link_to edit_user_usersobjeto_path(@user, p), remote: true, class: 'btn btn-flat btn-warning btn-xs' do %>
+		   <i class="fa fa-edit"></i> <span></span>
+		  <% end %>
+		<% end %>
+		<% if is_auth_e('usersobjeto') %>
+		  <%= link_to user_usersobjeto_path(@user, p), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}" }, class: 'btn btn-flat btn-danger btn-xs' do %>
+		   <i class="fa fa-close"></i> <span></span>
+		  <% end %>
+		<% end %>
+	</td>
+</tr>

@@ -1,0 +1,16 @@
+<div class="table-responsive">
+	<table class="table table-bordered">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Id</th>
+	      <th>Nombre</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_userssucursales">
+	    <% @user.userssucursales.each do |userssucursal| %>
+	      <%= render 'userssucursales/tr', userssucursal: userssucursal %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

@@ -1,0 +1,15 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Modulo</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_usersmodulos">
+	    <% @usersmodulos.includes([:modulo]).order(updated_at: :desc).each do |usersmodulo| %>
+	      <%= render 'usersmodulos/tr', usersmodulo: usersmodulo %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

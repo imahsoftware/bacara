@@ -1,0 +1,35 @@
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      Tasas de Cambio
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Año</th>
+            <th>Mes</th>
+            <th>Soles por Dolar</th>
+            <th>Pesos por Dolar</th>
+            <th>Yenes por Dolar</th>
+            <th>Euros por Dolar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for portafoliostasascambio in @portafolio.portafoliostasascambios.all.order('id desc') %>
+             <tr id="portafoliostasascambio_<%=portafoliostasascambio.id%>">
+               <td><%= portafoliostasascambio.anno rescue nil%></td>
+               <td><%= portafoliostasascambio.mes rescue nil %> - <%=descmesmin(portafoliostasascambio.mes.to_i) rescue nil %> </td>
+               <td><%= portafoliostasascambio.soles_dolar rescue nil %></td>
+               <td><%= portafoliostasascambio.pesos_dolar rescue nil %></td>
+               <td><%= portafoliostasascambio.yenes_dolar rescue nil %></td>
+               <td><%= portafoliostasascambio.euros_dolar rescue nil %></td>
+             </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

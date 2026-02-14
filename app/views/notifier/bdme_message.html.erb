@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+   <title>...G-Intac...</title>
+    <style type="text/css" media="screen">
+      h3 { color: #7185B9; }
+      ul { list-style: none; }
+      #some-id { font-size:2em; }
+      .some-class { color:red; }
+    </style>
+</head>
+
+<body>
+<img src="http://190.0.34.154:6001/images/logo_g_intac.png"/>
+<br/><br/><br/>
+<div align="justify" style="font-size: 15px; font-family: Verdana, Geneva, sans-serif;">
+Estimado (a) <strong><%=@objeto.deudor rescue nil%></strong>, Beneficiario del Fondo Medellín EPM:<br/><br/>
+La Agencia de Educación Superior de Medellín –G-Intac–, entidad del Municipio de Medellín, es la responsable de
+gestionar el cobro de los crédito educativo originados en el Fondo Medellín EPM.<br/><br/>
+Revisando el comportamiento de su crédito <strong><%=@objeto.nro_obligacion rescue nil%></strong>, se ha identificado que con corte al 21 de
+septiembre de 2015, este presenta valores vencidos. Cumpliendo disposiciones normativas colombianas, G-Intac
+está obligado a informarle que el próximo 30 de octubre de 2015, tanto usted como <strong><%=@objeto.deudor_solidario rescue nil%></strong> (deudor solidario),
+serán REPORTADOS en la BASE DE DEUDORES MOROSOS DEL ESTADO.<br/><br/>
+El reporte podrá evitarse, siempre y cuando, usted y/o su deudor solidario ponga al día su
+crédito educativo dentro de los 30 días siguientes a este mensaje.<br/><br/>
+Cualquier inquietud, podrá ser resuelta en el teléfono <strong>4447947 extensión 140</strong> o
+acercándose a nuestras oficinas en la <strong>Transversal 73 # 65 – 296 (Sector Robledo, cerca al Centro Comercial Florida)</strong>.<br/><br/>
+Finalmente, además de cumplir con las normas colombianas, queremos recordarles que los pagos realizados se destinan a financiar el acceso a la educación superior de otras personas que, como usted, desean emprender un proyecto de educación superior pero carecen de los recursos económicos para hacerlo.<br/><br/><br/>
+Cordialmente,<br/><br/>
+<strong>GESTIÓN DE RECUPERACIÓN DE CARTERA<br/>
+Agencia de Educación Superior de Medellín - G-Intac</strong>
+</div>
+<br/><br/>
+<div align="justify" style="font-size: 11px; font-family: Verdana, Geneva, sans-serif;">
+  <strong>S I S - Sistema de Informacion G-Intac- <%=Time.now.strftime("%Y-%m-%d %X")%><br/>***Por favor no conteste este mensaje, ha sido enviado desde un e-mail automático y no recibirá respuesta.***</strong>
+</div>
+</body>
+</html>

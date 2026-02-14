@@ -1,0 +1,32 @@
+<%= form_for(ejecucion) do |f| %>
+  <% if ejecucion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ejecucion.errors.count, "error") %> prohibited this ejecucion from being saved:</h2>
+
+      <ul>
+      <% ejecucion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :periodosliquidacion_id %>
+    <%= f.text_field :periodosliquidacion_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :estado %>
+    <%= f.text_field :estado %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

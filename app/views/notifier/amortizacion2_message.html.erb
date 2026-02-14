@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+   <title>...G-Intac...</title>
+    <style type="text/css" media="screen">
+      h3 { color: #7185B9; }
+      ul { list-style: none; }
+      #some-id { font-size:2em; }
+      .some-class { color:red; }
+    </style>
+</head>
+<body>
+<img src="http://190.0.34.154:6001/images/logo_g_intac.jpg"/>
+<br/><br/><br/>
+<div align="justify" style="font-size: 15px; font-family: Verdana, Geneva, sans-serif;">
+Apreciado Beneficiario del Crédito Educativo:<br/><br/>
+A través del presente correo estamos remitiendo copia digitalizadas de las comunicaciones que fueron remitidas tanto a usted, como a su deudor solidario, con las condiciones de amortización de su crédito.<br/><br/>
+La comunicación física fue remitida a la dirección reportada por usted a nuestro operador Comfama, a esta misma dirección le será remitida la FACTURA MENSUAL que debe cancelar antes del día 30 de CADA MES.<br/><br/>
+La dirección que actualmente tenemos reportada por usted es la siguiente <strong><%=@persona.perdireccion.to_s rescue nil%> - <%=@persona.perciudad.to_s rescue nil%></strong>.<br/><br/>
+Si esta no es su dirección actual, debe acercarse cuanto antes a las oficinas de G-Intac ubicadas en la Carrera 81 # 49 A - 37 en Medellín, para actualizar su información de contacto y/o le sea suministrada su FACTURA.<br/><br/>
+Recuerde que el hecho de no recibir su FACTURA, no lo exime de cancelar su cuota en la fecha informada.<br/><br/><br/>
+Cordialmente,<br/><br/><br/>
+<strong>AGENCIA DE EDUCACIÓN SUPERIOR DE MEDELLÍN<br/>
+G-Intac<br/>
+Teléfono 444 79 47<br/>
+Carrera 81 # 49 A - 37<br/>
+Medellín<br/>
+</strong>
+</div>
+<br/><br/>
+<div align="justify" style="font-size: 11px; font-family: Verdana, Geneva, sans-serif;">
+  <strong>S I S - Sistema de Informacion G-Intac- <%=Time.now.strftime("%Y-%m-%d %X")%><br/>***Por favor no conteste este mensaje, ha sido enviado desde un e-mail automático y no recibirá respuesta.***</strong>
+</div>
+</body>
+</html>

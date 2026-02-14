@@ -1,0 +1,17 @@
+<tr id="usersfecha_<%= usersfecha.id %>">
+  <td class="text-center">
+    <%= link_to edit_user_usersfecha_path(@user, usersfecha), remote: true, class: 'edit_usersfecha_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+       <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to user_usersfecha_path(@user, usersfecha), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+    <%= link_to image_tag("calendar.gif", :title => "Horario"), usershorarios_path(:id=>usersfecha.id)%>
+  </td>
+  <td><%=usersfecha.fecha.strftime("%Y-%m-%d") rescue nil%></td>
+  <td class="text-center"><%=usersfecha.hora_inicio rescue nil%></td>
+  <td class="text-center"><%=usersfecha.hora_fin rescue nil%></td>
+  <td class="text-center"><%=usersfecha.intervalo rescue nil%></td>
+  <td class="text-center"><%=usersfecha.cantidad rescue nil%></td>
+  <td class="text-center"><%=usersfecha.estado rescue nil%></td>
+</tr>

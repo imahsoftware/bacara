@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+    <link rel=stylesheet type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  </head>
+
+<body onload='number_pages'>
+  <%= wicked_pdf_image_tag ("headercobrocoactivo.png"), size: "1000x150" %>
+    <div id="content">
+      <%= yield %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ENV['NOMBRE_APLICACION'] %></title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+  <body class="layout-top-nav">
+    <div class="wrapper">
+      <section class="content">
+        <%= yield %>
+      </section>
+    </div>
+  </body>
+</html>

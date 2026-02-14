@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+   <title>S I C P A</title>
+    <style type="text/css" media="screen">
+      h3 { color: #7185B9; }
+      ul { list-style: none; }
+      #some-id { font-size:2em; }
+      .some-class { color:red; }
+    </style>
+</head>
+<body>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td width="20%" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;">Señor(a)</td>
+          <td width="80%">&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="color:red; font-size:1em; font-family: Verdana, Geneva, sans-serif;"><strong><%= @user.nombre %></strong></td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;"> Te invitamos a conocer el Sistema de Información del Instituto de Cultura y Patrominio de Antioquia, actualmente estamos en la construcción de los modulos necesarios para poder realizar una gestion más efectiva y eficiente.</td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;">
+            A continuación te enviamos los datos para poder acceder al sistema</td>
+        </tr>
+         <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;">
+            <strong>La dirección de acceso al Sistema de Información es....  http://190.85.129.220:7000</strong></td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+<tr valign="middle">
+          <td colspan="2">
+          <table width="80%" border="1" cellpadding="0" cellspacing="0">
+           <tr valign="middle">
+              <td width="40%" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;"><strong>Usuario</strong></td>
+              <td width="60%" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;"><strong>Contraseña</strong></td>
+            </tr>
+        <tr valign="middle">
+          <td style="color:red; font-size:1em; font-family: Verdana, Geneva, sans-serif;"><%= @user.username %></td>
+          <td style="color:red; font-size:1em; font-family: Verdana, Geneva, sans-serif;">Si ya tienes contraseña utilízala de lo contrario digita 12345</td>
+        </tr>
+           </table>
+            </td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;">
+            Cuando ingreses a Nuestro Sistema de Información encontrarás un menu en la parte superior especificamente una opción que dice <strong>"Usuario"</strong>, en esta opcion puedes cambiar la contraseña de Acceso al Sistema de Información cuantas veces se necesite.</td>
+        </tr><tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;">
+            Esperamos poder contar con sus valiosos Aportes!</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2">&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr valign="middle">
+          <td colspan="2" style="font-size:1em; font-family: Verdana, Geneva, sans-serif;"><strong>S I C P A - Sistema de Informacion</strong></td>
+        </tr>
+        <tr valign="middle">
+          <td><strong style="font-size:1em; font-family: Verdana, Geneva, sans-serif;"><%=Time.now.strftime("%Y-%m-%d %X")%></strong></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+</body>
+</html>

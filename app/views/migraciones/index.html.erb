@@ -1,0 +1,62 @@
+<legend style="margin-top: -19px;">Procesos masivos de Cargue</legend>
+<% estados = []
+   usr = current_user
+   @query.each do |cargue|
+     estados << cargue[0]
+   end
+%>
+<div class="row">
+  <div class="col-md-12">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <%
+          estados.each do |p|
+            if usr.etapa.to_s == p
+              clase = "active"
+            else
+              clase = ""
+            end
+        %>
+          <li class="<%=clase%>">
+            <%= link_to etapar_migraciones_path(etapa: p) do %>
+              <i class="fa fa-adn"></i>&nbsp;<%=p %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <div class="tab-content">
+        <% cont = 0
+           clase = ""
+           @query.each do |c|
+             e = c[0].to_s
+             if usr.etapa.to_s == e
+        %>
+            <div class="tab-pane active" id="<%=e %>">
+              <div class="box-body">
+                <% if e.to_s == 'RODAMIENTOS' %>
+                    <%= render 'otrosrodamientos' %>
+                <% elsif e.to_s == 'NOVEDADES' %>
+                    <%= render 'otrosnovedades' %>
+                <% elsif e.to_s == 'SUPERVISORES' %>
+                    <%= render 'otrossupervisores' %>
+                <% elsif e.to_s == 'CONTRATOS' %>
+                    <%= render 'otroscontratos' %>
+                <% elsif e.to_s == 'PRORROGAS' %>
+                  <%= render 'otrosprorrogas' %>
+                <% elsif e.to_s == 'CUENTAS' %>
+                  <%= render 'otroscuentas' %>
+                <% elsif e.to_s == 'TERMINACIONES' %>
+                  <%= render 'otrosterminaciones' %>
+                <% elsif e.to_s == 'TELEFONOS' %>
+                  <%= render 'otrostelefonos' %>
+                <% elsif e.to_s == 'DOTACION_TALLAS' %>
+                  <%= render 'otrostallas' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

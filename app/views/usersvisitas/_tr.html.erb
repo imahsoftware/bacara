@@ -1,0 +1,11 @@
+<tr id="usersvisita_<%= usersvisita.id %>">
+	<td class="text-center">
+		<%= link_to edit_user_usersvisita_path(@user, usersvisita), remote: true, class: 'btn btn-flat btn-warning btn-xs' do %>
+		 <i class="fa fa-edit"></i> <span></span>
+		<% end %>
+		<%= link_to user_usersvisita_path(@user, usersvisita), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}" }, class: 'btn btn-flat btn-danger btn-xs' do %>
+		 <i class="fa fa-close"></i> <span></span>
+		<% end %>
+	</td>
+	<td><%= User.find(usersvisita.user_asignado).nombrecompleto rescue nil %></td>
+</tr>

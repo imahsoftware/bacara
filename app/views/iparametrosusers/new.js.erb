@@ -1,0 +1,9 @@
+<% if @active_record.present? %>
+	$("#iparametrosuser_<%= @active_record.id %>").replaceWith("<%= j render 'tr', iparametrosuser: @active_record %>");
+<% end %>
+$("#iparametrosuser_form").html("<%= j render 'form' %>");
+$(".datetimepicker").datetimepicker();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();
+$("#iparametrosuser_form").collapse("show");
+$(".select2").select2();

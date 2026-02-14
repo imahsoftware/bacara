@@ -1,0 +1,15 @@
+   <legend><%=@mod rescue nil %></legend>
+   <% @modulos.each_slice(4).each do |modulo| %>
+     <div class="row">
+      <% modulo.each do |item| %>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <span class="info-box-icon <%= item.color %>"><i class="<%= item.imagen %>"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-number"><%= link_to item.descripcion, item.controlador %></span>                
+              </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+          </div><!-- /.col -->
+       <% end %>
+     </div>
+   <% end %>

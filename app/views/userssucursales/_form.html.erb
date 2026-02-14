@@ -1,0 +1,19 @@
+<%= simple_form_for([@user, @userssucursal], remote: true) do |f| %>
+  <div class="bs-callout">
+     <div class="row">
+       <div class="col-md-12"><%= f.input :portafoliossucursal_id, collection: Portafoliossucursal.where(["portafolio_id = #{@user.portafolio_id} and id not in (select portafoliossucursal_id from userssucursales where user_id = #{@user.id})"]).order(created_at: :asc).collect {|p| [ p.descripcion.to_s, p.id ] }, input_html: { class: 'clean select2' }, label: false %></div>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+        <% if @userssucursal.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#userssucursal_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", user_userssucursal_path(@user, @userssucursal), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>

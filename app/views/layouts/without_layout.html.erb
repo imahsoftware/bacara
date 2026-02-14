@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+  <body class="sidebar-mini skin-blue-light ">
+    <div class="wrapper">
+      <%= render 'layouts/without_layouts/main_header' %> <!-- app/layouts/_main_header.html.erb -->
+      <%= render 'layouts/without_layouts/main_sidebar' %>
+      <%= render 'layouts/without_layouts/content_wrapper' %>
+      <%= render 'layouts/main_layout/main_footer' %> <!-- app/layouts/_main_footer.html.erb -->
+      <%#= render 'layouts/main_layout/control_sidebar' %> <!-- app/layouts/_control_sidebar.html.erb -->
+
+      <% if User.find(is_admin).autotratamiento_fecha.to_s == "" and is_portafolio == 10100 %>
+        <div class="modal fade" id="tratamientodatos">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </body>
+</html>

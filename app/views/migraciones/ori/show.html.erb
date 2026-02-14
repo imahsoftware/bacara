@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @migracion.nombre %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @migracion.estado %>
+</p>
+
+<%= link_to 'Edit', edit_migracion_path(@migracion) %> |
+<%= link_to 'Back', migraciones_path %>

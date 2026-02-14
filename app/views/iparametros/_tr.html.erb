@@ -1,0 +1,43 @@
+<tr id="iparametro_<%= iparametro.id %>">
+  	<td class="text-center">
+      <%= link_to edit_iparametro_path(iparametro), class: 'edit_iparametro_button', remote: true, data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+      <% if @is_auth_e_iparametro %>
+        <%= link_to iparametro, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+            <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+        <% end %>
+      <% end %>
+      <%= link_to agregar_usuario_iparametros_path(id: iparametro.id), class: 'edit_iparametro_button', remote: true, data: { toggle: 'tooltip' }, title: "Agregar Usuario" do %>
+        <button class="btn btn-xs btn-primary"><i class="fa fa-users"></i></button>
+      <% end %>
+      <% if iparametro.campo.to_s == 'tipo_contrato' %>
+        <% if iparametro.iparametrosformatos.present? %>
+          <%= link_to agregar_formato_iparametros_path(id: iparametro.id), class: 'edit_iparametro_button', remote: true, data: { toggle: 'tooltip' }, title: "Agregar Formato" do %>
+            <button class="btn btn-xs btn-success"><i class="fa fa-smile-o"></i></button>
+          <% end %>
+        <% else %>
+          <%= link_to agregar_formato_iparametros_path(id: iparametro.id), class: 'edit_iparametro_button', remote: true, data: { toggle: 'tooltip' }, title: "Agregar Formato" do %>
+            <button class="btn btn-xs btn-primary"><i class="fa fa-smile-o"></i></button>
+          <% end %>
+        <% end %>
+      <% end %>
+    </td>
+  <td><%= iparametro.campo %></td>
+  <td><%= iparametro.descripcion %></td>
+  <td><%= iparametro.codigo_aportes %></td>
+  <td><%= iparametro.estado %></td>
+  <td><%= iparametro.visible %></td>
+</tr>
+
+<div class="modal fade" id="agregar<%= iparametro.id %>">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+<div class="modal fade" id="agregarf<%= iparametro.id %>">
+  <div class="modal-dialog" style="width: 1000px;">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

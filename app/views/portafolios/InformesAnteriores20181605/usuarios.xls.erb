@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+<ss:Styles>
+  <ss:Style ss:ID='header'><ss:Font ss:Bold='1' ss:Color='#F5F6CE'/><ss:Interior ss:Color="#045FB4" ss:Pattern="Solid"/><ss:Alignment ss:Horizontal='Center'/></ss:Style>
+  <ss:Style ss:ID='row'><ss:Alignment ss:Horizontal='Left' ss:Vertical='Center'/></ss:Style> 
+</ss:Styles>
+  <ss:Worksheet ss:Name="Usuarios">
+    <ss:Table>
+        <ss:Column ss:Width="100"/>
+        <ss:Column ss:Width="300"/>
+        <ss:Column ss:Width="100"/>
+        <ss:Column ss:Width="200"/>
+        <ss:Column ss:Width="100"/>
+        <ss:Column ss:Width="100"/>
+        <ss:Column ss:Width="100"/>      
+      <ss:Row ss:StyleID='header'>
+        <Cell><Data ss:Type='String'>Identificacion</Data></Cell>
+        <Cell><Data ss:Type='String'>Nombre</Data></Cell>
+        <Cell><Data ss:Type='String'>Usuario</Data></Cell>
+        <Cell><Data ss:Type='String'>Email</Data></Cell>
+        <Cell><Data ss:Type='String'>Activo</Data></Cell>
+        <Cell><Data ss:Type='String'>Cargo</Data></Cell>
+        <Cell><Data ss:Type='String'>Sucursal</Data></Cell>
+        <Cell><Data ss:Type='String'>Consulta</Data></Cell>
+        <Cell><Data ss:Type='String'>Fecha Creación</Data></Cell>
+        <Cell><Data ss:Type='String'>Fecha Ult. Actualizacion</Data></Cell>
+      </ss:Row>
+      <% for p in @dato1s %>
+      <ss:Row ss:StyleID='row'>
+        <Cell><Data ss:Type='String'><%=p.identificacion rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.nombre rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.username rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.email rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.activo rescue nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Cargo.find(p.cargo_id).descripcion rescue nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= Portafoliossucursal.find(p.portafoliossucursal_id).descripcion rescue nil%></Data></Cell>
+        <Cell><Data ss:Type="String"><%= p.tipoconsulta rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.created_at.strftime("%Y-%m-%d %X") rescue nil%></Data></Cell>
+        <Cell><Data ss:Type='String'><%=p.updated_at.strftime("%Y-%m-%d %X") rescue nil%></Data></Cell>
+      </ss:Row>
+      <% end %>
+    </ss:Table>
+  </ss:Worksheet>
+</Workbook>

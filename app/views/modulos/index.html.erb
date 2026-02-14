@@ -1,0 +1,42 @@
+<% title 'Modulos' %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <%# if is_auth_c('modulo') %>
+        <%= link_to new_modulo_path, remote: true, id: 'new_modulo_button', data: { toggle: 'tooltip' }, title: 'Agregar' do %>
+          <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+        <% end %>
+      <%# end %>
+      Modulos
+    </h3>
+    <div class="box-tools pull-right">
+      <%= search_form_for @q do |f| %>
+        <div class="input-group input-group-sm" style="width: 180px;">
+          <%= f.search_field :descripcion_or_mensaje_or_controlador_or_autorizado_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
+          <div class="input-group-btn">
+            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- /.box-tools -->
+
+  </div><!-- /.box-header -->
+  <div class="flash_messages"></div>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="modulo_form" class="collapse"></div>
+        <div id="modulos">
+          <% if @modulos.present? %>
+        		<%= render 'modulos/tabla' %>
+        	<% else %>
+        		<div class="alert alert-warning"><h4><i class="icon fa fa-info"></i> <%=t :atencion%></h4><%=t :atencion_msj%></div>
+        	<% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

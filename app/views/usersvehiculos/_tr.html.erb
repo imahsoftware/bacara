@@ -1,0 +1,12 @@
+<tr id="usersvehiculo_<%= usersvehiculo.id %>">
+  <td class="text-center">
+    <%= link_to edit_user_usersvehiculo_path(@user, usersvehiculo), remote: true, class: 'edit_usersvehiculo_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+       <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to user_usersvehiculo_path(@user, usersvehiculo), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= usersvehiculo.portafoliosvehiculo.id rescue nil %></td>
+  <td><%= usersvehiculo.portafoliosvehiculo.descripcion rescue nil %></td>
+</tr>

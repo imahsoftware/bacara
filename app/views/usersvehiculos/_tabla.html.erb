@@ -1,0 +1,16 @@
+<div class="table-responsive">
+	<table class="table table-bordered">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Id</th>
+	      <th>Nombre</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_usersvehiculos">
+	    <% @user.usersvehiculos.order(portafoliosvehiculo_id: :asc).each do |usersvehiculo| %>
+	      <%= render 'usersvehiculos/tr', usersvehiculo: usersvehiculo %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

@@ -1,0 +1,46 @@
+
+  <header class="main-header">
+    <%= link_to root_path, class: 'logo'  do %>
+      <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Bacara', width: '90%' %></span>
+      <span class="logo-lg" style="font-size: 18px;"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+    <% end %>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <div class="navbar-collapse collapse" id="navbar-collapse" aria-expanded="false" style="background-color: #000000;">
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="modal fade" id="menu">
+    <div class="modal-dialog modal-dialog-responsive" role="document">
+      <div class="modal-content"></div>
+    </div>
+  </div>
+<style>
+    .bor{border-radius: 10px !important;}
+    .main-header .logo {
+        text-align: left;
+    }
+    .main-header #navbar-search-input.form-control {
+        background: rgba(255,255,255,0.9) !important;
+        border-color: transparent !important;
+    }
+    .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+        z-index: -2;
+        margin-left: 0px !important;
+    }
+</style>
+
+
+
+
+
+
+
+
+

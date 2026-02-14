@@ -1,0 +1,17 @@
+$("#usersparametro_form").collapse("hide");
+
+$("#usersparametro_form").empty();
+
+<% if @active_record.present? %>
+	$("#usersparametro_<%= @active_record.id %>").replaceWith("<%= j render 'tr', usersparametro: @active_record %>");
+<% end %>
+
+$("#usersparametro_<%= @usersparametro.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+
+$("#usersparametro_<%= @usersparametro.id %>").addClass("active_usersparametro");
+
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

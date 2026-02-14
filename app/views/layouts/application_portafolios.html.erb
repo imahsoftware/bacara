@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ENV['NOMBRE_APLICACION'] %></title>
+    <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
+    <script>
+        console.log("🔥 current_user:", <%= current_user ? current_user.id : "null" %>);
+        window.CURRENT_USER_ID = <%= current_user ? current_user.id : "null" %>;
+    </script>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+  <body class="sidebar-mini skin-blue-light">
+    <div class="wrapper">
+      <%= render 'layouts/main_layout/main_header' %>
+      <%= render 'layouts/portafolios_layout/main_sidebar' %>
+      <%= render 'layouts/portafolios_layout/main_content' %>
+      <%= render 'layouts/main_layout/main_footer' %>
+      <%#= render 'layouts/main_layout/control_sidebar' %>
+    </div>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+      /// Convierte texto en mayuscula
+      $('.uppercaseInput').keyup(function () {
+          $(this).val($(this).val().toUpperCase());
+      });
+  </script>
+</html>

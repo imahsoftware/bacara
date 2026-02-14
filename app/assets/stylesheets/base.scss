@@ -1,0 +1,343 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+@import 'simple_form_autocomplete';
+@import url('nav.scss');
+
+* html {
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+body * {
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+.thcolorinfo {
+  background: #24AAE9;
+  color: #fff;
+}
+
+.thcolorred {
+  background: #000000 !important;
+  color: #fff;
+}
+
+.thcolororange {
+  background: #ff851b !important;
+  color: #fff;
+}
+
+.thcolorgreen {
+  background: #00a65a !important;
+  color: #fff;
+}
+
+.thcolorgray {
+  background: #CCCCCC !important;
+  color: #000;
+}
+
+.thcolorgray2 {
+  background: #979797 !important;
+  color: #fff;
+}
+
+
+.divper {
+  background: #fff;
+  padding: 10px;
+  border-radius: 16px;
+  border: 1px solid #ccc !important;
+}
+
+.tdcolorgris {
+  background: #BDBDBD;
+  color: #000;
+  padding: 5px;
+}
+
+.camrednormal {
+  background: #ffcccc;
+  color: #000000;
+}
+
+.camredcenter {
+  background: #ffcccc;
+  text-align: center;
+  color: #000000;
+}
+
+.tabin {
+  background: #ffcccc;
+  text-align: left;
+  color: #000000;
+}
+
+.tabac {
+  background: #ccffe6;
+  text-align: left;
+  color: #009900;
+}
+
+.tabter {
+  background: #f39c12;
+  text-align: left;
+  color: #fff;
+}
+
+
+/* Credit to bootsnipp.com for the css for the color graph
+ ESTO SOLO ES PARA EL FORMULARIO DE LOGIN
+*/
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+/*
+.skin-blue-light .sidebar-menu>li.active>a {
+  background-color: #20447d !important;
+  color: #fff !important;
+}
+
+.skin-blue-light .nav-tabs-custom > .nav-tabs > li.active {
+  background-color: #20447d !important;
+}
+*/
+
+
+.divnoti {
+  position: fixed;
+  z-index: 9999;
+  left: 10px;
+  bottom: 45px;
+  min-width: 10%;
+  font-weight: bold;
+}
+
+.cab {
+  background: #D7D7D7;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tit {
+  background: #EDEDED;
+  color: #000;
+  font-size: 10px;
+  padding: 2px;
+}
+
+.gast {
+  background: #FCF2F2;
+  color: #000;
+  font-size: 10px;
+  padding: 2px;
+}
+
+.fotos {
+  width: 165px;
+  height: 165px;
+  float: left;
+  margin: 5px;
+}
+
+
+/* CLASES PARA COLOCAR TEXTO VERTICAL */
+th.rotate {
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform: translate(2px, 260px) rotate(-90deg);
+  width: 20px;
+}
+
+th.rotate > div > span {
+  padding: 5px 10px;
+}
+
+.signature_pad {
+  width: 700px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.signature_pad_body canvas {
+  width: 100%;
+  height: 100%;
+  border: dotted #444;
+  background: #CCCCCC;
+}
+
+canvas {
+  border: 1px solid grey;
+}
+
+.text-table {
+  font-size: 11px;
+}
+
+.text-table-10 {
+  font-size: 10px;
+}
+
+/* Estilo para dispositivos móviles */
+@media (max-width: 767px) {
+  .modal-dialog-responsive {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .form-control2 {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+    font-size: 35px;
+    text-align: center;
+  }
+
+
+  .mobile-input {
+    font-size: 15px;
+    height: 25px;
+    width: 25px;
+  }
+
+  table.miestilo {
+    width: 100%;
+  }
+  table.miestilo tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    padding: 1em;
+  }
+
+  table.miestilo thead {
+    display: none;
+
+  }
+
+  table.miestilo thead tr td {
+    width: 100% !important;
+    border: none;
+  }
+
+  table.miestilo td[data-titulo] {
+    display: block;
+    width: 100%;
+  }
+
+  table.miestilo td[data-titulo].brmobile {
+    display: block;
+    width: 100%;
+  }
+
+  table.miestilo td[data-titulo]::before {
+    content: attr(data-titulo);
+    width: 100px;
+  }
+
+  table.miestilo td[data-titulo="Observaciones:"]::before {
+    display: block;
+  }
+
+
+  table.miestilo2 {
+    width: 100%;
+  }
+  table.miestilo2 tr {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    padding: 1em;
+  }
+
+  table.miestilo2 thead {
+    display: none;
+
+  }
+
+  table.miestilo2 thead tr td {
+    width: 100% !important;
+    border: none;
+  }
+
+  table.miestilo2 td[data-titulo] {
+    display: block;
+    width: 100%;
+  }
+
+  table.miestilo2 td[data-titulo].brmobile {
+    display: block;
+    width: 100%;
+  }
+
+  table.miestilo2 td[data-titulo]::before {
+    content: attr(data-titulo);
+    width: 100px;
+  }
+
+  table.miestilo2 td[data-titulo="Observaciones:"]::before {
+    display: block;
+  }
+
+  .cancelcenter {
+    text-align: justify;
+  }
+
+  .campo_otp {
+    font-size: 20px;
+    text-align: center;
+    height: 45px;
+    width: 45px;
+    border-radius: 9px;
+    background-color: #ECECEC;
+  }
+}
+
+/* Estilo para dispositivos de escritorio */
+@media (min-width: 768px) {
+  .modal-dialog-responsive {
+    width: 75%;
+    margin: 30px auto; /* Ajusta el margen según tus preferencias */
+  }
+
+  .form-control2 {
+    border-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+    font-size: 60px;
+    text-align: center;
+  }
+
+  .campo_otp {
+    font-size: 50px;
+    text-align: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 9px;
+    background-color: #ECECEC;
+  }
+}
+
+#message {
+  background-color: #f39c12;
+  color:black;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 9px;
+  margin-left: 10px;
+}

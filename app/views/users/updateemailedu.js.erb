@@ -1,0 +1,21 @@
+$(".alert_flash").fadeOut(300, function() {
+	$(this).remove();
+});
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(300, function() {
+		$(this).remove();
+	});
+}, 5000);
+
+<% if @user.email != @email_actual %>
+	$(document).ready( function() {
+	  url = "<%= edit_persona_path(id: params[:user][:persona_id], etapa: 'A') %>"
+	  $(location).attr("href", url);
+	});
+<% end %>

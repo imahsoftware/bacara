@@ -1,0 +1,36 @@
+<%
+  isadmin = is_admin
+  usr = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+  <header class="main-header">
+
+<!-- Logo -->
+<%= link_to root_path, class: 'logo'  do %>
+  <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Bacara', width: '90%' %></span>
+  <span class="logo-lg" style="font-size: 18px;"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+  <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{usr.nombre}" + ' que quiere desconectarse?' } do %>
+    <button class="btn btn-flat btn-default"><i class="fa fa-sign-in"> <b>Salir</b></i></button>
+  <% end %>
+<% end %>
+
+<!-- Header Navbar -->
+<nav class="navbar navbar-static-top hidden-xs hidden-sm" role="navigation">
+
+</nav>
+</header>
+<style>
+  .bor{border-radius: 10px !important;}
+  .main-header .logo {
+    text-align: left;
+  }
+  .main-header #navbar-search-input.form-control {
+    background: rgba(255,255,255,0.9) !important;
+    border-color: transparent !important;
+  }
+  .input-group-btn:last-child > .btn, .input-group-btn:last-child > .btn-group {
+    z-index: -2;
+    margin-left: 0px !important;
+  }
+</style>

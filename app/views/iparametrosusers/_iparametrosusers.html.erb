@@ -1,0 +1,22 @@
+<div class="box-header">
+  <legend>
+    Usuarios
+  </legend>
+  <div class="box-tools pull-right">
+    <%= link_to new_iparametrosuser_path(iparametro_id: params[:id]), remote: true, class: 'btn btn-sm btn-info' do %>
+      <i class="fa fa-plus-square"> </i> <span>Nuevo</span>
+    <% end %>&nbsp;
+  </div>
+</div>
+
+<div class="box-body">
+  <div id="iparametrosuser_form" class="collapse"></div>
+  <div id="iparametrosusers">
+    <% if Iparametrosuser.where("iparametro_id = #{params[:id]}").present? %>
+      <%= render 'iparametrosusers/tabla' %>
+    <% else %>
+      <div class="alert alert-danger">
+        <h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4><%= t :atencion_msj %></div>
+    <% end %>
+  </div>
+</div>

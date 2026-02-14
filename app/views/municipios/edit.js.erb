@@ -1,0 +1,17 @@
+$("#municipio_form").collapse("hide");
+
+$("#municipio_form").empty();
+
+<% if @active_record.present? %>
+	$("#municipio_<%= @active_record.id %>").replaceWith("<%= j render 'tr', municipio: @active_record %>");
+<% end %>
+
+$("#municipio_<%= @municipio.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+
+$("#municipio_<%= @municipio.id %>").addClass("active_municipio");
+$(".datetimepicker").datetimepicker();
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

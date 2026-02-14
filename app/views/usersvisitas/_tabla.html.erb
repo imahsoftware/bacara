@@ -1,0 +1,15 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th class="text-center">Usuario de la Visita</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_usersvisitas">
+	    <% @user.usersvisitas.order(updated_at: :desc).each do |usersvisita| %>
+	      <%= render 'usersvisitas/tr', usersvisita: usersvisita %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

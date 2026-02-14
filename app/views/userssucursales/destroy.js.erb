@@ -1,0 +1,19 @@
+$(".alert_flash").fadeOut(300, function() {
+	$(this).remove();
+});
+
+<% if @user.userssucursales.count == 0 %>
+	$("#userssucursales").html("<div class='alert alert-warning'><h4><i class='icon fa fa-info'></i> <%=t :atencion%></h4><%=t :atencion_msj%><span></div>");
+<% else %>
+	$("#userssucursal_<%= @userssucursal.id %>").remove();
+<% end %>
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(300, function() {
+		$(this).remove();
+	});
+}, 5000);
+
+$('.tooltip').tooltip('hide');

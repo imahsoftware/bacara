@@ -1,0 +1,43 @@
+<%
+  user = User.find(is_admin)
+  #ispersona = is_persona
+%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%#= favicon_link_tag 'logo.png' %>
+  <script>
+      console.log("🔥 current_user:", <%= current_user ? current_user.id : "null" %>);
+      window.CURRENT_USER_ID = <%= current_user ? current_user.id : "null" %>;
+  </script>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+
+  <% if ['PERSONA', 'METRO'].include?(user.tipoconsulta.to_s)%>
+    <body class="sidebar-mini skin-blue-light" style="font-family: Helvetica, Arial, 'sans-serif', !important;">
+    <div class="wrapper">
+      <%= render 'layouts/without_seg_layout/main_header_per' %>
+      <%= render 'layouts/without_seg_layout/content_wrapper' %>
+    </div>
+    </body>
+  <% else %>
+    <body class="sidebar-mini skin-blue-light" style="font-family: Helvetica, Arial, 'sans-serif', !important;">
+    <div class="wrapper">
+      <%= render 'layouts/main_layout/main_header' %>
+      <%= render 'layouts/main_layout/main_sidebar' %>
+      <%= render 'layouts/main_layout/main_content' %>
+      <%= render 'layouts/main_layout/main_footer' %>
+    </div>
+    </body>
+  <% end %>
+<script type="text/javascript" charset="utf-8">
+    /// Convierte texto en mayuscula
+    $('.uppercaseInput').keyup(function () {
+        $(this).val($(this).val().toUpperCase());
+    });
+</script>
+</html>

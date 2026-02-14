@@ -1,0 +1,17 @@
+$("#usersportafolio_form").collapse("hide");
+
+$("#usersportafolio_form").empty();
+
+<% if @active_record.present? %>
+	$("#usersportafolio_<%= @active_record.id %>").replaceWith("<%= j render 'tr', usersportafolio: @active_record %>");
+<% end %>
+
+$("#usersportafolio_<%= @usersportafolio.id %>").html("<td colspan='7'><%= j render 'form' %></td>");
+
+$("#usersportafolio_<%= @usersportafolio.id %>").addClass("active_usersportafolio");
+
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,30 @@
+<div class="box box-primary">
+  <%= simple_form_for(@portafolio) do |f| %>
+    <div class="box-header">
+      <legend>Compañia</legend>
+      <% unless @portafolio.new_record? %>
+        <div class="box-tools pull-right">
+          <span class="label label-danger">Creacion: <%=@portafolio.created_at.strftime("%Y-%m-%d %X") rescue nil%></span>
+        </div>
+      <% end %>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-4"><%= f.input :nombre, disabled: true %></div>
+        <div class="col-md-2"><%= f.input :nombrecorto, label: 'Nombre Corto', disabled: true %></div>
+        <div class="col-md-4"><%= f.input :email, disabled: true %></div>
+        <div class="col-md-2"><%= f.input :estado, collection: select_estado_portafolios, as: :select, input_html: { data: { width: '100%' }, class: 'select2' }, disabled: true%></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><%= f.input :forma_vmn, collection: select_forma_vmn, as: :select, input_html: { data: { width: '100%' }, class: 'select2' }, disabled: true%></div>
+        <div class="col-md-3"><%= f.input :maximo_ajustes, as: :moneda, label: 'Máximo de ajustes al Mes', disabled: true %></div>
+        <div class="col-md-2"><%= f.input :logo, as: :file %></div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="box-tools pull-right">
+        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>

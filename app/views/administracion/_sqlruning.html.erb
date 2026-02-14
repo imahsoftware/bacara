@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="thcolor">
+        <th class="text-center">SID</th>
+        <th class="text-center">SERIAL</th>
+        <th class="text-center">SPID</th>
+        <th class="text-center">SQL TEXT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @processes.each do |process| %>
+        <tr>
+          <td class="text-center"><%= process.sid rescue nil %></td>
+          <td class="text-center"><%= process.serial rescue nil %></td>
+          <td class="text-center"><%= process.spid rescue nil %></td>
+          <td><%= process.sql_text rescue nil %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

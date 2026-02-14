@@ -1,0 +1,60 @@
+<br/><legend><h4>Agendas - Horarios <%= link_to 'Regresar', edit_user_path(:id =>@usersfecha.user_id), :class=>"btn btn-info" %></h4></legend>
+
+<div align="center">
+<table class="table table-bordered table-striped table-hover">
+  <tr valign="middle">
+    <th>Fecha de Asignacion</th>
+    <th><div align="center">Hora Inicio</div></th>
+    <th><div align="center">Hora Fin</div></th>
+    <th><div align="center">Intervalo</div></th>
+    <th><div align="center">Nro de personas por Intervalo</div></th>
+    <th><div align="center">Estado</div></th>
+   </tr>
+    <tr  valign="middle">
+      <td><%=@usersfecha.fecha.strftime("%Y-%m-%d") rescue nil%></td>
+      <td><div align="center"><%=@usersfecha.hora_inicio rescue nil%></div></td>
+      <td><div align="center"><%=@usersfecha.hora_fin rescue nil%></div></td>
+      <td><div align="center"><%=@usersfecha.intervalo rescue nil%></div></td>
+      <td><div align="center"><%=@usersfecha.cantidad rescue nil%></div></td>
+      <td><div align="center"><%=@usersfecha.estado rescue nil%> </div></td>
+   </tr>
+</table>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+  <tr valign="middle">
+    <th width="12%" height="25"><div align="left">Hora</div></th>
+    <th width="5%"><div align="center">Cantidad</div></th>
+    <th width="15%"><div align="center">Estado</div></th>
+    <th width="58%"><div align="left">Usuario</div></th>
+    <th>&nbsp;</th>
+  </tr>
+<% @usershorarios.each do |usershorario|
+     users = Helenasagenda.where("usershorario = #{usershorario.id}").order("created_at asc")%>
+<tr valign="middle" class="<%=cycle('even1', 'odd1')%>">
+    <td class="camposDesc"><div align="left"><%=h usershorario.horario rescue nil%></div></td>
+    <td class="camposDesc"><div align="center"><%=h usershorario.cantidad%></div></td>
+    <td class="camposDesc"><div align="center"><%=h usershorario.estado%></div></td>
+    <td class="camposDesc"><div align="left">
+          <% if users.count.to_i > 0 %>
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+              <% for user in users %>
+                <tr valign="middle">
+                  <td class="camposDesc" align="left"><%=user.persona.autobuscar rescue nil%> (<%=user.estado rescue nil%>)</td>
+                </tr>
+              <% end %>
+            </table>
+          <% end %>
+    </div></td>
+    <td class="camposDesc"><div align="center">
+        <% if users.count.to_i == 0 %>
+          <% if usershorario.estado.to_s == 'ACTIVO' %>
+          <%= link_to image_tag('connect2.png', :title => "Inactivar horario"), bact_usershorarios_path(:id=>usershorario.id)%>
+          <% else %>
+          <%= link_to image_tag('link_delete.png', :title => "Activar Horario"), act_usershorarios_path(:id=>usershorario.id)%>
+          <% end %>
+        <% end %>
+      </div></td>
+  </tr>
+<% end %>
+</table>
+</div>

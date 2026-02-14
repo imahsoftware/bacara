@@ -1,0 +1,19 @@
+<%= simple_form_for([@user, @usersportafolio], remote: true) do |f| %>
+  <div class="bs-callout">
+     <div class="row">
+       <div class="col-md-12"><%= f.input :portafolio_id, collection: Portafolio.where(["estado = 'ACTIVO' and id not in (select portafolio_id from usersportafolios where user_id = #{@user.id})"]).order(created_at: :asc).collect {|p| [ p.nombre.to_s, p.id ] }, input_html: { class: 'clean select2' }, label: false %></div>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+        <% if @usersportafolio.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersportafolio_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", user_usersportafolio_path(@user, @usersportafolio), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>

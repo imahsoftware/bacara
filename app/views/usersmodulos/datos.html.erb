@@ -1,0 +1,27 @@
+<div class="box box-info">
+   <div class="box-body">
+      <div class="alert alert-warning">
+       <h4><i class="icon fa fa-info"></i> <%=@user.nombre rescue nil%> ! </h4>
+       Bienvenida(o), para iniciar el diligenciamiento del formulario de inscripción, debes manifiestar conocer y entender que:</div>
+     <div class="row">
+       <div class="col-md-12 x">
+									<ul>
+												<li><div align="justify">La información que registre en el presente formulario se entiende rendida bajo la gravedad de juramento.</div></li>
+												<li><div align="justify">Faltar a la verdad en la información rendida puede generar sanciones de tipo penal
+												(código penal 442, 453 y Ley 1474 art 26).</div></li>
+												<li><div align="justify">La información solicitada tiene como finalidad consolidar información para estudios, diagnósticos y valoraciones propias del objeto misional de la Corporación para el fomento de la Educación Superior. Por lo tanto entiendo y acepto el tratamiento sobre mis datos personales con las universidades públicas y privadas, ICFES, Instituciones Educativas y/o Colegios públicos o privados; con las diferentes dependencias y entes descentralizados del Municipio de Medellín y al igual que las de la Gobernación de Antioquia. También autorizo el tratamiento de mis datos personales con programas especiales para población indígena, afrocolombiana, discapacidad y víctimas del conflicto armando.</div></li>
+												<li><div align="justify">De otro lado, autorizo el tratamiento de mis datos personales con listas restrictivas
+												para la prevención de lavados de activos y financiación del terrorismo; con operadores financieros; entidades de cobranza y operador asociado para la ejecución del programa contratados por la Corporación para el fomento de la Educación Superior</div></li>
+												<li><div align="justify">A los datos registrados se les dará el  tratamiento previsto en la Ley 1581 de 2012 reglamentada por el Decreto 1377 de 2013 y demás normas que la modifiquen, de modo que sus titulares tendrán los derechos expresamente establecidos en las normas citadas. En virtud de lo anterior, estos datos sólo podrán suministrarse a los titulares, sus causahabientes o sus representantes legales; las entidades públicas o administrativas en ejercicio de sus funciones legales o por orden judicial o a los terceros autorizados por el Titular o por la ley.</div></li>
+												<li><div align="justify">Igualmente expreso que recibí información previa y suficiente sobre las características y condiciones del programa, las cuales están detalladas en el reglamento operativo del programa.</div></li>
+												El participante deberá señalar el botón de acepto para ingresar y continuar el proceso de
+												renovación. 
+									</ul>
+									<div align="center"><%= link_to "Aprobar terminos y condiciones", {:controller=>"usersmodulos", :action =>"aprobarterminos", :id=> @user.id}, class: "btn btn-sm btn-danger" %>     
+									</div>
+
+       </div>
+     </div>
+   </div>
+ </div>
+

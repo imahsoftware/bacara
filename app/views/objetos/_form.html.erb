@@ -1,0 +1,27 @@
+<%= simple_form_for @objeto, remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-5">
+        <%= f.input :descripcion, label: "Descripción", input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :autorizado, as: :select, collection: { "SI" => "SI","NO" => "NO"}, input_html: { class: 'clean select2' }, include_blank: true, label: "Autorizado?" %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :descripcion_ampliada, label: "Descripción Ampliada", input_html: { class: 'clean' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @objeto.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#objeto_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", objeto_path(@objeto), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>

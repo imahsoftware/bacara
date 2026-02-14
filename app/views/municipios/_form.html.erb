@@ -1,0 +1,29 @@
+<%= simple_form_for @municipio, remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :descripcion, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :departamento, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-5">
+        <%= f.input :autobuscar, input_html: { class: 'clean' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @municipio.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#municipio_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", municipio_path(@municipio), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<br/>
+

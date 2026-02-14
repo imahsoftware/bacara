@@ -1,0 +1,5 @@
+<%- if current_user.otp_required_for_login %>
+  <%= link_to("Deactivate two factor", deactivate_two_factor_index_path) %>
+<% else %>
+  <%= link_to("Activate two factor", activate_two_factor_index_path) %>
+<% end %>

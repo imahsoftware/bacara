@@ -1,0 +1,126 @@
+<h3>Informes - Inscritos 2018</h3>
+<table border="1">
+  <tr valign="middle" style="vertical-align:middle; font-size: 10px; color: white;" bgcolor="#00C4C4">
+    <td><strong>Tipo Documento</strong></td>
+    <td><strong>Identificacion</strong></td>
+    <td><strong>Nombre</strong></td>
+    <td><strong>Genero</strong></td>
+    <td><strong>Fecha de Nacimiento</strong></td>
+    <td><strong>Direccion</strong></td>
+    <td><strong>Municipio</strong></td>
+    <td><strong>Barrio y vereda</strong></td>
+    <td><strong>Telefono</strong></td>
+    <td><strong>Celular</strong></td>
+    <td><strong>Correo electronico</strong></td>
+    <td><strong>Estrato</strong></td>
+    <td><strong>Puntaje Sisben</strong></td>
+    <td><strong>Institución</strong></td>
+    <td><strong>Representante del consejo estudiantil</strong></td>
+    <td><strong>Personero estudiantil</strong></td>
+    <td><strong>Liderazgo y participación social o comunitaria</strong></td>
+    <td><strong>Icfes</strong></td>
+    <td><strong>Puntaje icfes</strong></td>
+    <td><strong>Universidad</strong></td>
+    <td><strong>Programa</strong></td>
+    <td><strong>Matematicas Grado 9</strong></td>
+    <td><strong>Matematicas Grado 10</strong></td>
+    <td><strong>Matematicas Grado 11</strong></td>
+    <td><strong>Lenguaje Grado 9</strong></td>
+    <td><strong>Lenguaje Grado 10</strong></td>
+    <td><strong>Lenguaje Grado 11</strong></td>
+    <td><strong>Ciencias Naturales Grado 9</strong></td>
+    <td><strong>Ciencias Naturales Grado 10</strong></td>
+    <td><strong>Ciencias Naturales Grado 11</strong></td>
+    <td><strong>Ciencias Sociales Grado 9</strong></td>
+    <td><strong>Ciencias Sociales Grado 10</strong></td>
+    <td><strong>Ciencias Sociales Grado 11</strong></td>
+    <td><strong>Programa al que aspira</strong></td>
+    <td><strong>Nivel de formación del programa</strong></td>
+    <td><strong>Universidad primera opcion</strong></td>
+    <td><strong>Ya se presento?</strong></td>
+    <td><strong>Universidad segunda opcion</strong></td>
+    <td><strong>Ya se presento?</strong></td>
+    <td><strong>Universidad tercerca opcion</strong></td>
+    <td><strong>Ya se presento?</strong></td>
+    <td><strong>Tipo Dato acudiente</strong></td>
+    <td><strong>Identificacion acudiente</strong></td>
+    <td><strong>Nombre acudiente</strong></td>
+    <td><strong>Telefono</strong></td>
+    <td><strong>Celular</strong></td>
+    <td><strong>Otro Telefono</strong></td>
+    <td><strong>Ocupacion</strong></td>
+    <td><strong>Correo Electronico</strong></td>
+    <td><strong>Total</strong></td>
+    <td><strong><div align="left">Resultados Académicos Grado 9º</div></strong></td>
+    <td><strong><div align="left">Resultados Académicos Grado 10º</div></strong></td>
+    <td><strong><div align="left">Resultados Académicos Grado 11º</div></strong></td>
+    <td><strong><div align="left">Certificado del SISBEN con la información que especifique el puntaje asignado. </div></strong></td>
+    <td><strong><div align="left">Copia del último recibo de servicios públicos de su lugar permanente de habitación y del grupo familiar, donde conste estrato socioeconómico y dirección. </div></strong></td>
+    <td><strong><div align="left">Documento expedido por la Institución educativa que certifique el desempeño en cargos de representación. </div></strong></td>
+    <td><strong><div align="left">Documentos que certifiquen participación en grupos o proyectos sociales, comunitarios, humanitarios o de voluntariado. </div></strong></td>
+  </tr>
+<% @formularios.each do |r| %>
+  <tr valign="middle" style="vertical-align:middle; font-size: 10px;">
+      <td><%= r.tipo_documento rescue nil %></td>
+      <td><%= r.identificacion rescue nil %></td>
+      <td><%= r.nombres rescue nil %></td>
+      <td><%= r.genero rescue nil %></td>
+      <td><%= r.fecha_nacimiento rescue nil %></td>
+      <td><%= r.direccion rescue nil %></td>
+      <td><%= r.municipio.descripcion rescue nil %></td>
+      <td><%= r.barrio_vereda rescue nil %></td>
+      <td><%= r.telefono rescue nil %></td>
+      <td><%= r.celular rescue nil %></td>
+      <td><%= r.email rescue nil %></td>
+      <td><%= r.estrato rescue nil %></td>
+      <td><%= r.puntaje_sisben rescue nil %></td>
+      <td><%= r.institucion.nombre   rescue nil %></td>
+      <td><%= r.designacion rescue nil %></td>
+      <td><%= r.designacion2 rescue nil %></td>
+      <td><%= r.liderazgo rescue nil %></td>
+      <td><%= r.icfes rescue nil %></td>
+      <td><%= r.puntaje_icfes rescue nil %></td>
+      <td><%= r.universidad.nombre rescue nil %></td>
+      <td><%= r.programas rescue nil %></td>
+      <td><div align="right"><%= r.mat_grado9 rescue nil %></div></td>
+      <td><div align="right"><%= r.mat_grado10 rescue nil %></div></td>
+      <td><div align="right"><%= r.mat_grado11 rescue nil %></div></td>
+      <td><div align="right"><%= r.len_grado9 rescue nil %></div></td>
+      <td><div align="right"><%= r.len_grado10 rescue nil %></div></td>
+      <td><div align="right"><%= r.len_grado11 rescue nil %></div></td>
+      <td><div align="right"><%= r.nat_grado9 rescue nil %></div></td>
+      <td><div align="right"><%= r.nat_grado10 rescue nil %></div></td>
+      <td><div align="right"><%= r.nat_grado11 rescue nil %></div></td>
+      <td><div align="right"><%= r.soc_grado9 rescue nil %></div></td>
+      <td><div align="right"><%= r.soc_grado10 rescue nil %></div></td>
+      <td><div align="right"><%= r.soc_grado11 rescue nil %></div></td>
+      <td><%= r.programa_aspira rescue nil %></td>
+      <td><%= r.nivel rescue nil %></td>
+      <td><%= Universidad.find("#{r.universidad1_id}").nombre rescue nil %></td>
+      <td><%= r.presento rescue nil %></td>
+      <td><%= Universidad.find("#{r.universidad2_id}").nombre rescue nil %></td>
+      <td><%= r.presento2 rescue nil %></td>
+      <td><%= Universidad.find("#{r.universidad3_id}").nombre rescue nil %></td>
+      <td><%= r.presento3 rescue nil %></td>
+      <td><%= r.documento_acud rescue nil %></td>
+      <td><%= r.identificacion_acud rescue nil %></td>
+      <td><%= r.nombres_acud rescue nil %></td>
+      <td><%= r.telefono_acud rescue nil %></td>
+      <td><%= r.celular_acud rescue nil %></td>
+      <td><%= r.otro_tel rescue nil %></td>
+      <td><%= r.ocupacion rescue nil %></td>
+      <td><%= r.email_acud rescue nil %></td>
+      <td><div align="left"><%=r.cal2017_total rescue nil%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 61"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 58"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 62"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 60"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 59"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 63"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+      <td><div align="center"><% if r.formulariosdocumentos.exists?(["personastipo_id = 64"]) == true%>Cargado<%else%>NO Cargado<%end%></div></td>
+    </tr>    
+ <% end %>
+</table>
+
+
+

@@ -1,0 +1,17 @@
+$("#iparametrosuser_form").collapse("hide");
+
+$("#iparametrosuser_form").empty();
+
+<% if @active_record.present? %>
+	$("#iparametrosuser_<%= @active_record.id %>").replaceWith("<%= j render 'tr', iparametrosuser: @active_record %>");
+<% end %>
+
+$("#iparametrosuser_<%= @iparametrosuser.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+
+$("#iparametrosuser_<%= @iparametrosuser.id %>").addClass("active_iparametrosuser");
+$(".datetimepicker").datetimepicker();
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

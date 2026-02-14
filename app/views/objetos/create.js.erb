@@ -1,0 +1,24 @@
+$(".alert_flash").fadeOut(1000, function() {
+	$(this).remove();
+});
+
+<% if @objetos.present? %>
+	$("#objetos").html("<%= j render 'tabla' %>");
+<% else %>
+	$("#tbody_objetos").prepend("<%= j render 'tr', objeto: @objeto %>");
+<% end %>
+
+$(".clean").val("").trigger('change');
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(1000, function() {
+		$(this).remove();
+	});
+}, 5000);

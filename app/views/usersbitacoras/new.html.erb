@@ -1,0 +1,27 @@
+<h1>New usersbitacora</h1>
+
+<% form_for(@usersbitacora) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :usertransaccion_id %><br />
+    <%= f.text_field :usertransaccion_id %>
+  </p>
+  <p>
+    <%= f.label :tipo %><br />
+    <%= f.text_field :tipo %>
+  </p>
+  <p>
+    <%= f.label :transaccion %><br />
+    <%= f.text_field :transaccion %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', usersbitacoras_path %>

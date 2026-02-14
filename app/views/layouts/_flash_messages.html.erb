@@ -1,0 +1,14 @@
+<% flash.each do |type, msg| %>
+	<div class="callout callout-<%= irregular_types(type) %> alert-dismissible alert_flash divnoti text-center">
+	 <%= msg %>
+	</div>
+<% end %>
+<% flash.clear %>
+
+<script>
+	setTimeout(function() {
+		$(".alert_flash").fadeOut(1000, function() {
+			$(this).remove();
+		});
+	}, 5000);
+</script>

@@ -1,0 +1,26 @@
+<td class="text-center">
+  <%= link_to edit_portafolio_path(etapa: "A", id: portafolio.id), data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+    <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+  <% end %>
+  <% if is_auth_c('portafolio') %>
+    <%= link_to portafolio, remote: true, method: :delete, data: { confirm: 'Esta seguro?', toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+  <% end %>
+  <% if portafolio.id_alegra.blank? && portafolio.habilita_alegra.blank? %>
+    <%= link_to crear_empresa_ws_alegra_index_path(portafolio_id: portafolio.id), data: { toggle: 'tooltip' }, title: "Crear empresa en Alegra" do %>
+      <button class="btn btn-xs btn-success"><i class="fa fa-industry"></i></button>
+    <% end %>
+  <% end %>
+	<% if portafolio.id_alegra.present? && portafolio.habilita_alegra.blank? %>
+		<%= link_to habilitar_empresa_ws_alegra_index_path(portafolio_id: portafolio.id), data: { toggle: 'tooltip' }, title: "Habilitar empresa en Alegra" do %>
+			<button class="btn btn-xs btn-primary"><i class="fa fa-industry"></i></button>
+		<% end %>
+	<% end %>
+</td>
+<td><%= portafolio.nombre rescue nil %></td>
+<td><%= portafolio.nombrecorto rescue nil %></td>
+<td><%= portafolio.forma_vmn rescue nil %></td>
+<td>
+  <div align="center"><%= portafolio.estado rescue nil %></div>
+</td>

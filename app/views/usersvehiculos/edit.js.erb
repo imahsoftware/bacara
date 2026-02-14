@@ -1,0 +1,17 @@
+$("#usersvehiculo_form").collapse("hide");
+
+$("#usersvehiculo_form").empty();
+
+<% if @active_record.present? %>
+	$("#usersvehiculo_<%= @active_record.id %>").replaceWith("<%= j render 'tr', usersvehiculo: @active_record %>");
+<% end %>
+
+$("#usersvehiculo_<%= @usersvehiculo.id %>").html("<td colspan='7'><%= j render 'form' %></td>");
+
+$("#usersvehiculo_<%= @usersvehiculo.id %>").addClass("active_usersvehiculo");
+
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

@@ -1,0 +1,131 @@
+<legend>Cargue de <%= params[:tipo].capitalize rescue nil %></legend>
+<%
+  codigomigracion = params[:codigomigracion].to_i
+  valuecargue = 'migracionesestados'
+  @archivo = Archivo.new
+%>
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-condensed table-striped">
+            <thead class="thcolor">
+            <tr>
+              <td colspan="4" class="text-center"><strong>Orden del archivo</strong></td>
+            </tr>
+            <tr style="font-size: 12px;">
+              <td class="text-center" width="10%"><strong>Orden</strong></td>
+              <td class="text-center"><strong>Encabezado</strong></td>
+              <td class="text-center" width="20%"><strong>Detalle</strong></td>
+            </tr>
+            </thead>
+            <tbody>
+            <% Migracionescampo.where(["migracion_id = #{codigomigracion}"]).order("orden asc").each do |migracionescampo| %>
+              <tr style="font-size: 12px;">
+                <td class="text-center"><%= migracionescampo.orden rescue nil %></td>
+                <td class="text-left"><%= migracionescampo.encabezado rescue nil %></td>
+                <td class="text-center"><%= migracionescampo.detalle rescue nil %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6" align="left" style="padding-left: 0px" id="mostrarBoton"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="box box-primary">
+      <%= simple_form_for [@archivo], wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+        <%= f.hidden_field :migracion, value: valuecargue %>
+        <%= hidden_field_tag :tipo, params[:tipo], value: params[:tipo] %>
+        <div class="box-header">
+          <div class="alert alert-danger">
+            <h4><i class="icon fa fa-info"></i> Atención!</h4>
+            Recuerde que el archivo debe ser con extensión <strong>XLS</strong> o <strong>XLSX</strong>. <br/>DEBE tener
+            encabezados <br/>DEBE ser en el orden establecido
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <label>Archivo</label><br/>
+              <div class="input-group">
+                  <span class="input-group-btn">
+                    <button id="fake-file-button-browse" type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-file"></span>
+                    </button>
+                  </span>
+                <%= f.input :documentos, as: :file, label: false, input_html: { id: 'files-input-upload', style: 'display:none', data: { toggle: 'tooltip' }, title: 'Seleccionar Archivo' } %>
+                <input type="text" id="rutaarchivo" disabled="disabled" placeholder="Nada Seleccionado" class="form-control" style="width: 187px">
+                <span class="input-group-btn">
+                    <%= f.button :submit, "Cargar", class: "btn btn-primary", disabled: true, id: 'fake-file-button-upload', data: { toggle: 'tooltip', disable_with: "#{t :procesando}" }, title: 'Cargar Archivo' %>
+                  </span>
+                <script type="text/javascript">
+                    // Fake file upload
+                    document.getElementById('fake-file-button-browse').addEventListener('click', function () {
+                        document.getElementById('files-input-upload').click();
+                    });
+
+                    document.getElementById('files-input-upload').addEventListener('change', function () {
+                        document.getElementById('rutaarchivo').value = this.value.replace(/C:\\fakepath\\/, '');
+                        document.getElementById('fake-file-button-upload').removeAttribute('disabled');
+                    });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%
+        datos = Objeto.find_by_sql(["select m.archivo_id, (SELECT documentos_file_name FROM archivos where id = m.archivo_id) archivodetalle,
+                                          SUM(CASE WHEN m.estado_cargue ='APLICADO' THEN 1 ELSE 0 END) aplicado, SUM(CASE WHEN m.estado_cargue ='NO APLICADO' THEN 1 ELSE 0 END) no_aplicado
+                                  from  #{valuecargue.to_s} m where m.tipo = '#{params[:tipo]}' group by archivo_id"])
+        if datos.present?
+      %>
+        <table class="table table-bordered table-condensed table-striped">
+          <thead class="thcolor">
+          <tr style="font-size: 10px;">
+            <td class="text-center"><strong></strong></td>
+            <td class="text-center"><strong>Nº Lote</strong></td>
+            <td class="text-left"><strong>Archivo Cargado</strong></td>
+            <td class="text-center" width="20%"><strong>Cargados</strong></td>
+            <td class="text-center" width="20%"><strong>No Cargados</strong></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% datos.each do |ma| %>
+            <tr style="font-size: 10px;">
+              <td class="text-center">
+                <% if ma.no_aplicado.to_i > 0 %>
+                  <%= link_to errores_archivos_path(tipo: params[:tipo], archivo_id: ma.archivo_id, migracion_id: codigomigracion, format: :xlsx), data: { toggle: 'tooltip' }, title: 'Inconsistencias' do %>
+                    <button class="btn btn-xs btn-danger"><i class="fa fa-plus-square"></i></button>
+                  <% end %>
+                <% end %>
+                <% if ma.aplicado.to_i > 0 %>
+                  <%= link_to examenes_registros_personasformularios_path(archivo_id: ma.archivo_id, tipo: params[:tipo]), remote: true, data: { toggle: 'tooltip' }, title: 'Abrir Registros' do %>
+                    <button class="btn btn-xs btn-primary"><i class="fa fa-openid"></i></button>
+                  <% end %>
+                <% end %>
+              </td>
+              <td class="text-center">
+                <%= ma.archivo_id rescue nil %>
+              </td>
+              <td>
+                <%= ma.archivodetalle rescue nil %></td>
+              <td class="text-center"><%= ma.aplicado rescue nil %></td>
+              <td class="text-center"><%= ma.no_aplicado rescue nil %></td>
+            </tr>
+            <div class="modal fade" id="abrircargue<%= ma.archivo_id %>">
+              <div class="modal-dialog modal-dialog-responsive" role="document">
+                <div class="modal-content"></div>
+              </div>
+            </div>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

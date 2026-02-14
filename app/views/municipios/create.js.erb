@@ -1,0 +1,24 @@
+$(".alert_flash").fadeOut(1000, function() {
+	$(this).remove();
+});
+
+<% if Municipio.count == 1 %>
+	$("#municipios").html("<%= j render 'tabla' %>");
+<% else %>
+	$("#tbody_municipios").prepend("<%= j render 'tr', municipio: @municipio %>");
+<% end %>
+
+$(".clean").val("").trigger('change');
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(1000, function() {
+		$(this).remove();
+	});
+}, 5000);

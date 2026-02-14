@@ -1,0 +1,228 @@
+<div class="box box-primary">
+  <%= simple_form_for(@portafolio) do |f| %>
+    <div class="box-header">
+      <legend>
+        <% if @portafolio.new_record? %>
+          <%= link_to portafolios_path, data: { toggle: 'tooltip' }, title: 'Regresar a portafolios' do %>
+            <i class="fa fa-arrow-left fa-fw text-danger" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
+        <%= @portafolio.new_record? ? 'Nueva' : 'Editar' %> Compañia
+      </legend>
+      <% unless @portafolio.new_record? %>
+        <div class="box-tools pull-right">
+          <span class="label label-danger">Creacion: <%= @portafolio.created_at.strftime("%Y-%m-%d %X") rescue nil %></span>
+        </div>
+      <% end %>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+      <div class="row">
+        <div class="col-md-4"><%= f.input :nombre %></div>
+        <div class="col-md-2"><%= f.input :nombrecorto, label: 'Nombre Corto' %></div>
+        <div class="col-md-4"><%= f.input :email %></div>
+        <div class="col-md-2"><%= f.input :estado, collection: select_estado_portafolios, as: :select, input_html: { data: { width: '100%' }, class: 'select2' } %></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"><%= f.input :revisado_informe, label: 'Informe de Gestion Revisado por?' %></div>
+        <div class="col-md-4"><%= f.input :aprobado_informe, label: 'Informe de Gestion Aprobado por?' %></div>
+        <div class="col-md-3">
+          <%= f.input :logo, as: :file %>
+        </div>
+      </div>
+    </div>
+    <div class="box-footer">
+      <div class="box-tools pull-right">
+        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <legend>Servicios API</legend>
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#payu" data-toggle="tab">Payu</a></li>
+        <li><a href="#siigo" data-toggle="tab">Siigo</a></li>
+        <li><a href="#alegra" data-toggle="tab">Alegra</a></li>
+        <li><a href="#aportes" data-toggle="tab">Aportes en Linea</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="payu">
+          <%= simple_form_for(@portafolio) do |f| %>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4"><%= f.input :apikey, label: 'API KEY' %></div>
+                <div class="col-md-4"><%= f.input :apilogin, label: 'API LOGIN' %></div>
+                <div class="col-md-4"><%= f.input :llavepublica, label: 'Llave Pública' %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2"><%= f.input :idcomercio, label: 'ID Comercio' %></div>
+                <div class="col-md-2"><%= f.input :idcuenta, label: 'ID Cuenta' %></div>
+                <div class="col-md-2"><%= f.input :expirationdate, label: 'Días Expira' %></div>
+                <div class="col-md-3"><%= f.input :payumoneda, as: :select, label: 'Moneda', input_html: { class: 'select2' }, collection: select_monedapayu %></div>
+                <div class="col-md-3"><%= f.input :bitprueba, as: :select, label: 'Prueba', input_html: { class: 'select2' }, collection: select_sinopayu %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-4"><%= f.input :urlpayu, label: 'URL Payu' %></div>
+                <div class="col-md-4"><%= f.input :urlconfirmacion, label: 'URL Confirmación' %></div>
+                <div class="col-md-4"><%= f.input :urlrespuesta, label: 'URL Respuesta' %></div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="box-tools pull-right">
+                <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane" id="siigo">
+          <%= simple_form_for(@portafolio) do |f| %>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-6"><%= f.input :siigo_username, label: 'Username' %></div>
+                <div class="col-md-6"><%= f.input :siigo_password, label: 'Password' %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-8"><%= f.input :siigo_basic, label: 'Basic' %></div>
+                <div class="col-md-4"><%= f.input :siigo_ocp, label: 'Ocp' %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4"><%= f.input :siigo_doccode, label: 'DocCode' %></div>
+                <div class="col-md-4"><%= f.input :siigo_salesmansdentification, label: 'Sales man identification' %></div>
+                <div class="col-md-4"><%= f.input :siigo_paymentmeanscode, label: 'Payment Code' %></div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="box-tools pull-right">
+                <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="tab-pane" id="alegra">
+          <%= simple_form_for(@portafolio) do |f| %>
+            <div class="box-header">
+                <span class="pull-right-container">
+          <% if @portafolio.id_alegra.present? && @portafolio.habilita_alegra.present? %>
+              <small class="label pull-right bg-red">Habilitada</small><% end %>
+                  <% if @portafolio.id_alegra.present? %>
+          <small class="label pull-right bg-blue" style="margin-right: 10px;">Creada</small>
+            <% end %>
+        </span>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4"><%= f.input :id_alegra, label: "Id Compañia" %></div>
+                <div class="col-md-6"><%= f.input :name_alegra, label: "Nombre" %></div>
+                <div class="col-md-2"><%= f.input :identificacion_alegra, label: "Nit Alegra" %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-2"><%= f.input :dv_alegra, label: "Digito Verificación" %></div>
+                <div class="col-md-3"><%= f.input :type_alegra, label: "Tipo", disabled: true, hint: "main: Principal, associated: Secundaria" %></div>
+                <div class="col-md-5"><%= f.input :token_alegra, label: "Token" %></div>
+                <div class="col-md-2"><%= f.input :habilita_alegra, disabled: true, label: "Compañia Habilitada" %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-4"><%= f.input :setid_alegra, label: "Set Id" %></div>
+                <div class="col-md-4"><%= f.input :governmentid_alegra, label: "Government Id" %></div>
+                <div class="col-md-4"><%= f.input :url_alegra, as: :select, label: 'Servicio - URL Emitir Nomina', input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_alegra_emitir_nomina %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-3"><%= f.input :url_crear_empresa_alegra, as: :select, label: 'Servicio - URL Crear Empresa', input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_alegra_crear_empresa %></div>
+                <div class="col-md-3"><%= f.input :url_habilitar_empresa_alegra, as: :select, label: 'Servicio - URL Habiliar Empresa', input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_alegra_crear_empresa %></div>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="row">
+
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="box-tools pull-right">
+                <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane" id="aportes">
+          <div class="col-md-12">
+            <div class="box box-widget widget-user-2">
+              <div class="widget-user-header bg-yellow">
+                <div class="widget-user-image">
+                  <%= image_tag("logo_aportes.png", style: "width: 90px;") %>
+                </div>
+                <h3 class="widget-user-username" style="margin-left: 100px;">Orden del proceso</h3>
+              </div>
+              <div class="box-footer no-padding">
+                <ul class="nav nav-stacked" style="background-color: #DFDFDF">
+                  <div class="row">
+                    <div class="col-md-3 text-center" style="padding: 8px;">1. Generación del Token</div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">2. Creación del cotizante</div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">3. Envio de novedades</div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">4. Generación del certificado</div>
+                  </div>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+          <%= simple_form_for(@portafolio) do |f| %>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-3"><%= f.input :aportes_username, label: 'Username' %></div>
+                <div class="col-md-3"><%= f.input :aportes_contrasena, label: 'Password' %></div>
+                <div class="col-md-3">
+                  <%= f.input :aportes_aplicacion, as: :select, label: false, input_html: { class: 'select2', style: 'width: 100%' }, collection: select_aplicacion_aportes, label: 'Aplicacion' %>
+                </div>
+                <div class="col-md-3">
+                  <label for="">Url Token</label>
+                  <%= f.input :aportes_url, as: :select, label: false, input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_aportes %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="">Url Crear Cotizante</label>
+                  <%= f.input :aportes_url_cotizante, as: :select, label: false, input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_aportes_cotizante %>
+                </div>
+                <div class="col-md-3">
+                  <label for="">Url Generar Certificado</label>
+                  <%= f.input :aportes_url_certificado, as: :select, label: false, input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_aportes_certificado %>
+                </div>
+                <div class="col-md-3"><%= f.input :aportes_tipoidaportante, label: 'Tipo Id Aportes' %></div>
+                <div class="col-md-3"><%= f.input :aportes_numeroidaportante, label: 'Número Id Aportante' %></div>
+              </div>
+              <div class="row">
+                <div class="col-md-2"><%= f.input :aportes_sucursalprincipal, label: 'Sucursal Princial' %></div>
+                <div class="col-md-2"><%= f.input :aportes_centro_trabajo, label: 'Centro de Trabajo' %></div>
+                <div class="col-md-3">
+                  <label for="">Url Creación de Novedades</label>
+                  <%= f.input :aportes_url_novedades, as: :select, label: false, input_html: { class: 'select2', style: 'width: 100%' }, collection: select_url_aportes_novedades %>
+                </div>
+              </div>
+            </div>
+            <div class="box-footer">
+              <div class="box-tools pull-right">
+                <%= f.button :submit, "#{t :guardar}", class: 'btn btn-danger' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

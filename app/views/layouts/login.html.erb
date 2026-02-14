@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= ENV['NOMBRE_APLICACION'] %></title>
+    <%= csrf_meta_tags %>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+  </head>
+
+  <body class="hold-transition"style="background-color: #EAEAEA;">
+    <%= yield %>
+  </body>
+</html>

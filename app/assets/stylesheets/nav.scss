@@ -1,0 +1,135 @@
+body * {
+  font-family: Helvetica, Arial, "sans-serif", !important;
+}
+
+.skin-blue-light .sidebar-menu > li.active > a {
+  background-color: #000000 !important;
+  color: #fff !important;
+}
+
+.skin-blue-light .nav-tabs-custom > .nav-tabs > li.active {
+  background-color: #000000 !important;
+}
+
+.main-header .navbar {
+  background-color: #000000 !important;
+}
+
+.main-header li.user-header {
+  background-color: #000000 !important;
+}
+
+.main-header .navbar .sidebar-toggle:hover {
+  background-color: #000000 !important;
+}
+
+thead .thcolor {
+  background: #000000 !important;
+  color: #fff !important;
+}
+
+td {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+th {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+p {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+div {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+li {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+b {
+  font-size: 12px;
+  font-family: "-apple-system", BlinkMacSystemFont, Roboto, Arial, Helvetica, "sans-serif";
+}
+
+.thcolor {
+  background: #000000 !important;
+  color: #fff !important;
+}
+
+.thcolor2 {
+  background: #d73925 !important;
+  color: #fff !important;
+}
+
+.thcolor3 {
+  background: #D6D6D6 !important;
+}
+
+.box-primary {
+  border-top-color: #000000 !important;
+}
+
+.btn-primary {
+  background-color: #000000 !important;
+}
+
+.main-header .logo {
+  background-color: #000000 !important;
+  color: #fff !important;
+  font-size: 30px !important;
+}
+
+/* ALERTA DE CARGUE */
+.bg-yellow, .callout.callout-warning, .alert-warning, .alert-warning1, .label-warning, .modal-warning .modal-body {
+  background-color: #000000 !important;
+}
+
+.alert-warning {
+  border-color: #000000;
+}
+
+.alert-warning1 {
+  border-color: #000000;
+}
+
+.alert-success {
+  border-color: #008d4c;
+}
+
+.alert-danger,
+.alert-error {
+  border-color: #d73925;
+}
+
+.alert-warning2 {
+  border-color: #e08e0b;
+}
+
+.alert-info {
+  border-color: #00acd6;
+}
+
+
+/* LATERAL COLOR SIDERBAR */
+.skin-blue-light .main-sidebar {
+  border-right: 1px solid #fff !important;
+}
+
+.skin-blue-light .wrapper, .skin-blue-light .main-sidebar, .skin-blue-light .left-side {
+  background-color: #fff !important;
+}
+
+.mensaje_firma_agenda {
+  background-color: #FCC422;
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}

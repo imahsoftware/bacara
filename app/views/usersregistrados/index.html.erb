@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-6 text-left">
+    <h3 style=" margin-top: 0px; margin-bottom: 10px;"><strong>Formulario Convoatoria</strong>
+      <small>(<%= @periodo %>)</small>
+    </h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <h3 style=" margin-top: 0px; margin-bottom: 10px;"><strong>Total Inscritos</strong> &nbsp;
+      <small class="label pull-right bg-red"> <%= @cantidad rescue nil %></small>
+    </h3>
+  </div>
+</div>
+<div class="box box-primary">
+  <div class="box-header">
+    <%= link_to new_formulario_path, id: 'new_universidad_button', data: {toggle: 'tooltip'}, title: 'Agregar' do %>
+      <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+    <% end %>
+    <div class="box-tools pull-right">
+      <%= form_tag buscador_formularios_path, :method => 'get' do %>
+        <div class="input-group input-group-sm" style="width: 180px;">
+          <%= text_field_tag :identificacion, params[:identificacion], class: 'form-control pull-right', placeholder: "Identificacion" %>
+          <div class="input-group-btn">
+            <%= button_tag(type: "submit", class: "btn btn-default") do %>
+              <i class="fa fa-search"></i>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div><!-- /.box-tools -->
+  </div>
+  <div class="box-header with-border">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-responsive">
+            <thead>
+            <tr>
+              <th class="tabco5" width="15%">Identificación</th>
+              <th class="tabco5" width="20%">Nombre</th>
+              <th class="tabco5" width="15%">Teléfonos</th>
+              <th class="tabco5" width="45%">Universidad</th>
+              <th class="tabco5" width="5%"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @formularios.each do |formulario| %>
+              <tr>
+                <td><%= formulario.identificacion %></td>
+                <td><%= formulario.nombres.upcase %></td>
+                <td><%= formulario.telefono %> - <%= formulario.celular %>
+                <td><%= Universidad.find(formulario.universidad1_id).nombre.to_s rescue nil %><br/>
+                  <strong>Programa:</strong> <%= h formulario.programa_aspira.upcase rescue nil %></td>
+                <td class="pull-rigth">
+                  <%= link_to edit_formulario_path(etapa: "A", id: formulario.id) do %>
+                    <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                  <% end %>
+                  <% if is_authorized %>
+                    <%= link_to formulario, method: :delete, data: {confirm: 'Esta seguro?'} do %>
+                      <button class="btn btn-xs btn-danger"><i class="fa fa-close"></i></button>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="box-footer"><%= paginate @formularios %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

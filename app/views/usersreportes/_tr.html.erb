@@ -1,0 +1,15 @@
+<tr id="usersreporte_<%= usersreporte.id %>">
+  <td class="text-center">
+    <%# if is_auth_a('usersreporte') %>
+      <%= link_to edit_user_usersreporte_path(@user, usersreporte), remote: true, class: 'edit_usersreporte_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+    <%# end %>
+    <%# if is_auth_e('usersreporte') %>
+      <%= link_to user_usersreporte_path(@user, usersreporte), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    <%# end %>
+  </td>
+  <td><%= usersreporte.infgrupo_id rescue nil%> - <%= usersreporte.infgrupo.nombre rescue nil%> (<%= usersreporte.infgrupo.tipo rescue nil%>)</td>
+</tr>

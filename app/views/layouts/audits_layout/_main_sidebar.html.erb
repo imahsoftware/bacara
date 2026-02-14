@@ -1,0 +1,42 @@
+<%
+  usr = User.find(is_admin)
+%>
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <% if usr.portafolio.logo.url == '/assets/logo.png' %>
+      <div class="user-panel">
+        <div class="pull-left image">
+          <%= image_tag usr.portafolio.logo.url(:medium), class: 'img-circle', style: 'max-width: 45px !important;', alt: 'Portafolio' %>
+        </div>
+        <div class="pull-left info">
+          <p class="text-blue"><%=is_portafolioname%></p>
+          <p>Fecha: <%= Time.now.strftime("%d-%m-%Y") %></p>
+        </div>
+      </div>
+    <% else %>
+      <div class="user-panel">
+        <div class="image text-center">
+          <%= image_tag usr.portafolio.logo.url(:medium), class: 'img-circle', alt: 'Portafolio' %>
+        </div>
+      </div>
+    <% end %>
+    <%= render 'personas/buscadorrapido' %> 
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header"><%=t :menu%></li>
+      <!-- Optionally, you can add icons to the links -->
+      <li class="<%= active_class(audits_path) %>">
+        <%= link_to audits_path do %>
+          <i class="fa fa-bullseye"></i> <span>General</span>
+        <% end %>
+      </li>
+      <li class="<%= active_class(registros_path) %>">
+        <%= link_to registros_path do %>
+          <i class="fa fa-bullseye"></i> <span>Especifico</span>
+        <% end %>
+      </li>
+    </ul>
+    <!-- /.sidebar-menu -->
+  </section>
+  <!-- /.sidebar -->
+</aside>

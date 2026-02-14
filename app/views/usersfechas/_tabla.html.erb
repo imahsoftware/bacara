@@ -1,0 +1,20 @@
+<div class="table-responsive">
+	<table class="table table-bordered">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Fecha de Asignacion</th>
+        <th class="text-center">Hora Inicio</th>
+    		<th class="text-center">Hora Fin</th>
+    		<th class="text-center">Intervalo</th>
+    		<th class="text-center">Nro de personas por Intervalo</th>
+    		<th class="text-center">Estado</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_usersfechas">
+	    <% @user.usersfechas.each do |usersfecha| %>
+	      <%= render 'usersfechas/tr', usersfecha: usersfecha %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

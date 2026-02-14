@@ -1,0 +1,46 @@
+<%= simple_form_for @modulo, remote: true do |f| %>
+  <div class="bs-callout">
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :descripcion, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :mensaje, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :controlador, input_html: { class: 'clean' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.input :metodo, as: :select, collection: select_tipometodourl, input_html: { class: 'select2 clean' }, include_blank: true %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :imagen, input_html: { class: 'clean' } %>
+      </div>
+      <div class="col-md-4">
+        <%= f.input :nivel, as: :select, collection: select_nivel, input_html: { class: 'select2 clean' }, include_blank: true %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :autorizado, as: :select, collection: { "SI" => "SI","NO" => "NO"}, input_html: { class: 'select2 clean' }, include_blank: true, label: "Autorizado?" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :clase, input_html: { class: 'clean' } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <% if @modulo.new_record? %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#modulo_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+        <% else %>
+          <%= link_to "#{t :cancelar}", modulo_path(@modulo), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,45 @@
+wd = xlsx_package.workbook
+wd.styles do |style|
+  title = wd.styles.add_style(b: true, bg_color: "FF045FB4",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  header = wd.styles.add_style(b: true, bg_color: "FF7DB4F4",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  header1 = wd.styles.add_style(b: true, bg_color: "FFE87F07",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  header2 = wd.styles.add_style(b: true, bg_color: "FF5EFF33",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  header3 = wd.styles.add_style(b: true, bg_color: "FF417932",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  header4 = wd.styles.add_style(b: true, bg_color: "FFE16E28",fg_color: 'F5F6CE',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  datosiz = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :left, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  datoscent = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  datosder = wd.styles.add_style(sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :right, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  fecha = wd.styles.add_style(sz: 11,font_name: "Calibri", :format_code => 'dd-mm-yyyy',:alignment=>{:horizontal => :center, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  datosnumeros = wd.styles.add_style(:format_code => '#,###,###.#0',sz: 11,font_name: "Calibri",:alignment=>{:horizontal => :right, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+  fecha_min = wd.styles.add_style(sz: 11,font_name: "Calibri", :format_code => 'dd-mm-yyyy HH:MM:SS',:alignment=>{:horizontal => :right, :vertical => :center},:border=>Axlsx::STYLE_THIN_BORDER)
+
+  wd.add_worksheet(:name => "Usuarios")  do |sheet|        
+    sheet.add_row ["Identificacion",
+                  "Nombre",
+                  "Usuario",
+                  "Email",
+                  "Activo",
+                  "Cargo",
+                  "Sucursal",
+                  "Consulta",
+                  "Fecha Creación",
+                  "Fecha Ult. Actualizacion"], :style => title
+    for p in @dato1s
+      x = Cargo.find(p.cargo_id).descripcion rescue nil
+      y = Portafoliossucursal.find(p.portafoliossucursal_id).descripcion rescue nil
+
+     estilos = [datosder,datosiz,datosiz,datosiz,datoscent,datosiz,datosiz,datosiz,fecha_min,fecha_min]
+     tamano = [:auto,:auto,:auto,:auto,:auto,:auto,:auto,:auto,:auto,:auto]
+      sheet.add_row [p.identificacion,
+                    p.nombre,
+                    p.username,
+                    p.email,
+                    p.activo,
+                    x,
+                    y,
+                    p.tipoconsulta,
+                    p.created_at,
+                    p.updated_at], :style => estilos, :widths=> tamano
+    end
+  end
+end

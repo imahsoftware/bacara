@@ -1,0 +1,55 @@
+<% title 'Todos los Cargues' %>
+<h3 style="margin-top: -19px;">Todos los Cargues</h3>
+<div class="row">
+  <div class="col-md-4">
+    <div class="box box-primary">
+      <%= simple_form_for [@archivo], wrapper: :inline_form, html: { class: 'form-inline' } do |f| %>
+        <div class="box-header" style="padding-bottom: 0px">
+          <div class="alert alert-danger" style="margin-bottom: 10px">
+            <h4><i class="icon fa fa-info"></i> Atención!</h4>
+            Recuerde que el archivo debe ser con extensión <strong>XLS</strong> o <strong>XLSX</strong>, debe tener encabezados y debe ser en el orden establecido
+          </div>
+        </div>
+        <div class="box-body" style="padding-top: 0px">
+          <div class="row">
+            <div class="col-md-12" style="margin-bottom: 5px">
+              <%= f.input :migracion, as: :select, label: false, collection: @query, input_html: {data: { width: '295px' }, class: 'select2'}, prompt: 'Seleccionar Cargue' %>
+            </div>
+            <div class="col-md-12">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button id="fake-file-button-browse" type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-file"></span>
+                  </button>
+                </span>
+                <%= f.input :documentos, as: :file, label: false, input_html: { id: 'files-input-upload', style: 'display:none', data: { toggle: 'tooltip' }, title: 'Seleccionar Archivo' } %>
+                <input type="text" id="rutaarchivo" disabled="disabled" placeholder="Nada Seleccionado" class="form-control" style="width: 187px">
+                <span class="input-group-btn">
+                  <%= f.button :submit, "Cargar", class: "btn btn-primary", disabled: true, id: 'fake-file-button-upload', data: { toggle: 'tooltip', disable_with: "#{t :procesando}" }, title: 'Cargar Archivo' %>
+                </span>
+                <script type="text/javascript">
+                    // Fake file upload
+                    document.getElementById('fake-file-button-browse').addEventListener('click', function() {
+                        document.getElementById('files-input-upload').click();
+                    });
+
+                    document.getElementById('files-input-upload').addEventListener('change', function() {
+                        document.getElementById('rutaarchivo').value = this.value.replace(/C:\\fakepath\\/,'');
+                        document.getElementById('fake-file-button-upload').removeAttribute('disabled');
+                    });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <% @query.each do |cargue| %>
+      <div id="<%= cargue[1].downcase.gsub(' ', '_') rescue nil%>" class="hidden div-result">
+        <%= render '/migraciones/cargues',  migracion: cargue[2].to_i, nombre: cargue[0].to_s %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<tr id="usersportafolio_<%= usersportafolio.id %>">
+  <td class="text-center">
+    <%= link_to edit_user_usersportafolio_path(@user, usersportafolio), remote: true, class: 'edit_usersportafolio_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+       <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to user_usersportafolio_path(@user, usersportafolio), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= usersportafolio.portafolio.id rescue nil %></td>
+  <td><%= usersportafolio.portafolio.nombre rescue nil %></td>
+</tr>

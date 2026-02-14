@@ -1,0 +1,9 @@
+<tr id="iparametrosuser_<%= iparametrosuser.id %>">
+  <td class="text-center">
+    <%= link_to iparametrosuser, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td class="text-center"><%= iparametrosuser.id %></td>
+  <td><%= iparametrosuser.user.nombrecompleto rescue nil %></td>
+</tr>

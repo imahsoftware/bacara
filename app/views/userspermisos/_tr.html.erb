@@ -1,0 +1,14 @@
+<tr id="userspermiso_<%= userspermiso.id %>">
+	<td>
+		<%= link_to edit_user_userspermiso_path(@user, userspermiso), remote: true, class: 'btn btn-flat btn-warning btn-xs' do %>
+		 <i class="fa fa-edit"></i> <span></span>
+		<% end %>
+		<%= link_to user_userspermiso_path(@user, userspermiso), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}" }, class: 'btn btn-flat btn-danger btn-xs' do %>
+		 <i class="fa fa-close"></i> <span></span>
+		<% end %>
+	</td>
+	<td><%= userspermiso.objeto.descripcionamp rescue nil %></td>
+	<td><%= userspermiso.crea %></td>
+	<td><%= userspermiso.actualiza %></td>
+	<td><%= userspermiso.elimina %></td>
+</tr>

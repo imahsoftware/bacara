@@ -1,0 +1,33 @@
+<%= simple_form_for([:user, @usersobjeto], remote: true, url: url) do |f|   %>
+  <div class="row">
+    <% unless @usersobjeto.new_record? %>
+        <div class="col-md-6"><%= f.input :objeto_id, collection: Objeto.all.collect {|p| [ p.descripcion, p.id ] }, as: :select, label: 'Objeto', include_blank: true%>
+        </div>
+    <% else %>
+        <div class="col-md-6"><%= f.input :objeto_id, collection: Objeto.where(["id not in (select objeto_id from usersobjetos where user_id =#{@user.id})"]).collect {|p| [ p.descripcion, p.id ] }, as: :select, label: 'Objeto',  include_blank: true%>
+        </div>
+    <% end %>
+    <div class="col-md-2"><%= f.input :crea, as: :select, collection: select_sino, input_html: { data: { width: '100%' }, class: 'select2'}, label: 'Crea ?'  %></div>
+    <div class="col-md-2"><%= f.input :actualiza, as: :select, collection: select_sino, input_html: { data: { width: '100%' }, class: 'select2'}, label: 'Actualiza ?'  %></div>
+    <div class="col-md-2"><%= f.input :elimina, as: :select, collection: select_sino, input_html: { data: { width: '100%' }, class: 'select2'}, label: 'Elimina ?'  %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <% unless @usersobjeto.new_record? %>
+          <div class="col-md-6">
+            <%= link_to "#{t :cancelar}",user_usersobjeto_path(@user, @usersobjeto), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+          </div>
+          <div class="col-md-6">
+            <%= f.button :submit, "Actualizar", class: "btn-flat btn-danger pull-right" %>
+          </div>
+        <% end %>
+        <% if @usersobjeto.new_record? %>
+          <div class="col-md-12">
+            <%= f.button :submit, "#{t :guardar}", class: "btn-flat btn-danger pull-right" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

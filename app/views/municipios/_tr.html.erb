@@ -1,0 +1,15 @@
+<tr id="municipio_<%= municipio.id %>">
+  <% if is_auth_c('municipio') %>
+  	<td class="text-center">
+      <%= link_to edit_municipio_path(municipio), class: 'edit_municipio_button', remote: true, data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+         <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+      <% end %>
+      <%= link_to municipio, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+          <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+      <% end %>
+    </td>
+  <% end %>
+  <td><%= municipio.id %></td>
+  <td><%= municipio.descripcion %></td>
+  <td><%= municipio.departamento %></td>
+</tr>

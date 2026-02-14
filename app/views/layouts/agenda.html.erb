@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%#= favicon_link_tag 'logo.png' %>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= javascript_include_tag 'application'%>
+</head>
+
+<body class="sidebar-mini skin-blue-light sidebar-collapse" style="height: auto; min-height: 100%;">
+<div class="wrapper">
+  <%= render 'layouts/main_layoutagenda/main_headeragenda' %>
+  <%= render 'layouts/main_layoutagenda/main_sidebar' %>
+  <%= render 'layouts/main_layoutagenda/main_content' %>
+  <%= render 'layouts/main_layoutagenda/main_footer' %>
+  <%#= render 'layouts/main_layoutagenda/control_sidebar' %>
+</div>
+</body>
+</html>

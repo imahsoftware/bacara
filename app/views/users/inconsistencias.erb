@@ -1,0 +1,25 @@
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      Informe Inconsistencias
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <tr bgcolor="#00FF00">
+          <th><strong>Identificación</strong></th>
+          <th><strong>Nombre</strong></th>
+          <th><strong>Inconsistencia</strong></th>
+       </tr>
+      <% @mconerror.each do |c|%>
+        <tr>
+            <td class="text-left"><%= c.identificacion rescue nil%></td>
+            <td class="text-left"><%= c.nombre rescue nil %></td>
+            <td class="text-left"><%= c.error rescue nil %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>

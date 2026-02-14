@@ -1,0 +1,8 @@
+<tr id="usersparametro_<%= usersparametro.id %>">
+	<td class="text-center">
+		<%= link_to user_usersparametro_path(@user, usersparametro), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}" }, class: 'btn btn-flat btn-danger btn-xs' do %>
+		 <i class="fa fa-close"></i> <span></span>
+		<% end %>
+	</td>
+	<td><%= usersparametro.campo rescue nil %></td>
+</tr>

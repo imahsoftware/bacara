@@ -1,0 +1,102 @@
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  isimah = is_sygma
+%>
+<header class="main-header">
+  <%= link_to root_path, class: 'logo', style: "back" do %>
+    <span class="logo-mini"><b>SEMINARIO</b></span>
+    <span class="logo-lg" style="font-size: 18px; margin-top: -4px;"><b>SEMINARIO</b></span>
+  <% end %>
+
+  <!-- Header Navbar: style can be found in header.less -->
+  <nav class="navbar navbar-static-top">
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to visitas_path, input_html: { class: "dropdown-toggle" } do %>
+            <i class="fa fa-map-marker"></i>
+          <% end %>
+        </li>
+        <%# if Contratospersona.where("identificacion = '#{user.identificacion}'").first.present? %>
+              <!-- <li>
+                <%#= link_to abrir_datos_menus_path, remote: true, data: { toggle: 'tooltip' }, title: 'Actualizar Datos Basicos' do %>
+                  <i class="fa fa-futbol-o"></i>
+                <%# end %>
+              </li> -->
+            <%# end %>
+        <li class="dropdown user user-menu">
+          <%= link_to '#', class: 'dropdown-toggle', data: { toggle: 'dropdown' } do %>
+            <%= image_tag user.avatar.url(:medium), class: 'user-image', alt: 'User Image' %>
+            <span class="hidden-xs"><%= user.username %></span>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li class="user-header">
+              <%= image_tag user.avatar.url(:medium), class: 'img-circle', alt: 'User Image' %>
+              <p style="font-size: 11px;">
+                <%= user.nombre %>
+              </p>
+            </li>
+            <li class="user-footer">
+              <div class="pull-left">
+                <%= link_to edit_user_registration_path do %>
+                  <button class="btn btn-flat btn-default">
+                    <i class="fa fa-edit"> <b style="font-size: 11px;"><%= t :editar_perfil %></b></i></button>
+                <% end %>
+              </div>
+              <div class="pull-right">
+                <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{user.nombre}" + ' que quiere desconectarse?' } do %>
+                  <button class="btn btn-flat btn-default">
+                    <i class="fa fa-sign-in"> <b style="font-size: 11px;"><%= t :salir %></b></i></button>
+                <% end %>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+  </nav>
+</header>
+
+<div class="modal fade" id="abrir_datos">
+  <div class="modal-dialog modal-dialog-responsive" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
+
+<style>
+    .main-header .logo {
+        background-color: #fff !important;
+        color: #C9392B !important;
+        height: 43px !important;
+    }
+
+    .navbar-nav > li > a {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        height: 47px;
+    }
+
+    .main-header .navbar {
+        -webkit-transition: margin-left .3s ease-in-out !important;
+        -o-transition: margin-left .3s ease-in-out !important;
+        transition: margin-left .3s ease-in-out !important;
+        margin-bottom: 0 !important;
+        border: none !important;
+        min-height: 43px !important;
+        border-radius: 0 !important;
+    }
+
+</style>
+
+
+

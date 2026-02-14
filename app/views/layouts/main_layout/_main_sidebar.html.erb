@@ -1,0 +1,100 @@
+<%
+  isadmin = is_admin
+  gescount = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 1]).select("modulos.*").order("modulos.descripcion")
+  procount = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 2]).select("modulos.*").order("modulos.descripcion")
+  parcount = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 3]).select("modulos.*").order("modulos.descripcion")
+  dascount = Userspermiso.joins(:objeto).where(["userspermisos.user_id = ? and objetos.autorizado = 'DS'", isadmin]).select("objetos.*").order("objetos.observacion")
+%>
+<aside class="main-sidebar">
+  <!-- sidebar: style can be found in sidebar.less -->
+  <section class="sidebar">
+    <%= image_tag 'logos/logo_inicio_bacara.png', class: 'user-image', style: "width: 80%" %>
+    <%#= render 'personas/buscadorrapido' %>
+    <!-- Sidebar Menu -->
+    <ul class="sidebar-menu" data-widget="tree">
+      <li class="header"><%= t :menu_principal %></li>
+      <!-- Optionally, you can add icons to the links -->
+      <% if gescount.present? %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa-sticky-note"></i> <span><%= t :menu_gestion %></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <% gescount.each do |item| %>
+              <% if item.metodo.to_s == "" %>
+                <% item.metodo = 'GET' %>
+              <% end %>
+              <li>
+                <%= link_to item.controlador do %>
+                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% if procount.present? %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa-cogs"></i> <span><%= t :menu_procesos %></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <% procount.each do |item| %>
+              <% if item.metodo.to_s == "" %>
+                <% item.metodo = 'GET' %>
+              <% end %>
+              <li>
+                <%= link_to item.controlador, method: item.metodo.to_s do %>
+                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% if parcount.present? %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa-sliders"></i> <span><%= t :menu_parametrizacion %></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <% parcount.each do |item| %>
+              <% if item.metodo.to_s == "" %>
+                <% item.metodo = 'GET' %>
+              <% end %>
+              <li>
+                <%= link_to item.controlador do %>
+                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+      <% if dascount.present? %>
+        <li class="treeview" style="font-size: 12px !important;">
+          <a href="#"><i class="fa fa-sliders"></i> <span><%= t :menu_dash %></span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <% dascount.each do |item| %>
+              <li>
+                <%= link_to menus_path(idob: item.id) do %>
+                  <span style="font-size: 12px !important; "><%= item.observacion %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+</aside>

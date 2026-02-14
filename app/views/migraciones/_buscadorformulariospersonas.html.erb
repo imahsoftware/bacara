@@ -1,0 +1,47 @@
+<div class="box-header with-border">
+  <h3 class="box-title">Buscador de Persona</h3>
+</div>
+<div class="box-body paddin-body" style="margin-top: 15px;">
+  <%= form_tag buscador_migraciones_path, remote: true, method: :get do %>
+    <div class="row">
+      <div class="col-md-2">
+        <div class="form-group input-group" style="padding-bottom: 10px;">
+          <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+          <%= text_field_tag :identificacion, params[:identificacion], class: 'form-control uppercaseInput', autocomplete: 'off', style: "width: 100%", placeholder: 'Identificación' %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group input-group" style="padding-bottom: 10px;">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <%= text_field_tag :nombre, params[:nombre], class: 'form-control uppercaseInput', autocomplete: 'off', style: "width: 100%", placeholder: 'Nombre' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group input-group" style="padding-bottom: 10px;">
+          <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+          <%= text_field_tag :archivo_id, params[:archivo_id], class: 'form-control uppercaseInput', autocomplete: 'off', style: "width: 100%", placeholder: 'Nº Lote' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group input-group" style="padding-bottom: 10px;">
+          <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+          <%= text_field_tag :celular, params[:celular], class: 'form-control uppercaseInput', autocomplete: 'off', style: "width: 100%", placeholder: 'Nº Celular' %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <%= button_tag type: 'submit', class: 'btn btn-primary', data: { toggle: 'tooltip' }, title: 'Buscar' do %>
+          <i class="fa fa-search" aria-hidden="true"></i> Buscar
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+  <div id="buscador2">
+    <% if @personasformulariosb.present? %>
+      <%= render 'personasformularios/resultado', personasformularios: @personasformulariosb %>
+    <% else %>
+      <%= render 'layouts/procesos/alert_message' %>
+    <% end %>
+  </div>
+
+

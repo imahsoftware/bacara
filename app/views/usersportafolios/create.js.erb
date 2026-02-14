@@ -1,0 +1,28 @@
+$(".alert_flash").fadeOut(300, function() {
+	$(this).remove();
+});
+
+<% if @user.usersportafolios.count == 1 %>
+	$("#usersportafolios").html("<%= j render 'tabla' %>");
+<% else %>
+	$("#tbody_usersportafolios").prepend("<%= j render 'tr', usersportafolio: @usersportafolio %>");
+<% end %>
+
+$(".clean").val("").trigger('change');
+
+$("#usersportafolio_form").collapse("hide");
+
+$("#usersportafolio_form").empty();
+
+$('[data-toggle="tooltip"]').tooltip();
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+$(".form-group").removeClass("has-error");
+$(".form-group > .help-block.help-block-error").remove();
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(300, function() {
+		$(this).remove();
+	});
+}, 5000);

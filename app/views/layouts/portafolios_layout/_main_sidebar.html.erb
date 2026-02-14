@@ -1,0 +1,51 @@
+
+<%
+  isadmin = is_admin
+  user = User.find(isadmin)
+  isportafolio = is_portafolio
+  issygma = is_sygma
+%>
+<aside class="main-sidebar">
+  <section class="sidebar">
+    <%#= render 'personas/buscadorrapido' %>
+    <ul class="sidebar-menu" data-widget="tree">
+      <% if is_sygma %>
+        <li>
+          <%= link_to portafolios_path do %>
+            <i class="fa fa-arrow-left text-danger"></i> Regresar a portafolios
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to root_path do %>
+            <i class="fa fa-arrow-left text-danger"></i> Regresar
+          <% end %>
+        </li>
+      <% end -%>
+      <li class="header"><%= t :menu %></li>
+      <!-- Optionally, you can add icons to the links -->
+      <% unless @portafolio.new_record? %>
+        <li class="treeview">
+        <li class="<%= active_class(edit_portafolio_path(etapa: "A", id: @portafolio.id)) %>">
+          <%= link_to edit_portafolio_path(etapa: "A", id: @portafolio.id) do %>
+            <i class="fa fa-bullseye"></i><span>Compañia</span>
+          <% end %>
+        </li>
+        <% if is_sygma %>
+           <li class="<%= active_class(edit_portafolio_path(etapa: "B", id: @portafolio.id)) %>">
+            <%= link_to edit_portafolio_path(etapa: "B", id: @portafolio.id) do %>
+              <i class="fa fa-bullseye"></i><span>Barberos</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li class="<%= active_class(edit_portafolio_path(etapa: "B", id: @portafolio.id)) %>">
+            <%= link_to edit_portafolio_path(etapa: "B", id: @portafolio.id) do %>
+              <i class="fa fa-bullseye"></i><span>Barberos</span>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+      </li>
+    </ul>
+  </section>
+</aside>

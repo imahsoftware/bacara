@@ -1,0 +1,23 @@
+/*
+ *= require base
+ *= require plugins/select2/select2.min
+ *= require bootstrap-datetimepicker.min
+ *= require dist/css/AdminLTE.min
+ *= require dist/css/skins/_all-skins.min
+ *= require jquery-ui/datepicker
+ *= require select
+ *= require signature-pad
+ *= require_tree .
+*= require datatables
+ *= require_self
+*/
+
+.alerta-visita {
+    width: 100%;
+    color: #000000;
+    background-color: #F0DE78;
+    border-radius: 5px;
+    padding: 8px;
+    text-align: justify;
+    margin-bottom: 15px;
+}

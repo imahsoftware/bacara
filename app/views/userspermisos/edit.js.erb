@@ -1,0 +1,17 @@
+$("#userspermiso_form").collapse("hide");
+
+$("#userspermiso_form").empty();
+
+<% if @active_record.present? %>
+	$("#userspermiso_<%= @active_record.id %>").replaceWith("<%= j render 'tr', userspermiso: @active_record %>");
+<% end %>
+
+$("#userspermiso_<%= @userspermiso.id %>").html("<td colspan='5'><%= j render 'form' %></td>");
+
+$("#userspermiso_<%= @userspermiso.id %>").addClass("active_userspermiso");
+
+$(".select2").select2();
+
+$(".tooltip").tooltip("hide");
+
+$('[data-toggle="tooltip"]').tooltip();

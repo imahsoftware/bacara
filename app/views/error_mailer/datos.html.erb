@@ -1,0 +1,12 @@
+<%= image_tag 'https://imahsoftware.com/assets/logo_st_alta_resolucion-4641ef5615a62e046a94c9aebaba6440fd1d9245aa2bda0b658273a2d6159ffa.png', width: "25%" %>
+
+<h3>Error 500</h3>
+
+<span><b>Hora: </b><%= Time.now.strftime("%Y-%m-%d %H:%M:%S %p") %></span><br>
+
+<span><b>Usuario: </b><%= User.find(@user_id).nombre %> (<%= @user_id %>)</span><br>
+
+<span><b>Portafolio: </b><%= Portafolio.find(@portafolio_id).nombre %> (<%= @portafolio_id %>)</span>
+<br>
+<br>
+Att: <b>ImahSoftware</b><br>

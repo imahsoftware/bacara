@@ -1,0 +1,61 @@
+<% isadmin = current_user.id
+   if is_auth_c("consultarallconv")
+     user_asignado = -1 #condiciones especial para supervisores
+   end
+   if Personasformulario.where("(user_asignado = #{isadmin} or user_asignado2 = #{isadmin} or user_asignado3 = #{isadmin} or user_asignado5 = #{isadmin} or user_asignado5 = #{isadmin})").present?
+     personasformularios = Personasformulario.where("(user_asignado = #{isadmin} or user_asignado2 = #{isadmin} or user_asignado3 = #{isadmin} or user_asignado4 = #{isadmin} or user_asignado5 = #{isadmin})")
+   else
+     #personasformularios = Personasformulario.where(["id not in (select distinct personasformulario_id from contratosperfechas where codigo_firma is not null)"]).all
+     #personasformularios = Personasformulario.where(["id in (select distinct personasformulario_id from contratosperfechas where codigo_firma is null)"]).all
+     personasformularios = Personasformulario.all
+   end
+%>
+
+<div class="box-body paddin-body">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="<%= @etapap == "1" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "1", estado: "PENDIENTE") do %>
+              <i class="fa fa-child"></i> Pendiente
+              (<%= personasformularios.where("estado = 'PENDIENTE'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "2" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "2", estado: "COMPLETADO") do %>
+              <i class="fa fa-info"></i> Completados
+              (<%= personasformularios.where("estado = 'COMPLETADO'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "3" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "3", estado: "DEVUELTO") do %>
+              <i class="fa fa-sign-out"></i> Devueltos
+              (<%= personasformularios.where("estado = 'DEVUELTO'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "4" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "4", estado: "APROBADO") do %>
+              <i class="fa fa-check"></i> Aprobados
+              (<%= personasformularios.where("estado = 'APROBADO'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "5" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "5", estado: "RECHAZADO") do %>
+              <i class="fa fa-close"></i> Rechazados
+              (<%= personasformularios.where("estado = 'RECHAZADO'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "6" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "6", estado: "DESISTE") do %>
+              <i class="fa fa-close"></i> Desisten
+              (<%= personasformularios.where("estado = 'DESISTE'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "7" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "7", estado: "CONTRATACION") do %>
+              <i class="fa fa-close"></i> Contratacion en proceso
+              (<%= personasformularios.where("estado = 'CONTRATACION'").count rescue 0 %>)
+            <% end %></li>
+          <li class="<%= @etapap == "8" ? 'active' : nil %>"> <%= link_to index_convocatorias_migraciones_path(etapa: 'SEGUIMIENTO', etapap: "8", estado: "SINCONTACTO") do %>
+              <i class="fa fa-close"></i> Sin Contacto
+              (<%= personasformularios.where("estado = 'SINCONTACTO'").count rescue 0 %>)
+            <% end %></li>
+
+        </ul>
+        <div class="tab-content">
+          <% if ["1","2","3","4","5","6","7","8"].include?(@etapap) %>
+            <%= render 'migraciones/formularios/etapap' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="box box-success">
+   <div class="box-body">
+      <div class="alert alert-success">
+       <h2 style="text-shadow: 2px 1px 1px #848484;"><i class="fa fa-thumbs-up" aria-hidden="true"></i><strong>	<%= @formulario.nombres.upcase rescue nil%>! </strong></h2>
+       <h3>Felicitaciones acabas de terminar la primera etapa del proceso de inscripción.</h3><br/>
+       <h4><p><strong style="color: #1C2F53;text-shadow: 2px 1px 1px #848484;">NOTA: </strong><%=@mensaje%></p></h4>
+       <br/>
+       <a href="http://198.199.77.50:80">
+        <span class="label label-default btn argos pull-left">Iniciar Sesion - Fundacion Argos</span>
+       </a><br/>
+       </div>
+    </div>
+ </div>
+
+ <style>
+  .argos{
+    background-color: #1C2F53;
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 2px 1px 1px #848484;
+  }
+ </style>

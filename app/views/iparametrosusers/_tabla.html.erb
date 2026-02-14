@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+    <tr class="thcolor">
+      <th width="10%"></th>
+      <th width="5%" class="text-center">ID</th>
+      <th>Usuario</th>
+    </tr>
+    </thead>
+    <tbody id="tbody_iparametrosusers">
+    <% Iparametrosuser.where("iparametro_id = #{@iparametro.id}").each do |iparametrosuser| %>
+      <%= render 'iparametrosusers/tr', iparametrosuser: iparametrosuser %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

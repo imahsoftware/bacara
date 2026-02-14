@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+   <title>S I S</title>
+    <style type="text/css" media="screen">
+      h3 { color: #7185B9; }
+      ul { list-style: none; }
+      #some-id { font-size:2em; }
+      .some-class { color:red; }
+    </style>
+</head>
+<body>
+<img src="http://190.0.34.154:6001/images/logo_g_intac.png"/>
+<br/><br/><br/>
+<div align="justify" style="font-size: 15px; font-family: Verdana, Geneva, sans-serif;">
+Medellín, 11 de Agosto de 2014<br/><br/>
+Señor(a)<br/>
+<strong><%=@persona.nombres rescue nil%> - <%=@persona.identificacion rescue nil%><br/>
+<%=@persona.email rescue nil%><br/>
+<%=@persona.perdireccion rescue nil%><br/>
+<%=@persona.perciudad rescue nil%>
+</strong><br/><br/><br/>
+Asunto: Citación para Notificación Personal.<br/><br/>
+Por medio de la presente le informamos que dentro de los cinco (5) días siguientes al recibo de esta comunicación, 
+<strong>debe presentarse</strong> con su cedula de ciudadanía, en  las instalaciones de <strong>LA AGENCIA DE EDUCACIÓN SUPERIOR - G-Intac</strong> ubicado en la carrera 81 # 49A 37, Medellín. Barrio Calasanz, en el horario de  lunes a jueves de 8:00 am a 12:30 m y de 01:30 p.m. a 5:15 pm;  viernes de 08:00 a.m. a 12:30.m. y de 01:30 p.m. a 04:00 p.m.<br/><br/>
+Lo anterior  con el fin de notificarle personalmente el contenido de la Resolución <%=@persona.nro_resolucion rescue nil%>, por medio de la cual <strong>"se
+  consolida el estado del crédito de un beneficiario del fondo Medellín-EPM-Universidades"</strong><br/><br/>
+En caso de no asistir dentro del término previsto, se procederá a notificarle por aviso de conformidad con el
+artículo 69 del Código de Procedimiento Administrativo y de lo Contencioso Administrativo.<br/><br/>
+Atentamente,<br/><br/><br/>
+<strong>RICARDO GIL PADILLA.<br/>
+Subdirector Administrativo, Financiero Y De Apoyo A La Gestión<br/>
+Agencia Educación Superior-G-Intac-
+</strong>
+</div>
+<br/><br/>
+<div align="justify" style="font-size: 11px; font-family: Verdana, Geneva, sans-serif;">
+  <strong>S I S - Sistema de Informacion G-Intac- <%=Time.now.strftime("%Y-%m-%d %X")%><br/>***Por favor no conteste este mensaje, ha sido enviado desde un e-mail automático y no recibirá respuesta.***</strong>
+</div>
+</body>
+</html>

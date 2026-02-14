@@ -1,0 +1,19 @@
+$(".alert_flash").fadeOut(1000, function() {
+	$(this).remove();
+});
+
+<% if Municipio.all.count == 0 %>
+	$("#municipios").html("<div class='alert alert-danger'><h4><i class='icon fa fa-info'></i> <%=t :atencion%></h4><%=t :atencion_msj%><span></div>");
+<% else %>
+	$("#municipio_<%= @municipio.id %>").remove();
+<% end %>
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+
+setTimeout(function() {
+	$(".alert_flash").fadeOut(1000, function() {
+		$(this).remove();
+	});
+}, 5000);
+
+$('.tooltip').tooltip('hide');

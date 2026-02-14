@@ -1,0 +1,37 @@
+<br/>
+<div class="row">
+  <div class="col-md-12"  align="justify">
+  <div class="box-body no-padding">
+              <table class="table">
+        <% @personastipos = Personastipo.where(["clase = '1' and anno_conv = '2017'"]).order("documento").all
+           @personastipos.each do |personastipo|
+        %>
+          <tr>
+            <td width="100%">
+              <table class="table table-hover">
+                <thead>
+                  <th width="5%" rowspan="2">
+                    <%= link_to new_formulariosdocumento_path(:formulario_id=>@formulario.id, :clase => '1', :anno_conv => '2017',:personastipo_id =>personastipo.id ), :title => "Cargar Documento", class: 'btn btn-xs btn-info' do %>
+                   <i class="fa fa-cloud-upload"></i> <span></span>
+                  <% end %>
+                  </th>
+                  <th width="45%" rowspan="2" style="font-size: 11px;"><div align="justify"><%=personastipo.documento rescue nil%></div></th>
+                  <th width="25%">Fecha</th>
+                  <th width="20%">Archivo</th>
+                  <th width="5%"></th>
+                </thead>
+                <tbody id="formulariosdocumentos">
+                  <% for d in @formulario.formulariosdocumentos.where(["personastipo_id = #{personastipo.id}"]).all%>
+                    <%= render '/formulariosdocumentos/rows', d: d %>
+                  <% end %>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        <% end %>
+    </table>
+  </div><!-- /.box-body -->
+</div>
+
+
+</div>

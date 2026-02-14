@@ -1,0 +1,159 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+  <h3 class="modal-title"><strong>Carga Masiva de Usuarios</strong></h3>
+  <div class="alert alert-danger">
+    <h4><i class="icon fa fa-info"></i> Atención!</h4>
+      Recuerde que el archivo debe ser con extensión <strong>XLS</strong> o <strong>XLSX</strong>, no debe tener encabezados y debe ser en el orden establecido
+  </div>
+	<div class="table-responsive">
+    <table class="table table-bordered table-condensed table-striped">
+	    <thead class="thcolor">
+	      <tr>
+	        <td colspan="4" class="text-center"><strong>Orden del archivo</strong></td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	        <td class="text-center"><strong>Orden</strong></td>
+	        <td class="text-center"><strong>Descripcion</strong></td>
+	        <td class="text-center"><strong>Formato</strong></td>
+	        <td class="text-center"><strong>Obligatorio</strong></td>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">1</td>
+	       <td class="text-left">Nombre Completo</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">2</td>
+	       <td class="text-left">Idenficación</td>
+	       <td class="text-center">Numerico (sin separadores de mil)</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">3</td>
+	       <td class="text-left">Nombre de Usuario</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">4</td>
+	       <td class="text-left">Email</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">5</td>
+	       <td class="text-left">Tipo de Consulta</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">6</td>
+	       <td class="text-left">Contraseña</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">SI</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">7</td>
+	       <td class="text-left">Sucursal ID</td>
+	       <td class="text-center">Numérico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">8</td>
+	       <td class="text-left">Cargo ID</td>
+	       <td class="text-center">Numerico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">9</td>
+	       <td class="text-left">Teléfono</td>
+	       <td class="text-center">Numerico (sin separadores de mil)</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">10</td>
+	       <td class="text-left">Celular</td>
+	       <td class="text-center">Numerico (sin separadores de mil)</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">11</td>
+	       <td class="text-left">Dirección</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">12</td>
+	       <td class="text-left">Ciudad</td>
+	       <td class="text-center">Alfabetico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">13</td>
+	       <td class="text-left">Género</td>
+	       <td class="text-center">Alfanumerico (MASCULINO - FEMENINO)</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">14</td>
+	       <td class="text-left">Fecha de Nacimiento</td>
+	       <td class="text-center">Fecha (DD-MM-YYYY)</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">15</td>
+	       <td class="text-left">Fecha de Inicio</td>
+	       <td class="text-center">Fecha (DD-MM-YYYY)</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">16</td>
+	       <td class="text-left">Observaciones</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	      <tr style="font-size: 12px;">
+	       <td class="text-center">17</td>
+	       <td class="text-left">Extensión</td>
+	       <td class="text-center">Alfanumerico</td>
+	       <td class="text-center">NO</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
+</div>
+<div class="modal-body">
+	<%= form_tag importar_users_path, multipart: true do %>
+		<div class="row">
+	    <div class="col-md-12">
+	      <div class="input-group">
+	          <span class="input-group-btn">
+	      		<button id="fake-file-button-browse" type="button" class="btn btn-default">
+	      			<span class="glyphicon glyphicon-file"></span>
+	      		</button>
+	      	</span>
+	        <%= file_field_tag(:file, id: 'files-input-upload', style: 'display:none', data: { toggle: 'tooltip' }, title: 'Seleccionar Archivo') %>
+	        <input type="text" id="rutaarchivo" disabled="disabled" placeholder="No has seleccionado el archivo" class="form-control">
+	      	<span class="input-group-btn">
+	          <%= button_tag(type: "submit", class: "btn btn-primary", disabled: true, id: 'fake-file-button-upload', data: { toggle: 'tooltip', disable_with: "#{t :procesando}" }, title: 'Cargar Archivo') do %>
+	          	<span class="fa fa-upload"></span>
+	      		<% end %>
+	      	</span>
+	      </div>
+	      <script type="text/javascript">
+	        document.getElementById('fake-file-button-browse').addEventListener('click', function() {
+	        	document.getElementById('files-input-upload').click();
+	        });
+
+	        document.getElementById('files-input-upload').addEventListener('change', function() {
+	        	document.getElementById('rutaarchivo').value = this.value.replace(/C:\\fakepath\\/,'');
+	        	document.getElementById('fake-file-button-upload').removeAttribute('disabled');
+	        });
+	      </script>
+	    </div>
+	  </div>
+	<% end %>
+</div>

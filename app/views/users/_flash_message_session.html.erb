@@ -1,0 +1,19 @@
+<h3 style="color: #000; text-align: center">
+  <% flash.each do |type, msg| %>
+    <div class="callout_message-<%= irregular_types(type) %>" id="alert_remove">
+      <%= msg %>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calloutMessage = document.querySelector('.callout_message-<%= irregular_types(type) %>');
+            if (calloutMessage) {
+                setTimeout(function() {
+                    calloutMessage.style.display = 'none';
+                }, 4000);
+            }
+        });
+    </script>
+  <% end %>
+  <% flash.clear %>
+  <%= titulo rescue nil %>
+</h3>

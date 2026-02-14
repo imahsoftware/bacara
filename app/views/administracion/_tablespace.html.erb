@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="thcolor">
+        <th>Tablespace Name</th>
+        <th>Size MB</th>
+        <th>Free MB</th>
+        <th>Free %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tablespace.each do |t| %>
+        <tr>
+          <td><%= t.tablespace_name rescue nil %></td>
+          <td><%= camponumerico t.size_mb rescue nil %></td>
+          <td><%= camponumerico t.free_mb rescue nil %></td>
+          <td><%= t.free_porc rescue nil %>%</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

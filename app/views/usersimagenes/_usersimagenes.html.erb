@@ -1,0 +1,35 @@
+<%= link_to 'Cargar Documentos', new_user_usersimagen_path(@user.id), :class=>"btn btn-info" %>
+<br/>
+<br/>
+<% form_for [@user, @usersimagen], remote: true do |form| %>
+<% if !@usersimagen.id %>
+<% end %>
+<% if @user.usersimagenes.exists?  %>
+    <table class="table table-bordered table-striped table-hover">
+      <tr valign="middle">
+        <td width="5%">&nbsp;</td>
+        <td width="40%"><strong><div align="left" style="font-size: 12px;">Clase</div></strong></td>
+        <td width="55%"><strong><div align="left" style="font-size: 12px;">Nombre del Archivo</div></strong></td>
+      </tr>
+      <% for usersimagen in @user.usersimagenes.find(:all, :order => 'created_at DESC') %>
+       <tr  valign="middle" class="<%=cycle('even1', 'odd1')%> usersimagen_<%=usersimagen.id%>">
+         <td><div align="center">
+          <%= link_to image_tag("images.png", :title => "Ver Imagen"), usersimagen.usersimagen.url(:original, false),
+                         { :popup => ['new_window','height=450,width=600,scrollbars=yes']}%>
+          <%= link_to image_tag("borrar.png", :title => "Eliminar"), user_usersimagen_path(@user, usersimagen),
+                            method: :delete, confirm: "¿Seguro?", remote: true, before: "$(this).up('.usersimagen_#{usersimagen.id}').remove()" %>
+           </div>
+         </td>
+         <td><div align="left" style="font-size: 12px;"><%=usersimagen.clase rescue nil%></div></td>
+         <td><div align="left" style="font-size: 12px;"><%=link_to usersimagen.usersimagen_file_name, usersimagen.usersimagen.url(:original, false),
+                         { :popup => ['new_window','height=450,width=600,scrollbars=yes']}%></div></td>
+       </tr>
+      <% end %>
+    </table>
+<% else %>
+<div id="capacitacion">
+    <div class="alert alert-danger">No hay datos asociados</div>
+</div>
+<% end %>
+   <%= hidden_field :user, :id %>
+<% end %>

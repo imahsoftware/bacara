@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+    <thead>
+      <tr class="thcolor">
+        <th width="10%"></th>
+        <th width="25%">Campo</th>
+        <th>Descripción</th>
+        <th width="20%">Codigo AportesEnLinea</th>
+        <th width="10%">Estado</th>
+        <th width="10%">Visible</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_iparametros">
+      <%
+        @is_auth_e_iparametro = is_auth_e('iparametro')
+        @iparametros.order("campo,descripcion asc").each do |iparametro| %>
+        <%= render 'iparametros/tr', iparametro: iparametro %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

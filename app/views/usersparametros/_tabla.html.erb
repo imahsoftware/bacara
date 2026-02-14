@@ -1,0 +1,15 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-condensed table-striped">
+	  <thead>
+	    <tr class="thcolor">
+				<th width="10%"></th>
+        <th>Campo</th>
+	    </tr>
+	  </thead>
+	  <tbody id="tbody_usersparametros">
+	    <% @user.usersparametros.order(updated_at: :desc).each do |usersparametro| %>
+	      <%= render 'usersparametros/tr', usersparametro: usersparametro %>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>

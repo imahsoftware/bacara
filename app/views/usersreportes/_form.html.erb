@@ -1,0 +1,18 @@
+<%= simple_form_for([@user, @usersreporte], remote: true) do |f| %>
+   <div class="row">
+      <div class="col-md-12"><%= f.input :infgrupo_id, collection: Infgrupo.where(["id not in (select infgrupo_id from usersreportes where user_id = #{@user.id})"]).collect {|p| [ p.nombregrupo.to_s, p.id ] }, input_html: { multiple: true, class: 'select2' }, label: 'Reporte' %></div>
+   </div>
+   <div class="row">
+     <div class="col-md-6">
+       <% if @usersreporte.new_record? %>
+         <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersreporte_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+       <% else %>
+         <%= link_to "#{t :cancelar}", user_usersreporte_path(@user, @usersreporte), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+       <% end %>
+     </div>
+     <div class="col-md-6">
+       <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+     </div>
+   </div>
+   <br>
+<% end %>

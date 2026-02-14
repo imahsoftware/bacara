@@ -1,0 +1,23 @@
+<% usr = User.find(is_admin) %>
+<aside class="main-sidebar" style="position: fixed;">
+  <section class="sidebar">
+    <div align="center"><%= image_tag usr.avatar.url(:medium), alt: 'User Image', class: 'img-circle bb', width: '128px' %></div>
+    <div class="user-panel">
+      <h4 class="text-center"><%= usr.nombre rescue nil %></h4>
+    </div>
+<!--
+    <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <%#= link_to verconsolestudiante_personas_path(persona_id: @a), remote: true do %>
+          <i class="fa fa-bars"></i> <span>Datos Basicos</span>
+        <%# end %>
+      </li>
+    </ul> -->
+  </section>
+</aside>
+
+<style>
+  .bb{
+    padding: 15px;
+  }
+</style>

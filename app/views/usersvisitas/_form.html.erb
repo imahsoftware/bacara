@@ -1,0 +1,19 @@
+<%= simple_form_for([@user, @usersvisita], remote: true) do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.select :user_asignado, options_for_select([[f.object.descripcion_users, f.object.user_asignado]]), {}, { class: 'form-control select2Users select2' } %>
+    </div>
+  </div><br/>
+  <div class="row">
+    <div class="col-md-6">
+      <% if @usersvisita.new_record? %>
+        <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#usersvisita_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+      <% else %>
+        <%= link_to "#{t :cancelar}", user_usersvisita_path(@user, @usersvisita), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
+      <%= f.button :submit, "#{t :guardar}", class: "btn btn-danger pull-right" %>
+    </div>
+  </div>
+<% end %>

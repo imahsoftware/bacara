@@ -1,0 +1,124 @@
+<div class="process-row nav nav-tabs">
+<% unless @formulario.new_record? %>
+<% if @formulario.etapa.to_s == "A" %>
+  <div class="process-step">
+     <%= link_to edit_formulario_path(id: @formulario.id, etapa: "A") do%>
+      <i class="fa fa-commenting fat btn color-imagen btn-circle "></i>
+      <% if @formulario.completo_basico %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Datos Basicos <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Datos Basicos</strong></small></p>
+      <% end -%>
+     <% end -%>
+   </div>
+<% else %>
+  <div class="process-step">
+     <%= link_to edit_formulario_path(id: @formulario.id, etapa: "A") do%>
+      <i class="fa fa-commenting fat btn btn-default btn-circle "></i>
+      <% if @formulario.completo_basico %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Datos Basicos <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Datos Basicos</strong></small></p>
+      <% end -%>
+     <% end -%>
+   </div>
+<% end -%>
+
+<% if @formulario.etapa.to_s == "B" %>
+  <div class="process-step">
+      <%= link_to edit_formulario_path(id: @formulario.id, etapa: "B") do%>
+      <i class="fa fa-graduation-cap fat btn color-imagen btn-circle "></i>
+      <% if @formulario.completo_academicos %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Academicos <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Academicos</strong></small></p>
+      <% end -%>
+     <% end -%>
+   </div>
+<% else %>
+  <div class="process-step">
+   <%= link_to edit_formulario_path(id: @formulario.id, etapa: "B") do%>
+    <i class="fa fa-graduation-cap fat btn btn-default btn-circle "></i>
+      <% if @formulario.completo_academicos %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Academicos <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Academicos</strong></small></p>
+      <% end -%>
+   <% end -%>
+  </div>
+<% end -%>
+
+
+<% if @formulario.etapa.to_s == "C" %>
+  <div class="process-step">
+     <%= link_to edit_formulario_path(id: @formulario.id, etapa: "C") do%>
+      <i class="fa fa-desktop fat btn color-imagen btn-circle "></i>
+      <% if @formulario.completo_programa %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Programa <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Programa</strong></small></p>
+      <% end -%>
+     <% end -%>
+   </div>
+<% else %>
+  <div class="process-step">
+   <%= link_to edit_formulario_path(id: @formulario.id, etapa: "C") do%>
+    <i class="fa fa-desktop fat btn btn-default btn-circle "></i>
+    <% if @formulario.completo_programa %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Programa <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Programa</strong></small></p>
+      <% end -%>
+   <% end -%>
+  </div>
+<% end -%>
+
+
+<% if @formulario.etapa.to_s == "D" %>
+  <div class="process-step">
+     <%= link_to edit_formulario_path(id: @formulario.id, etapa: "D") do%>
+      <i class="fa fa-users fat btn color-imagen btn-circle "></i>
+      <% if @formulario.completo_familiares %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Familiares <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Familiares</strong></small></p>
+      <% end -%>
+     <% end -%>
+   </div>
+<% else %>
+  <div class="process-step">
+   <%= link_to edit_formulario_path(id: @formulario.id, etapa: "D") do%>
+    <i class="fa fa-users fat btn btn-default btn-circle "></i>
+      <% if @formulario.completo_familiares %>
+        <p class="letra"><strong><span class="label label-success btn bg-success pull-center">Familiares <i class="fa fa-check-circle" aria-hidden="true"></i></span></strong></p>
+      <% else %>
+        <p class="letra"><small><strong>Familiares</strong></small></p>
+      <% end -%>
+   <% end -%>
+  </div>
+  <% end -%>
+  <% if @formulario.etapa.to_s == "E" %>
+  <div class="process-step">
+     <%= link_to edit_formulario_path(id: @formulario.id, etapa: "E") do%>
+      <i class="fa fa-book fat btn color-imagen btn-circle "></i>
+      <p class="letra"><small><strong>Cargue Documentos</strong></small><br/>
+        <%# if @formulario.completo_familiares %>
+        <!-- <span class="label label-danger btn bg-danger pull-center">Completado</span> -->
+      <%# end -%>
+      </p>
+     <% end -%>
+   </div>
+<% else %>
+  <div class="process-step">
+   <%= link_to edit_formulario_path(id: @formulario.id, etapa: "E") do%>
+    <i class="fa fa-book fat btn btn-default btn-circle "></i>
+    <p class="letra"><small><strong>Cargue Documentos</strong></small><br/>
+      <%# if @formulario.completo_familiares %>
+        <!-- <span class="label label-danger btn bg-danger pull-center">Completado</span> -->
+      <%# end -%>
+    </p>
+   <% end -%>
+  </div>
+  <% end -%>
+<% end -%>
+</div>

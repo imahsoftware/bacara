@@ -1,0 +1,9 @@
+<div class="box box-primary">
+  <div class="box-body">
+    <ul>
+      <% @members.each do |us| %>
+        <li><%= us.name rescue nil %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ejecucion.user %>
+</p>
+
+<p>
+  <strong>Periodosliquidacion:</strong>
+  <%= @ejecucion.periodosliquidacion %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @ejecucion.estado %>
+</p>
+
+<%= link_to 'Edit', edit_ejecucion_path(@ejecucion) %> |
+<%= link_to 'Back', ejecuciones_path %>

@@ -1,0 +1,12 @@
+<tr id="userssucursal_<%= userssucursal.id %>">
+  <td class="text-center">
+    <%= link_to edit_user_userssucursal_path(@user, userssucursal), remote: true, class: 'edit_userssucursal_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+       <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%= link_to user_userssucursal_path(@user, userssucursal), remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+        <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+  </td>
+  <td><%= userssucursal.portafoliossucursal.id rescue nil %></td>
+  <td><%= userssucursal.portafoliossucursal.descripcion rescue nil %></td>
+</tr>

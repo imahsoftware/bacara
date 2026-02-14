@@ -1,0 +1,102 @@
+<% title 'Registros de la aplicación' %>
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      <%= link_to audits_path, data: { toggle: 'tooltip' }, title: 'Refrescar' do %>
+        <button class="btn btn-xs btn-primary"><i class="fa fa-refresh"></i></button>
+      <% end %>
+      Registros de la aplicación
+    </h3>
+  </div>
+  <div class="box-body">
+    <div class="box-tools">
+      <%= form_tag request.path, method: :get, id: "search-form" do %>
+        <div class="row">
+          <div class="col-md-2">
+            <%= text_field_tag :fecha_inicio, params[:fecha_inicio], class: 'form-control datepicker', placeholder: 'Fecha Inicio'%>
+          </div>
+          <div class="col-md-2">
+            <%= text_field_tag :fecha_fin, params[:fecha_fin], class: 'form-control datepicker', placeholder: 'Fecha fin'%>
+          </div>
+          <div class="col-md-3">
+            <%= select_tag 'ubicacion[proceso]', options_for_select(Objeto.find_by_sql("select distinct auditable_type from audits order by auditable_type").collect {|p| [ p.auditable_type, p.auditable_type ] }), prompt: 'Objeto', data: { width: '100%' }, class: 'form-control select2' %>
+          </div>
+          <div class="col-md-2">
+            <%= select_tag 'ubicacion[accion]', options_for_select([["Crear", "create"],["Eliminar", "destroy"],["Actualizar","update"]]), prompt: 'Acción', data: { width: '100%' }, class: 'form-control select2' %>
+          </div>
+          <div class="col-md-3">
+            <%= hidden_field_tag :user_id %>
+            <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control", id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <%= submit_tag 'Buscar', class: 'btn btn-flat btn-warning pull-right' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <br>
+    <% if @audits.present? %>
+      <div class="table-responsive">
+        <table class="table no-margin">
+          <thead class="thcolor">
+            <tr>
+              <th>Fecha</th>
+              <th>Usuario</th>
+              <th>Portafolio</th>
+              <th>Modelo</th>
+              <th class="text-center">Acción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @audits.order(created_at: :desc).each do |audit| %>
+                <tr>
+                <% if audit.created_at.strftime("%d/%m/%Y") == Time.now.strftime("%d/%m/%Y") %>
+                  <td>Hoy a las <%= audit.created_at.strftime("%H:%M") %></td>
+                <% elsif audit.created_at.strftime("%d/%m/%Y") == Date.yesterday.strftime("%d/%m/%Y") %>
+                  <td>Ayer a las <%= audit.created_at.strftime("%H:%M") %></td>
+                <% else %>
+                  <td><%= audit.created_at.strftime("%d/%m/%Y - %I:%M %p") %></td>
+                <% end %>
+                  <td><%= audit.user.nombre rescue nil %></td>
+                  <td><%= audit.user.portafolio.nombre rescue nil %></td>
+                  <td><%= audit.auditable_type rescue nil %></td>
+                  <% if audit.action == 'create' %>
+                    <td class="text-center"><span class="label label-primary"><%= log_actions(audit.action) %></span></td>
+                  <% elsif audit.action == 'update' %>
+                    <td class="text-center"><span class="label label-warning"><%= log_actions(audit.action) %></span></td>
+                  <% elsif audit.action == 'destroy' %>
+                    <td class="text-center"><span class="label label-danger"><%= log_actions(audit.action) %></span></td>
+                  <% end %>
+                  <td>
+                    <%= link_to audit_path(audit), remote: true do %>
+                      <button class="btn btn-xs btn-primary">Ver cambios</button>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% else %>
+    <h4 class="text-center">No se encontraron datos</h4>
+  <% end %>
+
+  <div class="box-footer clear-fix">
+		<div class="box-tools pull-right">
+			<%= will_paginate @audits, renderer: BootstrapPagination::Rails %>
+		</div>
+  </div><!-- box-footer -->
+</div>
+
+<div class="modal modal-default fade" id="auditModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

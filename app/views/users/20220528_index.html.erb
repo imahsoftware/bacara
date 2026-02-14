@@ -1,0 +1,163 @@
+<% title 'Usuarios' %>
+<% issygma = is_sygma%>
+<div class="box box-primary">
+  <div class="box-header" style="margin-bottom: -32px;">
+    <legend>Usuarios</legend>
+    <div class="box-tools pull-right">
+      <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
+        <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
+      <% end %>
+      <% if issygma %>
+        <%= link_to carguemasivo_users_path, remote: true, class: 'btn btn-sm btn-warning' do %>
+          <i class="fa fa-cloud-upload"> </i> <span>Cargue Masivo</span>
+        <% end %>
+      <% end %>
+      <%= link_to permisosymodulos_users_path(format: :xlsx), class: 'btn btn-sm btn-info' do %>
+          <i class="fa fa-download"> </i> <span>Info. Usuarios</span>
+      <% end %>
+    </div>
+  </div>
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-12">
+        <% if issygma %>
+          <div class="col-md-4">
+            <div class="box-tools pull-left">
+              <%= search_form_for @q do |f| %>
+                <div class="input-group" style="width: 270px;">
+                  <%= f.select :portafolio_id_eq, options_for_select(Portafolio.all.collect {|p| [ p.nombre, p.id ] }), {}, {class: 'form-control select2'} %>
+                  <div class="input-group-btn">
+                    <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                      <i class="fa fa-search"></i>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <div class="box-tools pull-right">
+          <% if issygma %>
+            <%= form_tag users_path, method: :get, id: "search-form" do %>
+              <div class="input-group" style="width: 550px;">
+                <%= hidden_field_tag :user_id %>
+                <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+              </div>
+            <% end %>
+            <script type="text/javascript" charset="utf-8">
+              $('#nombre').bind('railsAutocomplete.select', function(event, data){
+                $('#search-form').submit()
+              });
+            </script>
+          <% else %>
+            <%= search_form_for @q do |f| %>
+              <div class="input-group input-group-sm" style="width: 180px;">
+                <%= f.search_field :email_or_username_or_nombre_or_identificacion_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
+                <div class="input-group-btn">
+                  <%= button_tag(type: "submit", class: "btn btn-default") do %>
+                    <i class="fa fa-search"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <% if @users.present? %>
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-striped">
+              <thead>
+                <tr class="thcolor">
+                  <th>Acciones</th>
+                  <th>Usuario</th>
+                  <th>Nombre</th>
+                  <th class="text-center">Activo?</th>
+                  <th>Portafolio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @blockedusers != nil %>
+                  <% @blockedusers.each do |user| %>
+                    <tr>
+                      <td class="text-center">
+                        <%= link_to edit_user_path(etapa: "A", id: user.id), data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+                          <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                        <% end %>
+                        <% if user.activo == 'S' %>
+                          <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                            <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
+                          <% end %>
+                        <% else %>
+                          <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                            <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
+                          <% end %>
+                        <% end %>
+                        <% if user.unlock_token %>
+                          <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                            <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
+                          <% end %>
+                        <% end %>
+                      </td>
+                      <td><%= user.username %></td>
+                      <td><%= user.nombre %></td>
+                      <td class="text-center"><%= user.activo %></td>
+                      <td><%= user.portafolio.nombre rescue nil %></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+
+                <% @users.each do |user| %>
+                  <tr>
+                    <td class="text-center">
+                      <%= link_to edit_user_path(etapa: "A", id: user.id), data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+                        <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+                      <% end %>
+                      <% if user.activo == 'S' %>
+                        <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                          <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
+                        <% end %>
+                      <% else %>
+                        <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                          <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
+                        <% end %>
+                      <% end %>
+                      <% if user.unlock_token %>
+                        <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                          <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
+                        <% end %>
+                      <% end %>
+                      <% if issygma %>
+                        <%= link_to resetpass_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Reestablecer Clave' do %>
+                          <button class="btn btn-xs btn-warning"><i class="fa fa-refresh"></i></button>
+                        <% end %>
+                      <% end %>
+                    </td>
+                    <td><%= user.username %></td>
+                    <td><%= user.nombre %></td>
+                    <td class="text-center"><%= user.activo %></td>
+                    <td><%= user.portafolio.nombre rescue nil %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <div class="box-tools pull-right">
+            <%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+          </div>
+        </div>
+      <% else %>
+        <h4 class="text-center">No se encontraron datos</h4>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="carguemasivo">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
