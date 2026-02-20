@@ -20,7 +20,7 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-#/config/database.yml
+/config/database.yml
 public/
 #app/assets/images/codes/
 #app/assets/images/qr/
@@ -43,6 +43,7 @@ app/views/.DS_Store
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/puma.rb
 .idea/workspace.xml
 .idea/encodings.xml
 .idea/jsLinters/jshint.xml
