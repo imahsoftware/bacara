@@ -1,9 +1,0 @@
-development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
-  database: bacara
-  pool: 5
-  username: root
-  password: J3r0n1m02o17
-  host: 165.227.63.186
