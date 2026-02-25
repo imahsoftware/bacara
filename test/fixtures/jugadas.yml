@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  jugador: MyString
+  fecha: 2026-02-25
+  estado: MyString
+
+two:
+  jugador: MyString
+  fecha: 2026-02-25
+  estado: MyString

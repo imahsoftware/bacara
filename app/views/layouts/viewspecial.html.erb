@@ -1,21 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= ENV['NOMBRE_APLICACION'] %></title>
-    <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <%= stylesheet_link_tag    'application', media: 'all'%>
-    <%= javascript_include_tag 'application'%>
-  </head>
-  <body class="sidebar-mini skin-blue-light">
-    <div class="wrapper">
-      <%= render 'layouts/main_layout/main_header' %>
-      <section class="content">
-        <div class="box box-primary">
-          <%= yield %>
-        </div>
-      </section>
-    </div>
-  </body>
+<head>
+  <title><%= ENV['NOMBRE_APLICACION'] %></title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+
+<body class="vsp-body">
+
+<%
+  isadmin = is_admin
+  user    = User.find(isadmin) rescue nil
+%>
+
+<!-- ── Topbar ─────────────────────────────────────────────── -->
+<div class="vsp-topbar">
+
+  <!-- Logo -->
+  <%= link_to root_path, class: 'vsp-logo' do %>
+    BAC<span class="logo-accent">ARA</span>
+  <% end %>
+
+  <!-- Título de página -->
+  <div class="vsp-topbar-center">
+    <span class="vsp-page-title">
+      <i class="fa fa-gamepad" style="margin-right:5px; opacity:.5;"></i>
+      Detalle de Jugada
+    </span>
+  </div>
+
+  <!-- Usuario -->
+  <div class="vsp-topbar-right">
+    <% if user %>
+      <div class="dropdown">
+        <a href="#" class="vsp-user-btn dropdown-toggle" data-toggle="dropdown">
+          <% begin %>
+            <%= image_tag user.avatar.url(:medium), alt: user.username %>
+          <% rescue %>
+            <i class="fa fa-user-circle" style="font-size:22px; color:rgba(255,255,255,.5);"></i>
+          <% end %>
+          <span class="vsp-user-name hidden-xs"><%= user.username %></span>
+          <i class="fa fa-angle-down"></i>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dd-header">
+            <p><%= user.nombre %></p>
+            <small><%= user.username %></small>
+          </li>
+          <li>
+            <%= link_to edit_user_registration_path do %>
+              <i class="fa fa-edit" style="color:#6b7280; width:14px;"></i> Editar perfil
+            <% end %>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <%= link_to logout_path,
+                        data: { confirm: "¿Seguro que quieres salir, #{user.nombre}?" },
+                        class: 'dd-danger' do %>
+              <i class="fa fa-sign-out" style="width:14px;"></i> Salir
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<!-- ── Contenido ──────────────────────────────────────────── -->
+<div class="vsp-main">
+  <div class="vsp-container">
+    <%= yield %>
+  </div>
+</div>
+
+</body>
 </html>

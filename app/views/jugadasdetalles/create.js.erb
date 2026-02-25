@@ -1,0 +1,10 @@
+// app/views/jugadasdetalles/create.js.erb
+
+$('#tabla-movimientos').html('<%= j render("tabla_movimientos", jugadasdetalles: @jugadasdetalles, nuevo_detalle: @nuevo_detalle) %>');
+$('#mov-count').text('<%= @total_movimientos %>');
+$('#badge-count').text('<%= @total_movimientos %>');
+$('#next-bet-text').text('<%= j @proximo_bet %>');
+
+<% if @total_movimientos >= 5 %>
+$('#prc-badge').show();
+<% end %>

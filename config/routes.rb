@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :jugadas
+
+  resources :jugadasdetalles, only: [:index, :new, :create] do
+    collection do
+      post :undo
+    end
+  end
+
+
   mount ActionCable.server => '/cable'
 
   resources :notificacionesplataformas, only: [:index] do

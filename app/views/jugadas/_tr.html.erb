@@ -1,0 +1,27 @@
+<tr id="jugada_<%= jugada.id %>">
+  <td class="text-center">
+    <%# if is_auth_a('jugada') %>
+    <%= link_to edit_jugada_path(jugada), remote: true, class: 'edit_jugada_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
+      <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
+    <% end %>
+    <%# end %>
+    <%# if is_auth_e('jugada') %>
+    <%= link_to jugada, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
+      <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
+    <% end %>
+    <%# end %>
+
+    <%# Botón para abrir el detalle de jugada en nueva ventana %>
+    <%= link_to new_jugadasdetalle_path(jugada_id: jugada.id),
+                target: "_blank",
+                rel: "noopener",
+                data: { toggle: 'tooltip' },
+                title: "Ver detalle de jugada" do %>
+      <button class="btn btn-xs btn-primary">
+        <i class="fa fa-play-circle"></i>
+      </button>
+    <% end %>
+
+  </td>
+  <td><%= jugada.jugador %></td>
+</tr>

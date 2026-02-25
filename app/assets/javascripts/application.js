@@ -605,3 +605,87 @@ $(document).ready(function () {
         $("#filter-count2").text("Number of Filter = " + count);
     });
 });
+
+
+
+
+// PROCESO PARA ENVIO CON AJAX PARA LOS MOVIMIENTOS
+
+
+(function () {
+    'use strict';
+
+    // Evitar doble binding si por alguna razón el script se carga dos veces
+    if (window._jdBound) return;
+    window._jdBound = true;
+
+    function csrfToken() { return $('meta[name="csrf-token"]').attr('content'); }
+    function showSpinner() { $('#jd-spinner').fadeIn(150); }
+    function hideSpinner() { $('#jd-spinner').fadeOut(200); }
+    function setLoading(btn, on) { on ? $(btn).addClass('jd-loading') : $(btn).removeClass('jd-loading'); }
+
+    function addRipple(btn, e) {
+        var off = $(btn).offset();
+        var size = Math.max($(btn).outerWidth(), $(btn).outerHeight());
+        var $r = $('<span class="jd-ripple"></span>').css({
+            width: size, height: size,
+            left: e.pageX - off.left - size / 2,
+            top:  e.pageY - off.top  - size / 2
+        });
+        $(btn).append($r);
+        setTimeout(function () { $r.remove(); }, 600);
+    }
+
+    // ── Clic en P o B ────────────────────────────────────────────
+    $(document).off('click.jd', '#btn-player, #btn-banker')
+        .on ('click.jd', '#btn-player, #btn-banker', function (e) {
+            var $btn     = $(this);
+            var tipo     = $btn.data('tipo');
+            var jugadaId = $btn.data('jugada-id');
+            var baseBet  = $('#jd-base-bet').val() || 10;
+
+            addRipple($btn, e);
+            setLoading($btn, true);
+            showSpinner();
+
+            $.ajax({
+                url:      '/jugadasdetalles',
+                type:     'POST',
+                dataType: 'script',
+                headers:  { 'X-CSRF-Token': csrfToken() },
+                data:     { jugada_id: jugadaId, tipo: tipo, base_bet: baseBet },
+                error: function (xhr) {
+                    alert('Error al registrar movimiento: ' + (xhr.responseText || 'desconocido'));
+                },
+                complete: function () {
+                    setLoading($btn, false);
+                    hideSpinner();
+                }
+            });
+        });
+
+    // ── Botón Undo ────────────────────────────────────────────────
+    $(document).off('click.jd', '#btn-undo')
+        .on ('click.jd', '#btn-undo', function () {
+            var $btn     = $(this);
+            var jugadaId = $btn.data('jugada-id');
+            if (!confirm('¿Deshacer el último movimiento?')) return;
+
+            $btn.prop('disabled', true).text('Deshaciendo...');
+            showSpinner();
+
+            $.ajax({
+                url:      '/jugadasdetalles/undo',
+                type:     'POST',
+                dataType: 'script',
+                headers:  { 'X-CSRF-Token': csrfToken() },
+                data:     { jugada_id: jugadaId },
+                error:    function () { alert('Error al deshacer.'); },
+                complete: function () {
+                    $btn.prop('disabled', false).text('OOPS! Undo Last Result');
+                    hideSpinner();
+                }
+            });
+        });
+
+})();

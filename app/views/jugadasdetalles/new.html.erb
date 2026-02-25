@@ -1,0 +1,75 @@
+<%# ── Título con nombre del jugador ────────────────────────── %>
+<div class="jd-player-header">
+  <div class="jd-player-info">
+    <span class="jd-player-label">
+      <i class="fa fa-user-circle"></i> Jugador
+    </span>
+    <h2 class="jd-player-name"><%= @jugada.jugador %></h2>
+  </div>
+  <div class="jd-player-meta">
+    <span class="jd-meta-item">
+      <i class="fa fa-hashtag"></i> Jugada <strong>#<%= @jugada_id %></strong>
+    </span>
+  </div>
+</div>
+
+<div id="jd-spinner">⏳ Guardando...</div>
+<div class="jd-layout">
+  <div class="jd-card">
+    <div class="jd-card-head">
+      <h3><i class="fa fa-gamepad"></i> Select the Result</h3>
+      <span class="jd-badge">#<%= @jugada_id %></span>
+    </div>
+
+    <div class="jd-card-body jd-selector">
+      <p class="jd-sub">Click on an image to select your option.</p>
+
+      <div class="jd-bet-row">
+        <label for="jd-base-bet">Select Base Bet</label>
+        <select id="jd-base-bet">
+          <% [5, 10, 15, 20, 25, 50, 100].each do |v| %>
+            <option value="<%= v %>" <%= v == 10 ? 'selected' : '' %>><%= v %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="jd-circles">
+        <button class="jd-circle jd-circle-p" id="btn-player" data-tipo="P" data-jugada-id="<%= @jugada_id %>" title="Player">P</button>
+        <button class="jd-circle jd-circle-b" id="btn-banker" data-tipo="B" data-jugada-id="<%= @jugada_id %>" title="Banker">B</button>
+      </div>
+
+      <button class="jd-undo-btn" id="btn-undo" data-jugada-id="<%= @jugada_id %>">
+        OOPS! Undo Last Result
+      </button>
+
+      <div class="jd-next-bet" id="jd-next-bet-banner">
+        <span class="jd-nb-label">Your Next Bet</span>
+        <p id="next-bet-text"><%= @proximo_bet %></p>
+      </div>
+
+      <p class="jd-powered">Powered by: bacwinners.com</p>
+    </div>
+
+    <div class="jd-card-foot">
+      Movimientos: <strong id="mov-count"><%= @total_movimientos %></strong>
+      <span id="prc-badge"
+            class="jd-badge jd-badge-green"
+            style="display:<%= @total_movimientos >= 5 ? 'inline-flex' : 'none' %>; margin-left:6px;">
+        🔄 PRC activo
+      </span>
+    </div>
+  </div>
+
+  <div class="jd-card">
+    <div class="jd-card-head">
+      <h3><i class="fa fa-list-alt"></i> Movimientos</h3>
+      <span class="jd-badge" id="badge-count"><%= @total_movimientos %></span>
+    </div>
+
+    <div class="jd-table-wrap">
+      <div id="tabla-movimientos">
+        <%= render 'tabla_movimientos', jugadasdetalles: @jugadasdetalles %>
+      </div>
+    </div>
+  </div>
+</div>

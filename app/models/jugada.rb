@@ -1,0 +1,2 @@
+class Jugada < ApplicationRecord
+end
