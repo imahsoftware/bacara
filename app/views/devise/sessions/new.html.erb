@@ -85,9 +85,6 @@
         <div class="pass-wrap">
           <div class="pass-label-row">
             <label>Contraseña</label>
-            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-              <%= link_to new_password_path(resource_name), class: 'forgot-inline' do %><span>¿Olvidaste tu contraseña?</span><% end %>
-            <% end %>
           </div>
           <div class="pass-field">
             <%= f.input_field :password, required: false, class: 'form-control', placeholder: 'Contraseña', autocomplete: 'off', id: 'password_field' %>

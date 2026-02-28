@@ -499,3 +499,13 @@
         grid-template-columns: 1fr;
     }
 }
+
+
+/* ══ SCROLL CON CABECERA FIJA EN MOVIMIENTOS ══════════════ */
+#tabla-movimientos .bac-scorecard-wrapper {
+    max-height: 600px;   /* ajusta la altura a tu gusto */
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+
