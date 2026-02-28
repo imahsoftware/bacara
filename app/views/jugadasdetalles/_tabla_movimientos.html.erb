@@ -52,7 +52,7 @@
           </tbody>
         </table>
 
-        <%# BOTTOM: filas 6+ (sin cabecera, continúa la columna central) %>
+
         <% if resto.any? %>
           <table class="bac-table bac-table-central-bottom">
             <tbody>
@@ -102,7 +102,7 @@
             <% resto.each_with_index do |d, i| %>
               <tr id="row-j1-<%= d.id %>"
                   class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %>">
-                <td class="td-num"><%= i + 6 %></td>
+                <td class="td-num"><%= i + 1 %></td>
                 <td><%= d.mecanica1.presence || '—' %></td>
                 <td><%= d.player1.present? ? content_tag(:span, d.player1, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
                 <td><%= d.banquer1.present? ? content_tag(:span, d.banquer1, class:'bac-neg') : content_tag(:span,'—',class:'bac-dash') %></td>
