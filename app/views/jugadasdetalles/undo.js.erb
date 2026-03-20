@@ -1,6 +1,6 @@
 // app/views/jugadasdetalles/undo.js.erb
 
-$('#tabla-movimientos').html('<%= j render("tabla_movimientos", jugadasdetalles: @jugadasdetalles) %>');
+$('#tabla-movimientos').html('<%= j render("tabla_movimientos", jugadasdetalles: @jugadasdetalles || []) %>');
 $('#mov-count').text('<%= @total_movimientos %>');
 $('#badge-count').text('<%= @total_movimientos %>');
 $('#next-bet-text').text('<%= j @proximo_bet %>');
@@ -8,3 +8,14 @@ $('#next-bet-text').text('<%= j @proximo_bet %>');
 <% if @total_movimientos < 5 %>
 $('#prc-badge').hide();
 <% end %>
+
+// ═══ Reiniciar floating header + auto-scroll ═══
+(function(){
+    if (typeof window.setupFloatingHeader === 'function') {
+        window.setupFloatingHeader();
+    }
+    var el = document.getElementById('jd-movimientos-scroll');
+    if (el) {
+        setTimeout(function(){ el.scrollTop = el.scrollHeight; }, 50);
+    }
+})();

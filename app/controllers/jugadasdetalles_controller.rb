@@ -47,6 +47,30 @@ class JugadasdetallesController < ApplicationController
     end
   end
 
+  # POST /jugadasdetalles/undo  (AJAX - deshace el último movimiento)
+  def undo
+    ultimo = Jugadasdetalle.where(jugada_id: @jugada_id).order(id: :desc).first
+
+    if ultimo
+      ultimo.destroy
+
+      # Si quedan 5 o más, recalcular con el PRC
+      total_restante = Jugadasdetalle.where(jugada_id: @jugada_id).count
+      if total_restante >= 5
+        ejecutar_prc_calculo_automatico(@jugada_id)
+      end
+    end
+
+    @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
+    @total_movimientos = @jugadasdetalles.count
+    @proximo_bet       = calcular_proximo_bet(@jugadasdetalles)
+
+    respond_to do |format|
+      format.js   # → app/views/jugadasdetalles/undo.js.erb
+      format.json { render json: { status: "ok", total: @total_movimientos } }
+    end
+  end
+
   # GET /jugadasdetalles?jugada_id=X  (AJAX - refresca tabla completa)
   def index
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)

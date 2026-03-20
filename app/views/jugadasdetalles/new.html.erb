@@ -42,7 +42,8 @@
           <button class="jd-undo-btn" id="btn-undo"
                   data-jugada-id="<%= @jugada_id %>"
                   style="margin-bottom:0;">
-            OOPS! Undo Last Result
+            <!-- OOPS! Undo Last Result -->
+            Eliminar Ultimo Registro
           </button>
           <br><br>
 
@@ -61,20 +62,23 @@
               style="display:<%= @total_movimientos >= 5 ? 'inline-flex' : 'none' %>; margin-left:6px;">
           🔄 PRC activo
         </span>
-        <p class="jd-powered" style="margin:4px 0 0;">Powered by: bacwinners.com</p>
+        <p class="jd-powered" style="margin:4px 0 0;">ImahSoftware</p>
       </div>
     </div>
   </div>
 
   <%# ── COLUMNA DERECHA: Movimientos ─────────────────────── %>
   <div class="jd-col-right">
-    <div class="jd-card" style="height: 100%;">
+    <div class="jd-card" style="height: 100%; display: flex; flex-direction: column;">
       <div class="jd-card-head">
         <h3><i class="fa fa-list-alt"></i> Movimientos</h3>
         <span class="jd-badge" id="badge-count"><%= @total_movimientos %></span>
       </div>
 
-      <div style="padding: 0; overflow-x: auto;">
+      <%# Header clonado — oculto por defecto, aparece al scrollear %>
+      <div id="jd-floating-header" class="jd-floating-header" style="display:none;"></div>
+
+      <div id="jd-movimientos-scroll" style="flex:1; overflow-y:auto; overflow-x:auto; max-height:70vh; padding:0;">
         <div id="tabla-movimientos">
           <%= render 'tabla_movimientos', jugadasdetalles: @jugadasdetalles %>
         </div>
@@ -83,3 +87,84 @@
   </div>
 
 </div>
+
+<script>
+    $(function(){
+        // ═══ Floating header: clona el encabezado de JUGADA 1/2 y lo muestra al scrollear ═══
+        function setupFloatingHeader(){
+            var $scroll = $('#jd-movimientos-scroll');
+            var $float  = $('#jd-floating-header');
+            if (!$scroll.length || !$float.length) return;
+
+            // Buscar los theads de JUGADA 1 y JUGADA 2 (columnas left y right)
+            var $left  = $scroll.find('.bac-scorecard-left table thead');
+            var $right = $scroll.find('.bac-scorecard-right table thead');
+            var $centerTop = $scroll.find('.bac-table-central-top thead');
+
+            // Si no hay theads (menos de 6 registros), no hacer nada
+            if (!$left.length && !$right.length) {
+                $float.hide();
+                return;
+            }
+
+            // Construir el header clonado con la misma estructura grid
+            var html = '<div style="display:grid; grid-template-columns:1fr auto 1fr; min-width:640px;">';
+
+            // Left header
+            html += '<div style="grid-column:1;">';
+            html += '<table class="bac-table" style="margin:0;"><thead>' + $left.html() + '</thead></table>';
+            html += '</div>';
+
+            // Center header (P|B)
+            html += '<div style="grid-column:2; min-width:90px; max-width:120px; border-left:2px solid #9ca3af; border-right:2px solid #9ca3af;">';
+            html += '<table class="bac-table" style="margin:0; border-left:none; border-right:none;"><thead>' + $centerTop.html() + '</thead></table>';
+            html += '</div>';
+
+            // Right header
+            html += '<div style="grid-column:3;">';
+            html += '<table class="bac-table" style="margin:0;"><thead>' + $right.html() + '</thead></table>';
+            html += '</div>';
+
+            html += '</div>';
+            $float.html(html);
+
+            // Obtener la posición del header original de JUGADA 1
+            var $origHeader = $scroll.find('.bac-scorecard-left table thead');
+
+            $scroll.off('scroll.floatingHeader').on('scroll.floatingHeader', function(){
+                if (!$origHeader.length) return;
+
+                // Posición del header original relativo al contenedor scroll
+                var headerTop = $origHeader[0].getBoundingClientRect().top;
+                var scrollTop = $scroll[0].getBoundingClientRect().top;
+
+                if (headerTop < scrollTop) {
+                    // El header original ya no es visible → mostrar el flotante
+                    $float.show();
+                    // Sincronizar scroll horizontal
+                    $float[0].scrollLeft = $scroll[0].scrollLeft;
+                } else {
+                    $float.hide();
+                }
+            });
+
+            // Sincronizar scroll horizontal del body al header
+            $scroll.off('scroll.floatingSync').on('scroll.floatingSync', function(){
+                if ($float.is(':visible')) {
+                    $float[0].scrollLeft = $scroll[0].scrollLeft;
+                }
+            });
+        }
+
+        setupFloatingHeader();
+
+        // Exponer para que los JS de create/undo puedan reinicializar
+        window.setupFloatingHeader = setupFloatingHeader;
+
+        // Auto-scroll al último registro
+        var $scroll = $('#jd-movimientos-scroll');
+        if ($scroll.length && $scroll[0].scrollHeight > $scroll[0].clientHeight) {
+            setTimeout(function(){ $scroll.scrollTop($scroll[0].scrollHeight); }, 100);
+        }
+    });
+</script>

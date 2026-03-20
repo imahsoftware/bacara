@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :jugadas
+  post 'jugadasdetalles/undo', to: 'jugadasdetalles#undo'
 
   resources :jugadasdetalles, only: [:index, :new, :create] do
     collection do
