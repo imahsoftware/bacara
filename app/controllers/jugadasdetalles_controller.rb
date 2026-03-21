@@ -25,9 +25,9 @@ class JugadasdetallesController < ApplicationController
     if @detalle.save
       total = Jugadasdetalle.where(jugada_id: @jugada_id).count
 
-      #if total >= 5
-        ejecutar_prc_calculo_automatico(@jugada_id)
-      #end
+      if total >= 5
+        ejecutar_prc_calculo_automatico(@detalle.id)
+      end
 
       # Recargar todos los registros para actualizar la tabla
       @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
