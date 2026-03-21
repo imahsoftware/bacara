@@ -93,9 +93,8 @@ class JugadasdetallesController < ApplicationController
   # Ejecuta el stored procedure prc_calculo_automatico
   # Se llama a partir del 5to movimiento de cada jugada
   def ejecutar_prc_calculo_automatico(jugada_id)
-    ActiveRecord::Base.connection.execute(
-      "CALL prc_calculo_automatico(#{jugada_id.to_i})"
-    )
+    Rails.logger.error "Ejecutandoo... CALL prc_calculo_automatico(#{jugada_id.to_i})"
+    ActiveRecord::Base.connection.execute("CALL prc_calculo_automatico(#{jugada_id.to_i})")
   rescue => e
     Rails.logger.error "Error ejecutando prc_calculo_automatico: #{e.message}"
     # No interrumpir el flujo principal si el PRC falla
