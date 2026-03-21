@@ -682,7 +682,7 @@ $(document).ready(function () {
                 data:     { jugada_id: jugadaId },
                 error:    function () { alert('Error al deshacer.'); },
                 complete: function () {
-                    $btn.prop('disabled', false).text('OOPS! Undo Last Result');
+                    $btn.prop('disabled', false).text('Eliminar Ultimo Registro');
                     hideSpinner();
                 }
             });
