@@ -38,14 +38,20 @@
           </div>
           <br>
 
-          <%# Undo %>
-          <button class="jd-undo-btn" id="btn-undo"
-                  data-jugada-id="<%= @jugada_id %>"
-                  style="margin-bottom:0;">
-            <!-- OOPS! Undo Last Result -->
-            Eliminar Ultimo Registro
-          </button>
-          <br><br>
+          <%# Undo + Reset %>
+          <div style="display:flex; gap:6px; margin-bottom:0;">
+            <button class="jd-undo-btn" id="btn-undo"
+                    data-jugada-id="<%= @jugada_id %>"
+                    style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px;">
+              Eliminar Último
+            </button>
+            <button class="jd-undo-btn" id="btn-reset"
+                    data-jugada-id="<%= @jugada_id %>"
+                    style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px; background:#dc2626; border-color:#dc2626;">
+              Reset
+            </button>
+          </div>
+          <br>
 
           <%# Next Bet %>
           <div class="jd-next-bet" id="jd-next-bet-banner" style="margin-bottom:0; flex:1; min-width:160px;">

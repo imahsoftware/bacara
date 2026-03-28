@@ -669,7 +669,6 @@ $(document).ready(function () {
         .on ('click.jd', '#btn-undo', function () {
             var $btn     = $(this);
             var jugadaId = $btn.data('jugada-id');
-            if (!confirm('¿Deshacer el último movimiento?')) return;
 
             $btn.prop('disabled', true).text('Deshaciendo...');
             showSpinner();
@@ -682,7 +681,30 @@ $(document).ready(function () {
                 data:     { jugada_id: jugadaId },
                 error:    function () { alert('Error al deshacer.'); },
                 complete: function () {
-                    $btn.prop('disabled', false).text('Eliminar Ultimo Registro');
+                    $btn.prop('disabled', false).text('Eliminar Último');
+                    hideSpinner();
+                }
+            });
+        });
+
+    // ── Botón Reset ───────────────────────────────────────────────
+    $(document).off('click.jd', '#btn-reset')
+        .on ('click.jd', '#btn-reset', function () {
+            var $btn     = $(this);
+            var jugadaId = $btn.data('jugada-id');
+
+            $btn.prop('disabled', true).text('Reseteando...');
+            showSpinner();
+
+            $.ajax({
+                url:      '/jugadasdetalles/reset',
+                type:     'POST',
+                dataType: 'script',
+                headers:  { 'X-CSRF-Token': csrfToken() },
+                data:     { jugada_id: jugadaId },
+                error:    function () { alert('Error al resetear.'); },
+                complete: function () {
+                    $btn.prop('disabled', false).text('Reset');
                     hideSpinner();
                 }
             });

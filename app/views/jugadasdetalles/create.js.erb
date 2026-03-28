@@ -16,9 +16,22 @@ $('#prc-badge').hide();
     if (typeof window.setupFloatingHeader === 'function') {
         window.setupFloatingHeader();
     }
+
     var el = document.getElementById('jd-movimientos-scroll');
     if (el) {
-        setTimeout(function(){ el.scrollTop = el.scrollHeight; }, 50);
+        setTimeout(function(){
+            // Scroll interno del contenedor (escritorio)
+            el.scrollTop = el.scrollHeight;
+
+            // En mobile/tablet el layout es una columna y la página hace scroll
+            // Si el div no tiene scroll propio, desplazar la ventana hasta el final de la tabla
+            if (el.scrollHeight <= el.clientHeight) {
+                var tablaEl = document.getElementById('tabla-movimientos');
+                if (tablaEl) {
+                    tablaEl.lastElementChild && tablaEl.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+            }
+        }, 80);
     }
 })();
 

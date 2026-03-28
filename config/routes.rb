@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
 
   resources :jugadas
-  post 'jugadasdetalles/undo', to: 'jugadasdetalles#undo'
+  post 'jugadasdetalles/undo',  to: 'jugadasdetalles#undo'
+  post 'jugadasdetalles/reset', to: 'jugadasdetalles#reset'
 
   resources :jugadasdetalles, only: [:index, :new, :create] do
     collection do
       post :undo
+      post :reset
     end
   end
 

@@ -77,6 +77,20 @@ class JugadasdetallesController < ApplicationController
     end
   end
 
+  def reset
+    # Eliminar todos los registros asociados a esta jugada
+    Jugadasdetalle.where(jugada_id: @jugada_id).delete_all
+
+    @jugadasdetalles   = []
+    @total_movimientos = 0
+    @proximo_bet       = "No Bet"
+
+    respond_to do |format|
+      format.js { render 'undo' }
+      format.json { render json: { status: "ok", total: 0 } }
+    end
+  end
+
   def index
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
