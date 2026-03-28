@@ -72,7 +72,7 @@ class JugadasdetallesController < ApplicationController
       ultimo.destroy
 
       total_restante = Jugadasdetalle.where(jugada_id: @jugada_id).count
-      if total_restante >= 5
+      if total_restante > 5
         ejecutar_prc_calculo_automatico(@jugada_id)
       end
     end
