@@ -104,21 +104,7 @@ class JugadasdetallesController < ApplicationController
   # Lee el slot que el PRC dejó (r_player=0, r_banker=0, orden máximo)
   # Retorna "P", "B" o "No Bet" según player1/banquer1
   def calcular_proximo_bet(jugada_id)
-    slot = Jugadasdetalle
-             .where(jugada_id: jugada_id)
-             .where(r_player: 0, r_banker: 0)
-             .order(id: :desc)
-             .first
-
-    return "No Bet" unless slot
-
-    if slot.player1.to_i > 0
-      "P"
-    elsif slot.banquer1.to_i > 0
-      "B"
-    else
-      "No Bet"
-    end
+    Jugada.find(jugada_id).siguiente.to_s
   end
 
   def set_layout
