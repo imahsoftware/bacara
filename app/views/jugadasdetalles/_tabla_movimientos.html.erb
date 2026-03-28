@@ -58,7 +58,7 @@
             <tbody>
             <% resto.each do |d| %>
               <tr id="row-pb-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %>">
+                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
                 <td class="td-central-p">
                   <% if d.r_player == 1 %>
                     <span class="bac-chip bac-chip-p">P</span>
@@ -101,7 +101,7 @@
             <tbody>
             <% resto.each_with_index do |d, i| %>
               <tr id="row-j1-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %>">
+                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
                 <td class="td-num"><%= i + 1 %></td>
                 <td><%= d.mecanica1.presence || '—' %></td>
                 <td><%= d.player1.present? ? content_tag(:span, d.player1, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
@@ -146,7 +146,7 @@
             <tbody>
             <% resto.each do |d| %>
               <tr id="row-j2-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %>">
+                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
                 <td><%= d.mecanica2.presence || '—' %></td>
                 <td><%= d.player2.present? ? content_tag(:span, d.player2, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
                 <td><%= d.banquer2.present? ? content_tag(:span, d.banquer2, class:'bac-neg') : content_tag(:span,'—',class:'bac-dash') %></td>

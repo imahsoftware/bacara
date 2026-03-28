@@ -397,6 +397,10 @@
 }
 .jd-row-new td { animation: bac-row-flash 1.4s ease forwards; }
 
+/* Fila finalizada — fondo rojo muy suave */
+.tr-finalizar td { background-color: #fff1f1 !important; }
+.tr-finalizar:hover td { background-color: #ffe4e4 !important; }
+
 /* ══════════════════════════════════════════════════════════════
    HEADER JUGADOR
 ══════════════════════════════════════════════════════════════ */
