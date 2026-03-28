@@ -5,8 +5,9 @@ class Jugadasdetalle < ApplicationRecord
 
   validates :jugada_id, presence: true
 
-  # Scope para obtener registros de una jugada ordenados
-  scope :jugadas, ->(jugada_id) { where(jugada_id: jugada_id).order(:id) }
+  # Registros confirmados por el usuario (r_player=1 o r_banker=1)
+  # Excluye los slots del PRC (r_player=0, r_banker=0)
+  scope :jugadas, ->(jugada_id) { where(jugada_id: jugada_id).where("r_player = 1 OR r_banker = 1").order(:orden, :id) }
 
   # Número de movimiento dentro de la jugada (1-based)
   def numero_movimiento
