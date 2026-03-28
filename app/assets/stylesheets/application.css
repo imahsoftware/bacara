@@ -170,7 +170,7 @@
 .jd-selector-inner {
     display: block;
     text-align: center;
-    padding: 4px 20px 8px;
+    padding: 4px 12px 6px;
 }
 
 .jd-bet-row {
@@ -419,19 +419,14 @@
 .jd-meta-item strong { color: #1e293b; }
 
 /* ══════════════════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — Tabla compacta (mobile y tablet)
 ══════════════════════════════════════════════════════════════ */
-@media (max-width: 768px) {
-    .jd-selector-inner {
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
-    }
-    /* Círculos P/B más pequeños en mobile */
-    .jd-circles { gap: 16px; margin-bottom: 12px; }
-    .jd-circle  { width: 52px; height: 52px; font-size: 1.3rem; }
+@media (max-width: 1100px) {
+    .bac-table th, .bac-table td { padding: 5px 7px; font-size: 11px; }
+    .bac-chip { width: 18px; height: 18px; font-size: 9px; }
+}
 
-    /* Tabla compacta en mobile */
+@media (max-width: 768px) {
     .bac-scorecard-grid { min-width: 0; grid-template-columns: 1fr auto 1fr; }
     .bac-scorecard-wrapper { overflow-x: auto; }
     .bac-table th, .bac-table td { padding: 4px 5px; font-size: 10px; }
@@ -439,20 +434,9 @@
     .bac-table thead tr.tr-grupos th { font-size: 9px; padding: 4px 5px; }
     .bac-table thead tr.tr-cols th   { font-size: 9px; }
     .td-num { width: 20px; }
-
-    .jd-player-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .jd-player-name   { font-size: 1.1rem; }
-
-    /* Botones undo/reset más compactos */
-    .jd-undo-btn { padding: 7px 12px; font-size: 12px; }
-}
-
-/* Tablet */
-@media (min-width: 769px) and (max-width: 1100px) {
-    .jd-circles { gap: 20px; }
-    .jd-circle  { width: 68px; height: 68px; font-size: 1.6rem; }
-    .bac-table th, .bac-table td { padding: 5px 7px; font-size: 11px; }
-    .bac-chip { width: 18px; height: 18px; font-size: 9px; }
+    .jd-player-header { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px 14px; margin-bottom: 8px; }
+    .jd-player-name   { font-size: 1rem; }
+    .jd-player-label  { font-size: 10px; }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -470,20 +454,17 @@
     min-width: 0;
 }
 
+/* ── Tablet ─────────────────────────────────────────────────── */
 @media (max-width: 1100px) {
     .jd-two-col-layout {
         grid-template-columns: 220px 1fr;
     }
-
-    /* Panel sticky en tablet también */
     .jd-col-left {
         position: sticky;
         top: 0;
         z-index: 100;
         align-self: start;
     }
-
-    /* Card de movimientos fijo, solo la tabla scrollea */
     .jd-col-right .jd-card {
         display: flex;
         flex-direction: column;
@@ -497,59 +478,70 @@
     }
 }
 
+/* ── Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+    /* Layout de una columna, pantalla completa */
     .jd-two-col-layout {
         grid-template-columns: 1fr;
+        gap: 8px;
     }
 
-    /* Panel de botones sticky en mobile — siempre visible arriba */
+    /* Panel de botones: sticky, compacto, sombra para separarlo visualmente */
     .jd-col-left {
         position: sticky;
         top: 0;
         z-index: 100;
-        background: #fff;
+        background: #f8fafc;
     }
-
-    /* Reducir padding interno del card en mobile para que ocupe menos altura */
-    .jd-col-left .jd-card-body {
-        padding: 8px 12px;
+    .jd-col-left .jd-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
     .jd-col-left .jd-card-head {
-        padding: 8px 14px;
+        padding: 6px 12px;
+    }
+    .jd-col-left .jd-card-body {
+        padding: 6px 12px;
     }
     .jd-col-left .jd-card-foot {
-        padding: 6px 14px;
+        padding: 5px 12px;
+        font-size: 11px;
     }
 
-    /* Círculos más pequeños para que el panel ocupe menos altura */
+    /* Círculos P/B pequeños */
     .jd-col-left .jd-circles {
-        gap: 16px;
-        margin-bottom: 8px;
+        gap: 20px;
+        margin-bottom: 6px;
     }
     .jd-col-left .jd-circle {
-        width: 48px;
-        height: 48px;
-        font-size: 1.2rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
     }
 
-    /* Next bet más compacto */
+    /* Botones undo/reset compactos */
+    .jd-undo-btn { padding: 6px 10px; font-size: 11px; margin-bottom: 6px; }
+
+    /* Next bet compacto */
     .jd-col-left .jd-next-bet {
-        padding: 6px 12px;
-        margin-bottom: 4px;
+        padding: 5px 10px;
+        margin-bottom: 0;
     }
-    .jd-col-left .jd-next-bet p {
-        font-size: 0.95rem;
-    }
+    .jd-col-left .jd-next-bet .jd-nb-label { font-size: 9px; }
+    .jd-col-left .jd-next-bet p { font-size: 0.9rem; }
 
-    /* La tabla ocupa el resto con scroll propio */
+    /* Card de movimientos: altura fija, solo la tabla scrollea internamente */
     .jd-col-right .jd-card {
-        height: auto !important;
         display: flex;
         flex-direction: column;
-        max-height: 65vh;
+        height: 55vh;
+        min-height: 300px;
+    }
+    .jd-col-right .jd-card-head {
+        flex-shrink: 0;
     }
     #jd-movimientos-scroll {
-        flex: 1;
+        flex: 1 1 0;
         overflow-y: auto !important;
         overflow-x: auto !important;
         max-height: none !important;
