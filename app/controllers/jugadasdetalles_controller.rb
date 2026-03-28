@@ -13,44 +13,24 @@ class JugadasdetallesController < ApplicationController
   def create
     tipo = params[:tipo]  # "P" o "B"
 
-    total_actual = Jugadasdetalle.where(jugada_id: @jugada_id).count
+    # Siempre insertar un nuevo registro por cada clic P/B
+    @detalle = Jugadasdetalle.new(
+      jugada_id: @jugada_id,
+      r_player:  tipo == "P" ? 1 : 0,
+      r_banker:  tipo == "B" ? 1 : 0
+    )
 
-    if total_actual < 4
-      @detalle = Jugadasdetalle.new(
-        jugada_id: @jugada_id,
-        r_player:  tipo == "P" ? 1 : 0,
-        r_banker:  tipo == "B" ? 1 : 0
-      )
-
-      unless @detalle.save
-        respond_to do |format|
-          format.js   { render js: "alert('Error al guardar el movimiento.');" }
-          format.json { render json: { status: "error", errors: @detalle.errors.full_messages }, status: :unprocessable_entity }
-        end
-        return
+    unless @detalle.save
+      respond_to do |format|
+        format.js   { render js: "alert('Error al guardar el movimiento.');" }
+        format.json { render json: { status: "error", errors: @detalle.errors.full_messages }, status: :unprocessable_entity }
       end
+      return
+    end
 
-      if Jugadasdetalle.where(jugada_id: @jugada_id).count >= 4
-        ejecutar_prc_calculo_automatico(@detalle.id)
-      end
-
-    else
-      registro_pendiente = Jugadasdetalle.where(jugada_id: @jugada_id).order(id: :desc).first
-      if registro_pendiente.nil?
-        respond_to do |format|
-          format.js   { render js: "alert('No se encontró registro pendiente del PRC.');" }
-          format.json { render json: { status: "error", errors: ["No hay registro pendiente"] }, status: :unprocessable_entity }
-        end
-        return
-      end
-
-      registro_pendiente.update!(
-        r_player: tipo == "P" ? 1 : 0,
-        r_banker: tipo == "B" ? 1 : 0
-      )
-
-      @detalle = registro_pendiente
-
+    # Ejecutar PRC cuando el total supera 5 registros (a partir del 6to movimiento)
+    total_tras_insercion = Jugadasdetalle.where(jugada_id: @jugada_id).count
+    if total_tras_insercion > 5
       ejecutar_prc_calculo_automatico(@detalle.id)
     end
 
@@ -71,9 +51,11 @@ class JugadasdetallesController < ApplicationController
     if ultimo
       ultimo.destroy
 
+      # Re-ejecutar PRC si aún quedan más de 5 registros
       total_restante = Jugadasdetalle.where(jugada_id: @jugada_id).count
       if total_restante > 5
-        ejecutar_prc_calculo_automatico(@jugada_id)
+        ultimo_vigente = Jugadasdetalle.where(jugada_id: @jugada_id).order(id: :desc).first
+        ejecutar_prc_calculo_automatico(ultimo_vigente.id) if ultimo_vigente
       end
     end
 

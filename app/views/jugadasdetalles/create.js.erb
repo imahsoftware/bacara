@@ -5,8 +5,10 @@ $('#mov-count').text('<%= @total_movimientos %>');
 $('#badge-count').text('<%= @total_movimientos %>');
 $('#next-bet-text').text('<%= j @proximo_bet %>');
 
-<% if @total_movimientos >= 5 %>
+<% if @total_movimientos > 5 %>
 $('#prc-badge').show();
+<% else %>
+$('#prc-badge').hide();
 <% end %>
 
 // ═══ Reiniciar floating header + auto-scroll ═══
