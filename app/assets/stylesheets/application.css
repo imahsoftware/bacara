@@ -460,22 +460,46 @@
 
 /* ── Tablet ─────────────────────────────────────────────────── */
 @media (max-width: 1100px) {
+    /* En tablet también apilamos igual que mobile */
     .jd-two-col-layout {
-        grid-template-columns: 220px 1fr;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
+
+    /* Panel de botones sticky arriba */
     .jd-col-left {
         position: sticky;
         top: 0;
         z-index: 100;
-        align-self: start;
+        background: #f8fafc;
+        align-self: auto;
     }
+    .jd-col-left .jd-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    }
+    .jd-col-left .jd-card-head { padding: 6px 14px; }
+    .jd-col-left .jd-card-body { padding: 8px 14px; }
+    .jd-col-left .jd-card-foot { padding: 6px 14px; font-size: 12px; }
+
+    /* Círculos en fila horizontal compactos */
+    .jd-col-left .jd-circles { gap: 24px; margin-bottom: 8px; }
+    .jd-col-left .jd-circle  { width: 60px; height: 60px; font-size: 1.4rem; }
+
+    /* Next bet compacto */
+    .jd-col-left .jd-next-bet { padding: 6px 12px; margin-bottom: 0; }
+    .jd-col-left .jd-next-bet p { font-size: 1rem; }
+
+    /* Card de movimientos: altura fija, solo la tabla scrollea */
     .jd-col-right .jd-card {
         display: flex;
         flex-direction: column;
-        max-height: 85vh;
+        height: 60vh;
+        min-height: 320px;
     }
+    .jd-col-right .jd-card-head { flex-shrink: 0; }
     .jd-col-right #jd-movimientos-scroll {
-        flex: 1;
+        flex: 1 1 0;
         overflow-y: auto;
         overflow-x: auto;
         max-height: none !important;
