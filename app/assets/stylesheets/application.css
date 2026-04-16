@@ -360,7 +360,10 @@
 .bac-table tbody tr:hover td { background: #f0f9ff; }
 .bac-table tbody tr:last-child td { border-bottom: 2px solid #d1d5db; }
 
-.td-num { font-weight: 700; color: #374151; background: #f8fafc; width: 32px; }
+.td-num { font-weight: 700; color: #374151; background: #f8fafc; width: 28px; }
+
+/* Columnas angostas para tablas compactas */
+.col-narrow { width: 44px; max-width: 52px; padding: 7px 4px !important; }
 
 .bac-chip {
     display: inline-flex; align-items: center; justify-content: center;
@@ -398,8 +401,12 @@
 .jd-row-new td { animation: bac-row-flash 1.4s ease forwards; }
 
 /* Fila finalizada — fondo rojo muy suave */
-.tr-finalizar td { background-color: #fff1f1 !important; }
+.tr-finalizar td    { background-color: #fff1f1 !important; }
 .tr-finalizar:hover td { background-color: #ffe4e4 !important; }
+
+/* Fila finalizada OK (Y) — fondo verde muy suave */
+.tr-finalizar-ok td    { background-color: #f0fdf4 !important; }
+.tr-finalizar-ok:hover td { background-color: #dcfce7 !important; }
 
 /* ══════════════════════════════════════════════════════════════
    HEADER JUGADOR

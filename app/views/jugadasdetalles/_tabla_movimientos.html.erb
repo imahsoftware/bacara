@@ -1,5 +1,14 @@
 <%# app/views/jugadasdetalles/_tabla_movimientos.html.erb %>
 
+<% def fila_class(d, nuevo_detalle)
+  clases = []
+  clases << 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id
+  if d.respond_to?(:finalizar) && d.finalizar.present?
+    clases << (d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : 'tr-finalizar')
+  end
+  clases.join(' ')
+end %>
+
 <% if jugadasdetalles.empty? %>
   <div class="jd-empty">
     <i class="fa fa-inbox"></i>
@@ -57,8 +66,7 @@
           <table class="bac-table bac-table-central-bottom">
             <tbody>
             <% resto.each do |d| %>
-              <tr id="row-pb-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
+              <tr id="row-pb-<%= d.id %>" class="<%= fila_class(d, defined?(nuevo_detalle) ? nuevo_detalle : nil) %>">
                 <td class="td-central-p">
                   <% if d.r_player == 1 %>
                     <span class="bac-chip bac-chip-p">P</span>
@@ -86,27 +94,32 @@
           <table class="bac-table">
             <thead>
             <tr class="tr-grupos">
-              <th rowspan="2" style="background:#f8fafc;color:#374151;width:32px;">#</th>
+              <th rowspan="2" style="background:#f8fafc;color:#374151;width:28px;">#</th>
               <th colspan="4" class="th-grupo-1">
                 <i class="fa fa-play-circle"></i> Jugada 1
               </th>
+              <th colspan="3" class="th-grupo-res">
+                <i class="fa fa-flag-checkered"></i> Resultado
+              </th>
             </tr>
             <tr class="tr-cols">
-              <th>MEC</th>
-              <th class="col-p-head">P</th>
-              <th class="col-b-head">B</th>
-              <th>✓/✗</th>
+              <th class="col-narrow">MEC</th>
+              <th class="col-p-head col-narrow">P</th>
+              <th class="col-b-head col-narrow">B</th>
+              <th class="col-narrow">✓/✗</th>
+              <th class="col-narrow">RES</th>
+              <th class="col-narrow">Final</th>
+              <th class="col-narrow">Acum.</th>
             </tr>
             </thead>
             <tbody>
             <% resto.each_with_index do |d, i| %>
-              <tr id="row-j1-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
+              <tr id="row-j1-<%= d.id %>" class="<%= fila_class(d, defined?(nuevo_detalle) ? nuevo_detalle : nil) %>">
                 <td class="td-num"><%= i + 1 %></td>
-                <td><%= d.mecanica1.presence || '—' %></td>
-                <td><%= d.player1.present? ? content_tag(:span, d.player1, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
-                <td><%= d.banquer1.present? ? content_tag(:span, d.banquer1, class:'bac-neg') : content_tag(:span,'—',class:'bac-dash') %></td>
-                <td>
+                <td class="col-narrow"><%= d.mecanica1.presence || '—' %></td>
+                <td class="col-narrow"><%= d.player1.present? ? content_tag(:span, d.player1, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
+                <td class="col-narrow"><%= d.banquer1.present? ? content_tag(:span, d.banquer1, class:'bac-neg') : content_tag(:span,'—',class:'bac-dash') %></td>
+                <td class="col-narrow">
                   <% if d.resultado1 == 1 %>
                     <span class="bac-ok">✓</span>
                   <% elsif d.resultado1 == 0 %>
@@ -114,6 +127,21 @@
                   <% else %>
                     <span class="bac-dash">—</span>
                   <% end %>
+                </td>
+                <td class="col-narrow">
+                  <%= d.mensaje.present? ? content_tag(:span, d.mensaje, style:'font-size:10px;color:#374151') : content_tag(:span,'—',class:'bac-dash') %>
+                </td>
+                <td class="td-final col-narrow">
+                  <% if d.final.present? %>
+                    <% if d.final > 0 %><span class="bac-pos">+<%= d.final %></span>
+                    <% elsif d.final < 0 %><span class="bac-neg"><%= d.final %></span>
+                    <% else %><span class="bac-zero">0</span><% end %>
+                  <% else %><span class="bac-dash">—</span><% end %>
+                </td>
+                <td class="col-narrow <%= d.acumulado.present? ? (d.acumulado > 0 ? 'td-acum-pos' : d.acumulado < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
+                  <% if d.acumulado.present? %>
+                    <%= d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado %>
+                  <% else %><span class="bac-dash">—</span><% end %>
                 </td>
               </tr>
             <% end %>
@@ -145,8 +173,7 @@
             </thead>
             <tbody>
             <% resto.each do |d| %>
-              <tr id="row-j2-<%= d.id %>"
-                  class="<%= 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id %> <%= 'tr-finalizar' if d.respond_to?(:finalizar) && d.finalizar.present? %>">
+              <tr id="row-j2-<%= d.id %>" class="<%= fila_class(d, defined?(nuevo_detalle) ? nuevo_detalle : nil) %>">
                 <td><%= d.mecanica2.presence || '—' %></td>
                 <td><%= d.player2.present? ? content_tag(:span, d.player2, class:'bac-pos') : content_tag(:span,'—',class:'bac-dash') %></td>
                 <td><%= d.banquer2.present? ? content_tag(:span, d.banquer2, class:'bac-neg') : content_tag(:span,'—',class:'bac-dash') %></td>
