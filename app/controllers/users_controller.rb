@@ -259,7 +259,6 @@ class UsersController < ApplicationController
       @user.portafolio_id = is_portafolio
     end
     if @user.save
-      ActiveRecord::Base.connection.execute("CALL prc_actperfilsupervisor()")
       flash[:notice] = "Creado con Exito."
       redirect_to edit_user_path(etapa: "A", id: @user.id)
     else
