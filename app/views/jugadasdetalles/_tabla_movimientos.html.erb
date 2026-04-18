@@ -138,9 +138,9 @@ end %>
                     <% else %><span class="bac-zero">0</span><% end %>
                   <% else %><span class="bac-dash">—</span><% end %>
                 </td>
-                <td class="col-narrow <%= d.acumulado.present? ? (d.acumulado > 0 ? 'td-acum-pos' : d.acumulado < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
-                  <% if d.acumulado.present? %>
-                    <%= d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado %>
+                <td class="col-narrow <%= d.acumulado2.present? ? (d.acumulado2 > 0 ? 'td-acum-pos' : d.acumulado2 < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
+                  <% if d.acumulado2.present? %>
+                    <%= d.acumulado2 > 0 ? "+#{d.acumulado2}" : d.acumulado2 %>
                   <% else %><span class="bac-dash">—</span><% end %>
                 </td>
               </tr>
