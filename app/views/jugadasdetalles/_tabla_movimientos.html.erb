@@ -98,7 +98,7 @@ end %>
               <th colspan="4" class="th-grupo-1">
                 <i class="fa fa-play-circle"></i> Jugada 1
               </th>
-              <th colspan="3" class="th-grupo-res">
+              <th colspan="2" class="th-grupo-res">
                 <i class="fa fa-flag-checkered"></i> Resultado
               </th>
             </tr>
@@ -107,8 +107,7 @@ end %>
               <th class="col-p-head col-narrow">P</th>
               <th class="col-b-head col-narrow">B</th>
               <th class="col-narrow">✓/✗</th>
-              <th class="col-narrow">RES</th>
-              <th class="col-narrow">Final</th>
+              <th class="col-narrow">Resul</th>
               <th class="col-narrow">Acum.</th>
             </tr>
             </thead>
@@ -127,9 +126,6 @@ end %>
                   <% else %>
                     <span class="bac-dash">—</span>
                   <% end %>
-                </td>
-                <td class="col-narrow">
-                  <%= d.mensaje.present? ? content_tag(:span, d.mensaje, style:'font-size:10px;color:#374151') : content_tag(:span,'—',class:'bac-dash') %>
                 </td>
                 <td class="td-final col-narrow">
                   <% if d.final.present? %>
@@ -166,9 +162,9 @@ end %>
               <th class="col-p-head">P</th>
               <th class="col-b-head">B</th>
               <th>✓/✗</th>
-              <th>RES</th>
-              <th>Final</th>
+              <th>Resul</th>
               <th>Acum.</th>
+              <th>Final</th>
             </tr>
             </thead>
             <tbody>
@@ -186,19 +182,21 @@ end %>
                     <span class="bac-dash">—</span>
                   <% end %>
                 </td>
-                <td>
-                  <%= d.mensaje.present? ? content_tag(:span, d.mensaje, style:'font-size:11px;color:#374151') : content_tag(:span,'—',class:'bac-dash') %>
-                </td>
                 <td class="td-final">
-                  <% if d.final.present? %>
-                    <% if d.final > 0 %><span class="bac-pos">+<%= d.final %></span>
-                    <% elsif d.final < 0 %><span class="bac-neg"><%= d.final %></span>
+                  <% if d.final2.present? %>
+                    <% if d.final2 > 0 %><span class="bac-pos">+<%= d.final2 %></span>
+                    <% elsif d.final2 < 0 %><span class="bac-neg"><%= d.final2 %></span>
                     <% else %><span class="bac-zero">0</span><% end %>
                   <% else %><span class="bac-dash">—</span><% end %>
                 </td>
-                <td class="<%= d.acumulado.present? ? (d.acumulado > 0 ? 'td-acum-pos' : d.acumulado < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
-                  <% if d.acumulado.present? %>
-                    <%= d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado %>
+                <td class="<%= d.acumulado2.present? ? (d.acumulado2 > 0 ? 'td-acum-pos' : d.acumulado2 < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
+                  <% if d.acumulado2.present? %>
+                    <%= d.acumulado2 > 0 ? "+#{d.acumulado2}" : d.acumulado2 %>
+                  <% else %><span class="bac-dash">—</span><% end %>
+                </td>
+                <td class="<%= d.acumuladof.present? ? (d.acumuladof > 0 ? 'td-acum-pos' : d.acumuladof < 0 ? 'td-acum-neg' : 'td-acum-zer') : '' %>">
+                  <% if d.acumuladof.present? %>
+                    <%= d.acumuladof > 0 ? "+#{d.acumuladof}" : d.acumuladof %>
                   <% else %><span class="bac-dash">—</span><% end %>
                 </td>
               </tr>
