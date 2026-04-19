@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :registros
   belongs_to :persona
   belongs_to :portafolio
+  has_many :jugadas
   has_many :portafoliosreportes
   has_many :usersmodulos, dependent: :destroy
   has_many :userspermisos, dependent: :destroy

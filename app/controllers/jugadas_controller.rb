@@ -9,8 +9,9 @@ class JugadasController < ApplicationController
   end
 
   def index
-    @q = Jugada.ransack(params[:q])
-    @jugadas = @q.result.paginate(:page => params[:page], :per_page => 10)
+    @q = current_user.jugadas.ransack(params[:q])
+    @jugadas = @q.result.paginate(page: params[:page], per_page: 10)
+
     respond_to do |format|
       format.html
     end
@@ -34,6 +35,7 @@ class JugadasController < ApplicationController
 
   def create
     @jugada = Jugada.new(jugada_params)
+    @jugada.user_id = current_user.id
     respond_to do |format|
       if @jugada.save
         flash[:notice] = "#{t :notice_crea_msj}"
