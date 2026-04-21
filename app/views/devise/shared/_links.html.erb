@@ -1,21 +1,21 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Ingresar", new_session_path(resource_name) %><br />
+  <%= link_to "#{t :ingresar}", new_session_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Registrarse", new_registration_path(resource_name) %><br />
+  <%= link_to "#{t :registrarse}", new_registration_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Olvido su contraseña", new_password_path(resource_name) %><br />
+  <%= link_to "#{t :olvido_su_contrasena}", new_password_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "No recibio el correo de confirmacion?", new_confirmation_path(resource_name) %><br />
+  <%= link_to "#{t :no_recibio_correo_confirmacion}", new_confirmation_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "No recibí las instrucciones de desbloqueo", new_unlock_path(resource_name) %><br />
+  <%= link_to "#{t :no_recibio_instrucciones_desbloqueo}", new_unlock_path(resource_name) %><br />
 <% end %>
 
 <%#if devise_mapping.omniauthable? %>

@@ -35,7 +35,9 @@
               <% end %>
               <li>
                 <%= link_to item.controlador do %>
-                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                    <span style="font-size: 12px !important;">
+                      <%= item.descripcion == 'Jugadas' ? t(:jugadas) : item.descripcion %>
+                    </span>
                 <% end %>
               </li>
             <% end %>
