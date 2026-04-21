@@ -4,8 +4,14 @@
   <div class="box-header with-border">
     <h3 class="box-title">
       <%# if is_auth_c('jugada') %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: 'Agregar' do %>
-          <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+        <% if is_persona && @persona_bloquea_nueva_jugada %>
+          <span id="new_jugada_button" class="text-muted" style="cursor:not-allowed;opacity:0.45;" data-toggle="tooltip" title="Finalice todas sus jugadas antes de crear una nueva.">
+            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+          </span>
+        <% else %>
+          <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: 'Nueva Jugada' do %>
+            <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+          <% end %>
         <% end %>
       <%# end %>
       Jugadas

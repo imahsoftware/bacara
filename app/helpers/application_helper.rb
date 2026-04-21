@@ -1296,4 +1296,10 @@ module ApplicationHelper
     ]
   end
 
+  # Módulo /jugadas en usersmodulos (sin redirect como is_permit)
+  def user_can_access_jugadas_module?
+    mod = Modulo.find_by(controlador: '/jugadas')
+    mod.present? && Usersmodulo.where(user_id: is_admin, modulo_id: mod.id).exists?
+  end
+
 end

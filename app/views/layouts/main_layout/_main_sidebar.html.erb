@@ -13,6 +13,13 @@
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header"><%= t :menu_principal %></li>
+      <% if user_signed_in? && current_user.tipoconsulta.to_s == 'PERSONA' %>
+        <li>
+          <%= link_to jugadas_path do %>
+            <i class="fa fa-gamepad"></i> <span>Crear Jugada</span>
+          <% end %>
+        </li>
+      <% end %>
       <!-- Optionally, you can add icons to the links -->
       <% if gescount.present? %>
         <li class="treeview" style="font-size: 12px !important;">

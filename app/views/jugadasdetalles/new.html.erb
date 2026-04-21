@@ -1,12 +1,14 @@
 <%# Profit = sumatoria de acumuladof por jugada_id en jugadasdetalles %>
 <% jd_profit_display = Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>
+<% jd_is_persona = current_user.tipoconsulta.to_s == 'PERSONA' %>
+<% jd_finalizada = @jugada.estado.to_s.upcase == 'FINALIZADA' %>
 
 <input type="hidden" id="jd-base-bet" value="10" />
 
 <div id="jd-spinner">⏳ Guardando...</div>
 
-<div class="jd-bw-page">
-  <div class="jd-bw-main">
+<div class="jd-bw-page <%= 'jd-bw-page--persona' if jd_is_persona %>">
+  <div class="jd-bw-main <%= 'jd-bw-main--persona' if jd_is_persona %>">
     <aside class="jd-bw-sidebar">
       <header class="jd-bw-hero">
         <h1 class="jd-bw-title">Baccarat Winners</h1>
@@ -35,15 +37,18 @@
           <button type="button" class="jd-undo-btn jd-undo-btn--bw" id="btn-undo"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="Undo Last Hand"
-                  data-label-loading="Undoing...">
+                  data-label-loading="Undoing..."
+                  <%= 'disabled' if jd_finalizada %>>
             Undo Last Hand
           </button>
           <button type="button" class="jd-reset-btn" id="btn-reset"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="Clear Session"
-                  data-label-loading="Clearing...">
+                  data-label-loading="Clearing..."
+                  <%= 'disabled' if jd_finalizada %>>
             Clear Session
           </button>
+          <%= link_to 'Regresar', jugadas_path, class: 'jd-back-btn' %>
         </div>
       </div>
 

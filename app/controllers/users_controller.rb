@@ -315,7 +315,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       flash['success'] = "Usuario actualizado"
       if is_permit('admin/users') == true
-        ActiveRecord::Base.connection.execute("CALL prc_actperfilsupervisor()") if params[:process_action] != 'update_user'
+        #ActiveRecord::Base.connection.execute("CALL prc_actperfilsupervisor()") if params[:process_action] != 'update_user'
         if params[:process_action] != 'update_user'
           redirect_to edit_user_path(id: @user.id, etapa: 'A')
         else

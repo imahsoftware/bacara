@@ -1,10 +1,12 @@
 class JugadasdetallesController < ApplicationController
   before_action :set_jugada_id
+  before_action :authorize_jugada_acceso
+  before_action :block_if_finalizada, only: [:create, :undo, :reset]
 
   layout :set_layout
 
   def new
-    @jugada            = Jugada.find(@jugada_id)
+    @jugada            = Jugada.for_user_list(current_user).find(@jugada_id)
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
@@ -118,10 +120,31 @@ class JugadasdetallesController < ApplicationController
   # Lee el slot que el PRC dejó (r_player=0, r_banker=0, orden máximo)
   # Retorna "P", "B" o "No Bet" según player1/banquer1
   def calcular_proximo_bet(jugada_id)
-    Jugada.find(jugada_id).siguiente2.to_s
+    Jugada.for_user_list(current_user).find(jugada_id).siguiente2.to_s
+  end
+
+  def authorize_jugada_acceso
+    if @jugada_id.blank? || @jugada_id.to_i <= 0
+      redirect_to root_path, alert: 'Jugada no válida.'
+      return
+    end
+
+    unless Jugada.for_user_list(current_user).exists?(id: @jugada_id)
+      redirect_to root_path, alert: 'No tiene acceso a esta jugada.'
+    end
   end
 
   def set_layout
     'viewspecial'
+  end
+
+  def block_if_finalizada
+    jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+    return unless jugada.estado.to_s.upcase == 'FINALIZADA'
+
+    respond_to do |format|
+      format.js   { render js: "alert('Jugada FINALIZADA. No se permite modificar.');" }
+      format.json { render json: { status: 'error', message: 'Jugada FINALIZADA' }, status: :forbidden }
+    end
   end
 end
