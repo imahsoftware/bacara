@@ -12,6 +12,18 @@ class Jugadasdetalle < ApplicationRecord
       .order(:orden, :id)
   }
 
+  # Suma SQL de acumuladof para todos los renglones de un jugada_id (PROFIT en UI)
+  def self.sum_acumuladof_for_jugada(jugada_id)
+    return 0 if jugada_id.blank?
+
+    where(jugada_id: jugada_id).sum(:acumuladof)
+  end
+
+  def self.formatted_profit_for_jugada(jugada_id)
+    v = sum_acumuladof_for_jugada(jugada_id).to_f
+    v == v.to_i ? v.to_i.to_s : sprintf('%.1f', v)
+  end
+
   def tipo
     return "P" if r_player == 1
     return "B" if r_banker == 1
