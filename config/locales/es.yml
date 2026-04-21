@@ -2,115 +2,133 @@
 # Este es ....
 # Este es ....
 es:
-  editar_perfil: Editar Perfil
-  salir: Salir
-  ver_todos: Ver todos
-  hay: Hay
-  buscar: Buscar
-  indicadores_presupuesto_ejecucion: Indicadores de Presupuesto vs Ejecución
-  indicadores_cartera: Indicadores de Cartera
-  presupuesto_mes: Presupuesto Mes
-  recaudos_mes: Recaudos Mes Actual
-  presupuesto_total: Presupuesto Total
-  recaudo_total: Recaudo Total
-  soportes_pendientes: Soportes Pendientes
-  parametros_consulta: Parametros de la Consulta
-  activos: Activos
-  total_activos: Total Activos
-  total_creditos: Total Creditos
-  al_dia: Al Dia
-  en_mora: En Mora
-  recaudo_mes: Recaudo Mes
-  recaudos: Recaudos
-  recaudo_aldia: Recaudos al día
-  recaudomora_30: Recaudos Mora Menor a 30 días
-  recaudosmora_90: Recaudos Mora entre 31 - 90 días
-  recaudosmora_180: Recaudos Mora entre 91 - 180 días
-  recaudosmora_100: Recados Mora Mayor a 180 días
-  ppto_activos: Ppto Activos
-  nuevos_activos: Nuevos Activos
-  ppto_nuevos_activos: Ppto Nuevos Activos
-  antiguos_activos: Antiguos Activos
-  ppto_antiguos_activos: Ppto Antiguos Activos
-  en_proceso: En Proceso
-  inactivos: Inactivos
+  editar_perfil: Edit Profile
+  salir: Log Out
+  ver_todos: See all
+  hay: There are
+  buscar: Search
+  indicadores_presupuesto_ejecucion: Budget vs Execution Indicators
+  indicadores_cartera: Portfolio Indicators
+  presupuesto_mes: Monthly Budget
+  recaudos_mes: Current Month Collections
+  presupuesto_total: Total Budget
+  recaudo_total: Total Collection
+  soportes_pendientes: Pending Support
+  parametros_consulta: Query Parameters
+  activos: Active
+  total_activos: Total Active
+  total_creditos: Total Credits
+  al_dia: Up to date
+  en_mora: In default
+  recaudo_mes: Monthly Collection
+  recaudos: Collections
+  recaudo_aldia: Collections up to date
+  recaudomora_30: Collections in default less than 30 days
+  recaudosmora_90: Collections in default between 31 - 90 days
+  recaudosmora_180: Collections in default between 91 - 180 days
+  recaudosmora_100: Collections in default greater than 180 days
+  ppto_activos: Budget Active
+  nuevos_activos: New Active
+  ppto_nuevos_activos: Budget New Active
+  antiguos_activos: Old Active
+  ppto_antiguos_activos: Budget Old Active
+  en_proceso: In Process
+  inactivos: Inactive
   total: Total
-  resumen_de_estados: Resumen de Estados
-  inscripcion_basica: Inscripción Básica
-  pago_cuota_inicial: Pagó Estudio Edupol (No Reembolsable)
-  selecciono_forma_de_pago: Seleccionó Forma de Pago
-  gestion_documental_aprobada: Gestión Documental Aprobada
-  indicadores_recaudo_presupuesto: Indicadores de Recaudo vs Presupuesto
-  antiguos: Antiguos
-  buscador_de_personas: Buscador de Personas
-  buscador_segmentos: Buscador de Segmentos
-  aceptar: Aceptar
-  #
-  # Estandarizado
-  #
-  agregar: Agregar
-  atencion: Atención!
-  atencion_msj: No hay datos aún
-  documento: Ver Documentos
-  documentos_msj: No hay Documentos
-  cierre_msj: NO hay cierre consolidado por lo tanto no se puede registrar nuevos recaudos
-  regresar: Regresar
-  menu: MENÚ DE OPCIONES
-  creacion: Fecha de Creación
-  seguro: Esta seguro?
-  entre: Entre
-  nuevo: Nuevo
-  actualizar: Actualizar
-  asignar: Asignar
-  regresar_obligacion: Regresar a Obligaciones
-
-  notice_crea_msj: Registro Creado con Exito.
-  notice_crearec_msj: Recaudo Creado
-  notice_actualiza_msj: Registro Actualizado con Exito.
-  notice_elimina_msj: Registro Eliminado con Exito.
-  notice_resultado_msj: No hay resultados de la busqueda
-  guardar: Guardar
-  seleccionar: --Seleccionar
-  procesando: Procesando
-  cancelar: Cancelar
-  elimina_confirma: Esta seguro de Borrar?
-  title_elimina: Eliminar
-  title_editar: Editar
-  title_notificaciones_direcciones: Notificacion de Direcciones
-  title_notificaciones_correos: Notificacion de Correos
-  title_soporte_digital: Añadir Soporte Digital
-  title_gerente: Cargue Masivo de Gerentes Regionales
-  title_ver: Ver
-  title_plan_pagos: Plan de Pagos
-  title_recaudos: Recaudos
-  title_otros_recaudos: Otros Recaudos
-  title_observacion_obligacion: Observación de la obligación
-  title_detalle_factura: Detalle de las facturas
-  title_historico_pagaduria: Historico Pagadurias
-  title_historico_fondeadores: Historico Fondeadores
-  title_autoria: Autorizar
-  title_no_autoriza: No autorizar
-  title_ver_certificado_deuda: Ver certificado de deuda
-  title_ver_paz_salvo: Ver Paz y Salvo
-  title_evaluacion_titulo: Evaluación del titulo
-  title_seguimiento_asignaciones: Seguimiento Asignaciones
-
-  menu_gestion: Gestion
-  menu_cargues: Cargues
-  menu_procesos: Procesos
-  menu_parametrizacion: Parametrización
-  menu_dash: DashBoard
-  menu_parametrizacionedu: Parametros Educación
-  menu_searchdoc: Buscar por Identificación...
-  menu_principal: MENÚ PRINCIPAL
-  menu_personas: MENÚ PERSONAS
+  resumen_de_estados: Summary of States
+  inscripcion_basica: Basic Registration
+  pago_cuota_inicial: Paid Edupol Study (Non-Refundable)
+  selecciono_forma_de_pago: Selected Payment Method
+  gestion_documental_aprobada: Approved Document Management
+  indicadores_recaudo_presupuesto: Collection vs Budget Indicators
+  antiguos: Old
+  buscador_de_personas: People Finder
+  buscador_segmentos: Segment Finder
+  aceptar: Accept
+  agregar: Add
+  atencion: Attention!
+  atencion_msj: No data yet
+  documento: View Documents
+  documentos_msj: No Documents
+  cierre_msj: There is no consolidated closing therefore new collections cannot be registered
+  regresar: Return
+  menu: MENU OPTIONS
+  creacion: Creation Date
+  seguro: Are you sure?
+  entre: Between
+  nuevo: New
+  actualizar: Update
+  asignar: Assign
+  regresar_obligacion: Return to Obligations
+  notice_crea_msj: Record created successfully.
+  notice_crearec_msj: Collection created
+  notice_actualiza_msj: Record updated successfully.
+  notice_elimina_msj: Record deleted successfully.
+  notice_resultado_msj: No search results
+  guardar: Save
+  seleccionar: --Select
+  procesando: Processing
+  cancelar: Cancel
+  elimina_confirma: Are you sure you want to delete?
+  title_elimina: Delete
+  title_editar: Edit
+  title_notificaciones_direcciones: Address Notification
+  title_notificaciones_correos: Email Notification
+  title_soporte_digital: Add Digital Support
+  title_gerente: Bulk Upload of Regional Managers
+  title_ver: View
+  title_plan_pagos: Payment Plan
+  title_recaudos: Collections
+  title_otros_recaudos: Other Collections
+  title_observacion_obligacion: Obligation Observation
+  title_detalle_factura: Invoice Details
+  title_historico_pagaduria: Payment History
+  title_historico_fondeadores: Funders History
+  title_autoria: Authorize
+  title_no_autoriza: Do not authorize
+  title_ver_certificado_deuda: View debt certificate
+  title_ver_paz_salvo: View Peace and Clearance
+  title_evaluacion_titulo: Title Evaluation
+  title_seguimiento_asignaciones: Assignment Tracking
+  menu_gestion: Management
+  menu_cargues: Uploads
+  menu_procesos: Processes
+  menu_parametrizacion: Parameterization
+  menu_dash: Dashboard
+  menu_parametrizacionedu: Education Parameters
+  menu_searchdoc: Search by Identification...
+  menu_principal: MAIN MENU
+  menu_personas: PEOPLE MENU
+  acciones: Actions
+  jugadas: Plays
+  buscar_placeholder: Search...
+  ver_detalle_jugada: View play details
+  ingreso_al_sistema: System Login
+  ingresa_credenciales: Enter your credentials to continue
+  usuario: Username
+  contrasena: Password
+  iniciar_sesion: Sign In
+  iniciando: Signing in...
+  olvido_contrasena: Forgot your password?
+  ingresar: Sign In
+  registrarse: Sign Up
+  olvido_su_contrasena: Forgot your password?
+  no_recibio_correo_confirmacion: Did not receive confirmation email?
+  no_recibio_instrucciones_desbloqueo: Did not receive unlock instructions?
+  soluciones_software_medida: Custom software solutions
+  desarrollo_medida: Custom development
+  integracion_sistemas: System integration
+  soporte_continuo: Continuous support
+  todos_derechos_reservados: All rights reserved.
 
   will_paginate:
-    previous_label: "&#8592; Anterior"
-    next_label: "Siguiente &#8594;"
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
     page_gap: "&hellip;"
   activerecord:
     attributes:
+      jugada:
+        jugador: Player
       comite:
         temas: Temas
         fecha: Fecha

@@ -39,21 +39,21 @@
           </div>
         </div>
 
-        <p class="showcase-tagline">Soluciones de software a tu medida</p>
+        <p class="showcase-tagline"><%= t :soluciones_software_medida %></p>
 
         <!-- Features -->
         <div class="showcase-features">
           <div class="sf-item">
             <span class="sf-dot"></span>
-            <span>Desarrollo a medida</span>
+            <span><%= t :desarrollo_medida %></span>
           </div>
           <div class="sf-item">
             <span class="sf-dot"></span>
-            <span>Integración de sistemas</span>
+            <span><%= t :integracion_sistemas %></span>
           </div>
           <div class="sf-item">
             <span class="sf-dot"></span>
-            <span>Soporte continuo</span>
+            <span><%= t :soporte_continuo %></span>
           </div>
         </div>
       </div>
@@ -71,23 +71,23 @@
     <div id="signin">
 
       <div class="logo">
-        <%= render 'users/flash_message_session', titulo: 'Ingreso al Sistema' %>
-        <p class="form-subtitle">Ingresa tus credenciales para continuar</p>
+        <%= render 'users/flash_message_session', titulo: "#{t :ingreso_al_sistema}" %>
+        <p class="form-subtitle"><%= t :ingresa_credenciales %></p>
       </div>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: 'idforminit', autocomplete: 'off' }) do |f| %>
 
         <div>
-          <label>Usuario</label>
-          <%= f.input_field :username, autocomplete: 'off', required: false, autofocus: true, class: 'form-control', placeholder: 'Usuario' %>
+          <label><%= t :usuario %></label>
+          <%= f.input_field :username, autocomplete: 'off', required: false, autofocus: true, class: 'form-control', placeholder: "#{t :usuario}" %>
         </div>
 
         <div class="pass-wrap">
           <div class="pass-label-row">
-            <label>Contraseña</label>
+            <label><%= t :contrasena %></label>
           </div>
           <div class="pass-field">
-            <%= f.input_field :password, required: false, class: 'form-control', placeholder: 'Contraseña', autocomplete: 'off', id: 'password_field' %>
+            <%= f.input_field :password, required: false, class: 'form-control', placeholder: "#{t :contrasena}", autocomplete: 'off', id: 'password_field' %>
             <button type="button" class="eye-toggle" onclick="togglePwd()" tabindex="-1">
               <svg id="eye-show" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               <svg id="eye-hide" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
@@ -97,7 +97,7 @@
 
         <br/>
         <div>
-          <%= f.button :submit, 'Iniciar Sesión', class: 'primary-btn', disabled_with: 'Iniciando...' %>
+          <%= f.button :submit, "#{t :iniciar_sesion}", class: 'primary-btn', disabled_with: "#{t :iniciando}" %>
         </div>
 
       <% end %>
@@ -107,14 +107,14 @@
           <ul>
             <li>
               <%= link_to new_password_path(resource_name) do %>
-                <span>¿Olvidaste tu contraseña?</span>
+                <span><%= t :olvido_contrasena %></span>
               <% end %>
             </li>
           </ul>
         <% else %>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <%= link_to new_password_path(resource_name) do %>
-              <span>¿Olvidaste tu contraseña?</span>
+              <span><%= t :olvido_contrasena %></span>
             <% end %>
           <% end %>
         <% end %>
@@ -124,7 +124,7 @@
     </div>
 
     <footer id="main-footer">
-      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> | Todos los derechos reservados.
+      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> | <%= t :todos_derechos_reservados %>
       <em>(Bacara 2.0)</em>
     </footer>
   </div>

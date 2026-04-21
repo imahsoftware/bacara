@@ -1,19 +1,19 @@
-<% title 'Jugadas' %>
+<% title t(:jugadas) %>
 
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">
       <%# if is_auth_c('jugada') %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: 'Agregar' do %>
+        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: "#{t :agregar}" do %>
           <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
         <% end %>
       <%# end %>
-      Jugadas
+      <%= t :jugadas %>
     </h3>
     <div class="box-tools pull-right">
       <%= search_form_for @q do |f| %>
         <div class="input-group input-group-sm" style="width: 180px;">
-          <%= f.search_field :jugador_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
+          <%= f.search_field :jugador_cont, class: 'form-control pull-right', placeholder: "#{t :buscar_placeholder}" %>
           <div class="input-group-btn">
             <%= button_tag(type: "submit", class: "btn btn-default") do %>
               <i class="fa fa-search"></i>
