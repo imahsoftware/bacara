@@ -873,12 +873,21 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-foot--sidebar {
     margin-top: 20px;
     padding-top: 14px;
-    border-top: 1px solid #e9ecef;
+    border-top: none;
 }
 .jd-bw-foot .jd-powered {
     display: block;
     margin-top: 6px;
     color: #ced4da;
+}
+.jd-powered--hero {
+    display: inline-block !important;
+    margin-left: 8px;
+    margin-top: 0 !important;
+    color: #9ca3af !important;
+    font-size: 11px;
+    font-weight: 600;
+    vertical-align: middle;
 }
 
 /* Tabla estilo “Frequency” */

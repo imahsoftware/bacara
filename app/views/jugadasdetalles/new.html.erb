@@ -12,7 +12,10 @@
     <aside class="jd-bw-sidebar">
       <header class="jd-bw-hero">
         <h1 class="jd-bw-title">Baccarat Winners</h1>
-        <p class="jd-bw-profit">PROFIT: $<span id="jd-profit-amount"><%= jd_profit_display %></span></p>
+        <p class="jd-bw-profit">
+          PROFIT: $<span id="jd-profit-amount"><%= jd_profit_display %></span>
+          <span class="jd-powered jd-powered--hero">ImahSoftware</span>
+        </p>
         <% if @jugada.present? %>
           <p class="jd-bw-sub"><%= @jugada.jugador %> · Jugada #<%= @jugada_id %></p>
         <% end %>
@@ -53,13 +56,8 @@
       </div>
 
       <footer class="jd-bw-foot jd-bw-foot--sidebar">
-        <span>Movimientos: <strong id="mov-count"><%= @total_movimientos %></strong></span>
-        <span id="prc-badge"
-              class="jd-badge jd-badge-green jd-badge--ft"
-              style="display:<%= @total_movimientos > 5 ? 'inline-flex' : 'none' %>; margin-left:8px;">
-          PRC activo
-        </span>
-        <span class="jd-powered">ImahSoftware</span>
+        <span id="mov-count" style="display:none;"><%= @total_movimientos %></span>
+        <span id="prc-badge" style="display:none;"></span>
       </footer>
     </aside>
 
