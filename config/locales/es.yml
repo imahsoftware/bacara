@@ -121,6 +121,120 @@ es:
   soporte_continuo: Continuous support
   todos_derechos_reservados: All rights reserved.
 
+  # Jugadas Detalladas translations
+  jugador_label: Player
+  seleccionar_resultado: Select Result
+  eliminar_ultimo: Delete Last
+  reset: Reset
+  your_next_bet: Your Next Bet
+  movimientos: Movements
+  prc_activo: PRC active
+  imahsoftware: ImahSoftware
+  aun_no_hay_movimientos: No movements yet. Click on P or B to start.
+  jugada_1: Play 1
+  jugada_2: Play 2
+  resultado: Result
+  mecanica: Mech
+  acumulado: Accum
+  final: Final
+  guardando: Saving...
+  detalle_jugada: Play Details
+  seguro_salir: Are you sure you want to leave
+  regresar_usuarios: Return to users
+  datos_basicos: Basic Data
+  modulos: Modules
+  permisos: Permissions
+  usuarios_visitas: User Visits
+  reportes: Reports
+  cargues_opciones: Uploads - Options
+  parametros: Parameters
+  edit_profile: Edit Profile
+  total_logins: Total Logins
+  query_type: Query Type
+  return: Return
+  user_profile: User Profile
+  identification: Identification
+  full_name: Full Name
+  mobile: Mobile
+  password: Password
+  password_hint: Leave blank if you don't want to change it
+  confirm_password: Confirm Password
+  save: Save
+  search_by_identification: Search by Identification...
+  profile: Profile
+  edit_profile_button: Edit Profile
+  logout: Logout
+  are_you_sure_logout: Are you sure you want to log out?
+  reestablish: Reestablish
+  deactivate_two_factor: Deactivate two factor
+  activate_two_factor: Activate two factor
+  users: Users
+  new_user: New User
+  search: Search...
+  username: Username
+  name: Name
+  email: Email
+  mobile: Mobile
+  active: Active?
+  inactivate_user: Inactivate user
+  activate_user: Activate user
+  unlock: Unlock
+  reset_password: Reset Password
+  reset_and_send_sms: Reset password, Unlock and send SMS
+  no_data_found: No data found
+  add_new: Add New
+  edit: Edit
+  user: User
+  identification: Identification
+  active: Active
+  username: Username
+  password: Password
+  confirm_password: Confirm Password
+  company: Company
+  query_type: Query Type
+  mobile: Mobile
+  observations: Observations
+  node: Node
+  avatar: Avatar
+  accept: Accept
+  return_to_users: Return to users
+  unlock: Unlock
+  reset_password: Reset Password
+  error_procedure: An error occurred in the procedure, please report to the administrator.
+  page_not_found: The page you are looking for does not exist.
+  return_to_previous: To return to the previous page click
+  here: Here
+  all_rights_reserved: All rights reserved
+  modules: Modules
+  add: Add
+  search: Search...
+  general_parameters: General Parameters
+  new: New
+  objects: Objects
+  application_records: Application Records
+  refresh: Refresh
+  start_date: Start Date
+  end_date: End Date
+  object: Object
+  action: Action
+  create: Create
+  delete: Delete
+  update: Update
+  search: Search...
+  search_button: Search
+  date: Date
+  user: User
+  portfolio: Portfolio
+  model: Model
+  actions: Actions
+  today: Today at
+  yesterday: Yesterday at
+  view_changes: View changes
+  database: Database
+  sql_running: SQL Running
+  jobs_running: Jobs Running
+  tablespace_space: Tablespace Space
+
   will_paginate:
     previous_label: "&#8592; Previous"
     next_label: "Next &#8594;"

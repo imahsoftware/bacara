@@ -1,7 +1,7 @@
 <div class="container">
   <section class="content-header">
     <h1>
-      Editar perfil
+      <%= t :edit_profile %>
     </h1>
   </section>
   <section class="content">
@@ -24,14 +24,14 @@
                 <b>Email</b> <small class="pull-right"><%= current_user.email %></small>
               </li>
               <li class="list-group-item">
-                <b>Total de Ingresos</b> <small class="pull-right"><%= current_user.sign_in_count %></small>
+                <b><%= t :total_logins %></b> <small class="pull-right"><%= current_user.sign_in_count %></small>
               </li>
               <li class="list-group-item">
-                <b>Tipo Consulta</b> <small class="pull-right"><%= current_user.tipoconsulta %></small>
+                <b><%= t :query_type %></b> <small class="pull-right"><%= current_user.tipoconsulta %></small>
               </li>
             </ul>
             <%= link_to root_path, class: "btn btn-block", style: "background-color: #C9392B; color: white;" do %>
-              <b>Regresar</b>
+              <b><%= t :return %></b>
             <% end %>
           </div>
         </div>
@@ -41,46 +41,45 @@
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs">
             <li class="active">
-              <a href="#settings" data-toggle="tab" aria-expanded="false"><i class="fa fa-user"></i> Perfil de
-                usuario</a></li>
+              <a href="#settings" data-toggle="tab" aria-expanded="false"><i class="fa fa-user"></i> <%= t :user_profile %></a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="settings">
               <%= simple_form_for(resource, as: resource_name, url: user_path(id: resource.id, process_action: 'update_user'), html: { method: :put, class: "form-horizontal", id: 'idforminit', autocomplete: 'off' }) do |f| %>
                 <div class="box-body">
                   <div class="row">
-                    <label class="col-sm-3">Identificación</label>
+                    <label class="col-sm-3"><%= t :identification %></label>
                     <div class="col-sm-8">
-                      <%= f.input :identificacion, required: true, placeholder: 'Identificación', label: false, disabled: true %>
+                      <%= f.input :identificacion, required: true, placeholder: t(:identification), label: false, disabled: true %>
                     </div>
                   </div>
                   <div class="row">
-                    <label class="col-sm-3 col-form-label">Nombre Completo</label>
+                    <label class="col-sm-3 col-form-label"><%= t :full_name %></label>
                     <div class="col-sm-8">
-                      <%= f.input :nombre, required: true, class: 'form-control', placeholder: 'Nombre Completo', label: false, disabled: true %>
+                      <%= f.input :nombre, required: true, class: 'form-control', placeholder: t(:full_name), label: false, disabled: true %>
                     </div>
                   </div>
                   <div class="row">
-                    <label class="col-sm-3 col-form-label">Celular</label>
+                    <label class="col-sm-3 col-form-label"><%= t :mobile %></label>
                     <div class="col-sm-8">
-                      <%= f.input :celular, required: true, class: 'form-control', placeholder: 'Celular', label: false, disabled: true %>
+                      <%= f.input :celular, required: true, class: 'form-control', placeholder: t(:mobile), label: false, disabled: true %>
                     </div>
                   </div>
                   <div class="row">
-                    <label class="col-sm-3 col-form-label">Contraseña</label>
+                    <label class="col-sm-3 col-form-label"><%= t :password %></label>
                     <div class="col-sm-8">
-                      <%= f.input :password, hint: 'Dejalo en blanco si no quieres cambiarlo', required: false, input_html: { autocomplete: "new-password" }, label: false %>
+                      <%= f.input :password, hint: t(:password_hint), required: false, input_html: { autocomplete: "new-password" }, label: false %>
                     </div>
                   </div>
                   <div class="row">
-                    <label class="col-sm-3 col-form-label">Confirmar Contraseña</label>
+                    <label class="col-sm-3 col-form-label"><%= t :confirm_password %></label>
                     <div class="col-sm-8">
                       <%= f.input :password_confirmation, required: false, input_html: { autocomplete: "new-password" }, label: false %>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <%= f.button :submit, 'Guardar', class: 'btn-flat pull-right', style: "background-color: #C9392B; color: white;" %>
+                      <%= f.button :submit, t(:save), class: 'btn-flat pull-right', style: "background-color: #C9392B; color: white;" %>
                     </div>
                   </div>
                 </div>

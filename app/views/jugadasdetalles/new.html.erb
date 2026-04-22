@@ -2,18 +2,18 @@
 <div class="jd-player-header">
   <div class="jd-player-info">
     <span class="jd-player-label">
-      <i class="fa fa-user-circle"></i> Jugador
+      <i class="fa fa-user-circle"></i> <%= t :jugador_label %>
     </span>
     <h2 class="jd-player-name"><%= @jugada.jugador %></h2>
   </div>
   <div class="jd-player-meta">
     <span class="jd-meta-item">
-      <i class="fa fa-hashtag"></i> Jugada <strong>#<%= @jugada_id %></strong>
+      <i class="fa fa-hashtag"></i> <%= t :jugadas %> <strong>#<%= @jugada_id %></strong>
     </span>
   </div>
 </div>
 
-<div id="jd-spinner">⏳ Guardando...</div>
+<div id="jd-spinner"><%= t :guardando %></div>
 
 <%# ══ LAYOUT DOS COLUMNAS ═══════════════════════════════════ %>
 <div class="jd-two-col-layout">
@@ -22,7 +22,7 @@
   <div class="jd-col-left">
     <div class="jd-card" style="height: 100%;">
       <div class="jd-card-head">
-        <h3><i class="fa fa-gamepad"></i> Seleccionar el Resultado</h3>
+        <h3><i class="fa fa-gamepad"></i> <%= t :seleccionar_resultado %></h3>
         <span class="jd-badge">#<%= @jugada_id %></span>
       </div>
 
@@ -43,19 +43,19 @@
             <button class="jd-undo-btn" id="btn-undo"
                     data-jugada-id="<%= @jugada_id %>"
                     style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px;">
-              Eliminar Último
+              <%= t :eliminar_ultimo %>
             </button>
             <button class="jd-undo-btn" id="btn-reset"
                     data-jugada-id="<%= @jugada_id %>"
                     style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px; background:#dc2626; border-color:#dc2626;">
-              Reset
+              <%= t :reset %>
             </button>
           </div>
           <br>
 
           <%# Next Bet %>
           <div class="jd-next-bet" id="jd-next-bet-banner" style="margin-bottom:0; flex:1; min-width:160px;">
-            <span class="jd-nb-label">Your Next Bet</span>
+            <span class="jd-nb-label"><%= t :your_next_bet %></span>
             <p id="next-bet-text"><%= @proximo_bet %></p>
             
           </div>
@@ -63,13 +63,13 @@
       </div>
 
       <div class="jd-card-foot">
-        Movimientos: <strong id="mov-count"><%= @total_movimientos %></strong>
+        <%= t :movimientos %>: <strong id="mov-count"><%= @total_movimientos %></strong>
         <span id="prc-badge"
               class="jd-badge jd-badge-green"
               style="display:<%= @total_movimientos > 5 ? 'inline-flex' : 'none' %>; margin-left:6px;">
-          🔄 PRC activo
+          🔄 <%= t :prc_activo %>
         </span>
-        <p class="jd-powered" style="margin:4px 0 0;">ImahSoftware</p>
+        <p class="jd-powered" style="margin:4px 0 0;"><%= t :imahsoftware %></p>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
   <div class="jd-col-right">
     <div class="jd-card" style="height: 100%; display: flex; flex-direction: column;">
       <div class="jd-card-head">
-        <h3><i class="fa fa-list-alt"></i> Movimientos</h3>
+        <h3><i class="fa fa-list-alt"></i> <%= t :movimientos %></h3>
         <span class="jd-badge" id="badge-count"><%= @total_movimientos %></span>
       </div>
 

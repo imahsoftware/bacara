@@ -1,19 +1,19 @@
-<% title 'Objetos' %>
+<% title t(:objects) %>
 
 <div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title">
       <%# if is_auth_c('modulo') %>
-        <%= link_to new_objeto_path, remote: true, id: 'new_objeto_button', data: { toggle: 'tooltip' }, title: 'Agregar' do %>
+        <%= link_to new_objeto_path, remote: true, id: 'new_objeto_button', data: { toggle: 'tooltip' }, title: t(:add) do %>
           <i class="fa fa-plus fa-fw text-danger" aria-hidden="true"></i>
         <% end %>
       <%# end %>
-      Objetos
+      <%= t :objects %>
     </h3>
     <div class="box-tools pull-right">
       <%= search_form_for @q do |f| %>
         <div class="input-group input-group-sm" style="width: 180px;">
-          <%= f.search_field :descripcion_or_descripcion_ampliada_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
+          <%= f.search_field :descripcion_or_descripcion_ampliada_cont, class: 'form-control pull-right', placeholder: t(:search) %>
           <div class="input-group-btn">
             <%= button_tag(type: "submit", class: "btn btn-default") do %>
               <i class="fa fa-search"></i>
