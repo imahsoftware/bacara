@@ -125,12 +125,51 @@ class JugadasdetallesController < ApplicationController
 
   def authorize_jugada_acceso
     if @jugada_id.blank? || @jugada_id.to_i <= 0
-      redirect_to root_path, alert: 'Jugada no válida.'
+      redirect_to root_path, alert: "Jugada no válida."
       return
     end
 
     unless Jugada.for_user_list(current_user).exists?(id: @jugada_id)
-      redirect_to root_path, alert: 'No tiene acceso a esta jugada.'
+      redirect_to root_path, alert: "No tiene acceso a esta jugada."
+      return
+    end
+
+    return unless ensure_persona_solo_jugada_pendiente
+  end
+
+  # tipoconsulta PERSONA: no puede abrir otra jugada (IDOR) por URL; solo la sesión PENDIENTE activa.
+  def ensure_persona_solo_jugada_pendiente
+    return true unless current_user.tipoconsulta.to_s == "PERSONA"
+
+    pend = Jugada.primera_pendiente_para(current_user)
+
+    if pend.blank?
+      denegar_acceso_baccarat_persona(
+        jugadas_path,
+        "No tiene una sesión PENDIENTE. Use el listado de jugadas."
+      )
+      return false
+    end
+
+    if pend.id != @jugada_id.to_i
+      correcta = new_jugadasdetalle_path(jugada_id: pend.id)
+      denegar_acceso_baccarat_persona(
+        correcta,
+        "Solo puede acceder a su jugada PENDIENTE activa (por seguridad no se admite otro id)."
+      )
+      return false
+    end
+
+    true
+  end
+
+  def denegar_acceso_baccarat_persona(redirect_path, message)
+    respond_to do |format|
+      format.html { redirect_to redirect_path, alert: message }
+      format.js do
+        render js: "alert(#{message.to_json}); window.location.replace(#{redirect_path.to_json});"
+      end
+      format.json { render json: { error: message, redirect: redirect_path }, status: :forbidden }
     end
   end
 
