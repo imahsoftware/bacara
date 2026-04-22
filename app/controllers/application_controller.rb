@@ -800,6 +800,16 @@ class ApplicationController < ActionController::Base
     return nro.to_i
   end
 
+  # Persona: tras login, ir a baccarat (jugada PENDIENTE) o al listado de sus jugadas
+  def after_sign_in_path_for(user)
+    if user.tipoconsulta.to_s == 'PERSONA'
+      pend = Jugada.primera_pendiente_para(user)
+      return new_jugadasdetalle_path(jugada_id: pend.id) if pend
+      return jugadas_path
+    end
+    super
+  end
+
   private
 
   def bloqueo_user_index

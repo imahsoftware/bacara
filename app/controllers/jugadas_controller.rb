@@ -3,17 +3,27 @@ class JugadasController < ApplicationController
 
   layout :set_layout
   before_action :checkaccess
+  before_action :persona_redirige_pendiente_a_baccarat, only: [:index]
 
   def checkaccess
     return true if current_user.tipoconsulta.to_s == 'PERSONA'
     return is_permit('jugadas')
   end
 
+  # tipoconsulta PERSONA: con jugada PENDIENTE, baccarat tiene prioridad sobre el listado
+  def persona_redirige_pendiente_a_baccarat
+    return unless current_user.tipoconsulta.to_s == 'PERSONA'
+    return unless request.format.html?
+
+    pend = Jugada.primera_pendiente_para(current_user)
+    redirect_to new_jugadasdetalle_path(jugada_id: pend.id) and return if pend
+  end
+
   def index
     @jugadas_base = Jugada.for_user_list(current_user)
-    @q = @jugadas_base.ransack(params[:q])
-    @jugadas = @q.result.paginate(page: params[:page], per_page: 10)
+    @jugadas = @jugadas_base.order(id: :desc).paginate(page: params[:page], per_page: 10)
     @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
+    @persona_ultima_cerrada = Jugada.ultima_cerrada_para_nueva_shoe(current_user)
 
     respond_to do |format|
       format.html
@@ -27,7 +37,7 @@ class JugadasController < ApplicationController
   def new
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       respond_to do |format|
-        format.js { render js: "alert('Debe finalizar todas sus jugadas antes de crear una nueva.');" }
+        format.js { render js: "alert('Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.');" }
       end
       return
     end
@@ -46,7 +56,7 @@ class JugadasController < ApplicationController
   def create
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       respond_to do |format|
-        format.js { render js: "alert('Debe finalizar todas sus jugadas antes de crear una nueva.');" }
+        format.js { render js: "alert('Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.');" }
       end
       return
     end
@@ -60,6 +70,39 @@ class JugadasController < ApplicationController
       else
         format.js { render 'layouts/errors', locals: { object: @jugada } }
       end
+    end
+  end
+
+  # Solo PERSONA, desde baccarat (viewspecial): crea jugada y abre su detalle.
+  def nueva_shoe
+    unless current_user.tipoconsulta.to_s == 'PERSONA'
+      redirect_to root_path, alert: 'Acción no permitida.'
+      return
+    end
+
+    from = Jugada.for_user_list(current_user).find_by(id: params[:from_jugada_id].to_i)
+    if from.blank? || from.estado.to_s.upcase != 'CERRADA'
+      redirect_back fallback_location: jugadas_path, alert: 'Solo se puede crear una jugada cuando la actual está CERRADA.'
+      return
+    end
+
+    if Jugada.persona_tiene_jugada_abierta?(current_user)
+      redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.id), alert: 'Tiene otra jugada PENDIENTE. Termine la sesión activa antes de crear otra.'
+      return
+    end
+
+    @jugada = Jugada.new(
+      user_id:  current_user.id,
+      fecha:    Date.current,
+      estado:   'PENDIENTE',
+      jugador:  'SHOE' # luego: SHOE + id
+    )
+    if @jugada.save
+      @jugada.update!(jugador: "SHOE#{@jugada.id}")
+      redirect_to new_jugadasdetalle_path(jugada_id: @jugada.id)
+    else
+      msg = @jugada.errors.full_messages.to_sentence
+      redirect_back fallback_location: jugadas_path, alert: msg
     end
   end
 

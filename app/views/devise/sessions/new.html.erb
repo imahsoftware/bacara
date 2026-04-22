@@ -4,11 +4,11 @@
   <div id="right">
     <div id="showcase">
 
-      <!-- Logo SVG creado para Bacara -->
+      <!-- Marca BacWins · bacwins.bot -->
       <div class="showcase-content">
         <div class="brand-logo">
-          <!-- Ícono: nodo de red / código / software -->
-          <svg class="brand-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ícono: nodo de red (identidad de producto) -->
+          <svg class="brand-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <!-- Círculo central -->
             <circle cx="32" cy="32" r="6" fill="#06176B"/>
             <circle cx="32" cy="32" r="4" fill="white"/>
@@ -34,8 +34,10 @@
           </svg>
 
           <div class="brand-wordmark">
-            <span class="brand-name">BACARA</span>
-            <span class="brand-sub">SOFTWARE</span>
+            <span class="brand-name" aria-label="BacWins">
+              <span class="brand-name__bac">Bac</span><span class="brand-name__wins">Wins</span>
+            </span>
+            <span class="brand-sub">bacwins.bot</span>
           </div>
         </div>
 
@@ -124,8 +126,7 @@
     </div>
 
     <footer id="main-footer">
-      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> | <%= t :todos_derechos_reservados %>
-      <em>(Bacara 2.0)</em>
+      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> · <span class="footer-app">BacWins</span> · <%= t :todos_derechos_reservados %>
     </footer>
   </div>
 
@@ -138,6 +139,8 @@
         --blue:      #06176B;
         --blue-mid:  #0d2494;
         --blue-glow: rgba(6,23,107,0.18);
+        --accent:    #2dd4bf;
+        --accent-bright: #5eead4;
         --black:     #0a0a0f;
         --panel:     #0e0e1a;
         --white:     #ffffff;
@@ -254,20 +257,40 @@
 
     .brand-name {
         font-family: var(--font-logo);
-        font-size: 2.4rem;
+        font-size: 2.35rem;
         font-weight: 800;
-        color: var(--white);
-        letter-spacing: 0.12em;
+        letter-spacing: -0.02em;
         line-height: 1;
+        display: flex;
+        align-items: baseline;
+        gap: 0.02em;
+    }
+
+    .brand-name__bac {
+        color: var(--white);
+    }
+
+    .brand-name__wins {
+        background: linear-gradient(125deg, var(--accent-bright) 0%, #fbbf24 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: none;
+        filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.25));
+    }
+
+    @supports not (background-clip: text) {
+        .brand-name__wins { color: var(--accent-bright); }
     }
 
     .brand-sub {
         font-family: var(--font-logo);
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: rgba(255,255,255,0.4);
-        letter-spacing: 0.3em;
-        margin-top: 0.2rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.38);
+        letter-spacing: 0.22em;
+        margin-top: 0.45rem;
+        text-transform: lowercase;
     }
 
     .showcase-tagline {
@@ -300,7 +323,7 @@
     .sf-dot {
         width: 6px; height: 6px;
         border-radius: 50%;
-        background: #3b5bdb;
+        background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
         flex-shrink: 0;
     }
 
@@ -479,6 +502,10 @@
         padding: 0 2rem;
     }
     #main-footer b { color: var(--blue); font-weight: 600; }
+    #main-footer .footer-app {
+        color: var(--blue);
+        font-weight: 600;
+    }
 
     /* ── Flash ── */
     .callout_message-danger {

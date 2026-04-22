@@ -4,6 +4,14 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
+  def app_brand_name
+    ENV["NOMBRE_APLICACION"].presence || "BacWins"
+  end
+
+  def app_brand_name_short
+    ENV["NOMBRE_CORTO"].presence || "BacWins"
+  end
+
   def select_tipo_genero(params)
     if params == 'MASCULINO'
       'pantalon_hombre'
@@ -930,7 +938,7 @@ module ApplicationHelper
 
   def select_logo
     [
-      ["BACARA", "logo_inicio_bacara.png"]
+      ["BacWins", "logo.png"]
     ]
   end
 

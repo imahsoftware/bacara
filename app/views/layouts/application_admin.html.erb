@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= ENV['NOMBRE_APLICACION'] %></title>
+    <title><%= content_for?(:title) ? yield(:title) : 'App' %> | <%= app_brand_name %></title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <script>
@@ -16,10 +16,12 @@
     <%= javascript_include_tag 'application'%>
   </head>
 
-    <body class="sidebar-mini skin-blue-light" style="font-family: Helvetica, Arial, 'sans-serif', !important;">
+    <body class="sidebar-mini skin-blue-light <%= 'persona-no-sidebar' if ispersona %>" style="font-family: Helvetica, Arial, 'sans-serif', !important;">
     <div class="wrapper">
         <%= render 'layouts/main_layout/main_header' %>
+        <% unless ispersona %>
         <%= render 'layouts/main_layout/main_sidebar' %>
+        <% end %>
         <%= render 'layouts/main_layout/main_content' %>
         <%= render 'layouts/main_layout/main_footer' %>
     </div>

@@ -7,20 +7,19 @@
 <header class="main-header">
   <% permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists? %>
   <%= link_to root_path, class: 'logo', style: "back" do %>
-    <span class="logo-mini"><b>B<span style="color:#3c8dbc;">A</span></b></span>
-    <span class="logo-lg" style="font-size: 18px; margin-top: -4px; color: #1e293b;">
-    <b>BAC<span style="color:#3c8dbc;">ARA</span></b>
-  </span>
+    <%= render "shared/header_brand_wordmark" %>
   <% end %>
 
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
+    <% unless is_persona %>
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </a>
+    <% end %>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">

@@ -22,6 +22,13 @@
     margin-bottom: 15px;
 }
 
+/* AdminLTE 2: tipoconsulta PERSONA — sin <aside> lateral: contenido y pie a ancho completo */
+body.persona-no-sidebar .content-wrapper,
+body.persona-no-sidebar .right-side,
+body.persona-no-sidebar .main-footer {
+    margin-left: 0 !important;
+}
+
 /* ── Body ─────────────────────────────────────────────────── */
 .vsp-body {
     margin: 0; padding: 0;
@@ -591,8 +598,34 @@
     border-bottom: 2px solid #d1d5db;
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     overflow-x: hidden;
-    z-index: 20;
-    position: relative;
+    overflow-y: hidden;
+    z-index: 30;
+    position: sticky;
+    top: 0;
+}
+.jd-floating-header .jd-floating-grid {
+    align-items: stretch;
+}
+.jd-floating-header .jd-floating-col {
+    min-width: 0;
+}
+.jd-floating-header .jd-floating-col table {
+    margin: 0;
+}
+.jd-floating-header .jd-floating-col-center {
+    border-left: 2px solid #9ca3af;
+    border-right: 2px solid #9ca3af;
+}
+.jd-floating-header .jd-floating-col-center .bac-table {
+    border-left: none;
+    border-right: none;
+}
+
+/* Evita doble cabecera visual cuando header flotante activo */
+.jd-movimientos-scroll--bw.jd-floating-active #tabla-movimientos .bac-scorecard-left table thead,
+.jd-movimientos-scroll--bw.jd-floating-active #tabla-movimientos .bac-scorecard-right table thead,
+.jd-movimientos-scroll--bw.jd-floating-active #tabla-movimientos .bac-table-central-top thead {
+    visibility: hidden;
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -601,9 +634,13 @@
 /* Fondo blanco como el mock (layout viewspecial + esta vista) */
 body.vsp-body:has(.jd-bw-page) {
     background: #ffffff;
+    overflow: auto;
 }
 .vsp-main:has(.jd-bw-page) {
     background: #ffffff;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
 }
 
 .jd-bw-page {
@@ -615,9 +652,12 @@ body.vsp-body:has(.jd-bw-page) {
     --jd-bw-header: #1A1D21;
     --jd-bw-row-hi: #F9EBD2;
     max-width: 1280px;
+    height: auto;
     margin: 0 auto;
     padding: 8px 0 28px;
     background: #ffffff;
+    box-sizing: border-box;
+    overflow: visible;
 }
 
 /* Botonera izquierda + tabla derecha, alineadas arriba */
@@ -626,13 +666,20 @@ body.vsp-body:has(.jd-bw-page) {
     grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
     gap: 24px 28px;
     align-items: start;
+    height: auto;
+    min-height: 0;
 }
 .jd-bw-sidebar {
     min-width: 0;
+    overflow: visible;
 }
 .jd-bw-col-table {
     min-width: 0;
     width: 100%;
+    min-height: 0;
+    height: auto;
+    display: block;
+    overflow: visible;
 }
 
 .jd-bw-hero {
@@ -649,9 +696,26 @@ body.vsp-body:has(.jd-bw-page) {
 }
 .jd-bw-profit {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.35rem;
     font-weight: 800;
     color: #111;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+}
+.jd-bw-profit__label {
+    margin-right: 0.35em;
+}
+.jd-bw-profit__wrap {
+    white-space: nowrap;
+}
+.jd-bw-profit__currency {
+    font-weight: 800;
+    margin-right: 0.1em;
+    font-variant-numeric: tabular-nums;
+}
+.jd-bw-profit #jd-profit-amount {
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
 }
 .jd-bw-sub {
     margin: 10px 0 0;
@@ -661,28 +725,54 @@ body.vsp-body:has(.jd-bw-page) {
 }
 
 .jd-next-bet--bw {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 18px;
     background: #fff !important;
     border: 1px solid #dee2e6 !important;
     border-radius: 10px !important;
-    padding: 14px 18px !important;
+    padding: 16px 20px !important;
     margin: 0 0 22px !important;
     max-width: none;
     text-align: center;
     box-shadow: none !important;
 }
 .jd-next-bet--bw .jd-nb-label {
+    display: inline;
     color: var(--jd-bw-teal) !important;
-    font-size: 11px !important;
-    letter-spacing: 0.06em;
+    font-size: 1.5rem !important;
+    letter-spacing: 0.03em;
     text-transform: none !important;
-    font-weight: 700 !important;
-    margin-bottom: 4px !important;
-}
-.jd-next-bet--bw p {
-    color: var(--jd-bw-teal) !important;
-    font-size: 1.25rem !important;
     font-weight: 800 !important;
+    margin-bottom: 0 !important;
+    white-space: nowrap;
+    line-height: 1.15;
+}
+.jd-next-bet--bw p.jd-next-bet__value,
+.jd-next-bet--bw .jd-next-bet__value {
+    color: var(--jd-bw-teal) !important;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
     margin: 0 !important;
+    letter-spacing: 0.02em;
+}
+@media (max-width: 400px) {
+    .jd-next-bet--bw {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .jd-next-bet--bw .jd-nb-label {
+        white-space: normal;
+        font-size: 1.3rem !important;
+    }
+    .jd-next-bet--bw p.jd-next-bet__value,
+    .jd-next-bet--bw .jd-next-bet__value {
+        font-size: 1.5rem !important;
+    }
 }
 
 .jd-bw-actions {
@@ -792,47 +882,39 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-back-btn:active {
     transform: scale(0.98);
 }
-
-/* PERSONA: botonera centrada arriba; tabla abajo */
-.jd-bw-page--persona .jd-bw-main--persona {
-    grid-template-columns: 1fr;
-    gap: 16px;
+/* New SHOE (PERSONA): clases AdminLTE2 (.btn) en index y baccarat */
+.box-header .box-tools .btn {
+    margin-left: 2px;
 }
-.jd-bw-page--persona .jd-bw-sidebar {
-    width: 100%;
-    max-width: 560px;
-    margin: 0 auto;
-}
-.jd-bw-page--persona .jd-bw-actions {
+.jd-bw-row-btns .btn.btn-block {
     text-align: center;
+    font-weight: 800;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
 }
-.jd-bw-page--persona .jd-bw-row-btns {
-    max-width: 420px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-    align-items: stretch;
-}
-.jd-bw-page--persona .jd-bw-row-btns .jd-undo-btn--bw,
-.jd-bw-page--persona .jd-bw-row-btns .jd-reset-btn,
-.jd-bw-page--persona .jd-bw-row-btns .jd-back-btn {
-    flex: 1 1 0;
-    width: auto;
-    min-width: 0;
-    padding: 7px 8px !important;
-    font-size: 11px;
-    border-radius: 8px !important;
+.jd-bw-row-btns a.btn {
+    text-decoration: none;
 }
 
 .jd-bw-frequency {
     margin-top: 0;
-    display: flex;
-    flex-direction: column;
+    display: block;
+    height: auto;
     min-height: 0;
+    overflow: visible;
+}
+/* Título "Frequency" a la izquierda, dato de jugada alineado a la derecha (misma fila en desktop) */
+.jd-bw-frequency-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin: 0 0 10px;
 }
 .jd-bw-ft-title {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 1rem;
     font-weight: 800;
     color: #111;
@@ -840,6 +922,33 @@ body.vsp-body:has(.jd-bw-page) {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.jd-bw-sub--ft {
+    margin: 0;
+    font-size: 12px;
+    color: #57534e;
+    font-weight: 600;
+    text-align: right;
+    line-height: 1.35;
+    max-width: 100%;
+    padding: 6px 12px;
+    background: #faf7f1;
+    border: 1px solid #e8e4dc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    flex: 0 1 auto;
+}
+@media (max-width: 600px) {
+    .jd-bw-frequency-head {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .jd-bw-sub--ft {
+        text-align: center;
+        align-self: flex-end;
+    }
 }
 .jd-badge--ft {
     font-size: 11px;
@@ -847,15 +956,19 @@ body.vsp-body:has(.jd-bw-page) {
 }
 
 .jd-movimientos-scroll--bw {
-    flex: 1;
-    overflow-y: auto;
+    position: relative;
+    overflow-y: auto !important;
     overflow-x: auto;
-    max-height: calc(100vh - 200px);
-    min-height: 320px;
+    max-height: none;
+    min-height: 180px;
+    height: auto;
     padding: 0;
     background: #fff;
     border-radius: 8px;
     border: 1px solid #e9ecef;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y pan-x;
 }
 
 .jd-floating-header--bw {
@@ -880,15 +993,6 @@ body.vsp-body:has(.jd-bw-page) {
     margin-top: 6px;
     color: #ced4da;
 }
-.jd-powered--hero {
-    display: inline-block !important;
-    margin-left: 8px;
-    margin-top: 0 !important;
-    color: #9ca3af !important;
-    font-size: 11px;
-    font-weight: 600;
-    vertical-align: middle;
-}
 
 /* Tabla estilo “Frequency” */
 .jd-bw-page .bac-table {
@@ -900,7 +1004,8 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-page .bac-table td {
     border: none;
     border-bottom: 1px solid #e9ecef;
-    padding: 8px 6px;
+    padding: 6px 6px;
+    line-height: 1.15;
 }
 .jd-bw-page .bac-table thead tr.tr-grupos th {
     background: var(--jd-bw-header) !important;
@@ -910,7 +1015,7 @@ body.vsp-body:has(.jd-bw-page) {
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 8px 6px;
+    padding: 6px 6px;
 }
 .jd-bw-page .bac-table thead tr.tr-cols th {
     background: var(--jd-bw-header) !important;
@@ -918,6 +1023,8 @@ body.vsp-body:has(.jd-bw-page) {
     font-size: 10px;
     font-weight: 700;
     border-bottom: 1px solid #2c3138 !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .jd-bw-page .th-grupo-1,
 .jd-bw-page .th-grupo-2,
@@ -928,27 +1035,27 @@ body.vsp-body:has(.jd-bw-page) {
     border-color: #2c3138 !important;
 }
 .jd-bw-page .bac-table tbody tr:nth-child(even) td {
-    background: #f8f9fa;
+    background: #fff;
 }
 .jd-bw-page .bac-table tbody tr:nth-child(odd) td {
     background: #fff;
 }
-.jd-bw-page .bac-table tbody tr:hover td {
-    background: #eef2f7 !important;
-}
 .jd-bw-page .bac-scorecard-left table tbody tr:last-child td,
 .jd-bw-page .bac-scorecard-right table tbody tr:last-child td,
 .jd-bw-page .bac-table-central-bottom tbody tr:last-child td {
-    background: var(--jd-bw-row-hi) !important;
-    border-bottom-color: #e8dcc4;
+    background: #fff !important;
+    border-bottom-color: #e9ecef;
 }
 /* Solo primeras 5 manos: la última fila del bloque P|B superior es la activa */
 .jd-bw-page .bac-scorecard-wrapper:not(:has(.bac-scorecard-left)) .bac-table-central-top tbody tr:last-child td {
-    background: var(--jd-bw-row-hi) !important;
-    border-bottom-color: #e8dcc4;
+    background: #fff !important;
+    border-bottom-color: #e9ecef;
 }
 .jd-bw-page .bac-table tbody tr:last-child td {
-    border-bottom: 2px solid #e8dcc4;
+    border-bottom: 2px solid #e9ecef;
+}
+.jd-bw-page .bac-scorecard-left table tbody tr:last-child td.td-num {
+    background: #f1f3f5 !important;
 }
 .jd-bw-page .bac-chip-p {
     background: var(--jd-bw-blue);
@@ -1009,15 +1116,13 @@ body.vsp-body:has(.jd-bw-page) {
         gap: 20px;
     }
     .jd-bw-sidebar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
+        position: relative;
         background: #fff;
         padding-bottom: 10px;
         margin: 0 -4px;
         padding-left: 4px;
         padding-right: 4px;
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        box-shadow: none;
     }
     .jd-bw-foot--sidebar {
         border-top: none;
@@ -1025,8 +1130,8 @@ body.vsp-body:has(.jd-bw-page) {
         margin-top: 10px;
     }
     .jd-movimientos-scroll--bw {
-        max-height: 52vh;
-        min-height: 240px;
+        max-height: none;
+        min-height: 180px;
     }
 }
 

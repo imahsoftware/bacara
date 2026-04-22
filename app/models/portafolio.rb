@@ -66,7 +66,7 @@ class Portafolio < ApplicationRecord
 		return logo_empresa.to_s
 =begin
 		if self.id == 1
-			return 'logo_inicio_bacara.png'
+			return 'logo.png'
 		elsif self.id == 2
 			return 'microcinco.jpg'
 		elsif self.id == 3

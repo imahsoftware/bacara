@@ -10,8 +10,7 @@
 %>
   <!-- Logo -->
   <%= link_to root_path, class: 'logo' do %>
-    <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo IMAH', width: '90%' %></span>
-    <span class="logo-lg"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+    <%= render "shared/header_brand_with_image" %>
   <% end %>
 
   <!-- Header Navbar -->

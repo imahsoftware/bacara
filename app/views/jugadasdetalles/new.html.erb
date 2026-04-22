@@ -1,32 +1,33 @@
 <%# Profit = sumatoria de acumuladof por jugada_id en jugadasdetalles %>
 <% jd_profit_display = Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>
-<% jd_is_persona = current_user.tipoconsulta.to_s == 'PERSONA' %>
-<% jd_finalizada = @jugada.estado.to_s.upcase == 'FINALIZADA' %>
+<% jd_pendiente = @jugada.estado.to_s.upcase == 'PENDIENTE' %>
+<% jd_muestra_regresar = current_user.tipoconsulta.to_s != 'PERSONA' %>
+<% jd_muestra_new_shoe = current_user.tipoconsulta.to_s == 'PERSONA' && @jugada.present? && @jugada.estado.to_s.upcase == 'CERRADA' %>
 
 <input type="hidden" id="jd-base-bet" value="10" />
 
 <div id="jd-spinner">⏳ Guardando...</div>
 
-<div class="jd-bw-page <%= 'jd-bw-page--persona' if jd_is_persona %>">
-  <div class="jd-bw-main <%= 'jd-bw-main--persona' if jd_is_persona %>">
+<div class="jd-bw-page">
+  <div class="jd-bw-main">
     <aside class="jd-bw-sidebar">
       <header class="jd-bw-hero">
         <h1 class="jd-bw-title">Baccarat Winners</h1>
         <p class="jd-bw-profit">
-          PROFIT: $<span id="jd-profit-amount"><%= jd_profit_display %></span>
-          <span class="jd-powered jd-powered--hero">ImahSoftware</span>
+          <span class="jd-bw-profit__label">PROFIT:</span>
+          <span class="jd-bw-profit__wrap">
+            <span class="jd-bw-profit__currency" title="Dólares estadounidenses (USD)">US$</span><span id="jd-profit-amount"><%= jd_profit_display %></span>
+          </span>
         </p>
-        <% if @jugada.present? %>
-          <p class="jd-bw-sub"><%= @jugada.jugador %> · Jugada #<%= @jugada_id %></p>
-        <% end %>
       </header>
 
       <div class="jd-next-bet jd-next-bet--bw" id="jd-next-bet-banner">
         <span class="jd-nb-label">Your Next Bet:</span>
-        <p id="next-bet-text"><%= @proximo_bet %></p>
+        <p class="jd-next-bet__value" id="next-bet-text"><%= @proximo_bet %></p>
       </div>
 
       <div class="jd-bw-actions">
+        <% if jd_pendiente %>
         <div class="jd-circles jd-circles--bw">
           <button class="jd-circle jd-circle-p jd-circle--bw" id="btn-player"
                   data-tipo="P" data-jugada-id="<%= @jugada_id %>" title="Player">P
@@ -35,23 +36,31 @@
                   data-tipo="B" data-jugada-id="<%= @jugada_id %>" title="Banker">B
           </button>
         </div>
+        <% end %>
 
         <div class="jd-bw-row-btns">
+          <% if jd_pendiente %>
           <button type="button" class="jd-undo-btn jd-undo-btn--bw" id="btn-undo"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="Undo Last Hand"
-                  data-label-loading="Undoing..."
-                  <%= 'disabled' if jd_finalizada %>>
+                  data-label-loading="Undoing...">
             Undo Last Hand
           </button>
           <button type="button" class="jd-reset-btn" id="btn-reset"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="Clear Session"
-                  data-label-loading="Clearing..."
-                  <%= 'disabled' if jd_finalizada %>>
+                  data-label-loading="Clearing...">
             Clear Session
           </button>
-          <%= link_to 'Regresar', jugadas_path, class: 'jd-back-btn' %>
+          <% end %>
+          <% if jd_muestra_regresar %>
+            <%= link_to 'Regresar', jugadas_path, class: 'jd-back-btn' %>
+          <% elsif jd_muestra_new_shoe %>
+            <%# tipoconsulta PERSONA y jugada CERRADA: SHOE#id, solo si from_jugada CERRADA (ver controller) %>
+            <%= link_to nueva_shoe_jugada_path(from_jugada_id: @jugada_id), method: :post, class: 'btn btn-success btn-block' do %>
+              <i class="fa fa-plus" aria-hidden="true"></i> New SHOE
+            <% end %>
+          <% end %>
         </div>
       </div>
 
@@ -63,14 +72,18 @@
 
     <div class="jd-bw-col-table">
       <section class="jd-bw-frequency">
-        <h2 class="jd-bw-ft-title">
-          Frequency Table
-          <span class="jd-badge jd-badge--ft" id="badge-count"><%= @total_movimientos %></span>
-        </h2>
-
-        <div id="jd-floating-header" class="jd-floating-header jd-floating-header--bw" style="display:none;"></div>
+        <div class="jd-bw-frequency-head">
+          <h2 class="jd-bw-ft-title">
+            Frequency Table
+            <span class="jd-badge jd-badge--ft" id="badge-count"><%= @total_movimientos %></span>
+          </h2>
+          <% if @jugada.present? %>
+            <p class="jd-bw-sub--ft"><%= @jugada.jugador %> · Jugada #<%= @jugada_id %></p>
+          <% end %>
+        </div>
 
         <div id="jd-movimientos-scroll" class="jd-movimientos-scroll--bw">
+          <div id="jd-floating-header" class="jd-floating-header jd-floating-header--bw" style="display:none;"></div>
           <div id="tabla-movimientos">
             <%= render 'tabla_movimientos', jugadasdetalles: @jugadasdetalles %>
           </div>
@@ -82,76 +95,135 @@
 
 <script>
     $(function(){
-        // ═══ Floating header: clona el encabezado de JUGADA 1/2 y lo muestra al scrollear ═══
+        function syncMovimientosHeight(){
+            var $scroll = $('#jd-movimientos-scroll');
+            if (!$scroll.length) return;
+            var rect = $scroll[0].getBoundingClientRect();
+            var viewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+            var bottomGap = 80; // +10px para separar contenedor del borde inferior
+            // Si usuario ya scrolleo página y top queda negativo,
+            // usar 0 para no inflar altura del contenedor.
+            var visibleTop = Math.max(rect.top, 0);
+            var available = Math.floor(viewportH - visibleTop - bottomGap);
+            var target = Math.max(180, available);
+
+            $scroll.css({
+                height: target + 'px',
+                maxHeight: target + 'px'
+            });
+        }
+
+        // ═══ Floating header: clona encabezados y mantiene anchos reales al scrollear ═══
         function setupFloatingHeader(){
             var $scroll = $('#jd-movimientos-scroll');
             var $float  = $('#jd-floating-header');
             if (!$scroll.length || !$float.length) return;
 
-            // Buscar los theads de JUGADA 1 y JUGADA 2 (columnas left y right)
-            var $left  = $scroll.find('.bac-scorecard-left table thead');
-            var $right = $scroll.find('.bac-scorecard-right table thead');
-            var $centerTop = $scroll.find('.bac-table-central-top thead');
+            // Buscar encabezados y contenedores originales
+            var $leftTable   = $scroll.find('.bac-scorecard-left table').first();
+            var $rightTable  = $scroll.find('.bac-scorecard-right table').first();
+            var $centerTable = $scroll.find('.bac-table-central-top').first();
+            var $leftThead   = $leftTable.find('thead').first();
+            var $rightThead  = $rightTable.find('thead').first();
+            var $centerThead = $centerTable.find('thead').first();
+            var $centerCol   = $scroll.find('.bac-scorecard-center').first();
+            var $grid        = $scroll.find('.bac-scorecard-grid').first();
 
-            // Si no hay theads (menos de 6 registros), no hacer nada
-            if (!$left.length && !$right.length) {
+            // Si no hay headers principales (menos de 6 registros), no hacer nada
+            if (!$leftThead.length || !$rightThead.length || !$centerThead.length) {
+                $scroll.off('.floatingHeader');
+                $(window).off('.floatingHeader');
                 $float.hide();
                 return;
             }
 
-            // Construir el header clonado con la misma estructura grid
-            var html = '<div style="display:grid; grid-template-columns:1fr auto 1fr; min-width:640px;">';
-
-            // Left header
-            html += '<div style="grid-column:1;">';
-            html += '<table class="bac-table" style="margin:0;"><thead>' + $left.html() + '</thead></table>';
-            html += '</div>';
-
-            // Center header (P|B)
-            html += '<div style="grid-column:2; min-width:90px; max-width:120px; border-left:2px solid #9ca3af; border-right:2px solid #9ca3af;">';
-            html += '<table class="bac-table" style="margin:0; border-left:none; border-right:none;"><thead>' + $centerTop.html() + '</thead></table>';
-            html += '</div>';
-
-            // Right header
-            html += '<div style="grid-column:3;">';
-            html += '<table class="bac-table" style="margin:0;"><thead>' + $right.html() + '</thead></table>';
-            html += '</div>';
-
-            html += '</div>';
+            // Construir header clonado
+            var html = ''
+                + '<div class="jd-floating-grid">'
+                +   '<div class="jd-floating-col jd-floating-col-left"><table class="bac-table"><thead>' + $leftThead.html() + '</thead></table></div>'
+                +   '<div class="jd-floating-col jd-floating-col-center"><table class="bac-table bac-table-central-top"><thead>' + $centerThead.html() + '</thead></table></div>'
+                +   '<div class="jd-floating-col jd-floating-col-right"><table class="bac-table"><thead>' + $rightThead.html() + '</thead></table></div>'
+                + '</div>';
             $float.html(html);
 
-            // Obtener la posición del header original de JUGADA 1
-            var $origHeader = $scroll.find('.bac-scorecard-left table thead');
+            function syncFloatingSizes(){
+                var leftW = Math.round($leftTable.outerWidth() || 0);
+                var centerW = Math.round(($centerCol.outerWidth() || $centerTable.outerWidth() || 0));
+                var rightW = Math.round($rightTable.outerWidth() || 0);
+                var totalW = Math.max(
+                    Math.round($grid.outerWidth() || 0),
+                    leftW + centerW + rightW
+                );
+
+                var $fg = $float.find('.jd-floating-grid');
+                $fg.css({
+                    display: 'grid',
+                    gridTemplateColumns: leftW + 'px ' + centerW + 'px ' + rightW + 'px',
+                    minWidth: totalW + 'px',
+                    width: totalW + 'px'
+                });
+
+                var $fLeft  = $float.find('.jd-floating-col-left table');
+                var $fCtr   = $float.find('.jd-floating-col-center table');
+                var $fRight = $float.find('.jd-floating-col-right table');
+
+                $fLeft.css('width', leftW + 'px');
+                $fCtr.css('width', centerW + 'px');
+                $fRight.css('width', rightW + 'px');
+
+                $float[0].scrollLeft = $scroll[0].scrollLeft;
+            }
 
             $scroll.off('scroll.floatingHeader').on('scroll.floatingHeader', function(){
-                if (!$origHeader.length) return;
-
-                // Posición del header original relativo al contenedor scroll
-                var headerTop = $origHeader[0].getBoundingClientRect().top;
-                var scrollTop = $scroll[0].getBoundingClientRect().top;
-
-                if (headerTop < scrollTop) {
-                    // El header original ya no es visible → mostrar el flotante
+                var showFloating = $scroll.scrollTop() > ($leftThead.outerHeight() || 0);
+                if (showFloating) {
                     $float.show();
-                    // Sincronizar scroll horizontal
-                    $float[0].scrollLeft = $scroll[0].scrollLeft;
+                    $scroll.addClass('jd-floating-active');
                 } else {
                     $float.hide();
+                    $scroll.removeClass('jd-floating-active');
                 }
-            });
-
-            // Sincronizar scroll horizontal del body al header
-            $scroll.off('scroll.floatingSync').on('scroll.floatingSync', function(){
                 if ($float.is(':visible')) {
                     $float[0].scrollLeft = $scroll[0].scrollLeft;
                 }
             });
+
+            // Forzar rueda dentro de tabla al scroll interno (evita mover página)
+            $scroll.off('wheel.tableScroll').on('wheel.tableScroll', function(e){
+                var ev = e.originalEvent;
+                if (!ev) return;
+                e.preventDefault();
+                this.scrollTop += ev.deltaY;
+                this.scrollLeft += ev.deltaX;
+            });
+
+            $(window).off('resize.floatingHeader').on('resize.floatingHeader', function(){
+                syncFloatingSizes();
+            });
+
+            // Si rueda cae sobre cabecera flotante, mover scroll de tabla
+            $float.off('wheel.floatingHeader').on('wheel.floatingHeader', function(e){
+                var ev = e.originalEvent;
+                if (!ev) return;
+                e.preventDefault();
+                $scroll[0].scrollTop += ev.deltaY;
+                $scroll[0].scrollLeft += ev.deltaX;
+            });
+
+            syncFloatingSizes();
+            $scroll.trigger('scroll.floatingHeader');
         }
 
+        syncMovimientosHeight();
         setupFloatingHeader();
+        $(window).off('resize.jdLayout').on('resize.jdLayout', function(){
+            syncMovimientosHeight();
+            if (window.setupFloatingHeader) window.setupFloatingHeader();
+        });
 
         // Exponer para que los JS de create/undo puedan reinicializar
         window.setupFloatingHeader = setupFloatingHeader;
+        window.syncMovimientosHeight = syncMovimientosHeight;
 
         // Auto-scroll al último registro
         var $scroll = $('#jd-movimientos-scroll');

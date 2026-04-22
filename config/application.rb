@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Bacara
   class Application < Rails::Application
-    config.app_name = "Bacara"
+    config.app_name = "BacWins"
     config.action_mailer.default_url_options = { host: 'imahsoftware.com' }
     config.action_cable.disable_request_forgery_protection = true
     # Settings in config/environments/* take precedence over those specified here.

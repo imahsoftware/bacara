@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :jugadas
+  post 'jugadas/nueva_shoe', to: 'jugadas#nueva_shoe', as: :nueva_shoe_jugada
   post 'jugadasdetalles/undo',  to: 'jugadasdetalles#undo'
   post 'jugadasdetalles/reset', to: 'jugadasdetalles#reset'
 

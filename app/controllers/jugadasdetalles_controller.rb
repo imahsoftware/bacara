@@ -1,7 +1,7 @@
 class JugadasdetallesController < ApplicationController
   before_action :set_jugada_id
   before_action :authorize_jugada_acceso
-  before_action :block_if_finalizada, only: [:create, :undo, :reset]
+  before_action :block_unless_pendiente, only: [:create, :undo, :reset]
 
   layout :set_layout
 
@@ -138,13 +138,13 @@ class JugadasdetallesController < ApplicationController
     'viewspecial'
   end
 
-  def block_if_finalizada
+  def block_unless_pendiente
     jugada = Jugada.for_user_list(current_user).find(@jugada_id)
-    return unless jugada.estado.to_s.upcase == 'FINALIZADA'
+    return if jugada.estado.to_s.upcase == 'PENDIENTE'
 
     respond_to do |format|
-      format.js   { render js: "alert('Jugada FINALIZADA. No se permite modificar.');" }
-      format.json { render json: { status: 'error', message: 'Jugada FINALIZADA' }, status: :forbidden }
+      format.js   { render js: "alert('Solo con jugada PENDIENTE se pueden registrar apuestas (P/B) o deshacer/limpiar.');" }
+      format.json { render json: { status: 'error', message: 'Jugada no PENDIENTE' }, status: :forbidden }
     end
   end
 end

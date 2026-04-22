@@ -2,7 +2,7 @@
   <div id="right">
     <div id="showcase">
       <div class="showcase-content">
-        <!-- <%= image_tag('logos/logo_inicio_bacara.png', size: '500x200') %>-->
+        <!-- <%= image_tag('logo.png', size: '500x200', alt: 'BacWins') %> -->
       </div>
     </div>
   </div>
@@ -51,8 +51,7 @@
       <%= render 'layouts/flash_messages' %>
     </div>
     <footer id="main-footer">
-      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> | Todos los derechos reservados.
-      <em>(Bacara 2.0)</em>
+      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> · <span class="footer-app">BacWins</span> · Todos los derechos reservados.
     </footer>
   </div>
 </div>
@@ -242,6 +241,7 @@
         max-width: 80%;
         padding-top: 5rem;
     }
+    #main-footer .footer-app { color: #06176B; font-weight: 600; }
 
     /* Button */
     .primary-btn {

@@ -12,11 +12,22 @@ $('#prc-badge').hide();
 
 // ═══ Reiniciar floating header + auto-scroll ═══
 (function(){
+    if (typeof window.syncMovimientosHeight === 'function') {
+        window.syncMovimientosHeight();
+    }
     if (typeof window.setupFloatingHeader === 'function') {
         window.setupFloatingHeader();
     }
     var el = document.getElementById('jd-movimientos-scroll');
     if (el) {
-        setTimeout(function(){ el.scrollTop = el.scrollHeight; }, 50);
+        setTimeout(function(){
+            if (typeof window.syncMovimientosHeight === 'function') {
+                window.syncMovimientosHeight();
+            }
+            if (typeof window.setupFloatingHeader === 'function') {
+                window.setupFloatingHeader();
+            }
+            el.scrollTop = el.scrollHeight;
+        }, 50);
     }
 })();
