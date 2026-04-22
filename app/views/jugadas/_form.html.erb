@@ -2,7 +2,7 @@
   <div class="bs-callout">
     <div class="row">
       <div class="col-md-4">
-        <%= f.input :jugador, input_html: { class: 'clean' } %>
+        <%= f.input :jugador, input_html: { class: 'clean', :onchange => "javascript:this.value=this.value.toUpperCase();" } %>
       </div>
     </div>
     <div class="row">

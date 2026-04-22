@@ -1,98 +1,83 @@
-<%# ── Título con nombre del jugador ────────────────────────── %>
-<div class="jd-player-header">
-  <div class="jd-player-info">
-    <span class="jd-player-label">
-      <i class="fa fa-user-circle"></i> <%= t :jugador_label %>
-    </span>
-    <h2 class="jd-player-name"><%= @jugada.jugador %></h2>
-  </div>
-  <div class="jd-player-meta">
-    <span class="jd-meta-item">
-      <i class="fa fa-hashtag"></i> <%= t :jugadas %> <strong>#<%= @jugada_id %></strong>
-    </span>
-  </div>
-</div>
+<%# Profit = sumatoria de acumuladof por jugada_id en jugadasdetalles %>
+<% jd_profit_display = Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>
+<% jd_is_persona = current_user.tipoconsulta.to_s == 'PERSONA' %>
+<% jd_finalizada = @jugada.estado.to_s.upcase == 'FINALIZADA' %>
 
-<div id="jd-spinner"><%= t :guardando %></div>
+<input type="hidden" id="jd-base-bet" value="10" />
 
-<%# ══ LAYOUT DOS COLUMNAS ═══════════════════════════════════ %>
-<div class="jd-two-col-layout">
+<div id="jd-spinner">⏳ Guardando...</div>
 
-  <%# ── COLUMNA IZQUIERDA: Select the Result ─────────────── %>
-  <div class="jd-col-left">
-    <div class="jd-card" style="height: 100%;">
-      <div class="jd-card-head">
-        <h3><i class="fa fa-gamepad"></i> <%= t :seleccionar_resultado %></h3>
-        <span class="jd-badge">#<%= @jugada_id %></span>
+<div class="jd-bw-page <%= 'jd-bw-page--persona' if jd_is_persona %>">
+  <div class="jd-bw-main <%= 'jd-bw-main--persona' if jd_is_persona %>">
+    <aside class="jd-bw-sidebar">
+      <header class="jd-bw-hero">
+        <h1 class="jd-bw-title">Baccarat Winners</h1>
+        <p class="jd-bw-profit">
+          PROFIT: $<span id="jd-profit-amount"><%= jd_profit_display %></span>
+          <span class="jd-powered jd-powered--hero">ImahSoftware</span>
+        </p>
+        <% if @jugada.present? %>
+          <p class="jd-bw-sub"><%= @jugada.jugador %> · Jugada #<%= @jugada_id %></p>
+        <% end %>
+      </header>
+
+      <div class="jd-next-bet jd-next-bet--bw" id="jd-next-bet-banner">
+        <span class="jd-nb-label">Your Next Bet:</span>
+        <p id="next-bet-text"><%= @proximo_bet %></p>
       </div>
 
-      <div class="jd-card-body">
-        <div class="jd-selector-inner">
-          <div class="jd-circles" style="margin-bottom:0;">
-            <button class="jd-circle jd-circle-p" id="btn-player"
-                    data-tipo="P" data-jugada-id="<%= @jugada_id %>" title="Player">P
-            </button>
-            <button class="jd-circle jd-circle-b" id="btn-banker"
-                    data-tipo="B" data-jugada-id="<%= @jugada_id %>" title="Banker">B
-            </button>
-          </div>
-          <br>
+      <div class="jd-bw-actions">
+        <div class="jd-circles jd-circles--bw">
+          <button class="jd-circle jd-circle-p jd-circle--bw" id="btn-player"
+                  data-tipo="P" data-jugada-id="<%= @jugada_id %>" title="Player">P
+          </button>
+          <button class="jd-circle jd-circle-b jd-circle--bw" id="btn-banker"
+                  data-tipo="B" data-jugada-id="<%= @jugada_id %>" title="Banker">B
+          </button>
+        </div>
 
-          <%# Undo + Reset %>
-          <div style="display:flex; gap:6px; margin-bottom:0;">
-            <button class="jd-undo-btn" id="btn-undo"
-                    data-jugada-id="<%= @jugada_id %>"
-                    style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px;">
-              <%= t :eliminar_ultimo %>
-            </button>
-            <button class="jd-undo-btn" id="btn-reset"
-                    data-jugada-id="<%= @jugada_id %>"
-                    style="flex:1; margin:0; padding:6px 10px; font-size:11px; font-weight:600; min-height:0; border-radius:6px; background:#dc2626; border-color:#dc2626;">
-              <%= t :reset %>
-            </button>
-          </div>
-          <br>
-
-          <%# Next Bet %>
-          <div class="jd-next-bet" id="jd-next-bet-banner" style="margin-bottom:0; flex:1; min-width:160px;">
-            <span class="jd-nb-label"><%= t :your_next_bet %></span>
-            <p id="next-bet-text"><%= @proximo_bet %></p>
-            
-          </div>
+        <div class="jd-bw-row-btns">
+          <button type="button" class="jd-undo-btn jd-undo-btn--bw" id="btn-undo"
+                  data-jugada-id="<%= @jugada_id %>"
+                  data-label-default="Undo Last Hand"
+                  data-label-loading="Undoing..."
+                  <%= 'disabled' if jd_finalizada %>>
+            Undo Last Hand
+          </button>
+          <button type="button" class="jd-reset-btn" id="btn-reset"
+                  data-jugada-id="<%= @jugada_id %>"
+                  data-label-default="Clear Session"
+                  data-label-loading="Clearing..."
+                  <%= 'disabled' if jd_finalizada %>>
+            Clear Session
+          </button>
+          <%= link_to 'Regresar', jugadas_path, class: 'jd-back-btn' %>
         </div>
       </div>
 
-      <div class="jd-card-foot">
-        <%= t :movimientos %>: <strong id="mov-count"><%= @total_movimientos %></strong>
-        <span id="prc-badge"
-              class="jd-badge jd-badge-green"
-              style="display:<%= @total_movimientos > 5 ? 'inline-flex' : 'none' %>; margin-left:6px;">
-          🔄 <%= t :prc_activo %>
-        </span>
-        <p class="jd-powered" style="margin:4px 0 0;"><%= t :imahsoftware %></p>
-      </div>
-    </div>
-  </div>
+      <footer class="jd-bw-foot jd-bw-foot--sidebar">
+        <span id="mov-count" style="display:none;"><%= @total_movimientos %></span>
+        <span id="prc-badge" style="display:none;"></span>
+      </footer>
+    </aside>
 
-  <%# ── COLUMNA DERECHA: Movimientos ─────────────────────── %>
-  <div class="jd-col-right">
-    <div class="jd-card" style="height: 100%; display: flex; flex-direction: column;">
-      <div class="jd-card-head">
-        <h3><i class="fa fa-list-alt"></i> <%= t :movimientos %></h3>
-        <span class="jd-badge" id="badge-count"><%= @total_movimientos %></span>
-      </div>
+    <div class="jd-bw-col-table">
+      <section class="jd-bw-frequency">
+        <h2 class="jd-bw-ft-title">
+          Frequency Table
+          <span class="jd-badge jd-badge--ft" id="badge-count"><%= @total_movimientos %></span>
+        </h2>
 
-      <%# Header clonado — oculto por defecto, aparece al scrollear %>
-      <div id="jd-floating-header" class="jd-floating-header" style="display:none;"></div>
+        <div id="jd-floating-header" class="jd-floating-header jd-floating-header--bw" style="display:none;"></div>
 
-      <div id="jd-movimientos-scroll" style="flex:1; overflow-y:auto; overflow-x:auto; max-height:70vh; padding:0;">
-        <div id="tabla-movimientos">
-          <%= render 'tabla_movimientos', jugadasdetalles: @jugadasdetalles %>
+        <div id="jd-movimientos-scroll" class="jd-movimientos-scroll--bw">
+          <div id="tabla-movimientos">
+            <%= render 'tabla_movimientos', jugadasdetalles: @jugadasdetalles %>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   </div>
-
 </div>
 
 <script>

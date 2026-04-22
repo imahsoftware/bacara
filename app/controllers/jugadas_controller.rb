@@ -5,12 +5,15 @@ class JugadasController < ApplicationController
   before_action :checkaccess
 
   def checkaccess
+    return true if current_user.tipoconsulta.to_s == 'PERSONA'
     return is_permit('jugadas')
   end
 
   def index
-    @q = current_user.jugadas.ransack(params[:q])
+    @jugadas_base = Jugada.for_user_list(current_user)
+    @q = @jugadas_base.ransack(params[:q])
     @jugadas = @q.result.paginate(page: params[:page], per_page: 10)
+    @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
 
     respond_to do |format|
       format.html
@@ -22,18 +25,32 @@ class JugadasController < ApplicationController
   end
 
   def new
+    if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
+      respond_to do |format|
+        format.js { render js: "alert('Debe finalizar todas sus jugadas antes de crear una nueva.');" }
+      end
+      return
+    end
+
     @active_record = Jugada.find(params[:active_id]) if params[:active_id].present?
     @jugada = Jugada.new
     respond_to { |format| format.js }
   end
 
   def edit
-    @active_record = Jugada.find(params[:active_id]) if params[:active_id].present?
-    @jugada = Jugada.find(params[:id])
+    @active_record = Jugada.for_user_list(current_user).find(params[:active_id]) if params[:active_id].present?
+    @jugada = Jugada.for_user_list(current_user).find(params[:id])
     respond_to { |format| format.js }
   end
 
   def create
+    if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
+      respond_to do |format|
+        format.js { render js: "alert('Debe finalizar todas sus jugadas antes de crear una nueva.');" }
+      end
+      return
+    end
+
     @jugada = Jugada.new(jugada_params)
     @jugada.user_id = current_user.id
     respond_to do |format|
@@ -69,7 +86,7 @@ class JugadasController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_jugada
-    @jugada = Jugada.find(params[:id])
+    @jugada = Jugada.for_user_list(current_user).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

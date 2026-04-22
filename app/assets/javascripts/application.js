@@ -670,7 +670,7 @@ $(document).ready(function () {
             var $btn     = $(this);
             var jugadaId = $btn.data('jugada-id');
 
-            $btn.prop('disabled', true).text('Deshaciendo...');
+            $btn.prop('disabled', true).text($btn.data('label-loading') || 'Undoing...');
             showSpinner();
 
             $.ajax({
@@ -681,7 +681,7 @@ $(document).ready(function () {
                 data:     { jugada_id: jugadaId },
                 error:    function () { alert('Error al deshacer.'); },
                 complete: function () {
-                    $btn.prop('disabled', false).text('Eliminar Último');
+                    $btn.prop('disabled', false).text($btn.data('label-default') || 'Undo Last Hand');
                     hideSpinner();
                 }
             });
@@ -693,7 +693,7 @@ $(document).ready(function () {
             var $btn     = $(this);
             var jugadaId = $btn.data('jugada-id');
 
-            $btn.prop('disabled', true).text('Reseteando...');
+            $btn.prop('disabled', true).text($btn.data('label-loading') || 'Clearing...');
             showSpinner();
 
             $.ajax({
@@ -704,7 +704,7 @@ $(document).ready(function () {
                 data:     { jugada_id: jugadaId },
                 error:    function () { alert('Error al resetear.'); },
                 complete: function () {
-                    $btn.prop('disabled', false).text('Reset');
+                    $btn.prop('disabled', false).text($btn.data('label-default') || 'Clear Session');
                     hideSpinner();
                 }
             });

@@ -4,16 +4,22 @@
   <div class="box-header with-border">
     <h3 class="box-title">
       <%# if is_auth_c('jugada') %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: "#{t :agregar}" do %>
-          <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+        <% if is_persona && @persona_bloquea_nueva_jugada %>
+          <span id="new_jugada_button" class="text-muted" style="cursor:not-allowed;opacity:0.45;" data-toggle="tooltip" title="Finalice todas sus jugadas antes de crear una nueva.">
+            <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+          </span>
+        <% else %>
+          <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', data: { toggle: 'tooltip' }, title: 'Nueva Jugada' do %>
+            <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+          <% end %>
         <% end %>
       <%# end %>
-      <%= t :jugadas %>
+      Jugadas
     </h3>
     <div class="box-tools pull-right">
       <%= search_form_for @q do |f| %>
         <div class="input-group input-group-sm" style="width: 180px;">
-          <%= f.search_field :jugador_cont, class: 'form-control pull-right', placeholder: "#{t :buscar_placeholder}" %>
+          <%= f.search_field :jugador_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
           <div class="input-group-btn">
             <%= button_tag(type: "submit", class: "btn btn-default") do %>
               <i class="fa fa-search"></i>
