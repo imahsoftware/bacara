@@ -2,9 +2,6 @@
   <td class="text-center">
     <% cerrada = jugada.estado.to_s.strip.upcase == 'CERRADA' %>
     <% if current_user.tipoconsulta.to_s == 'TODO' && !cerrada %>
-      <%= link_to edit_jugada_path(jugada), remote: true, class: 'edit_jugada_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
-        <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
-      <% end %>
       <%= link_to jugada, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
         <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
       <% end %>
