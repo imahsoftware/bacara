@@ -234,6 +234,103 @@ es:
   sql_running: SQL Running
   jobs_running: Jobs Running
   tablespace_space: Tablespace Space
+  actions: Actions
+  creation_date: Creation Date
+  player: Player
+  status: Status
+  description: Description
+  controller: Controller
+  image: Image
+  message: Message
+  level: Level
+  authorized: Authorized
+  extended_description: Extended Description
+  field: Field
+  code_aportesenlínea: AportesEnLinea Code
+  visible: Visible
+  id: ID
+  name: Name
+  municipality: Municipality
+  department: Department
+  permission: Permission
+  creates: Creates
+  updates: Updates
+  deletes: Deletes
+  field: Field
+  assignment_date: Assignment Date
+  start_time: Start Time
+  end_time: End Time
+  interval: Interval
+  number_of_people_per_interval: Number of people per interval
+  report: Report
+  add_new_permission: Add New Permission
+  add_new_visit: Add New Visit
+  new_company: New Company
+  edit_company: Edit Company
+  sure: Sure?
+  job_name: Job Name
+  job_style: Job Style
+  assigned_parameters: Assigned Parameters
+  associated_reports: Associated Reports
+  associated_visits: Associated Visits
+  associated_modules: Associated Modules
+  municipalities: Municipalities
+  no_jobs_running: No jobs running
+  kill_job: Kill Job
+  dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
+  associated_permissions: Associated Permissions
+  schedules_hours: Schedules - Hours
+  return: Return
+  create_play: Create Play
+  return_to_portfolios: Return to portfolios
+  new_company: New Company
+  edit_company: Edit Company
+  create_company_alegra: Create company in Alegra
+  service_url_create_company: Service - URL Create Company
+  service_url_enable_company: Service - URL Enable Company
+  url_create_contributor: URL Create Contributor
+  select_user_copy_permissions: Select the user to copy permissions from
+  select_file: Select File
+  no_file_selected: No file selected
+  nothing_selected: Nothing Selected
+  update: Update
+  return_to_portfolios_link: Return to portfolios
+  return_link: Return
+  select_user_to_copy: Select the user to copy permissions
+  quantity: Quantity
+  inactivate_schedule: Inactivate schedule
+  activate_schedule: Activate schedule
+  active_session_users: Users with active session
+  connected_users: connected users
+  deactivate_session: Deactivate session
+  page_not_found: Page not found
+  bulk_user_process: Bulk User Process
+  total_validated_records: Total Validated Records
+  total_approved_records: Total Approved Records
+  total_records_inconsistencies: Total Records with Inconsistencies
+  view_inconsistencies: View Inconsistencies
+  confirm_bulk_upload: Confirm bulk upload
+  confirm_bulk_upload_inactivate: Confirm bulk upload to inactivate
+  are_you_sure_bulk_upload: Are you sure you want to execute the bulk user upload?
+  are_you_sure_bulk_upload_inactivate: Are you sure you want to execute the bulk user upload to inactivate them?
+  connection_date_time: Connection Date and Time
+  schedule: Schedule
+  images: Images
+  company: Company
+  short_name: Short Name
+  creation_date: Creation Date
+  api_services: API Services
+  payu: Payu
+  siigo: Siigo
+  alegra: Alegra
+  aportes_en_linea: Aportes en Línea
+  order_of_process: Order of Process
+  token_generation: Token Generation
+  contributor_creation: Contributor Creation
+  news_sending: News Sending
+  certificate_generation: Certificate Generation
+  enabled: Enabled
+  created: Created
 
   will_paginate:
     previous_label: "&#8592; Previous"

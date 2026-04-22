@@ -3,9 +3,9 @@
     <table class="table table-bordered table-condensed table-striped">
       <thead>
         <tr class="thcolor">
-          <th class="text-center">Acciones</th>
-          <th class="text-center">Job Name</th>
-          <th class="text-center">Job Style</th>
+          <th class="text-center"><%= t :actions %></th>
+          <th class="text-center"><%= t :job_name %></th>
+          <th class="text-center"><%= t :job_style %></th>
           <th class="text-center">Session ID</th>
           <th class="text-center">Slave Process ID</th>
           <th class="text-center">Elapsed Time</th>
@@ -18,7 +18,7 @@
           <tr>
             <td class="text-center">
               <% if is_supersygma %>
-                <%= link_to administracion_killjob_path(name: job.job_name), method: :post, data: { confirm: "Este es un botón muy PELIGROSO, estas seguro de matar el JOB?", toggle: 'tooltip' }, title: "Matar Job" do %>
+                <%= link_to administracion_killjob_path(name: job.job_name), method: :post, data: { confirm: t(:dangerous_button), toggle: 'tooltip' }, title: t(:kill_job) do %>
                   <button class="btn btn-xs btn-danger"><i class="fa fa-minus-square"></i></button>
                 <% end %>
               <% end %>
@@ -38,6 +38,6 @@
 <% else %>
   <div class="alert alert-danger
 ">
-    <h4><i class="icon fa fa-info"></i> <%=t :atencion%></h4>No hay Jobs en Ejecución
+    <h4><i class="icon fa fa-info"></i> <%=t :atencion%></h4><%= t :no_jobs_running %>
   </div>
 <% end %>

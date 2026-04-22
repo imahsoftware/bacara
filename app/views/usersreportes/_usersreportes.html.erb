@@ -1,9 +1,9 @@
 <div class="box box-primary">
   <div class="box-header">
-    <h3 class="box-title">Reportes Asociados</h3>
+    <h3 class="box-title"><%= t :associated_reports %></h3>
       <div class="box-tools pull-right">
         <%= link_to new_user_usersreporte_path(@user), remote: true, id: 'new_usersreporte_button', class: 'btn btn-sm btn-info' do %>
-          <i class="fa fa-plus-square"> </i> <span>Agregar Nuevo Permiso</span>
+          <i class="fa fa-plus-square"> </i> <span><%= t :add_new_permission %></span>
         <% end %>
       </div>
   </div>

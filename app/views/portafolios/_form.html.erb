@@ -24,7 +24,7 @@
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"><strong><%= user.new_record? ? 'Agregar' : 'Editar' %> Usuario</strong></h3>
+          <h3 class="box-title"><strong><%= user.new_record? ? t(:add_new) : t(:edit) %> <%= t :user %></strong></h3>
         </div><!-- /.box-header -->
         <div class="box-body">
           <div class="row">
@@ -39,7 +39,7 @@
         <div class="box-footer">
           <%= link_to "#{t :cancelar}", users_path, class: 'btn btn-flat btn-default' %>
           <div class="box-tools pull-right">
-            <%= f.button :submit, 'Aceptar', class: 'btn-flat btn-primary' %>
+            <%= f.button :submit, t(:accept), class: 'btn-flat btn-primary' %>
           </div><!-- /.box-tools -->
         </div><!-- box-footer -->
       </div><!-- /.box -->
