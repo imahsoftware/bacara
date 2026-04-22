@@ -1,5 +1,6 @@
 class JugadasController < ApplicationController
   before_action :set_jugada, only: [:show, :edit, :update, :destroy]
+  before_action :reject_if_cerrada, only: [:edit, :update, :destroy]
 
   layout :set_layout
   before_action :checkaccess
@@ -130,6 +131,16 @@ class JugadasController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_jugada
     @jugada = Jugada.for_user_list(current_user).find(params[:id])
+  end
+
+  def reject_if_cerrada
+    return unless @jugada&.estado.to_s.strip.upcase == "CERRADA"
+
+    msg = "La jugada está CERRADA: no se puede editar ni eliminar."
+    respond_to do |format|
+      format.html { redirect_to jugadas_path, alert: msg }
+      format.js   { render js: "alert(#{msg.to_json});" }
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
