@@ -3,22 +3,22 @@
     <div class="box-header">
       <legend>
         <% if @portafolio.new_record? %>
-          <%= link_to portafolios_path, data: { toggle: 'tooltip' }, title: 'Regresar a portafolios' do %>
+          <%= link_to portafolios_path, data: { toggle: 'tooltip' }, title: t(:return_to_portfolios) do %>
             <i class="fa fa-arrow-left fa-fw text-danger" aria-hidden="true"></i>
           <% end %>
         <% end %>
-        <%= @portafolio.new_record? ? 'Nueva' : 'Editar' %> Compañia
+        <%= @portafolio.new_record? ? t(:new_company) : t(:edit_company) %> <%= t :company %>
       </legend>
       <% unless @portafolio.new_record? %>
         <div class="box-tools pull-right">
-          <span class="label label-danger">Creacion: <%= @portafolio.created_at.strftime("%Y-%m-%d %X") rescue nil %></span>
+          <span class="label label-danger"><%= t :creation_date %>: <%= @portafolio.created_at.strftime("%Y-%m-%d %X") rescue nil %></span>
         </div>
       <% end %>
     </div><!-- /.box-header -->
     <div class="box-body">
       <div class="row">
         <div class="col-md-4"><%= f.input :nombre %></div>
-        <div class="col-md-2"><%= f.input :nombrecorto, label: 'Nombre Corto' %></div>
+        <div class="col-md-2"><%= f.input :nombrecorto, label: t(:short_name) %></div>
         <div class="col-md-4"><%= f.input :email %></div>
         <div class="col-md-2"><%= f.input :estado, collection: select_estado_portafolios, as: :select, input_html: { data: { width: '100%' }, class: 'select2' } %></div>
       </div>
@@ -40,13 +40,13 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <legend>Servicios API</legend>
+    <legend><%= t :api_services %></legend>
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#payu" data-toggle="tab">Payu</a></li>
-        <li><a href="#siigo" data-toggle="tab">Siigo</a></li>
-        <li><a href="#alegra" data-toggle="tab">Alegra</a></li>
-        <li><a href="#aportes" data-toggle="tab">Aportes en Linea</a></li>
+        <li class="active"><a href="#payu" data-toggle="tab"><%= t :payu %></a></li>
+        <li><a href="#siigo" data-toggle="tab"><%= t :siigo %></a></li>
+        <li><a href="#alegra" data-toggle="tab"><%= t :alegra %></a></li>
+        <li><a href="#aportes" data-toggle="tab"><%= t :aportes_en_linea %></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="payu">
@@ -111,9 +111,9 @@
             <div class="box-header">
                 <span class="pull-right-container">
           <% if @portafolio.id_alegra.present? && @portafolio.habilita_alegra.present? %>
-              <small class="label pull-right bg-red">Habilitada</small><% end %>
+              <small class="label pull-right bg-red"><%= t :enabled %></small><% end %>
                   <% if @portafolio.id_alegra.present? %>
-          <small class="label pull-right bg-blue" style="margin-right: 10px;">Creada</small>
+          <small class="label pull-right bg-blue" style="margin-right: 10px;"><%= t :created %></small>
             <% end %>
         </span>
             </div>
@@ -165,15 +165,15 @@
                 <div class="widget-user-image">
                   <%= image_tag("logo_aportes.png", style: "width: 90px;") %>
                 </div>
-                <h3 class="widget-user-username" style="margin-left: 100px;">Orden del proceso</h3>
+                <h3 class="widget-user-username" style="margin-left: 100px;"><%= t :order_of_process %></h3>
               </div>
               <div class="box-footer no-padding">
                 <ul class="nav nav-stacked" style="background-color: #DFDFDF">
                   <div class="row">
-                    <div class="col-md-3 text-center" style="padding: 8px;">1. Generación del Token</div>
-                    <div class="col-md-3 text-center" style="padding: 8px;">2. Creación del cotizante</div>
-                    <div class="col-md-3 text-center" style="padding: 8px;">3. Envio de novedades</div>
-                    <div class="col-md-3 text-center" style="padding: 8px;">4. Generación del certificado</div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">1. <%= t :token_generation %></div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">2. <%= t :contributor_creation %></div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">3. <%= t :news_sending %></div>
+                    <div class="col-md-3 text-center" style="padding: 8px;">4. <%= t :certificate_generation %></div>
                   </div>
                 </ul>
               </div>

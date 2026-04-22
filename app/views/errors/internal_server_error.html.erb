@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-md-12 text-center" style="color: #20447d; font-family: '-apple-system', BlinkMacSystemFont, Roboto, Arial, Helvetica, 'sans-serif';">
         <h4>
-          Se acaba de presentar un problema en el procedimiento, por favor reportar al administrador.
+          <%= t :error_procedure %>
         </h4>
         <h4><%= Time.now.strftime("%Y-%m-%d %H:%M:%S %p") %></h4>
       </div>
@@ -16,7 +16,7 @@
     <hr>
     <div class="text-center" style="color: #20447d; font-family: '-apple-system', BlinkMacSystemFont, Roboto, Arial, Helvetica, 'sans-serif';">
       <h4 style="color: red;">
-        Para regresar a la página anterior haz click <%= link_to root_path do %><button class="btn btn-sm btn-danger">Aquí</button><% end %>
+        <%= t :return_to_previous %> <%= link_to root_path do %><button class="btn btn-sm btn-danger"><%= t :here %></button><% end %>
       </h4>
     </div>
   </div>

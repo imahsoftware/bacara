@@ -28,7 +28,7 @@
   <div class="vsp-topbar-center">
     <span class="vsp-page-title">
       <i class="fa fa-gamepad" style="margin-right:5px; opacity:.5;"></i>
-      Detalle de Jugada
+      <%= t :detalle_jugada %>
     </span>
   </div>
 
@@ -53,15 +53,15 @@
           </li>
           <li>
             <%= link_to edit_user_registration_path do %>
-              <i class="fa fa-edit" style="color:#6b7280; width:14px;"></i> Editar perfil
+              <i class="fa fa-edit" style="color:#6b7280; width:14px;"></i> <%= t :editar_perfil %>
             <% end %>
           </li>
           <li role="separator" class="divider"></li>
           <li>
             <%= link_to logout_path,
-                        data: { confirm: "¿Seguro que quieres salir, #{user.nombre}?" },
+                        data: { confirm: "#{t :seguro_salir} #{user.nombre}?" },
                         class: 'dd-danger' do %>
-              <i class="fa fa-sign-out" style="width:14px;"></i> Salir
+              <i class="fa fa-sign-out" style="width:14px;"></i> <%= t :salir %>
             <% end %>
           </li>
         </ul>

@@ -5,59 +5,59 @@
         <div class="box-header">
           <legend>
             <% if @user.unlock_token %>
-              <%= link_to desbloquearusuario_users_path(id: @user.id), data: {toggle: 'tooltip', confirm: '¿Esta seguro?'}, title: 'Desbloquear' do %>
+              <%= link_to desbloquearusuario_users_path(id: @user.id), data: {toggle: 'tooltip', confirm: t(:seguro)}, title: t(:unlock) do %>
                 <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
               <% end %>
             <% end %>
             <% if is_sygma %>
-              <%= link_to resetpass_users_path(id: @user.id), data: {toggle: 'tooltip', confirm: '¿Esta seguro?'}, title: 'Reestablecer Clave' do %>
+              <%= link_to resetpass_users_path(id: @user.id), data: {toggle: 'tooltip', confirm: t(:seguro)}, title: t(:reset_password) do %>
                 <button class="btn btn-xs btn-warning"><i class="fa fa-refresh"></i></button>
               <% end %>
             <% end %>
 
             <% if @user.new_record? %>
-              <%= link_to users_path, data: {toggle: 'tooltip'}, title: 'Regresar a usuarios' do %>
+              <%= link_to users_path, data: {toggle: 'tooltip'}, title: t(:return_to_users) do %>
                 <i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
               <% end %>
             <% end %>
-            <%= @user.new_record? ? 'Agregar nuevo' : 'Editar' %> Usuario
+            <%= @user.new_record? ? t(:add_new) : t(:edit) %> <%= t :user %>
           </legend>
           <div class="box-tools pull-right">
             <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
-              <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
+              <i class="fa fa-plus-square"> </i> <span><%= t :new_user %></span>
             <% end %>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-            <div class="col-md-2"><%= f.input :identificacion, label: 'Identificación' %></div>
+            <div class="col-md-2"><%= f.input :identificacion, label: t(:identification) %></div>
             <div class="col-md-6"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
             <div class="col-md-1"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: {class: 'select2'} %></div>
             <div class="col-md-1"><%#= f.input :geintac, as: :select, collection: select_sinocorto, label: 'Imah ?', input_html: {class: 'select2'} %></div>
             <div class="col-md-2"><%#= f.input :ingresoseguro, label: 'Ingreso Seguro', as: :select, collection: select_sino, input_html: {class: 'select2'} %></div>
           </div>
           <div class="row">
-            <div class="col-md-4"><%= f.input :username, label: 'Usuario' %></div>
-            <div class="col-md-2"><%= f.input :password, label: 'Clave' %></div>
-            <div class="col-md-2"><%= f.input :password_confirmation, label: 'Confirmar Clave' %></div>
+            <div class="col-md-4"><%= f.input :username, label: t(:username) %></div>
+            <div class="col-md-2"><%= f.input :password, label: t(:password) %></div>
+            <div class="col-md-2"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
             <div class="col-md-4"><%= f.input :email %></div>
           </div>
           <div class="row">
             <div class="col-md-4">
-              <%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [ p.nombre, p.id ] }, input_html: { class: 'select2' }, as: :select, label: 'Compañia',include_blank: true%>
+              <%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [ p.nombre, p.id ] }, input_html: { class: 'select2' }, as: :select, label: t(:company),include_blank: true%>
             </div>
-            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Tipo Consulta' %></div>
-            <div class="col-md-2"><%= f.input :celular %></div>
-            <div class="col-md-3"><%= f.input :observaciones, as: :text, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
+            <div class="col-md-2"><%= f.input :celular, label: t(:mobile) %></div>
+            <div class="col-md-3"><%= f.input :observaciones, as: :text, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'}, label: t(:observations) %></div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2"><%= f.input :clase_aseo, as: :select, collection: select_act_tipo, input_html: { data: { width: '100%' }, class: 'select2'}, label: "Nodo"%></div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2"><%= f.input :clase_aseo, as: :select, collection: select_act_tipo, input_html: { data: { width: '100%' }, class: 'select2'}, label: t(:node)%></div>
           </div>
-          <div class="row"><div class="col-md-2"><%= f.input :avatar, as: :file %></div></div>
+          <div class="row"><div class="col-md-2"><%= f.input :avatar, as: :file, label: t(:avatar) %></div></div>
         </div>
         <div class="box-footer">
           <div class="box-tools pull-right">
-            <%= f.button :submit, 'Aceptar', class: 'btn-flat btn-danger' %>
+            <%= f.button :submit, t(:accept), class: 'btn-flat btn-danger' %>
           </div><!-- /.box-tools -->
         </div><!-- box-footer -->
       </div><!-- /.box -->

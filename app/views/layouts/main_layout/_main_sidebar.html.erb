@@ -16,7 +16,7 @@
       <% if user_signed_in? && current_user.tipoconsulta.to_s == 'PERSONA' %>
         <li>
           <%= link_to jugadas_path do %>
-            <i class="fa fa-gamepad"></i> <span>Crear Jugada</span>
+            <i class="fa fa-gamepad"></i> <span><%= t :create_play %></span>
           <% end %>
         </li>
       <% end %>

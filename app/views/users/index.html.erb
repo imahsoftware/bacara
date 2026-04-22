@@ -1,13 +1,13 @@
-<% title 'Usuarios' %>
+<% title t(:users) %>
 <% issygma = is_sygma
    isadmin = is_admin
 %>
 <div class="box box-primary">
   <div class="box-header" style="margin-bottom: -32px;">
-    <legend>Usuarios</legend>
+    <legend><%= t :users %></legend>
     <div class="box-tools pull-right">
       <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
-        <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
+        <i class="fa fa-plus-square"> </i> <span><%= t :new_user %></span>
       <% end %>
     </div>
   </div>
@@ -18,7 +18,7 @@
             <%= form_tag users_path, method: :get, id: "search-form" do %>
               <div class="input-group" style="width: 550px;">
                 <%= hidden_field_tag :user_id %>
-                <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: "Buscar...", type: "search", autocomplete: 'off' %>
+                <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: t(:search), type: "search", autocomplete: 'off' %>
               </div>
             <% end %>
             <script type="text/javascript" charset="utf-8">
@@ -37,11 +37,11 @@
               <thead>
                 <tr class="thcolor">
                   <th width="13%"></th>
-                  <th>Usuario</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Celular</th>
-                  <th class="text-center">Activo?</th>
+                  <th><%= t :username %></th>
+                  <th><%= t :name %></th>
+                  <th><%= t :email %></th>
+                  <th><%= t :mobile %></th>
+                  <th class="text-center"><%= t :active %></th>
                 </tr>
               </thead>
               <tbody>
@@ -54,16 +54,16 @@
                             <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
                           <% end %>
                           <% if user.activo == 'S' %>
-                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:inactivate_user) do %>
                               <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% else %>
-                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:activate_user) do %>
                               <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% end %>
                           <% if user.unlock_token %>
-                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock) do %>
                               <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
                             <% end %>
                           <% end %>
@@ -72,20 +72,20 @@
                             <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
                           <% end %>
                           <% if user.activo == 'S' %>
-                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:inactivate_user) do %>
                               <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% else %>
-                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:activate_user) do %>
                               <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% end %>
                           <% if user.unlock_token %>
-                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock) do %>
                               <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
                             <% end %>
                           <% end %>
-                          <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Restablece clave, Desbloquea y envia SMS' do %>
+                          <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:reset_and_send_sms) do %>
                             <button class="btn btn-xs btn-danger"><i class="fa fa-unlock"></i></button>
                           <% end %>
                         <% end %>
@@ -107,25 +107,25 @@
                             <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
                           <% end %>
                           <% if user.activo == 'S' %>
-                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                            <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:inactivate_user) do %>
                               <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% else %>
-                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                            <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:activate_user) do %>
                               <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
                             <% end %>
                           <% end %>
                           <% if user.unlock_token %>
-                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                            <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock) do %>
                               <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
                             <% end %>
                           <% end %>
                           <% if issygma %>
-                            <%= link_to resetpass_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Reestablecer Clave' do %>
+                            <%= link_to resetpass_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:reset_password) do %>
                               <button class="btn btn-xs btn-warning"><i class="fa fa-refresh"></i></button>
                             <% end %>
                           <% end %>
-                          <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Restablece clave, Desbloquea y envia SMS' do %>
+                          <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:reset_and_send_sms) do %>
                             <button class="btn btn-xs btn-danger"><i class="fa fa-unlock"></i></button>
                           <% end %>
                       <% else %>
@@ -133,25 +133,25 @@
                           <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
                         <% end %>
                         <% if user.activo == 'S' %>
-                          <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Inactivar usuario' do %>
+                          <%= link_to inactivaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:inactivate_user) do %>
                             <button class="btn btn-xs btn-danger"><i class="fa fa-circle"></i></button>
                           <% end %>
                         <% else %>
-                          <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Activar usuario' do %>
+                          <%= link_to activaruser_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:activate_user) do %>
                             <button class="btn btn-xs btn-warning"><i class="fa fa-circle"></i></button>
                           <% end %>
                         <% end %>
                         <% if user.unlock_token %>
-                          <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desbloquear' do %>
+                          <%= link_to desbloquearusuario_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock) do %>
                             <button class="btn btn-xs btn-info"><i class="fa fa-unlock"></i></button>
                           <% end %>
                         <% end %>
                         <% if issygma %>
-                          <%= link_to resetpass_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Reestablecer Clave' do %>
+                          <%= link_to resetpass_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:reset_password) do %>
                             <button class="btn btn-xs btn-warning"><i class="fa fa-refresh"></i></button>
                           <% end %>
                         <% end %>
-                        <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Restablece clave, Desbloquea y envia SMS' do %>
+                        <%= link_to restableceyenvia_users_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:reset_and_send_sms) do %>
                           <button class="btn btn-xs btn-danger"><i class="fa fa-unlock"></i></button>
                         <% end %>
                       <% end %>
@@ -172,7 +172,7 @@
           </div>
         </div>
       <% else %>
-        <h4 class="text-center">No se encontraron datos</h4>
+        <h4 class="text-center"><%= t :no_data_found %></h4>
       <% end %>
     </div>
   </div>

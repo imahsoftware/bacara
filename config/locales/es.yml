@@ -121,6 +121,217 @@ es:
   soporte_continuo: Continuous support
   todos_derechos_reservados: All rights reserved.
 
+  # Jugadas Detalladas translations
+  jugador_label: Player
+  seleccionar_resultado: Select Result
+  eliminar_ultimo: Delete Last
+  reset: Reset
+  your_next_bet: Your Next Bet
+  movimientos: Movements
+  prc_activo: PRC active
+  imahsoftware: ImahSoftware
+  aun_no_hay_movimientos: No movements yet. Click on P or B to start.
+  jugada_1: Play 1
+  jugada_2: Play 2
+  resultado: Result
+  mecanica: Mech
+  acumulado: Accum
+  final: Final
+  guardando: Saving...
+  detalle_jugada: Play Details
+  seguro_salir: Are you sure you want to leave
+  regresar_usuarios: Return to users
+  datos_basicos: Basic Data
+  modulos: Modules
+  permisos: Permissions
+  usuarios_visitas: User Visits
+  reportes: Reports
+  cargues_opciones: Uploads - Options
+  parametros: Parameters
+  edit_profile: Edit Profile
+  total_logins: Total Logins
+  query_type: Query Type
+  return: Return
+  user_profile: User Profile
+  identification: Identification
+  full_name: Full Name
+  mobile: Mobile
+  password: Password
+  password_hint: Leave blank if you don't want to change it
+  confirm_password: Confirm Password
+  save: Save
+  search_by_identification: Search by Identification...
+  profile: Profile
+  edit_profile_button: Edit Profile
+  logout: Logout
+  are_you_sure_logout: Are you sure you want to log out?
+  reestablish: Reestablish
+  deactivate_two_factor: Deactivate two factor
+  activate_two_factor: Activate two factor
+  users: Users
+  new_user: New User
+  search: Search...
+  username: Username
+  name: Name
+  email: Email
+  mobile: Mobile
+  active: Active?
+  inactivate_user: Inactivate user
+  activate_user: Activate user
+  unlock: Unlock
+  reset_password: Reset Password
+  reset_and_send_sms: Reset password, Unlock and send SMS
+  no_data_found: No data found
+  add_new: Add New
+  edit: Edit
+  user: User
+  identification: Identification
+  active: Active
+  username: Username
+  password: Password
+  confirm_password: Confirm Password
+  company: Company
+  query_type: Query Type
+  mobile: Mobile
+  observations: Observations
+  node: Node
+  avatar: Avatar
+  accept: Accept
+  return_to_users: Return to users
+  unlock: Unlock
+  reset_password: Reset Password
+  error_procedure: An error occurred in the procedure, please report to the administrator.
+  page_not_found: The page you are looking for does not exist.
+  return_to_previous: To return to the previous page click
+  here: Here
+  all_rights_reserved: All rights reserved
+  modules: Modules
+  add: Add
+  search: Search...
+  general_parameters: General Parameters
+  new: New
+  objects: Objects
+  application_records: Application Records
+  refresh: Refresh
+  start_date: Start Date
+  end_date: End Date
+  object: Object
+  action: Action
+  create: Create
+  delete: Delete
+  update: Update
+  search: Search...
+  search_button: Search
+  date: Date
+  user: User
+  portfolio: Portfolio
+  model: Model
+  actions: Actions
+  today: Today at
+  yesterday: Yesterday at
+  view_changes: View changes
+  database: Database
+  sql_running: SQL Running
+  jobs_running: Jobs Running
+  tablespace_space: Tablespace Space
+  actions: Actions
+  creation_date: Creation Date
+  player: Player
+  status: Status
+  description: Description
+  controller: Controller
+  image: Image
+  message: Message
+  level: Level
+  authorized: Authorized
+  extended_description: Extended Description
+  field: Field
+  code_aportesenlínea: AportesEnLinea Code
+  visible: Visible
+  id: ID
+  name: Name
+  municipality: Municipality
+  department: Department
+  permission: Permission
+  creates: Creates
+  updates: Updates
+  deletes: Deletes
+  field: Field
+  assignment_date: Assignment Date
+  start_time: Start Time
+  end_time: End Time
+  interval: Interval
+  number_of_people_per_interval: Number of people per interval
+  report: Report
+  add_new_permission: Add New Permission
+  add_new_visit: Add New Visit
+  new_company: New Company
+  edit_company: Edit Company
+  sure: Sure?
+  job_name: Job Name
+  job_style: Job Style
+  assigned_parameters: Assigned Parameters
+  associated_reports: Associated Reports
+  associated_visits: Associated Visits
+  associated_modules: Associated Modules
+  municipalities: Municipalities
+  no_jobs_running: No jobs running
+  kill_job: Kill Job
+  dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
+  associated_permissions: Associated Permissions
+  schedules_hours: Schedules - Hours
+  return: Return
+  create_play: Create Play
+  return_to_portfolios: Return to portfolios
+  new_company: New Company
+  edit_company: Edit Company
+  create_company_alegra: Create company in Alegra
+  service_url_create_company: Service - URL Create Company
+  service_url_enable_company: Service - URL Enable Company
+  url_create_contributor: URL Create Contributor
+  select_user_copy_permissions: Select the user to copy permissions from
+  select_file: Select File
+  no_file_selected: No file selected
+  nothing_selected: Nothing Selected
+  update: Update
+  return_to_portfolios_link: Return to portfolios
+  return_link: Return
+  select_user_to_copy: Select the user to copy permissions
+  quantity: Quantity
+  inactivate_schedule: Inactivate schedule
+  activate_schedule: Activate schedule
+  active_session_users: Users with active session
+  connected_users: connected users
+  deactivate_session: Deactivate session
+  page_not_found: Page not found
+  bulk_user_process: Bulk User Process
+  total_validated_records: Total Validated Records
+  total_approved_records: Total Approved Records
+  total_records_inconsistencies: Total Records with Inconsistencies
+  view_inconsistencies: View Inconsistencies
+  confirm_bulk_upload: Confirm bulk upload
+  confirm_bulk_upload_inactivate: Confirm bulk upload to inactivate
+  are_you_sure_bulk_upload: Are you sure you want to execute the bulk user upload?
+  are_you_sure_bulk_upload_inactivate: Are you sure you want to execute the bulk user upload to inactivate them?
+  connection_date_time: Connection Date and Time
+  schedule: Schedule
+  images: Images
+  company: Company
+  short_name: Short Name
+  creation_date: Creation Date
+  api_services: API Services
+  payu: Payu
+  siigo: Siigo
+  alegra: Alegra
+  aportes_en_linea: Aportes en Línea
+  order_of_process: Order of Process
+  token_generation: Token Generation
+  contributor_creation: Contributor Creation
+  news_sending: News Sending
+  certificate_generation: Certificate Generation
+  enabled: Enabled
+  created: Created
+
   will_paginate:
     previous_label: "&#8592; Previous"
     next_label: "Next &#8594;"

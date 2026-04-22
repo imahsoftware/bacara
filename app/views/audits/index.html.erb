@@ -1,12 +1,12 @@
-<% title 'Registros de la aplicación' %>
+<% title t(:application_records) %>
 
 <div class="box box-primary">
   <div class="box-header">
     <h3 class="box-title">
-      <%= link_to audits_path, data: { toggle: 'tooltip' }, title: 'Refrescar' do %>
+      <%= link_to audits_path, data: { toggle: 'tooltip' }, title: t(:refresh) do %>
         <button class="btn btn-xs btn-primary"><i class="fa fa-refresh"></i></button>
       <% end %>
-      Registros de la aplicación
+      <%= t :application_records %>
     </h3>
   </div>
   <div class="box-body">
@@ -14,26 +14,26 @@
       <%= form_tag request.path, method: :get, id: "search-form" do %>
         <div class="row">
           <div class="col-md-2">
-            <%= text_field_tag :fecha_inicio, params[:fecha_inicio], class: 'form-control datepicker', placeholder: 'Fecha Inicio'%>
+            <%= text_field_tag :fecha_inicio, params[:fecha_inicio], class: 'form-control datepicker', placeholder: t(:start_date)%>
           </div>
           <div class="col-md-2">
-            <%= text_field_tag :fecha_fin, params[:fecha_fin], class: 'form-control datepicker', placeholder: 'Fecha fin'%>
+            <%= text_field_tag :fecha_fin, params[:fecha_fin], class: 'form-control datepicker', placeholder: t(:end_date)%>
           </div>
           <div class="col-md-3">
-            <%= select_tag 'ubicacion[proceso]', options_for_select(Objeto.find_by_sql("select distinct auditable_type from audits order by auditable_type").collect {|p| [ p.auditable_type, p.auditable_type ] }), prompt: 'Objeto', data: { width: '100%' }, class: 'form-control select2' %>
+            <%= select_tag 'ubicacion[proceso]', options_for_select(Objeto.find_by_sql("select distinct auditable_type from audits order by auditable_type").collect {|p| [ p.auditable_type, p.auditable_type ] }), prompt: t(:object), data: { width: '100%' }, class: 'form-control select2' %>
           </div>
           <div class="col-md-2">
-            <%= select_tag 'ubicacion[accion]', options_for_select([["Crear", "create"],["Eliminar", "destroy"],["Actualizar","update"]]), prompt: 'Acción', data: { width: '100%' }, class: 'form-control select2' %>
+            <%= select_tag 'ubicacion[accion]', options_for_select([[t(:create), "create"],[t(:delete), "destroy"],[t(:update),"update"]]), prompt: t(:action), data: { width: '100%' }, class: 'form-control select2' %>
           </div>
           <div class="col-md-3">
             <%= hidden_field_tag :user_id %>
-            <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control", id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+            <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control", id_element: '#user_id', placeholder: t(:search), type: "search" %>
           </div>
         </div>
         <br>
         <div class="row">
           <div class="col-md-12">
-            <%= submit_tag 'Buscar', class: 'btn btn-flat btn-warning pull-right' %>
+            <%= submit_tag t(:search_button), class: 'btn btn-flat btn-warning pull-right' %>
           </div>
         </div>
       <% end %>
@@ -44,21 +44,21 @@
         <table class="table no-margin">
           <thead class="thcolor">
             <tr>
-              <th>Fecha</th>
-              <th>Usuario</th>
-              <th>Portafolio</th>
-              <th>Modelo</th>
-              <th class="text-center">Acción</th>
-              <th>Acciones</th>
+              <th><%= t :date %></th>
+              <th><%= t :user %></th>
+              <th><%= t :portfolio %></th>
+              <th><%= t :model %></th>
+              <th class="text-center"><%= t :action %></th>
+              <th><%= t :actions %></th>
             </tr>
           </thead>
           <tbody>
             <% @audits.order(created_at: :desc).each do |audit| %>
                 <tr>
                 <% if audit.created_at.strftime("%d/%m/%Y") == Time.now.strftime("%d/%m/%Y") %>
-                  <td>Hoy a las <%= audit.created_at.strftime("%H:%M") %></td>
+                  <td><%= t :today %> <%= audit.created_at.strftime("%H:%M") %></td>
                 <% elsif audit.created_at.strftime("%d/%m/%Y") == Date.yesterday.strftime("%d/%m/%Y") %>
-                  <td>Ayer a las <%= audit.created_at.strftime("%H:%M") %></td>
+                  <td><%= t :yesterday %> <%= audit.created_at.strftime("%H:%M") %></td>
                 <% else %>
                   <td><%= audit.created_at.strftime("%d/%m/%Y - %I:%M %p") %></td>
                 <% end %>
@@ -74,7 +74,7 @@
                   <% end %>
                   <td>
                     <%= link_to audit_path(audit), remote: true do %>
-                      <button class="btn btn-xs btn-primary">Ver cambios</button>
+                      <button class="btn btn-xs btn-primary"><%= t :view_changes %></button>
                     <% end %>
                   </td>
                 </tr>
@@ -84,7 +84,7 @@
       </div>
     </div>
   <% else %>
-    <h4 class="text-center">No se encontraron datos</h4>
+    <h4 class="text-center"><%= t :no_data_found %></h4>
   <% end %>
 
   <div class="box-footer clear-fix">
