@@ -5,7 +5,7 @@
     <h3 class="box-title"><%= t(:jugadas) %></h3>
     <div class="box-tools pull-right">
       <% if is_persona && @persona_bloquea_nueva_jugada %>
-        <span id="new_jugada_button" class="text-muted" style="cursor:not-allowed;opacity:0.45;" data-toggle="tooltip" title="Cierre o finalice su jugada PENDIENTE antes de crear otra.">
+        <span id="new_jugada_button" class="text-muted" style="cursor:not-allowed;opacity:0.45;" data-toggle="tooltip" title="<%= t('close_or_finish_pending_play') %>">
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
         </span>
       <% elsif is_persona && @persona_ultima_cerrada.present? %>
@@ -14,15 +14,15 @@
             class: 'btn btn-sm btn-success btn-flat',
             id: 'new_jugada_button',
             data: { toggle: 'tooltip' },
-            title: 'Crear una nueva sesión (SHOE) a partir de la jugada CERRADA.' do %>
+            title: t('create_new_shoe_from_closed_play') do %>
           <i class="fa fa-plus" aria-hidden="true"></i> New SHOE
         <% end %>
       <% elsif is_persona %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-default', data: { toggle: 'tooltip' }, title: 'Nueva Jugada' do %>
+        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-default', data: { toggle: 'tooltip' }, title: t('new_play') do %>
           <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
         <% end %>
       <% else %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-success', data: { toggle: 'tooltip' }, title: 'Nueva Jugada' do %>
+        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-success', data: { toggle: 'tooltip' }, title: t('new_play') do %>
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
         <% end %>
       <% end %>

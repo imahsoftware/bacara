@@ -9,24 +9,24 @@
   <div id="left">
     <div id="signin">
       <div class="logo">
-        <%= render 'users/flash_message_session', titulo: 'Ingreso al Sistema' %>
+        <%= render 'users/flash_message_session', titulo: t('system_login') %>
       </div>
       <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
         <%= f.input :reset_password_token, as: :hidden %>
         <%= f.full_error :reset_password_token %>
         <div>
-          <label>Nueva Contraseña</label>
-          <%= f.input :password, required: true, autofocus: true, label: false, placeholder: 'Nueva contraseña', input_html: { class: 'form-control'} %>
+          <label><%= t('new_password') %></label>
+          <%= f.input :password, required: true, autofocus: true, label: false, placeholder: t('new_password'), input_html: { class: 'form-control'} %>
         </div>
         <div>
-          <label>Nueva Contraseña</label>
+          <label><%= t('confirm_new_password') %></label>
           <%= f.input :password_confirmation, required: true, label: false,
-                      placeholder: 'Confirmar contraseña',
+                      placeholder: t('confirm_new_password'),
                       input_html: { class: 'form-control' } %>
         </div>
         <br/>
         <div>
-          <%= f.button :submit, 'Aceptar', class: 'primary-btn', disabled_with: 'Iniciando...' %>
+          <%= f.button :submit, t('aceptar'), class: 'primary-btn', disabled_with: t('signing_in') %>
         </div>
       <% end %>
 
@@ -35,14 +35,14 @@
           <ul>
             <li>
               <%= link_to new_password_path(resource_name) do %>
-                <span>¿Olvidaste tu contraseña?</span>
+                <span><%= t('forgot_password_link') %></span>
               <% end %>
             </li>
           </ul>
         <% else %>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <%= link_to new_password_path(resource_name) do %>
-              <span>¿Olvidaste tu contraseña?</span>
+              <span><%= t('forgot_password_link') %></span>
             <% end %>
           <% end %>
         <% end %>
@@ -51,7 +51,7 @@
       <%= render 'layouts/flash_messages' %>
     </div>
     <footer id="main-footer">
-      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> · <span class="footer-app">BacWins</span> · Todos los derechos reservados.
+      <%= t('copyright') %> &copy; <%= Time.now.strftime("%Y") %> <b><%= t('imahsoftware') %></b> · <span class="footer-app"><%= t('bacwins') %></span> · <%= t('all_rights_reserved') %>.
     </footer>
   </div>
 </div>

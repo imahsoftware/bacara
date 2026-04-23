@@ -1,7 +1,7 @@
 <%= simple_form_for([@user, @usersparametro], remote: true) do |f| %>
   <div class="row">
     <div class="col-md-6">
-      <%= f.input :campo, collection: Iparametro.select("campo").where("campo not in (select campo from usersparametros where user_id = #{@user.id})").distinct.order('campo').collect { |p| [p.campo, p.campo] }, input_html: { class: 'select2' }, label: 'Campo Permitido' %></div>
+      <%= f.input :campo, collection: Iparametro.select("campo").where("campo not in (select campo from usersparametros where user_id = #{@user.id})").distinct.order('campo').collect { |p| [p.campo, p.campo] }, input_html: { class: 'select2' }, label: t('campo_permitido') %></div>
   </div>
   <div class="row">
     <div class="col-md-6">

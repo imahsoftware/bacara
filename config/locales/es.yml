@@ -1,6 +1,4 @@
- # Este es ....
-# Este es ....
-# Este es ....
+# Auto-generated/merged by translation completion script.
 es:
   editar_perfil: Edit Profile
   salir: Log Out
@@ -120,8 +118,6 @@ es:
   integracion_sistemas: System integration
   soporte_continuo: Continuous support
   todos_derechos_reservados: All rights reserved.
-
-  # Jugadas Detalladas translations
   jugador_label: Player
   seleccionar_resultado: Select Result
   eliminar_ultimo: Delete Last
@@ -164,7 +160,7 @@ es:
   profile: Profile
   edit_profile_button: Edit Profile
   logout: Logout
-  are_you_sure_logout: Are you sure you want to log out?
+  are_you_sure_logout: Are you sure
   reestablish: Reestablish
   deactivate_two_factor: Deactivate two factor
   activate_two_factor: Activate two factor
@@ -174,8 +170,7 @@ es:
   username: Username
   name: Name
   email: Email
-  mobile: Mobile
-  active: Active?
+  active: Active
   inactivate_user: Inactivate user
   activate_user: Activate user
   unlock: Unlock
@@ -185,29 +180,19 @@ es:
   add_new: Add New
   edit: Edit
   user: User
-  identification: Identification
-  active: Active
-  username: Username
-  password: Password
-  confirm_password: Confirm Password
   company: Company
-  query_type: Query Type
-  mobile: Mobile
   observations: Observations
   node: Node
   avatar: Avatar
   accept: Accept
   return_to_users: Return to users
-  unlock: Unlock
-  reset_password: Reset Password
   error_procedure: An error occurred in the procedure, please report to the administrator.
-  page_not_found: The page you are looking for does not exist.
+  page_not_found: Page not found
   return_to_previous: To return to the previous page click
   here: Here
   all_rights_reserved: All rights reserved
   modules: Modules
   add: Add
-  search: Search...
   general_parameters: General Parameters
   new: New
   objects: Objects
@@ -220,10 +205,60 @@ es:
   create: Create
   delete: Delete
   update: Update
-  search: Search...
   search_button: Search
-  date: Date
-  user: User
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - null
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: '%d/%m/%Y'
+      long: '%A, %d de %B de %Y'
+      short: '%d de %b'
+    month_names:
+    - null
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
   portfolio: Portfolio
   model: Model
   actions: Actions
@@ -234,7 +269,6 @@ es:
   sql_running: SQL Running
   jobs_running: Jobs Running
   tablespace_space: Tablespace Space
-  actions: Actions
   creation_date: Creation Date
   player: Player
   status: Status
@@ -249,14 +283,12 @@ es:
   code_aportesenlínea: AportesEnLinea Code
   visible: Visible
   id: ID
-  name: Name
   municipality: Municipality
   department: Department
   permission: Permission
   creates: Creates
   updates: Updates
   deletes: Deletes
-  field: Field
   assignment_date: Assignment Date
   start_time: Start Time
   end_time: End Time
@@ -280,11 +312,8 @@ es:
   dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
   associated_permissions: Associated Permissions
   schedules_hours: Schedules - Hours
-  return: Return
   create_play: Create Play
   return_to_portfolios: Return to portfolios
-  new_company: New Company
-  edit_company: Edit Company
   create_company_alegra: Create company in Alegra
   service_url_create_company: Service - URL Create Company
   service_url_enable_company: Service - URL Enable Company
@@ -293,7 +322,6 @@ es:
   select_file: Select File
   no_file_selected: No file selected
   nothing_selected: Nothing Selected
-  update: Update
   return_to_portfolios_link: Return to portfolios
   return_link: Return
   select_user_to_copy: Select the user to copy permissions
@@ -303,7 +331,6 @@ es:
   active_session_users: Users with active session
   connected_users: connected users
   deactivate_session: Deactivate session
-  page_not_found: Page not found
   bulk_user_process: Bulk User Process
   total_validated_records: Total Validated Records
   total_approved_records: Total Approved Records
@@ -316,9 +343,7 @@ es:
   connection_date_time: Connection Date and Time
   schedule: Schedule
   images: Images
-  company: Company
   short_name: Short Name
-  creation_date: Creation Date
   api_services: API Services
   payu: Payu
   siigo: Siigo
@@ -331,11 +356,173 @@ es:
   certificate_generation: Certificate Generation
   enabled: Enabled
   created: Created
-
+  recover_password: Recover Password
+  enter_username_to_reset: Enter your username to reset access
+  forgot_password_link: Forgot your password?
+  back_to_login: Back to login
+  new_password: New Password
+  confirm_new_password: Confirm New Password
+  system_login: System Login
+  sending: Sending...
+  signing_in: Signing in...
+  custom_software_solutions: Custom software solutions
+  custom_development: Custom development
+  system_integration: System integration
+  continuous_support: Continuous support
+  copyright: Copyright
+  bacwins: BacWins
+  campo: Field
+  codigo_aportes_en_linea: AportesEnLinea Code
+  estado: Status
+  descripcion: Description
+  descripcion_ampliada: Extended Description
+  autorizado: Authorized
+  si: true
+  false: false
+  reporte: Report
+  campo_permitido: Allowed Field
+  modulo: Module
+  identificacion: Identification
+  nombre: Name
+  nombre_corto: Short Name
+  agregar_formato: Add Format
+  agregar_usuario: Add User
+  cargar_documento: Load Document
+  cargar_archivo: Load File
+  nada_seleccionado: Nothing Selected
+  nº_celular: Mobile Number
+  nº_lote: Batch Number
+  contraseña: Password
+  confirmar_contraseña: Confirm Password
+  correo_electronico: Email
+  identificacion_acud: Identification
+  cambiar_correo_electronico: Change Email
+  fecha_de_nacimiento: Date of Birth
+  contrato: Contract
+  contrato_empresa: Contract - Company
+  nodo: Node
+  periodo: Period
+  usuario_title: User
+  clave: Password
+  confirmar_clave: Confirm Password
+  agregar_nuevo: Add New
+  editar: Edit
+  regresar_a_usuarios: Return to Users
+  seguro_question: Are you sure?
+  desbloquear: Unlock
+  reestablecer_clave: Reset Password
+  inactivar_usuario: Inactivate User
+  activar_usuario: Activate User
+  cargar: Load
+  generar: Generate
+  crear_empresa_en_alegra: Create Company in Alegra
+  desisten: Desist
+  aprobar: Approve
+  rechazar: Reject
+  sin_contacto: No Contact
+  seleccione_usuario_copiar_permisos: Select the user to copy permissions
+  tipo_consulta: Query Type
+  confirmar_mi_cuenta: Confirm my account
+  puede_confirmar_correo: You can confirm your email through the following link
+  cuando_ingreses_sistema: When you enter our Information System you will find a menu at the top specifically an option that says "User", in this option you can change your System Access password as many
+    times as needed
+  usuario_menu: User
+  desconectarse: Disconnect
+  esta_seguro: Are you sure
+  que_quiere_desconectarse: that you want to disconnect?
+  eliminar: Delete
+  seguro_question_mark: Sure?
+  ver_imagen: View Image
+  eliminar_image: Delete
+  informe_gestion_revisado: Management Report Reviewed by?
+  informe_gestion_aprobado: Management Report Approved by?
+  api_key: API KEY
+  api_login: API LOGIN
+  llave_publica: Public Key
+  id_comercio: Commerce ID
+  id_cuenta: Account ID
+  dias_expira: Days Expires
+  moneda: Currency
+  prueba: Test
+  url_payu: Payu URL
+  url_confirmacion: Confirmation URL
+  url_respuesta: Response URL
+  basic: Basic
+  ocp: Ocp
+  doccode: DocCode
+  sales_man_identification: Sales man identification
+  payment_code: Payment Code
+  id_compania: Company ID
+  nombre_alegra: Name
+  nit_alegra: Nit Alegra
+  digito_verificacion: Check Digit
+  tipo: Type
+  token: Token
+  compania_habilitada: Company Enabled
+  set_id: Set Id
+  government_id: Government Id
+  servicio_url_emitir_nomina: Service - URL Issue Payroll
+  servicio_url_crear_empresa: Service - URL Create Company
+  servicio_url_habilitar_empresa: Service - URL Enable Company
+  aportes_username: Username
+  aportes_contrasena: Password
+  aportes_aplicacion: Application
+  aportes_tipo_id: Type ID Aportes
+  aportes_numero_id: Number ID Aportes
+  aportes_sucursal_principal: Main Branch
+  aportes_centro_trabajo: Work Center
+  url_creacion_novedades: URL Creation of News
+  informe_de_gestion_revisado_por: Management Report Reviewed by?
+  informe_de_gestion_aprobado_por: Management Report Approved by?
+  logo: Logo
+  siigo_username: Username
+  siigo_password: Password
+  siigo_basic: Basic
+  siigo_ocp: Ocp
+  siigo_doccode: DocCode
+  siigo_salesmansdentification: Sales man identification
+  siigo_paymentmeanscode: Payment Code
+  id_alegra: Company ID
+  name_alegra: Name
+  identificacion_alegra: Nit Alegra
+  dv_alegra: Check Digit
+  type_alegra: Type
+  token_alegra: Token
+  habilita_alegra: Company Enabled
+  setid_alegra: Set Id
+  governmentid_alegra: Government Id
+  url_alegra: Service - URL Issue Payroll
+  url_crear_empresa_alegra: Service - URL Create Company
+  url_habilitar_empresa_alegra: Service - URL Enable Company
+  aportes_username_label: Username
+  aportes_contrasena_label: Password
+  aportes_aplicacion_label: Application
+  aportes_tipoidaportante: Type ID Aportes
+  aportes_numeroidaportante: Number ID Aportes
+  aportes_sucursalprincipal: Main Branch
+  aportes_centro_trabajo_label: Work Center
+  aportes_url_certificado: Certificate URL
+  aportes_tipoidaportante_label: Type ID Aportes
+  aportes_numeroidaportante_label: Number ID Aportes
+  aportes_sucursalprincipal_label: Main Branch
+  aportes_centro_trabajo_label2: Work Center
+  url_token: URL Token
+  url_crear_cotizante: URL Create Contributor
+  url_generar_certificado: URL Generate Certificate
+  usuario_label: User
+  objeto: Object
+  permiso: Permission
+  close_or_finish_pending_play: Close or finish your pending play before creating another
+  create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
+  new_play: New Play
+  administration_module: Administration Module
+  administration_modules: Administration Modules
+  expand_security_modules: Expand Security Modules
+  that_you_want_to_disconnect: that you want to disconnect
   will_paginate:
-    previous_label: "&#8592; Previous"
-    next_label: "Next &#8594;"
-    page_gap: "&hellip;"
+    previous_label: '&#8592; Previous'
+    next_label: Next &#8594;
+    page_gap: '&hellip;'
   activerecord:
     attributes:
       jugada:
@@ -483,7 +670,7 @@ es:
         email_institucional: Correo Institucional
         clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
         nacimiento_municipio_id: Municipio de nacimiento
-        zona: Zona de residencia
+        zona: Zona
         discapacidad: ¿Tiene alguna discapacidad?
         tiposdiscapacidad_id: Tipo de discapacidad
         residencia_municipio_id: Municipio de la residencia
@@ -491,8 +678,7 @@ es:
         cohorte_id: Cohorte
         centro_id: Centro de Apoyo
         medio: ¿Por cuál medio se enteró de EDUPOL?
-        ciudadexpedicion_id: 'Ciudad de Expedición'
-        zona: Zona
+        ciudadexpedicion_id: Ciudad de Expedición
         parnaturalezadeudor_id: Naturaleza del Deudor
         parsituaciondeudor_id: Situación del Deudor
         contac_parentesco: Parentesco
@@ -701,66 +887,12 @@ es:
         accion_inmediata: Acción inmediata
         fecha_accion: Fecha accion inmediata
         observacion_accion: Observación de acción inmediata
-        #AQUI VA !!!!!!!!
     errors:
       messages:
-        record_invalid: "La validación falló: %{errors}"
+        record_invalid: 'La validación falló: %{errors}'
         restrict_dependent_destroy:
           has_one: No se puede eliminar el registro porque existe un %{record} dependiente
           has_many: No se puede eliminar el registro porque existen %{record} dependientes
-  date:
-    abbr_day_names:
-    - dom
-    - lun
-    - mar
-    - mié
-    - jue
-    - vie
-    - sáb
-    abbr_month_names:
-    -
-    - ene
-    - feb
-    - mar
-    - abr
-    - may
-    - jun
-    - jul
-    - ago
-    - sep
-    - oct
-    - nov
-    - dic
-    day_names:
-    - domingo
-    - lunes
-    - martes
-    - miércoles
-    - jueves
-    - viernes
-    - sábado
-    formats:
-      default: "%d/%m/%Y"
-      long: "%A, %d de %B de %Y"
-      short: "%d de %b"
-    month_names:
-    -
-    - enero
-    - febrero
-    - marzo
-    - abril
-    - mayo
-    - junio
-    - julio
-    - agosto
-    - septiembre
-    - octubre
-    - noviembre
-    - diciembre
-    order:
-    - :day
-    - :month
-    - :year
   datetime:
     distance_in_words:
       about_x_hours:
@@ -787,16 +919,16 @@ es:
         other: más de %{count} años
       x_days:
         one: 1 día
-        other: "%{count} días"
+        other: '%{count} días'
       x_minutes:
         one: 1 minuto
-        other: "%{count} minutos"
+        other: '%{count} minutos'
       x_months:
         one: 1 mes
-        other: "%{count} meses"
+        other: '%{count} meses'
       x_seconds:
         one: 1 segundo
-        other: "%{count} segundos"
+        other: '%{count} segundos'
     prompts:
       day: Día
       hour: Hora
@@ -805,7 +937,7 @@ es:
       second: Segundos
       year: Año
   errors:
-    format: "%{attribute} %{message}"
+    format: '%{attribute} %{message}'
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
@@ -821,7 +953,7 @@ es:
       invalid: es inválido
       less_than: debe ser menor que %{count}
       less_than_or_equal_to: debe ser menor o igual que %{count}
-      model_invalid: "La validación falló: %{errors}"
+      model_invalid: 'La validación falló: %{errors}'
       not_a_number: solo números
       not_an_integer: debe ser un entero
       odd: debe ser un número impar
@@ -837,11 +969,14 @@ es:
         one: longitud errónea (debe ser de 1 caracter)
         other: longitud errónea (debe ser de %{count} caracteres)
       other_than: debe ser distinto de %{count}
+      not_saved: '%{count} error impidieron guardar este %{resource}:
+
+        '
     template:
       body: 'Revise que los siguientes campos sean válidos:'
       header:
-        one: "%{model} no pudo guardarse debido a 1 error"
-        other: "%{model} no pudo guardarse debido a %{count} errores"
+        one: '%{model} no pudo guardarse debido a 1 error'
+        other: '%{model} no pudo guardarse debido a %{count} errores'
   helpers:
     select:
       prompt: Por favor selecciona
@@ -850,25 +985,22 @@ es:
       submit: Guardar %{model}
       update: Actualizar %{model}
   number:
-    # Used in number_to_currency()
     currency:
       format:
-        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
-        format: "%n %u"
-        unit: "$"
-        # These three are to override number.format and are optional
-        separator: ","
-        delímiter: "."
+        format: '%n %u'
+        unit: $
+        separator: ','
+        delimiter: .
         precision: 2
     format:
-      delímiter: ","
+      delimiter: ','
       precision: 2
-      separator: "."
+      separator: .
       significant: false
       strip_insignificant_zeros: false
     human:
       decimal_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           billion: mil millones
           million:
@@ -881,12 +1013,12 @@ es:
             other: billones
           unit: ''
       format:
-        delímiter: ","
+        delimiter: ','
         precision: 3
         significant: true
         strip_insignificant_zeros: true
       storage_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           byte:
             one: Byte
@@ -897,28 +1029,35 @@ es:
           tb: TB
     percentage:
       format:
-        delímiter: ","
-        format: "%n%"
+        delimiter: ','
+        format: '%n%'
     precision:
       format:
-        delímiter: ","
+        delimiter: ','
   support:
     array:
-      last_word_connector: " y "
-      two_words_connector: " y "
-      words_connector: ", "
+      last_word_connector: ' y '
+      two_words_connector: ' y '
+      words_connector: ', '
   time:
     am: am
     formats:
-      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
-      long: "%A, %d de %B de %Y a las %I:%M %p"
-      short: "%d de %b a las %H:%M hrs"
+      default: '%a, %d de %b de %Y a las %H:%M:%S %Z'
+      long: '%A, %d de %B de %Y a las %I:%M %p'
+      short: '%d de %b a las %H:%M hrs'
     pm: pm
-
   views:
     pagination:
-      first: "&laquo; Primero"
-      last: "Último &raquo;"
-      previous: "&lsaquo; Anterior"
-      next: "Siguiente &rsaquo;"
-      truncate: "..."
+      first: '&laquo; Primero'
+      last: Último &raquo;
+      previous: '&lsaquo; Anterior'
+      next: Siguiente &rsaquo;
+      truncate: '...'
+  datepicker:
+    dformat: '%d/%m/%Y'
+    pformat: DD/MM/YYYY
+  timepicker:
+    dformat: '%R'
+    pformat: HH:mm
+  dayViewHeaderFormat: MMMM YYYY
+  'no': 'No'

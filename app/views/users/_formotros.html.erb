@@ -5,39 +5,39 @@
         <div class="box-header">
           <legend>
             <% if @user.new_record? %>
-              <%= link_to users_path, data: { toggle: 'tooltip' }, title: 'Regresar a usuarios' do %>
+              <%= link_to users_path, data: { toggle: 'tooltip' }, title: t('regresar_a_usuarios') do %>
                 <i class="fa fa-arrow-left fa-fw text-success" aria-hidden="true"></i>
               <% end %>
             <% end %>
-            <%= @user.new_record? ? 'Agregar nuevo' : 'Editar' %> Usuario
+            <%= @user.new_record? ? t('agregar_nuevo') : t('editar') %> <%= t('usuario_label') %>
           </legend>
           <div class="box-tools pull-right">
             <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
-              <i class="fa fa-plus-square"> </i> <span>Nuevo usuario</span>
+              <i class="fa fa-plus-square"> </i> <span><%= t('nuevo') %> <%= t('usuario_label') %></span>
             <% end %>
           </div>
         </div><!-- /.box-header -->
         <div class="box-body">
           <div class="row">
-            <div class="col-md-2"><%= f.input :identificacion, label: 'Identificación' %></div>
+            <div class="col-md-2"><%= f.input :identificacion, label: t('identificacion') %></div>
             <div class="col-md-7"><%= f.input :nombre, input_html: { onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
             <div class="col-md-3"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: { class: 'select2' } %></div>
           </div>
           <div class="row">
-            <div class="col-md-4"><%= f.input :username, label: 'Usuario' %></div>
-            <div class="col-md-2"><%= f.input :password, label: 'Clave' %></div>
-            <div class="col-md-2"><%= f.input :password_confirmation, label: 'Confirmar Clave' %></div>
+            <div class="col-md-4"><%= f.input :username, label: t('usuario_label') %></div>
+            <div class="col-md-2"><%= f.input :password, label: t('clave') %></div>
+            <div class="col-md-2"><%= f.input :password_confirmation, label: t('confirmar_clave') %></div>
             <div class="col-md-4"><%= f.input :email %></div>
           </div>
           <div class="row">
-            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: 'Tipo Consulta' %></div>
+            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t('tipo_consulta') %></div>
             <div class="col-md-2"><%= f.input :celular %></div>
           </div>
           <div class="row">
             <div class="col-md-8">
-              <%= f.input :contrato_id, collection: Contrato.includes([:empresa]).order(:nro_contrato).collect {|p| [ p.nombrebyuser, p.id ] }, input_html: { class: 'select2' }, as: :select, label: 'Contrato - Empresa',include_blank: true%>
+              <%= f.input :contrato_id, collection: Contrato.includes([:empresa]).order(:nro_contrato).collect {|p| [ p.nombrebyuser, p.id ] }, input_html: { class: 'select2' }, as: :select, label: t('contrato_empresa'),include_blank: true%>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2"><%= f.input :clase_aseo, as: :select, collection: select_act_tipo, input_html: { data: { width: '100%' }, class: 'select2'}, label: "Nodo"%></div>
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2"><%= f.input :clase_aseo, as: :select, collection: select_act_tipo, input_html: { data: { width: '100%' }, class: 'select2'}, label: t('nodo')%></div>
           </div>
           <div class="row">
             <div class="col-md-2"><%= f.input :avatar, as: :file %></div>
@@ -45,7 +45,7 @@
         </div>
         <div class="box-footer">
           <div class="box-tools pull-right">
-            <%= f.button :submit, 'Aceptar', class: 'btn-flat btn-danger' %>
+            <%= f.button :submit, t('aceptar'), class: 'btn-flat btn-danger' %>
           </div><!-- /.box-tools -->
         </div><!-- box-footer -->
       </div><!-- /.box -->
