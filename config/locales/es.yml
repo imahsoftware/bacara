@@ -519,6 +519,11 @@ es:
   administration_modules: Administration Modules
   expand_security_modules: Expand Security Modules
   that_you_want_to_disconnect: that you want to disconnect
+  users_passwords_reset_email_sent: Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña.
+  users_passwords_user_not_found: No se encontró un usuario con esa dirección de correo electrónico.
+  users_passwords_password_updated: La contraseña se ha actualizado correctamente.
+  users_passwords_invalid_token: El token de restablecimiento de contraseña no es válido.
+  users_passwords_recovery_subject: Recuperación de Contraseña
   will_paginate:
     previous_label: '&#8592; Previous'
     next_label: Next &#8594;

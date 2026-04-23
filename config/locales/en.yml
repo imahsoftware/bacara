@@ -1059,6 +1059,11 @@ en:
   administration_modules: Administration Modules
   expand_security_modules: Expand Security Modules
   that_you_want_to_disconnect: that you want to disconnect
+  users_passwords_reset_email_sent: An email has been sent with instructions to reset your password.
+  users_passwords_user_not_found: No user was found with that email address.
+  users_passwords_password_updated: Your password has been updated successfully.
+  users_passwords_invalid_token: The password reset token is invalid.
+  users_passwords_recovery_subject: Password Recovery
   datepicker:
     dformat: '%m/%d/%Y'
     pformat: MM/DD/YYYY

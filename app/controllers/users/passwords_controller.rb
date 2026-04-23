@@ -13,13 +13,13 @@ class Users::PasswordsController < Devise::PasswordsController
       # Guardar el usuario con el nuevo token de restablecimiento de contraseña
       user.save
       # Envía el correo electrónico de notificación de restablecimiento de contraseña
-      Bacaramail::SendmailServices.new.notificacionEmails(user.email, "Recuperación de Contraseña", "devise/mailer/reset_password_instructions.html.erb", nil, nil, user.reset_password_token, user.username)
+      Bacaramail::SendmailServices.new.notificacionEmails(user.email, I18n.t(:users_passwords_recovery_subject), "devise/mailer/reset_password_instructions.html.erb", nil, nil, user.reset_password_token, user.username)
 
       # Redirigir a donde quieras después de enviar el correo electrónico
-      redirect_to root_path, notice: "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña."
+      redirect_to root_path, notice: I18n.t(:users_passwords_reset_email_sent)
     else
       # Manejar el caso en que no se encontró un usuario con esa dirección de correo electrónico
-      redirect_to root_path, alert: "No se encontró un usuario con esa dirección de correo electrónico."
+      redirect_to root_path, alert: I18n.t(:users_passwords_user_not_found)
     end
   end
 
@@ -35,7 +35,7 @@ class Users::PasswordsController < Devise::PasswordsController
       # Verificar si la actualización de la contraseña fue exitosa
       if resource.errors.empty?
         # Redirigir a donde quieras después de actualizar la contraseña
-        redirect_to root_path, notice: "La contraseña se ha actualizado correctamente."
+        redirect_to root_path, notice: I18n.t(:users_passwords_password_updated)
       else
         # Mostrar errores si la actualización de la contraseña falla
         flash[:alert] = resource.errors.full_messages.join(", ")
@@ -43,7 +43,7 @@ class Users::PasswordsController < Devise::PasswordsController
       end
     else
       # Manejar el caso en que no se encontró un usuario con el token de restablecimiento de contraseña
-      redirect_to root_path, alert: "El token de restablecimiento de contraseña no es válido."
+      redirect_to root_path, alert: I18n.t(:users_passwords_invalid_token)
     end
   end
 end
