@@ -6,23 +6,23 @@
 
 <input type="hidden" id="jd-base-bet" value="10" />
 
-<div id="jd-spinner">⏳ Guardando...</div>
+<div id="jd-spinner">⏳ <%= t(:guardando) %></div>
 
 <div class="jd-bw-page">
   <div class="jd-bw-main">
     <aside class="jd-bw-sidebar">
       <header class="jd-bw-hero">
-        <h1 class="jd-bw-title">Baccarat Winners</h1>
+        <h1 class="jd-bw-title"><%= t(:baccarat_winners) %></h1>
         <p class="jd-bw-profit">
-          <span class="jd-bw-profit__label">PROFIT:</span>
+          <span class="jd-bw-profit__label"><%= t(:profit_label) %></span>
           <span class="jd-bw-profit__wrap">
-            <span class="jd-bw-profit__currency" title="Dólares estadounidenses (USD)">US$</span><span id="jd-profit-amount"><%= jd_profit_display %></span>
+            <span class="jd-bw-profit__currency" title="<%= t(:usd_title) %>">US</span><span id="jd-profit-amount"><%= jd_profit_display %></span>
           </span>
         </p>
       </header>
 
       <div class="jd-next-bet jd-next-bet--bw" id="jd-next-bet-banner">
-        <span class="jd-nb-label">Your Next Bet:</span>
+        <span class="jd-nb-label"><%= t(:your_next_bet) %>:</span>
         <p class="jd-next-bet__value" id="next-bet-text"><%= @proximo_bet %></p>
       </div>
 
@@ -42,23 +42,23 @@
           <% if jd_pendiente %>
           <button type="button" class="jd-undo-btn jd-undo-btn--bw" id="btn-undo"
                   data-jugada-id="<%= @jugada_id %>"
-                  data-label-default="Undo Last Hand"
-                  data-label-loading="Undoing...">
-            Undo Last Hand
+                  data-label-default="<%= t(:undo_last_hand) %>"
+                  data-label-loading="<%= t(:undoing) %>">
+            <%= t(:undo_last_hand) %>
           </button>
           <button type="button" class="jd-reset-btn" id="btn-reset"
                   data-jugada-id="<%= @jugada_id %>"
-                  data-label-default="Clear Session"
-                  data-label-loading="Clearing...">
-            Clear Session
+                  data-label-default="<%= t(:clear_session) %>"
+                  data-label-loading="<%= t(:clearing) %>">
+            <%= t(:clear_session) %>
           </button>
           <% end %>
           <% if jd_muestra_regresar %>
-            <%= link_to 'Regresar', jugadas_path, class: 'jd-back-btn' %>
+            <%= link_to t(:regresar), jugadas_path, class: 'jd-back-btn' %>
           <% elsif jd_muestra_new_shoe %>
             <%# tipoconsulta PERSONA y jugada CERRADA: SHOE#id, solo si from_jugada CERRADA (ver controller) %>
             <%= link_to nueva_shoe_jugada_path(from_jugada_id: @jugada_id), method: :post, class: 'btn btn-success btn-block' do %>
-              <i class="fa fa-plus" aria-hidden="true"></i> New SHOE
+              <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_shoe) %>
             <% end %>
           <% end %>
         </div>
@@ -74,11 +74,11 @@
       <section class="jd-bw-frequency">
         <div class="jd-bw-frequency-head">
           <h2 class="jd-bw-ft-title">
-            Frequency Table
+            <%= t(:frequency_table) %>
             <span class="jd-badge jd-badge--ft" id="badge-count"><%= @total_movimientos %></span>
           </h2>
           <% if @jugada.present? %>
-            <p class="jd-bw-sub--ft"><%= @jugada.jugador %> · Jugada #<%= @jugada_id %></p>
+            <p class="jd-bw-sub--ft"><%= t(:play_number) %> #<%= @jugada_id %></p>
           <% end %>
         </div>
 
