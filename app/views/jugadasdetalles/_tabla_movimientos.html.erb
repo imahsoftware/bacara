@@ -13,7 +13,7 @@ end %>
 <% if jugadasdetalles.empty? %>
   <div class="jd-empty">
     <i class="fa fa-inbox"></i>
-    Aún no hay movimientos. Haz clic en <strong>P</strong> o <strong>B</strong> para comenzar.
+    <%= t(:aun_no_hay_movimientos) %>
   </div>
 
 <% else %>
@@ -93,13 +93,13 @@ end %>
             <tr class="tr-cols">
               <th style="background:#f8fafc;color:#374151;width:28px;">#</th>
               <% unless jd_hide_mec %>
-                <th class="col-narrow">MEC</th>
+                <th class="col-narrow"><%= t(:mecanica) %></th>
               <% end %>
               <th class="col-p-head col-narrow">P</th>
               <th class="col-b-head col-narrow">B</th>
               <th class="col-narrow">✓/✗</th>
-              <th class="col-narrow">Resul</th>
-              <th class="col-narrow">Acum.</th>
+              <th class="col-narrow"><%= t(:resultado) %></th>
+              <th class="col-narrow"><%= t(:acumulado) %></th>
             </tr>
             </thead>
             <tbody>
@@ -144,14 +144,14 @@ end %>
             <thead>
             <tr class="tr-cols">
               <% unless jd_hide_mec %>
-                <th>MEC</th>
+                <th><%= t(:mecanica) %></th>
               <% end %>
               <th class="col-p-head">P</th>
               <th class="col-b-head">B</th>
               <th>✓/✗</th>
-              <th>Resul</th>
-              <th>Acum.</th>
-              <th>Final</th>
+              <th><%= t(:resultado) %></th>
+              <th><%= t(:acumulado) %></th>
+              <th><%= t(:final) %></th>
             </tr>
             </thead>
             <tbody>

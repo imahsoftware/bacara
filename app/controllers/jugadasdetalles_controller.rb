@@ -125,12 +125,12 @@ class JugadasdetallesController < ApplicationController
 
   def authorize_jugada_acceso
     if @jugada_id.blank? || @jugada_id.to_i <= 0
-      redirect_to root_path, alert: "Jugada no válida."
+      redirect_to root_path, alert: I18n.t(:jugada_no_valida)
       return
     end
 
     unless Jugada.for_user_list(current_user).exists?(id: @jugada_id)
-      redirect_to root_path, alert: "No tiene acceso a esta jugada."
+      redirect_to root_path, alert: I18n.t(:no_tiene_acceso_jugada)
       return
     end
 
@@ -146,7 +146,7 @@ class JugadasdetallesController < ApplicationController
     if pend.blank?
       denegar_acceso_baccarat_persona(
         jugadas_path,
-        "No tiene una sesión PENDIENTE. Use el listado de jugadas."
+        I18n.t(:no_tiene_sesion_pendiente)
       )
       return false
     end
@@ -155,7 +155,7 @@ class JugadasdetallesController < ApplicationController
       correcta = new_jugadasdetalle_path(jugada_id: pend.id)
       denegar_acceso_baccarat_persona(
         correcta,
-        "Solo puede acceder a su jugada PENDIENTE activa (por seguridad no se admite otro id)."
+        I18n.t(:solo_puede_acceder_jugada_pendiente)
       )
       return false
     end

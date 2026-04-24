@@ -38,7 +38,7 @@ class JugadasController < ApplicationController
   def new
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       respond_to do |format|
-        format.js { render js: "alert('Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.');" }
+        format.js { render js: "alert(#{I18n.t(:jugada_en_curso_pendiente).to_json});" }
       end
       return
     end
@@ -57,7 +57,7 @@ class JugadasController < ApplicationController
   def create
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       respond_to do |format|
-        format.js { render js: "alert('Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.');" }
+        format.js { render js: "alert(#{I18n.t(:jugada_en_curso_pendiente).to_json});" }
       end
       return
     end
@@ -77,18 +77,18 @@ class JugadasController < ApplicationController
   # Solo PERSONA, desde baccarat (viewspecial): crea jugada y abre su detalle.
   def nueva_shoe
     unless current_user.tipoconsulta.to_s == 'PERSONA'
-      redirect_to root_path, alert: 'Acción no permitida.'
+      redirect_to root_path, alert: I18n.t(:accion_no_permitida)
       return
     end
 
     from = Jugada.for_user_list(current_user).find_by(id: params[:from_jugada_id].to_i)
     if from.blank? || from.estado.to_s.upcase != 'CERRADA'
-      redirect_back fallback_location: jugadas_path, alert: 'Solo se puede crear una jugada cuando la actual está CERRADA.'
+      redirect_back fallback_location: jugadas_path, alert: I18n.t(:solo_crear_jugada_cuando_cerrada)
       return
     end
 
     if Jugada.persona_tiene_jugada_abierta?(current_user)
-      redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.id), alert: 'Tiene otra jugada PENDIENTE. Termine la sesión activa antes de crear otra.'
+      redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.id), alert: I18n.t(:otra_jugada_pendiente)
       return
     end
 
@@ -121,7 +121,7 @@ class JugadasController < ApplicationController
   def destroy
     @jugada.destroy
     respond_to do |format|
-      flash['success'] = "Eliminado con exito"
+      flash['success'] = I18n.t(:notice_elimina_msj)
       format.js { render inline: "location.reload();" }
     end
   end
@@ -136,7 +136,7 @@ class JugadasController < ApplicationController
   def reject_if_cerrada
     return unless @jugada&.estado.to_s.strip.upcase == "CERRADA"
 
-    msg = "La jugada está CERRADA: no se puede editar ni eliminar."
+    msg = I18n.t(:jugada_cerrada_no_editar)
     respond_to do |format|
       format.html { redirect_to jugadas_path, alert: msg }
       format.js   { render js: "alert(#{msg.to_json});" }

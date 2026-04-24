@@ -1,5 +1,5 @@
-<p>Bienvenido <%= @email %>!oioioioio</p>
+<p><%= t :bienvenido %> <%= @email %>!</p>
 
-<p>Puede confirmar el correo electrónico de su cuenta a través del siguiente enlace:</p>
+<p><%= t :puede_confirmar_correo_enlace %></p>
 
-<p><%= link_to 'Confirmar mi cuenta', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to t(:confirmar_mi_cuenta), confirmation_url(@resource, confirmation_token: @token) %></p>

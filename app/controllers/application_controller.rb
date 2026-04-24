@@ -135,25 +135,25 @@ class ApplicationController < ActionController::Base
 
    helper_method :namedate
    def namedate(fecha)
-     day_names = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"]
-     month_names = ["","Enero","Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+     day_names = I18n.t(:day_names_full)
+     month_names = I18n.t(:month_names_full)
      dia = fecha.strftime("%w").to_i
      ndia = day_names[dia]
      mes = fecha.strftime("%m").to_i
      nmes = month_names[mes]
-     fchcompleta = ndia + ' ' + fecha.strftime("%d") + ' de ' + nmes + ' del ' + fecha.strftime("%Y")
+     fchcompleta = I18n.t(:fecha_larga_formato, dia_semana: ndia, dia: fecha.strftime("%d"), mes: nmes, anio: fecha.strftime("%Y"))
      return fchcompleta
    end
 
    helper_method :namedate2
    def namedate2(fecha)
-     day_names = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"]
-     month_names = ["","enero","febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+     day_names = I18n.t(:day_names_lower)
+     month_names = I18n.t(:month_names_lower)
      dia = fecha.strftime("%w").to_i
      ndia = day_names[dia]
      mes = fecha.strftime("%m").to_i
      nmes = month_names[mes]
-     fchcompleta = ndia + ' ' + fecha.strftime("%d") + ' de ' + nmes + ' del ' + fecha.strftime("%Y")
+     fchcompleta = I18n.t(:fecha_larga_formato, dia_semana: ndia, dia: fecha.strftime("%d"), mes: nmes, anio: fecha.strftime("%Y"))
      return fchcompleta
    end
 

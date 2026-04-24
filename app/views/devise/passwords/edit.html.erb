@@ -1,11 +1,63 @@
 <div id="wrapper">
+
+  <!-- ── PANEL IZQUIERDO OSCURO ── -->
   <div id="right">
     <div id="showcase">
       <div class="showcase-content">
-        <!-- <%= image_tag('logo.png', size: '500x200', alt: 'BacWins') %> -->
+        <div class="brand-logo">
+          <svg class="brand-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="6" fill="#06176B"/>
+            <circle cx="32" cy="32" r="4" fill="white"/>
+            <circle cx="12" cy="18" r="3.5" fill="white" opacity="0.9"/>
+            <circle cx="52" cy="18" r="3.5" fill="white" opacity="0.9"/>
+            <circle cx="12" cy="46" r="3.5" fill="white" opacity="0.7"/>
+            <circle cx="52" cy="46" r="3.5" fill="white" opacity="0.7"/>
+            <circle cx="32" cy="8"  r="3"   fill="white" opacity="0.6"/>
+            <circle cx="32" cy="56" r="3"   fill="white" opacity="0.6"/>
+            <line x1="32" y1="26" x2="32" y2="11"  stroke="white" stroke-width="1.2" opacity="0.5"/>
+            <line x1="32" y1="38" x2="32" y2="53"  stroke="white" stroke-width="1.2" opacity="0.4"/>
+            <line x1="27" y1="29" x2="15" y2="21"  stroke="white" stroke-width="1.2" opacity="0.5"/>
+            <line x1="37" y1="29" x2="49" y2="21"  stroke="white" stroke-width="1.2" opacity="0.5"/>
+            <line x1="27" y1="35" x2="15" y2="43"  stroke="white" stroke-width="1.2" opacity="0.4"/>
+            <line x1="37" y1="35" x2="49" y2="43"  stroke="white" stroke-width="1.2" opacity="0.4"/>
+            <line x1="15" y1="21" x2="32" y2="11"  stroke="white" stroke-width="0.7" opacity="0.2"/>
+            <line x1="49" y1="21" x2="32" y2="11"  stroke="white" stroke-width="0.7" opacity="0.2"/>
+            <line x1="15" y1="43" x2="32" y2="53"  stroke="white" stroke-width="0.7" opacity="0.2"/>
+            <line x1="49" y1="43" x2="32" y2="53"  stroke="white" stroke-width="0.7" opacity="0.2"/>
+          </svg>
+          <div class="brand-wordmark">
+            <span class="brand-name">BACARA</span>
+            <span class="brand-sub">SOFTWARE</span>
+          </div>
+        </div>
+
+        <p class="showcase-tagline"><%= t :soluciones_software_medida %></p>
+
+        <!-- Features -->
+        <div class="showcase-features">
+          <div class="sf-item">
+            <span class="sf-dot"></span>
+            <span><%= t :desarrollo_medida %></span>
+          </div>
+          <div class="sf-item">
+            <span class="sf-dot"></span>
+            <span><%= t :integracion_sistemas %></span>
+          </div>
+          <div class="sf-item">
+            <span class="sf-dot"></span>
+            <span><%= t :soporte_continuo %></span>
+          </div>
+        </div>
       </div>
+
+      <div class="deco deco-1"></div>
+      <div class="deco deco-2"></div>
+      <div class="deco deco-3"></div>
+      <div class="grid-overlay"></div>
     </div>
   </div>
+
+  <!-- ── PANEL DERECHO: Formulario ── -->
   <div id="left">
     <div id="signin">
       <div class="logo">
@@ -48,282 +100,280 @@
         <% end %>
       </div>
 
+      <div class="back-link">
+        <%= link_to new_session_path(resource_name) do %>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
+          <%= t('back_to_login') %>
+        <% end %>
+      </div>
+
       <%= render 'layouts/flash_messages' %>
     </div>
     <footer id="main-footer">
       <%= t('copyright') %> &copy; <%= Time.now.strftime("%Y") %> <b><%= t('imahsoftware') %></b> · <span class="footer-app"><%= t('bacwins') %></span> · <%= t('all_rights_reserved') %>.
     </footer>
   </div>
+
 </div>
 
-
-
 <style>
-    .alert_remove {
-        font-size: 14px;
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+    :root {
+        --blue:      #06176B;
+        --blue-mid:  #0d2494;
+        --blue-glow: rgba(6,23,107,0.18);
+        --black:     #0a0a0f;
+        --panel:     #0e0e1a;
+        --white:     #ffffff;
+        --gray-bg:   #f4f4f6;
+        --border:    #d8d8de;
+        --muted:     #888;
+        --font:      'DM Sans', sans-serif;
+        --font-logo: 'Syne', sans-serif;
+        --ease:      cubic-bezier(.4,0,.2,1);
     }
 
-    .callout_message-danger {
-        background-color: red;
-        color: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        width: calc(100% - 20px);
-        max-width: 300px; /* Ajusta el ancho máximo según tus preferencias */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    }
-
-    .callout_message-success {
-        background-color: green;
-        color: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        position: fixed;
-        bottom: 10px;
-        left: 10px;
-        width: calc(100% - 20px);
-        max-width: 300px; /* Ajusta el ancho máximo según tus preferencias */
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    }
-
-    @import url('https://fonts.googleapis.com/css?family=Roboto:300');
-
-    * {
-        box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
-        background: #fff;
-        color: #fff;
+        font-family: var(--font);
+        font-weight: 400;
+        background: var(--gray-bg);
         overflow: hidden;
         margin: 0;
+        height: 100vh;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-weight: 300;
-    }
+    #wrapper { display: flex; flex-direction: row; height: 100vh; }
 
-    #wrapper {
-        display: flex;
-        flex-direction: row;
-    }
-
+    #right { flex: 1; }
     #left {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        flex: 1;
         align-items: center;
         justify-content: center;
         height: 100vh;
-        background-color: white;
+        background: var(--gray-bg);
+        position: relative;
     }
 
-    #right {
-        flex: 1;
+    /* ── Panel oscuro ── */
+    #showcase {
+        width: 100%; height: 100%;
+        background: var(--panel);
+        display: flex; align-items: center; justify-content: center;
+        position: relative; overflow: hidden;
     }
 
-    /* Sign In */
+    .deco { position: absolute; border-radius: 50%; pointer-events: none; }
+    .deco-1 {
+        width: 600px; height: 600px; top: -160px; right: -160px;
+        background: radial-gradient(circle, rgba(6,23,107,0.35) 0%, transparent 65%);
+    }
+    .deco-2 {
+        width: 400px; height: 400px; bottom: -100px; left: -100px;
+        background: radial-gradient(circle, rgba(6,23,107,0.2) 0%, transparent 65%);
+    }
+    .deco-3 {
+        width: 250px; height: 250px; top: 55%; left: 55%;
+        transform: translate(-50%,-50%);
+        border: 1px solid rgba(255,255,255,0.04);
+        animation: spin 25s linear infinite;
+    }
+    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    .grid-overlay {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+    }
+
+    /* ── Brand ── */
+    .showcase-content {
+        position: relative; z-index: 1; text-align: center;
+        animation: fadeUp .9s var(--ease) both;
+        display: flex; flex-direction: column; align-items: center; gap: 1.8rem;
+    }
+
+    .brand-logo { display: flex; align-items: center; gap: 1.1rem; }
+
+    .brand-icon {
+        width: 64px; height: 64px;
+        filter: drop-shadow(0 0 18px rgba(6,23,107,0.7));
+    }
+
+    .brand-wordmark { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; }
+
+    .brand-name {
+        font-family: var(--font-logo);
+        font-size: 2.4rem; font-weight: 800;
+        color: var(--white);
+        letter-spacing: 0.12em;
+        line-height: 1;
+    }
+
+    .brand-sub {
+        font-family: var(--font-logo);
+        font-size: 0.75rem; font-weight: 700;
+        color: rgba(255,255,255,0.4);
+        letter-spacing: 0.3em;
+        margin-top: 0.2rem;
+    }
+
+    .showcase-tagline {
+        color: rgba(255,255,255,0.38);
+        font-size: 0.75rem; letter-spacing: 0.15em;
+        text-transform: uppercase; font-weight: 300; margin-top: -0.5rem;
+    }
+
+    .showcase-features { display: flex; flex-direction: column; gap: 0.65rem; align-items: flex-start; margin-top: 0.5rem; }
+
+    .sf-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+
+    .sf-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #3b5bdb;
+        flex-shrink: 0;
+    }
+
+    @keyframes fadeUp {
+        from { opacity:0; transform:translateY(16px); }
+        to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── Card ── */
     #signin {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        padding-bottom: 1rem;
+        background: var(--white);
+        border-radius: 20px;
+        padding: 3rem 3rem;
+        width: 82%; max-width: 480px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 12px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.04);
+        animation: fadeUp .55s var(--ease) .1s both;
     }
 
-    #signin form {
-        width: 80%;
-        padding-bottom: 1.8rem;
+    #signin .logo { margin-bottom: 2rem; }
+
+    #signin .logo h1,
+    #signin .logo h2,
+    #signin .logo h3,
+    #signin .logo .titulo {
+        font-size: 1.75rem; font-weight: 700;
+        color: var(--black); letter-spacing: -0.035em; line-height: 1.2;
     }
 
-    #signin .logo {
-        margin-bottom: 3vh;
-    }
-
-    #signin .logo img {
-        width: 300px;
-    }
+    .form-subtitle { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; font-weight: 400; }
 
     #signin label {
-        font-size: 0.9rem;
-        line-height: 2rem;
-        font-weight: 500;
-        color: #000;
+        display: block; font-size: 0.82rem; font-weight: 600;
+        color: var(--black); line-height: 2rem; margin-bottom: 0;
     }
 
-    #signin .text-input {
-        margin-bottom: 1.3rem;
-        width: 100%;
-        border-radius: 2px;
-        background: #f1f1f1;
-        border: 1px solid #555;
-        color: #000;
-        padding: 0.5rem 1rem;
-        line-height: 1.3rem;
+    /* ── Inputs ── */
+    .form-control {
+        width: 100%; height: 3.6rem;
+        border-radius: 8px; background: #f8f8f9;
+        border: 1.5px solid var(--border);
+        color: var(--black); padding: 0 1.1rem;
+        font-family: var(--font); font-size: 1.05rem; font-weight: 400;
+        outline: none;
+        transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s;
+        -webkit-appearance: none; display: block;
     }
 
-    #signin .primary-btn {
-        width: 100%;
+    .form-control::placeholder { color: #b8b8bf; font-weight: 300; }
+
+    .form-control:focus {
+        background: var(--white);
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px var(--blue-glow);
     }
 
-    #signin .secondary-btn,
-    .or,
-    .links {
-        width: 60%;
-    }
+    #signin form > div { margin-bottom: 1.2rem; }
 
-    #signin .links a {
-        display: block;
-        color: #000000;
-        text-decoration: none;
-        margin-bottom: 1rem;
-        text-align: center;
-        font-size: 0.9rem;
-    }
-
-    #signin .or {
-        display: flex;
-        flex-direction: row;
-        margin-bottom: 1.2rem;
-        align-items: center;
-    }
-
-    #signin .or .bar {
-        flex: auto;
-        border: none;
-        height: 1px;
-        background: #aaa;
-    }
-
-    #signin .or span {
-        color: #ccc;
-        padding: 0 0.8rem;
-    }
-
-    /* Showcase */
-    #showcase {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #E6E6E6;
-        height: 100vh;
-        text-align: center;
-    }
-
-    #showcase .showcase-text {
-        font-size: 3rem;
-        width: 100%;
-        color: #fff;
-        margin-bottom: 1.5rem;
-    }
-
-    #showcase .secondary-btn {
-        width: 60%;
-        margin: auto;
-    }
-
-    /* Footer */
-    #main-footer {
-        color: #C8C8C8;
-        text-align: center;
-        font-size: 0.8rem;
-        max-width: 80%;
-        padding-top: 5rem;
-    }
-    #main-footer .footer-app { color: #06176B; font-weight: 600; }
-
-    /* Button */
+    /* ── Botón ── */
     .primary-btn {
-        padding: 5px;
-        height: 3.7rem;
-        display: block;
-        border: 0;
-        border-radius: 2px;
-        font-weight: 500;
-        background: #C9392B;
-        color: #fff;
-        text-decoration: none;
-        cursor: pointer;
-        text-align: center;
-        transition: all 0.5s;
+        width: 100%; height: 3.6rem; padding: 0;
+        display: flex; align-items: center; justify-content: center;
+        border: 0; border-radius: 8px;
+        font-family: var(--font); font-size: 1.05rem; font-weight: 600;
+        background: var(--blue); color: var(--white);
+        cursor: pointer; text-decoration: none;
+        position: relative; overflow: hidden;
+        transition: background .2s, transform .15s, box-shadow .2s;
+        letter-spacing: 0.01em;
+    }
+
+    .primary-btn::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(255,255,255,.1), transparent);
     }
 
     .primary-btn:hover {
-        background-color: #CA493C;
-        color: #fff;
+        background: var(--blue-mid);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(6,23,107,0.35);
+        color: var(--white);
     }
+    .primary-btn:active { transform: translateY(0); }
 
-    .secondary-btn {
-        padding: 0.7rem 1rem;
-        height: 2.7rem;
-        display: block;
-        border: 1px solid #f4f4f4;
-        border-radius: 2px;
-        font-weight: 500;
-        background: none;
-        color: #fff;
-        text-decoration: none;
-        cursor: pointer;
-        text-align: center;
-        transition: all 0.5s;
+    /* ── Back link ── */
+    .back-link { margin-top: 1.2rem; text-align: center; }
+
+    .back-link a {
+        display: inline-flex; align-items: center; gap: 0.35rem;
+        font-size: 0.8rem; font-weight: 500;
+        color: var(--muted); text-decoration: none;
+        transition: color .2s;
     }
+    .back-link a:hover { color: var(--blue); }
 
-    .secondary-btn:hover {
-        border-color: #ff7b39;
-        color: #ff7b39;
+    /* ── Links ── */
+    .links { margin-top: 1rem; width: 100%; }
+    .links ul { list-style: none; }
+    .links a {
+        display: block; color: var(--blue); text-decoration: none;
+        text-align: center; font-size: 0.8rem; font-weight: 500; transition: opacity .2s;
     }
+    .links a:hover { opacity: .7; }
 
-    /* Media Queries */
-    @media (min-width: 1200px) {
-        #left {
-            flex: 4;
-        }
-
-        #right {
-            flex: 6;
-        }
+    /* ── Footer ── */
+    #main-footer {
+        position: absolute; bottom: 1.5rem;
+        font-size: 0.68rem; color: #aaa;
+        text-align: center; width: 100%; padding: 0 2rem;
     }
+    #main-footer b { color: var(--blue); font-weight: 600; }
+    #main-footer .footer-app { color: var(--blue); font-weight: 600; }
 
-    @media (max-width: 768px) {
-        body {
-            overflow: auto;
-        }
-
-        #right {
-            display: none;
-        }
-
-        #left {
-            justify-content: start;
-            margin-top: 4vh;
-        }
-
-        #signin .logo {
-            margin-bottom: 2vh;
-        }
-
-        #signin .text-input {
-            margin-bottom: 0.7rem;
-        }
-
-        #main-footer {
-            padding-top: 1rem;
-        }
+    /* ── Flash ── */
+    .callout_message-danger {
+        background: #fef2f2; color: #b91c1c;
+        border: 1px solid #fecaca;
+        padding: 0.75rem 1rem; border-radius: 10px;
+        font-size: 0.82rem; margin-top: 1rem;
     }
+    .callout_message-success {
+        background: #f0fdf4; color: #15803d;
+        border: 1px solid #bbf7d0;
+        padding: 0.75rem 1rem; border-radius: 10px;
+        font-size: 0.82rem; margin-top: 1rem;
+    }
+    .alert_remove { font-size: 14px; }
+    .hidden { display: none !important; }
 
-    .hidden {
-        display: none !important;
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+        body { overflow: auto; }
+        #wrapper { flex-direction: column; height: auto; }
+        #right { display: none; }
+        #left { min-height: 100vh; padding: 2.5rem 1.5rem 5rem; height: auto; }
+        #signin { width: 100%; max-width: 100%; padding: 2rem 1.5rem; }
+        #main-footer { position: relative; bottom: auto; margin-top: 2rem; }
     }
 </style>
 

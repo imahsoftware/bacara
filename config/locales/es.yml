@@ -49,7 +49,7 @@ es:
   documento: View Documents
   documentos_msj: No Documents
   cierre_msj: There is no consolidated closing therefore new collections cannot be registered
-  regresar: Return
+  regresar: Regresar
   menu: MENU OPTIONS
   creacion: Creation Date
   seguro: Are you sure?
@@ -118,23 +118,23 @@ es:
   integracion_sistemas: System integration
   soporte_continuo: Continuous support
   todos_derechos_reservados: All rights reserved.
-  jugador_label: Player
-  seleccionar_resultado: Select Result
-  eliminar_ultimo: Delete Last
-  reset: Reset
-  your_next_bet: Your Next Bet
-  movimientos: Movements
-  prc_activo: PRC active
+  jugador_label: Jugador
+  seleccionar_resultado: Seleccionar resultado
+  eliminar_ultimo: Borrar último
+  reset: Reiniciar
+  your_next_bet: Tu próxima apuesta
+  movimientos: Movimientos
+  prc_activo: PRC activo
   imahsoftware: ImahSoftware
-  aun_no_hay_movimientos: No movements yet. Click on P or B to start.
-  jugada_1: Play 1
-  jugada_2: Play 2
-  resultado: Result
-  mecanica: Mech
-  acumulado: Accum
+  aun_no_hay_movimientos: Aún no hay movimientos. Haz clic en P o B para comenzar.
+  jugada_1: Jugada 1
+  jugada_2: Jugada 2
+  resultado: Resultado
+  mecanica: Mec
+  acumulado: Acum
   final: Final
-  guardando: Saving...
-  detalle_jugada: Play Details
+  guardando: Guardando...
+  detalle_jugada: Detalle de jugada
   seguro_salir: Are you sure you want to leave
   regresar_usuarios: Return to users
   datos_basicos: Basic Data
@@ -524,6 +524,60 @@ es:
   users_passwords_password_updated: La contraseña se ha actualizado correctamente.
   users_passwords_invalid_token: El token de restablecimiento de contraseña no es válido.
   users_passwords_recovery_subject: Recuperación de Contraseña
+  jugada_en_curso_pendiente: Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.
+  accion_no_permitida: Acción no permitida.
+  solo_crear_jugada_cuando_cerrada: Solo se puede crear una jugada cuando la actual está CERRADA.
+  otra_jugada_pendiente: Tiene otra jugada PENDIENTE. Termine la sesión activa antes de crear otra.
+  jugada_cerrada_no_editar: 'La jugada está CERRADA: no se puede editar ni eliminar.'
+  jugada_no_valida: Jugada no válida.
+  no_tiene_acceso_jugada: No tiene acceso a esta jugada.
+  no_tiene_sesion_pendiente: No tiene una sesión PENDIENTE. Use el listado de jugadas.
+  solo_puede_acceder_jugada_pendiente: Solo puede acceder a su jugada PENDIENTE activa (por seguridad no se admite otro id).
+  fecha_larga_formato: '%{dia_semana} %{dia} de %{mes} del %{anio}'
+  day_names_full:
+    - Domingo
+    - Lunes
+    - Martes
+    - Miercoles
+    - Jueves
+    - Viernes
+    - Sábado
+  day_names_lower:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+  month_names_full:
+    - ''
+    - Enero
+    - Febrero
+    - Marzo
+    - Abril
+    - Mayo
+    - Junio
+    - Julio
+    - Agosto
+    - Septiembre
+    - Octubre
+    - Noviembre
+    - Diciembre
+  month_names_lower:
+    - ''
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
   will_paginate:
     previous_label: '&#8592; Previous'
     next_label: Next &#8594;
@@ -1058,6 +1112,224 @@ es:
       previous: '&lsaquo; Anterior'
       next: Siguiente &rsaquo;
       truncate: '...'
+  # === Phase B: application_helper select_* labels ===
+  helper_a_distancia: "A DISTANCIA"
+  helper_academicos: "ACADÉMICOS"
+  helper_activo: "ACTIVO"
+  helper_actualizar: "ACTUALIZAR"
+  helper_administrador: "ADMINISTRADOR"
+  helper_afrocolombiano: "NEGRO (A), AFRODESCENDIENTE, AFROCOLOMBIANO (A)"
+  helper_alta: "ALTA"
+  helper_anual: "ANUAL"
+  helper_anulado: "ANULADO"
+  helper_aplazado: "APLAZADO"
+  helper_aprobado: "APROBADO"
+  helper_aseo_fuerte: "ASEO FUERTE"
+  helper_aseo_normal: "ASEO NORMAL"
+  helper_asignar: "ASIGNAR"
+  helper_baja: "BAJA"
+  helper_base_g: "BASE G"
+  helper_brigada_aseo: "BRIGADA DE ASEO"
+  helper_candidato: "CANDIDATO"
+  helper_cargar: "CARGAR"
+  helper_casado: "CASADO"
+  helper_catolico: "CATÓLICO"
+  helper_centro_trabajo_cargo: "CENTRO DE TRABAJO Y CARGO"
+  helper_cheque: "CHEQUE"
+  helper_clasico: "CLASICO"
+  helper_clausulas: "CLAUSULAS"
+  helper_cobranza: "COBRANZA"
+  helper_colombia_compra_eficiente: "COLOMBIA COMPRA EFICIENTE"
+  helper_comercial: "COMERCIAL"
+  helper_completo: "COMPLETO"
+  helper_consignacion: "CONSIGNACION"
+  helper_consolidado: "CONSOLIDADO"
+  helper_consumo: "CONSUMO"
+  helper_continuidad: "CONTINUIDAD"
+  helper_contrato: "CONTRATO"
+  helper_coordinador: "COORDINADOR"
+  helper_correcto: "CORRECTO"
+  helper_correo_electronico: "CORREO ELECTRONICO"
+  helper_correo_fisico: "CORREO FISICO"
+  helper_credito: "CREDITO"
+  helper_cristiano: "CRISTIANO"
+  helper_cursos_especiales: "CURSOS ESPECIALES"
+  helper_debito: "DEBITO"
+  helper_deduccion: "DEDUCCION"
+  helper_definitivo: "DEFINITIVO"
+  helper_desarrollo_nuevo: "DESARROLLO NUEVO"
+  helper_desempleado: "DESEMPLEADO"
+  helper_devengo: "DEVENGO"
+  helper_dia_domingo: "DOMINGO"
+  helper_dia_jueves: "JUEVES"
+  helper_dia_lunes: "LUNES"
+  helper_dia_martes: "MARTES"
+  helper_dia_miercoles: "MIÉRCOLES"
+  helper_dia_sabado: "SÁBADO"
+  helper_dia_viernes: "VIERNES"
+  helper_dialectrica: "DIALECTRICA"
+  helper_diplomados: "DIPLOMADOS"
+  helper_diurno: "DIURNO"
+  helper_divorciado: "DIVORCIADO"
+  helper_documento: "DOCUMENTO"
+  helper_dolar_americano: "Dólar Americano"
+  helper_domiciliaria: "DOMICILIARIA"
+  helper_elementos_equipos_maquinaria: "ELEMENTOS, EQUIPOS Y MAQUINARIA"
+  helper_embargo: "EMBARGO"
+  helper_empleado: "EMPLEADO"
+  helper_en_ejecucion: "EN EJECUCION"
+  helper_en_liquidacion: "EN LIQUIDACION"
+  helper_en_proceso: "EN PROCESO"
+  helper_especializacion: "ESPECIALIZACIÓN"
+  helper_estabilidad_laboral: "ESTABILIDAD LABORAL"
+  helper_estadocivil_soltero: "SOLTERO"
+  helper_estudiante: "ESTUDIANTE"
+  helper_evangelico: "EVANGÉLICO"
+  helper_extremo: "EXTREMO"
+  helper_femenino: "FEMENINO"
+  helper_fijo: "FIJO"
+  helper_fin_de_semana: "FIN DE SEMANA"
+  helper_finalizado: "FINALIZADO"
+  helper_financieros: "FINANCIEROS"
+  helper_general: "GENERAL"
+  helper_gestion: "GESTION"
+  helper_gitano_rom: "GITANO (A) (ROM)"
+  helper_gran_contribuyente: "GRAN CONTRIBUYENTE"
+  helper_heterosexual: "HETEROSEXUAL"
+  helper_hombre_trans: "HOMBRE TRANS"
+  helper_homosexual: "HOMOSEXUAL"
+  helper_inactivo: "INACTIVO"
+  helper_incorrecto: "INCORRECTO"
+  helper_indefinido: "INDEFINIDO"
+  helper_independiente: "INDEPENDIENTE"
+  helper_insumos: "INSUMOS"
+  helper_interventor: "INTERVENTOR"
+  helper_jornada_lun_dom: "LUNES-DOMINGO"
+  helper_jornada_lun_sab: "LUNES-SABADO"
+  helper_jornada_lun_vie: "LUNES-VIERNES"
+  helper_libranza: "LIBRANZA"
+  helper_liquidado: "LIQUIDADO"
+  helper_maestria: "MAESTRÍA"
+  helper_maquinaria: "MAQUINARIA"
+  helper_masculino: "MASCULINO"
+  helper_media: "MEDIA"
+  helper_medio_tiempo: "MEDIO TIEMPO"
+  helper_mensual: "MENSUAL"
+  helper_mes_abril: "ABRIL"
+  helper_mes_agosto: "AGOSTO"
+  helper_mes_diciembre: "DICIEMBRE"
+  helper_mes_enero: "ENERO"
+  helper_mes_febrero: "FEBRERO"
+  helper_mes_julio: "JULIO"
+  helper_mes_junio: "JUNIO"
+  helper_mes_marzo: "MARZO"
+  helper_mes_mayo: "MAYO"
+  helper_mes_noviembre: "NOVIEMBRE"
+  helper_mes_octubre: "OCTUBRE"
+  helper_mes_septiembre: "SEPTIEMBRE"
+  helper_mestizo: "MESTIZO"
+  helper_metro: "METRO"
+  helper_mujer_trans: "MUJER TRANS"
+  helper_nivel_cargues: "CARGUES"
+  helper_nivel_gestion: "GESTION"
+  helper_nivel_parametrizacion: "PARAMETRIZACIÓN"
+  helper_nivel_parametrizacion_educacion: "PARAMETRIZACIÓN EDUCACIÓN"
+  helper_nivel_procesos: "PROCESOS"
+  helper_nivel_seguridad: "SEGURIDAD"
+  helper_no: "NO"
+  helper_no_aplica: "NO APLICA"
+  helper_nocturno: "NOCTURNO"
+  helper_notificacion: "NOTIFICACION"
+  helper_nuevo_sol_peruano: "Nuevo Sol Peruano"
+  helper_otra: "OTRA"
+  helper_otras: "OTRAS"
+  helper_otro: "OTRO"
+  helper_otros: "OTROS"
+  helper_otros_devengo: "OTROS DEVENGO"
+  helper_palanquero: "PALANQUERO (A) DE SAN BASILIO"
+  helper_pendiente: "PENDIENTE"
+  helper_pensionado: "PENSIONADO"
+  helper_perfeccionado: "PERFECCIONADO"
+  helper_persona: "PERSONA"
+  helper_persona_juridica: "PERSONA JURIDICA"
+  helper_persona_natural: "PERSONA NATURAL"
+  helper_personal: "PERSONAL"
+  helper_personalizada: "PERSONALIZADA"
+  helper_peso_argentino: "Peso Argentino"
+  helper_peso_chileno: "Peso Chileno"
+  helper_peso_colombiano: "Peso Colombiano"
+  helper_peso_mexicano: "Peso Mexicano"
+  helper_plastica: "PLASTICA"
+  helper_plazo: "PLAZO"
+  helper_plazo_clausulas: "PLAZO - CLAUSULAS"
+  helper_plazo_valor: "PLAZO - VALOR"
+  helper_plazo_valor_clausulas: "PLAZO - VALOR - CLAUSULAS"
+  helper_posgrado: "POSGRADO"
+  helper_produccion: "PRODUCCION"
+  helper_profesional: "PROFESIONAL"
+  helper_promesa_pago: "PROMESA PAGO"
+  helper_proveedor: "PROVEEDOR"
+  helper_prueba: "PRUEBA"
+  helper_punteras: "PUNTERAS"
+  helper_quincenal: "QUINCENAL"
+  helper_quitar: "QUITAR"
+  helper_raizal: "RAIZAL DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA"
+  helper_real_brasileno: "Real Brasileño"
+  helper_rechazado: "RECHAZADO"
+  helper_rector: "RECTOR"
+  helper_regimen_comun: "RÉGIMEN COMÚN"
+  helper_regimen_simplificado: "RÉGIMEN SIMPLIFICADO"
+  helper_restriccion: "RESTRICCION"
+  helper_reunion: "REUNION"
+  helper_riesgo_1: "Riesgo I (0.00522) - Act-Eco: 1691001 "
+  helper_riesgo_2: "Riesgo II (0.01044) - Act-Eco: 2811001"
+  helper_riesgo_3: "Riesgo III (0.02436) - Act-Eco: 3861001"
+  helper_riesgo_4: "Riesgo IV (0.04350) - Act-Eco: 4492301"
+  helper_riesgo_5: "Riesgo V (0.06960) - Act-Eco: 5812901"
+  helper_seguimiento: "SEGUIMIENTO"
+  helper_semestral: "SEMESTRAL"
+  helper_separado: "SEPARADO"
+  helper_servicio_especial: "SERVICIO ESPECIAL"
+  helper_si: "SI"
+  helper_sin_dato: "SIN DATO"
+  helper_sin_puntera: "SIN PUNTERA"
+  helper_sin_religion: "SIN RELIGIÓN"
+  helper_socioeconomicos: "SOCIOECONÓMICOS"
+  helper_solicitud_soporte: "SOLICITUD SOPORTE"
+  helper_supernumerario: "SUPERNUMERARIO"
+  helper_supervisor: "SUPERVISOR"
+  helper_tecnica_profesional: "TECNICA PROFESIONAL"
+  helper_tecnico: "TECNICO"
+  helper_tecnologia: "TECNOLOGÍA"
+  helper_tecnologico: "TECNOLOGICO"
+  helper_telefonica: "TELEFONICA"
+  helper_teletrabajo: "TELETRABAJO"
+  helper_terminado: "TERMINADO"
+  helper_testigo_jehova: "TESTIGO DE JEHOVÁ"
+  helper_tiempo_completo: "TIEMPO COMPLETO"
+  helper_todo: "TODO"
+  helper_transferencia: "TRANSFERENCIA"
+  helper_union_libre: "UNION LIBRE"
+  helper_universitario: "UNIVERSITARIO"
+  helper_valor: "VALOR"
+  helper_valor_clausulas: "VALOR - CLAUSULAS"
+  helper_virtual: "VIRTUAL"
+  helper_viudo: "VIUDO"
+  helper_vivienda_arriendo: "EN ARRIENDO"
+  helper_vivienda_familiar: "FAMILIAR"
+  helper_vivienda_propia: "PROPIA"
+  # === Game/Baccarat module: new keys ===
+  profit_label: "GANANCIA:"
+  usd_title: "Dólares estadounidenses (USD)"
+  baccarat_winners: "Baccarat Winners"
+  frequency_table: "Tabla de frecuencias"
+  undo_last_hand: "Deshacer última mano"
+  undoing: "Deshaciendo..."
+  clear_session: "Limpiar sesión"
+  clearing: "Limpiando..."
+  new_shoe: "Nueva SHOE"
+  hand_number: "Mano"
+  play_number: "Jugada"
   datepicker:
     dformat: '%d/%m/%Y'
     pformat: DD/MM/YYYY
@@ -1066,3 +1338,70 @@ es:
     pformat: HH:mm
   dayViewHeaderFormat: MMMM YYYY
   'no': 'No'
+  # === Devise Registration & Confirmation ===
+  registro_usuario: User Registration
+  correo_electronico: Email
+  crear_cuenta: Create Account
+  reenvio_correo_confirmacion: Resend Confirmation Email
+  reenviar_correo: Resend Email
+  identificacion: Identification
+  fecha_nacimiento: Date of Birth
+  # === Devise Mailer ===
+  hola: Hello
+  alguien_solicito_cambiar_contrasena: Someone has requested to change your password. You can do this through the following link.
+  cambiar_mi_contrasena: Change my password
+  si_no_solicito_ignore: If you did not request this, please ignore this email.
+  contrasena_no_cambiara: Your password will not change until you access the link above and create a new one.
+  nos_comunicamos_contrasena_modificada: We are writing to notify you that your password has been changed.
+  bienvenido: Welcome
+  puede_confirmar_correo_enlace: You can confirm your email account through the following link
+  confirmar_mi_cuenta: Confirm my account
+  resend_unlock_instructions: Resend unlock instructions
+  # === Additional Devise Mailer ===
+  su_cuenta_bloqueada: Your account has been locked due to an excessive number of failed login attempts.
+  haga_clic_desbloquear: Click the following link to unlock your account
+  desbloquear_mi_cuenta: Unlock my account
+  correo_se_esta_cambiando: We are writing to notify you that your email is being changed to
+  correo_ha_cambiado: We are writing to notify you that your email has been changed to
+  # === User Email Change Modal ===
+  cambiar_correo_electronico: Change Email
+  nombre: Name
+  correo_actual: Current Email
+  nuevo_correo: New Email
+  # === Bulk Upload ===
+  carga_masiva_usuarios: Bulk User Upload
+  atencion_archivo: Attention!
+  recuerde_archivo: Remember that the file must have extension XLS or XLSX, must not have headers and must be in the established order
+  orden_archivo: File Order
+  orden: Order
+  descripcion: Description
+  formato: Format
+  obligatorio: Required
+  nombre_completo: Full Name
+  identificacion_campo: Identification
+  nombre_usuario: Username
+  email_campo: Email
+  tipo_consulta: Query Type
+  contrasena_campo: Password
+  sucursal_id: Branch ID
+  cargo_id: Position ID
+  telefono_campo: Phone
+  celular_campo: Mobile
+  direccion_campo: Address
+  ciudad_campo: City
+  genero_campo: Gender
+  fecha_nacimiento_campo: Date of Birth
+  fecha_inicio_campo: Start Date
+  observaciones_campo: Observations
+  extension_campo: Extension
+  alfanumerico: Alphanumeric
+  numerico: Numeric
+  alfabetico: Alphabetic
+  fecha_formato: Date (DD-MM-YYYY)
+  sin_separadores: Numeric (no thousand separators)
+  si: Yes
+  no: No
+  # === Audits Sidebar ===
+  general: General
+  especifico: Specific
+  fecha: Date

@@ -1064,6 +1064,278 @@ en:
   users_passwords_password_updated: Your password has been updated successfully.
   users_passwords_invalid_token: The password reset token is invalid.
   users_passwords_recovery_subject: Password Recovery
+  jugada_en_curso_pendiente: You have a play in progress (PENDING). Close or finish it before creating another.
+  accion_no_permitida: Action not allowed.
+  solo_crear_jugada_cuando_cerrada: You can only create a new play when the current one is CLOSED.
+  otra_jugada_pendiente: You have another PENDING play. Finish the active session before creating another.
+  jugada_cerrada_no_editar: 'The play is CLOSED: it cannot be edited or deleted.'
+  jugada_no_valida: Invalid play.
+  no_tiene_acceso_jugada: You do not have access to this play.
+  no_tiene_sesion_pendiente: You do not have a PENDING session. Use the play list.
+  solo_puede_acceder_jugada_pendiente: You can only access your active PENDING play (for security, other ids are not allowed).
+  fecha_larga_formato: '%{dia_semana}, %{mes} %{dia}, %{anio}'
+  day_names_full:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+  day_names_lower:
+    - sunday
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    - saturday
+  month_names_full:
+    - ''
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+  month_names_lower:
+    - ''
+    - january
+    - february
+    - march
+    - april
+    - may
+    - june
+    - july
+    - august
+    - september
+    - october
+    - november
+    - december
+  # === Phase B: application_helper select_* labels ===
+  helper_a_distancia: "Distance"
+  helper_academicos: "Academic"
+  helper_activo: "Active"
+  helper_actualizar: "Update"
+  helper_administrador: "Administrator"
+  helper_afrocolombiano: "Black, Afrodescendant, Afro-Colombian"
+  helper_alta: "High"
+  helper_anual: "Annual"
+  helper_anulado: "Voided"
+  helper_aplazado: "Postponed"
+  helper_aprobado: "Approved"
+  helper_aseo_fuerte: "Heavy Cleaning"
+  helper_aseo_normal: "Normal Cleaning"
+  helper_asignar: "Assign"
+  helper_baja: "Low"
+  helper_base_g: "Base G"
+  helper_brigada_aseo: "Cleaning Crew"
+  helper_candidato: "Candidate"
+  helper_cargar: "Load"
+  helper_casado: "Married"
+  helper_catolico: "Catholic"
+  helper_centro_trabajo_cargo: "Work Center and Position"
+  helper_cheque: "Check"
+  helper_clasico: "Classic"
+  helper_clausulas: "Clauses"
+  helper_cobranza: "Collection"
+  helper_colombia_compra_eficiente: "Colombia Efficient Purchase"
+  helper_comercial: "Commercial"
+  helper_completo: "Complete"
+  helper_consignacion: "Deposit"
+  helper_consolidado: "Consolidated"
+  helper_consumo: "Consumption"
+  helper_continuidad: "Continuity"
+  helper_contrato: "Contract"
+  helper_coordinador: "Coordinator"
+  helper_correcto: "Correct"
+  helper_correo_electronico: "E-mail"
+  helper_correo_fisico: "Physical Mail"
+  helper_credito: "Credit"
+  helper_cristiano: "Christian"
+  helper_cursos_especiales: "Special Courses"
+  helper_debito: "Debit"
+  helper_deduccion: "Deduction"
+  helper_definitivo: "Definitive"
+  helper_desarrollo_nuevo: "New Development"
+  helper_desempleado: "Unemployed"
+  helper_devengo: "Earnings"
+  helper_dia_domingo: "SUNDAY"
+  helper_dia_jueves: "THURSDAY"
+  helper_dia_lunes: "MONDAY"
+  helper_dia_martes: "TUESDAY"
+  helper_dia_miercoles: "WEDNESDAY"
+  helper_dia_sabado: "SATURDAY"
+  helper_dia_viernes: "FRIDAY"
+  helper_dialectrica: "Dielectric"
+  helper_diplomados: "Diplomas"
+  helper_diurno: "Daytime"
+  helper_divorciado: "Divorced"
+  helper_documento: "Document"
+  helper_dolar_americano: "US Dollar"
+  helper_domiciliaria: "Home Visit"
+  helper_elementos_equipos_maquinaria: "Elements, Equipment and Machinery"
+  helper_embargo: "Garnishment"
+  helper_empleado: "Employed"
+  helper_en_ejecucion: "In Execution"
+  helper_en_liquidacion: "In Liquidation"
+  helper_en_proceso: "In Progress"
+  helper_especializacion: "Specialization"
+  helper_estabilidad_laboral: "Job Stability"
+  helper_estadocivil_soltero: "Single"
+  helper_estudiante: "Student"
+  helper_evangelico: "Evangelical"
+  helper_extremo: "Extreme"
+  helper_femenino: "Female"
+  helper_fijo: "Fixed"
+  helper_fin_de_semana: "Weekend"
+  helper_finalizado: "Finished"
+  helper_financieros: "Financial"
+  helper_general: "General"
+  helper_gestion: "Management"
+  helper_gitano_rom: "Gypsy (ROM)"
+  helper_gran_contribuyente: "Major Taxpayer"
+  helper_heterosexual: "Heterosexual"
+  helper_hombre_trans: "Trans Man"
+  helper_homosexual: "Homosexual"
+  helper_inactivo: "Inactive"
+  helper_incorrecto: "Incorrect"
+  helper_indefinido: "Indefinite"
+  helper_independiente: "Self-employed"
+  helper_insumos: "Supplies"
+  helper_interventor: "Auditor"
+  helper_jornada_lun_dom: "MONDAY-SUNDAY"
+  helper_jornada_lun_sab: "MONDAY-SATURDAY"
+  helper_jornada_lun_vie: "MONDAY-FRIDAY"
+  helper_libranza: "Payroll Deduction"
+  helper_liquidado: "Liquidated"
+  helper_maestria: "Master's Degree"
+  helper_maquinaria: "Machinery"
+  helper_masculino: "Male"
+  helper_media: "Medium"
+  helper_medio_tiempo: "Part Time"
+  helper_mensual: "Monthly"
+  helper_mes_abril: "APRIL"
+  helper_mes_agosto: "AUGUST"
+  helper_mes_diciembre: "DECEMBER"
+  helper_mes_enero: "JANUARY"
+  helper_mes_febrero: "FEBRUARY"
+  helper_mes_julio: "JULY"
+  helper_mes_junio: "JUNE"
+  helper_mes_marzo: "MARCH"
+  helper_mes_mayo: "MAY"
+  helper_mes_noviembre: "NOVEMBER"
+  helper_mes_octubre: "OCTOBER"
+  helper_mes_septiembre: "SEPTEMBER"
+  helper_mestizo: "Mestizo"
+  helper_metro: "Meter"
+  helper_mujer_trans: "Trans Woman"
+  helper_nivel_cargues: "Uploads"
+  helper_nivel_gestion: "Management"
+  helper_nivel_parametrizacion: "Settings"
+  helper_nivel_parametrizacion_educacion: "Education Settings"
+  helper_nivel_procesos: "Processes"
+  helper_nivel_seguridad: "Security"
+  helper_no: "NO"
+  helper_no_aplica: "NOT APPLICABLE"
+  helper_nocturno: "Night"
+  helper_notificacion: "Notification"
+  helper_nuevo_sol_peruano: "Peruvian Sol"
+  helper_otra: "OTHER"
+  helper_otras: "Other"
+  helper_otro: "Other"
+  helper_otros: "Others"
+  helper_otros_devengo: "Other Earnings"
+  helper_palanquero: "Palenquero of San Basilio"
+  helper_pendiente: "Pending"
+  helper_pensionado: "Retired"
+  helper_perfeccionado: "Finalized"
+  helper_persona: "Person"
+  helper_persona_juridica: "Legal Entity"
+  helper_persona_natural: "Natural Person"
+  helper_personal: "Personnel"
+  helper_personalizada: "Customized"
+  helper_peso_argentino: "Argentine Peso"
+  helper_peso_chileno: "Chilean Peso"
+  helper_peso_colombiano: "Colombian Peso"
+  helper_peso_mexicano: "Mexican Peso"
+  helper_plastica: "Plastic"
+  helper_plazo: "Term"
+  helper_plazo_clausulas: "Term - Clauses"
+  helper_plazo_valor: "Term - Value"
+  helper_plazo_valor_clausulas: "Term - Value - Clauses"
+  helper_posgrado: "Postgraduate"
+  helper_produccion: "Production"
+  helper_profesional: "Professional"
+  helper_promesa_pago: "Payment Promise"
+  helper_proveedor: "Supplier"
+  helper_prueba: "Test"
+  helper_punteras: "Steel Toe"
+  helper_quincenal: "Biweekly"
+  helper_quitar: "Remove"
+  helper_raizal: "Raizal from San Andrés, Providencia and Santa Catalina"
+  helper_real_brasileno: "Brazilian Real"
+  helper_rechazado: "Rejected"
+  helper_rector: "Principal"
+  helper_regimen_comun: "Common Regime"
+  helper_regimen_simplificado: "Simplified Regime"
+  helper_restriccion: "Restriction"
+  helper_reunion: "Meeting"
+  helper_riesgo_1: "Risk I (0.00522) - Act-Eco: 1691001"
+  helper_riesgo_2: "Risk II (0.01044) - Act-Eco: 2811001"
+  helper_riesgo_3: "Risk III (0.02436) - Act-Eco: 3861001"
+  helper_riesgo_4: "Risk IV (0.04350) - Act-Eco: 4492301"
+  helper_riesgo_5: "Risk V (0.06960) - Act-Eco: 5812901"
+  helper_seguimiento: "Follow-up"
+  helper_semestral: "Biannual"
+  helper_separado: "Separated"
+  helper_servicio_especial: "Special Service"
+  helper_si: "YES"
+  helper_sin_dato: "NO DATA"
+  helper_sin_puntera: "No Toe Cap"
+  helper_sin_religion: "No Religion"
+  helper_socioeconomicos: "Socioeconomic"
+  helper_solicitud_soporte: "Support Request"
+  helper_supernumerario: "Supernumerary"
+  helper_supervisor: "Supervisor"
+  helper_tecnica_profesional: "Professional Technical"
+  helper_tecnico: "Technical"
+  helper_tecnologia: "Technology"
+  helper_tecnologico: "Technological"
+  helper_telefonica: "Telephone"
+  helper_teletrabajo: "Telework"
+  helper_terminado: "Terminated"
+  helper_testigo_jehova: "Jehovah's Witness"
+  helper_tiempo_completo: "Full Time"
+  helper_todo: "All"
+  helper_transferencia: "Transfer"
+  helper_union_libre: "Common-law Union"
+  helper_universitario: "University"
+  helper_valor: "Value"
+  helper_valor_clausulas: "Value - Clauses"
+  helper_virtual: "Virtual"
+  helper_viudo: "Widowed"
+  helper_vivienda_arriendo: "Rented"
+  helper_vivienda_familiar: "Family-owned"
+  helper_vivienda_propia: "Owned"
+  # === Game/Baccarat module: new keys ===
+  profit_label: "PROFIT:"
+  usd_title: "US Dollars (USD)"
+  baccarat_winners: "Baccarat Winners"
+  frequency_table: "Frequency Table"
+  undo_last_hand: "Undo Last Hand"
+  undoing: "Undoing..."
+  clear_session: "Clear Session"
+  clearing: "Clearing..."
+  new_shoe: "New SHOE"
+  hand_number: "Hand"
+  play_number: "Play"
   datepicker:
     dformat: '%m/%d/%Y'
     pformat: MM/DD/YYYY
