@@ -24,10 +24,10 @@ class User < ApplicationRecord
   has_many :usersparametros
   has_many :notificacionesplataformas, dependent: :destroy
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/user_img.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_user_avatar.svg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
-  validates :nombre, :username, :email, :tipoconsulta, :celular,  presence: true
+  validates :nombre, :username, :email, :tipoconsulta, presence: true
 
   validates :email, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :multiline => true, message: "* Correo electrónico invalido" }
   validates :email, :username, uniqueness: true

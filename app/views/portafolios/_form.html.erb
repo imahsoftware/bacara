@@ -1,47 +1,47 @@
-<%= simple_form_for @portafolio, html: { class: 'form-horizontal'}, wrapper: :horizontal_form, remote: true do |f| %>
-  <div class="form-inputs">
-
-    </div>
-  </div>
-
-  <div class="form-actions">
-    <div class="box-tools">
-      <div class="col-md-10">
-        <%= f.button :submit, "#{t :guardar}", class: 'btn btn-flat btn-primary' %>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <%= button_tag "#{t :cancelar}", type: 'button', data: { disable_with: "#{t :procesando}"}, class: 'btn btn-default', id: 'cancelar-form-ob' %>
-    </div>
-
-  </div>
-<% end %>
-
-
-
-<%= simple_form_for(@portafolio) do |f| %>
+<%= simple_form_for @portafolio, html: { class: 'form-horizontal' }, wrapper: :horizontal_form, remote: true do |f| %>
   <div class="row">
     <div class="col-md-12">
       <div class="box box-primary">
+
         <div class="box-header with-border">
-          <h3 class="box-title"><strong><%= user.new_record? ? t(:add_new) : t(:edit) %> <%= t :user %></strong></h3>
+          <h3 class="box-title">
+            <strong>
+              <%= @portafolio.new_record? ? t(:nueva_compania) : t(:edit_company) %>
+            </strong>
+          </h3>
         </div><!-- /.box-header -->
+
         <div class="box-body">
           <div class="row">
-            <div class="col-md-4"><%= f.input :nombre %></div>
-            <div class="col-md-4"><%= f.input :email %></div>
-            <div class="col-md-4"><%= f.input :password %></div>
-         </div>
-         <div class="row">
-            <div class="col-md-6"><%= f.input :cargo %></div>
-         </div>
-        </div>
+            <div class="col-md-6">
+              <%= f.input :identificacion, label: t(:identificacion) %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :email, label: t(:correo_electronico) %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :username, label: t(:username) %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :clave, label: t(:clave) %>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+
         <div class="box-footer">
-          <%= link_to "#{t :cancelar}", users_path, class: 'btn btn-flat btn-default' %>
+          <%= button_tag "#{t :cancelar}",
+                         type: 'button',
+                         data: { disable_with: "#{t :procesando}" },
+                         class: 'btn btn-default',
+                         id: 'cancelar-form-ob' %>
           <div class="box-tools pull-right">
-            <%= f.button :submit, t(:accept), class: 'btn-flat btn-primary' %>
-          </div><!-- /.box-tools -->
-        </div><!-- box-footer -->
+            <%= f.button :submit, "#{t :guardar}", class: 'btn btn-flat btn-primary' %>
+          </div>
+        </div><!-- /.box-footer -->
+
       </div><!-- /.box -->
     </div>
   </div>

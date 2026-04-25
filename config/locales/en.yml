@@ -773,7 +773,7 @@ en:
   add_new: Add New
   edit: Edit
   user: User
-  company: Company
+  company: Client
   observations: Observations
   node: Node
   avatar: Avatar
@@ -837,8 +837,8 @@ en:
   report: Report
   add_new_permission: Add New Permission
   add_new_visit: Add New Visit
-  new_company: New Company
-  edit_company: Edit Company
+  new_company: New Client
+  edit_company: Edit Client
   sure: Sure?
   job_name: Job Name
   job_style: Job Style
@@ -925,6 +925,9 @@ en:
   identificacion: Identification
   nombre: Name
   nombre_corto: Short Name
+  companias: Clients
+  nueva_compania: New Client
+  forma_vmn: VMN Form
   agregar_formato: Add Format
   agregar_usuario: Add User
   cargar_documento: Load Document
@@ -963,6 +966,7 @@ en:
   seleccione_usuario_copiar_permisos: Select the user to copy permissions
   tipo_consulta: Query Type
   confirmar_mi_cuenta: Confirm my account
+  resend_unlock_instructions: Resend unlock instructions
   puede_confirmar_correo: You can confirm your email through the following link
   cuando_ingreses_sistema: When you enter our Information System you will find a menu at the top specifically an option that says "User", in this option you can change your System Access password as many
     times as needed
@@ -1064,6 +1068,9 @@ en:
   users_passwords_password_updated: Your password has been updated successfully.
   users_passwords_invalid_token: The password reset token is invalid.
   users_passwords_recovery_subject: Password Recovery
+  users_unlock_subject: Account Unlock
+  users_unlock_email_sent: An email has been sent with instructions to unlock your account.
+  users_unlock_user_not_found: No user was found with that email address.
   jugada_en_curso_pendiente: You have a play in progress (PENDING). Close or finish it before creating another.
   accion_no_permitida: Action not allowed.
   solo_crear_jugada_cuando_cerrada: You can only create a new play when the current one is CLOSED.

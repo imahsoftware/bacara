@@ -42,18 +42,20 @@
             <div class="col-md-2"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
             <div class="col-md-4"><%= f.input :email %></div>
           </div>
+          <%# tipoconsulta forzado a PERSONA por defecto (campo oculto) %>
+          <%= f.hidden_field :tipoconsulta, value: 'PERSONA' %>
+
           <div class="row">
-            <div class="col-md-4">
-              <%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [ p.nombre, p.id ] }, input_html: { class: 'select2' }, as: :select, label: t(:company),include_blank: true%>
+            <div class="col-md-3">
+              <label><%= t :avatar %></label>
+              <div class="avatar-preview" style="margin-bottom: 8px;">
+                <%= image_tag(@user.avatar.url(:thumb),
+                              alt: 'avatar',
+                              style: 'width:100px; height:100px; border-radius:50%; object-fit:cover; background:#f0f0f0; border:1px solid #d8d8de;') %>
+              </div>
+              <%= f.input :avatar, as: :file, label: false %>
             </div>
-            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
-            <div class="col-md-2"><%= f.input :celular, label: t(:mobile) %></div>
-            <div class="col-md-3"><%= f.input :observaciones, as: :text, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'}, label: t(:observations) %></div>
           </div>
-          <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2"><%= f.input :clase_aseo, as: :select, collection: select_act_tipo, input_html: { data: { width: '100%' }, class: 'select2'}, label: t(:node)%></div>
-          </div>
-          <div class="row"><div class="col-md-2"><%= f.input :avatar, as: :file, label: t(:avatar) %></div></div>
         </div>
         <div class="box-footer">
           <div class="box-tools pull-right">

@@ -105,21 +105,23 @@
       <% end %>
 
       <div class="links">
-        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' and devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-          <ul>
+        <ul>
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <li>
               <%= link_to new_password_path(resource_name) do %>
                 <span><%= t :olvido_contrasena %></span>
               <% end %>
             </li>
-          </ul>
-        <% else %>
-          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to new_password_path(resource_name) do %>
-              <span><%= t :olvido_contrasena %></span>
-            <% end %>
           <% end %>
-        <% end %>
+
+          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+            <li>
+              <%= link_to new_unlock_path(resource_name) do %>
+                <span><%= t :no_recibio_instrucciones_desbloqueo %></span>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
       </div>
 
       <%= render 'layouts/flash_messages' %>

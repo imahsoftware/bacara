@@ -4,7 +4,7 @@ es:
   salir: Log Out
   ver_todos: See all
   hay: There are
-  buscar: Search
+  buscar: Buscar
   indicadores_presupuesto_ejecucion: Budget vs Execution Indicators
   indicadores_cartera: Portfolio Indicators
   presupuesto_mes: Monthly Budget
@@ -107,12 +107,12 @@ es:
   contrasena: Password
   iniciar_sesion: Sign In
   iniciando: Signing in...
-  olvido_contrasena: Forgot your password?
-  ingresar: Sign In
-  registrarse: Sign Up
-  olvido_su_contrasena: Forgot your password?
-  no_recibio_correo_confirmacion: Did not receive confirmation email?
-  no_recibio_instrucciones_desbloqueo: Did not receive unlock instructions?
+  olvido_contrasena: ¿Olvidaste tu contraseña?
+  ingresar: Iniciar sesión
+  registrarse: Registrarse
+  olvido_su_contrasena: ¿Olvidaste tu contraseña?
+  no_recibio_correo_confirmacion: ¿No recibiste el correo de confirmación?
+  no_recibio_instrucciones_desbloqueo: ¿No recibiste las instrucciones para desbloquear?
   soluciones_software_medida: Custom software solutions
   desarrollo_medida: Custom development
   integracion_sistemas: System integration
@@ -165,11 +165,11 @@ es:
   deactivate_two_factor: Deactivate two factor
   activate_two_factor: Activate two factor
   users: Users
-  new_user: New User
-  search: Search...
-  username: Username
-  name: Name
-  email: Email
+  new_user: Nuevo usuario
+  search: Buscar...
+  username: Usuario
+  name: Nombre
+  email: Correo
   active: Active
   inactivate_user: Inactivate user
   activate_user: Activate user
@@ -178,10 +178,10 @@ es:
   reset_and_send_sms: Reset password, Unlock and send SMS
   no_data_found: No data found
   add_new: Add New
-  edit: Edit
-  user: User
-  company: Company
-  observations: Observations
+  edit: Editar
+  user: Usuario
+  company: Cliente
+  observations: Observaciones
   node: Node
   avatar: Avatar
   accept: Accept
@@ -297,9 +297,9 @@ es:
   report: Report
   add_new_permission: Add New Permission
   add_new_visit: Add New Visit
-  new_company: New Company
-  edit_company: Edit Company
-  sure: Sure?
+  new_company: Nuevo cliente
+  edit_company: Editar cliente
+  sure: ¿Estás seguro?
   job_name: Job Name
   job_style: Job Style
   assigned_parameters: Assigned Parameters
@@ -371,20 +371,23 @@ es:
   continuous_support: Continuous support
   copyright: Copyright
   bacwins: BacWins
-  campo: Field
-  codigo_aportes_en_linea: AportesEnLinea Code
-  estado: Status
-  descripcion: Description
-  descripcion_ampliada: Extended Description
+  campo: Campo
+  codigo_aportes_en_linea: Código AportesEnLínea
+  estado: Estado
+  descripcion: Descripción
+  descripcion_ampliada: Descripción ampliada
   autorizado: Authorized
   si: true
   false: false
   reporte: Report
   campo_permitido: Allowed Field
   modulo: Module
-  identificacion: Identification
-  nombre: Name
-  nombre_corto: Short Name
+  identificacion: Identificación
+  nombre: Nombre
+  nombre_corto: Nombre corto
+  companias: Clientes
+  nueva_compania: Nuevo cliente
+  forma_vmn: Forma VMN
   agregar_formato: Add Format
   agregar_usuario: Add User
   cargar_documento: Load Document
@@ -401,11 +404,11 @@ es:
   contrato: Contract
   contrato_empresa: Contract - Company
   nodo: Node
-  periodo: Period
-  usuario_title: User
-  clave: Password
-  confirmar_clave: Confirm Password
-  agregar_nuevo: Add New
+  periodo: Período
+  usuario_title: Usuario
+  clave: Clave
+  confirmar_clave: Confirmar clave
+  agregar_nuevo: Agregar nuevo
   editar: Edit
   regresar_a_usuarios: Return to Users
   seguro_question: Are you sure?
@@ -524,6 +527,9 @@ es:
   users_passwords_password_updated: La contraseña se ha actualizado correctamente.
   users_passwords_invalid_token: El token de restablecimiento de contraseña no es válido.
   users_passwords_recovery_subject: Recuperación de Contraseña
+  users_unlock_subject: Desbloqueo de cuenta
+  users_unlock_email_sent: Se ha enviado un correo electrónico con instrucciones para desbloquear tu cuenta.
+  users_unlock_user_not_found: No se encontró un usuario con esa dirección de correo electrónico.
   jugada_en_curso_pendiente: Tiene una jugada en curso (PENDIENTE). Cierre o finalícela antes de crear otra.
   accion_no_permitida: Acción no permitida.
   solo_crear_jugada_cuando_cerrada: Solo se puede crear una jugada cuando la actual está CERRADA.
@@ -1321,7 +1327,7 @@ es:
   # === Game/Baccarat module: new keys ===
   profit_label: "GANANCIA:"
   usd_title: "Dólares estadounidenses (USD)"
-  baccarat_winners: "Baccarat Winners"
+  bacara_winners: "Bacara Winners"
   frequency_table: "Tabla de frecuencias"
   undo_last_hand: "Deshacer última mano"
   undoing: "Deshaciendo..."
@@ -1356,7 +1362,7 @@ es:
   bienvenido: Welcome
   puede_confirmar_correo_enlace: You can confirm your email account through the following link
   confirmar_mi_cuenta: Confirm my account
-  resend_unlock_instructions: Resend unlock instructions
+  resend_unlock_instructions: Reenviar instrucciones de desbloqueo
   # === Additional Devise Mailer ===
   su_cuenta_bloqueada: Your account has been locked due to an excessive number of failed login attempts.
   haga_clic_desbloquear: Click the following link to unlock your account

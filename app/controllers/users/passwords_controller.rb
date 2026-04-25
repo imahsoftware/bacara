@@ -13,7 +13,7 @@ class Users::PasswordsController < Devise::PasswordsController
       # Guardar el usuario con el nuevo token de restablecimiento de contraseña
       user.save
       # Envía el correo electrónico de notificación de restablecimiento de contraseña
-      Bacaramail::SendmailServices.new.notificacionEmails(user.email, I18n.t(:users_passwords_recovery_subject), "devise/mailer/reset_password_instructions.html.erb", nil, nil, user.reset_password_token, user.username)
+      Bacaramail::SendmailServices.new.general(user.email, I18n.t(:users_passwords_recovery_subject), "devise/mailer/reset_password_instructions.html.erb", nil, nil, user.reset_password_token, user.username)
 
       # Redirigir a donde quieras después de enviar el correo electrónico
       redirect_to root_path, notice: I18n.t(:users_passwords_reset_email_sent)

@@ -20,6 +20,22 @@
 </td>
 <td><%= portafolio.nombre rescue nil %></td>
 <td><%= portafolio.nombrecorto rescue nil %></td>
+<td><%= portafolio.identificacion rescue nil %></td>
+<td><%= portafolio.email rescue nil %></td>
+<td><%= portafolio.username rescue nil %></td>
+<td>
+  <% if portafolio.clave.present? %>
+    <span class="clave-mask" data-clave="<%= portafolio.clave %>">••••••</span>
+    <a href="#" class="clave-toggle" data-target="clave-mask"
+       style="font-size:11px; margin-left:4px;"
+       onclick="event.preventDefault();
+                var el=this.previousElementSibling;
+                if(el.textContent==='••••••'){el.textContent=el.dataset.clave;this.textContent='ocultar';}
+                else{el.textContent='••••••';this.textContent='ver';}">ver</a>
+  <% else %>
+    <span style="color:#aaa;">—</span>
+  <% end %>
+</td>
 <td><%= portafolio.forma_vmn rescue nil %></td>
 <td>
   <div align="center"><%= portafolio.estado rescue nil %></div>
