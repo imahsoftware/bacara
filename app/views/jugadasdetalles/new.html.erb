@@ -1,5 +1,7 @@
 <%# Profit = sumatoria de acumuladof por jugada_id en jugadasdetalles %>
+<% jd_profit_value   = Jugadasdetalle.sum_acumuladof_for_jugada(@jugada_id).to_f %>
 <% jd_profit_display = Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>
+<% jd_profit_class   = jd_profit_value > 0 ? 'jd-bw-profit--win' : (jd_profit_value < 0 ? 'jd-bw-profit--lose' : 'jd-bw-profit--zero') %>
 <% jd_pendiente = @jugada.estado.to_s.upcase == 'PENDIENTE' %>
 <% jd_muestra_regresar = current_user.tipoconsulta.to_s != 'PERSONA' %>
 <% jd_muestra_new_shoe = current_user.tipoconsulta.to_s == 'PERSONA' && @jugada.present? && @jugada.estado.to_s.upcase == 'CERRADA' %>
@@ -13,12 +15,29 @@
     <aside class="jd-bw-sidebar">
       <header class="jd-bw-hero">
         <h1 class="jd-bw-title"><%= t(:bacara_winners) %></h1>
-        <p class="jd-bw-profit">
+        <p class="jd-bw-profit <%= jd_profit_class %>" id="jd-bw-profit-wrap">
           <span class="jd-bw-profit__label"><%= t(:profit_label) %></span>
           <span class="jd-bw-profit__wrap">
             <span class="jd-bw-profit__currency" title="<%= t(:usd_title) %>">US</span><span id="jd-profit-amount"><%= jd_profit_display %></span>
           </span>
         </p>
+
+        <script>
+          // Recolorea el bloque PROFIT según el signo del monto actual.
+          // Lo expone en window para que create.js.erb / undo.js.erb lo invoquen tras un AJAX.
+          window.applyProfitColor = function() {
+            var wrap = document.getElementById('jd-bw-profit-wrap');
+            var amt  = document.getElementById('jd-profit-amount');
+            if (!wrap || !amt) return;
+            var raw = (amt.textContent || '').trim().replace(',', '.');
+            var v   = parseFloat(raw);
+            if (isNaN(v)) v = 0;
+            wrap.classList.remove('jd-bw-profit--win', 'jd-bw-profit--lose', 'jd-bw-profit--zero');
+            if (v > 0)      wrap.classList.add('jd-bw-profit--win');
+            else if (v < 0) wrap.classList.add('jd-bw-profit--lose');
+            else            wrap.classList.add('jd-bw-profit--zero');
+          };
+        </script>
       </header>
 
       <div class="jd-next-bet jd-next-bet--bw" id="jd-next-bet-banner">

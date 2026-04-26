@@ -717,6 +717,29 @@ body.vsp-body:has(.jd-bw-page) {
     font-weight: 800;
     font-variant-numeric: tabular-nums;
 }
+
+/* ── Coloreo dinámico del PROFIT según ganancia/pérdida ───────── */
+.jd-bw-profit--win,
+.jd-bw-profit--win .jd-bw-profit__label,
+.jd-bw-profit--win .jd-bw-profit__currency,
+.jd-bw-profit--win #jd-profit-amount {
+    color: #15803d;
+    transition: color .25s ease;
+}
+.jd-bw-profit--lose,
+.jd-bw-profit--lose .jd-bw-profit__label,
+.jd-bw-profit--lose .jd-bw-profit__currency,
+.jd-bw-profit--lose #jd-profit-amount {
+    color: #b91c1c;
+    transition: color .25s ease;
+}
+.jd-bw-profit--zero,
+.jd-bw-profit--zero .jd-bw-profit__label,
+.jd-bw-profit--zero .jd-bw-profit__currency,
+.jd-bw-profit--zero #jd-profit-amount {
+    color: #6b7280;
+    transition: color .25s ease;
+}
 .jd-bw-sub {
     margin: 10px 0 0;
     font-size: 12px;

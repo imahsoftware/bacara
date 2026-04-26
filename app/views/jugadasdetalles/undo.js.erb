@@ -5,6 +5,7 @@ $('#mov-count').text('<%= @total_movimientos %>');
 $('#badge-count').text('<%= @total_movimientos %>');
 $('#next-bet-text').text('<%= j @proximo_bet %>');
 $('#jd-profit-amount').text('<%= j Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>');
+if (typeof window.applyProfitColor === 'function') { window.applyProfitColor(); }
 
 <% if @total_movimientos < 5 %>
 $('#prc-badge').hide();
