@@ -10,7 +10,6 @@
 
     <%# Botón para abrir el detalle de jugada en nueva ventana %>
     <%= link_to new_jugadasdetalle_path(jugada_id: jugada.id),
-                target: "_blank",
                 rel: "noopener",
                 data: { toggle: 'tooltip' },
                 title: "#{t :ver_detalle_jugada}" do %>
