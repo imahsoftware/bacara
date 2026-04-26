@@ -1327,7 +1327,7 @@ es:
   # === Game/Baccarat module: new keys ===
   profit_label: "GANANCIA:"
   usd_title: "Dólares estadounidenses (USD)"
-  bacara_winners: "Bacara Winners"
+  bacwins_winners: "Bacwins Winners"
   frequency_table: "Tabla de frecuencias"
   undo_last_hand: "Deshacer última mano"
   undoing: "Deshaciendo..."
