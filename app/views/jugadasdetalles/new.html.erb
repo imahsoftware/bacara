@@ -23,6 +23,19 @@
         </p>
 
         <script>
+          // Tras AJAX: si jugada ya no PENDIENTE, ocultar P/B/undo/clear y mostrar New Shoe o Regresar.
+          window.jdLockPlayControls = function () {
+            var $circles = $('.jd-circles--bw');
+            var $undo = $('#btn-undo');
+            var $reset = $('#btn-reset');
+            var $panel = $('#jd-post-close-panel');
+            $circles.hide();
+            $undo.hide();
+            $reset.hide();
+            if ($panel.length) {
+              $panel.show().attr('aria-hidden', 'false');
+            }
+          };
           // Recolorea el bloque PROFIT según el signo del monto actual.
           // Lo expone en window para que create.js.erb / undo.js.erb lo invoquen tras un AJAX.
           window.applyProfitColor = function() {
@@ -79,6 +92,18 @@
             <%= link_to nueva_shoe_jugada_path(from_jugada_id: @jugada_id), method: :post, class: 'btn btn-success btn-block' do %>
               <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_shoe) %>
             <% end %>
+          <% end %>
+          <%# Panel oculto si sesión empezó PENDIENTE: tras PRC/CERRADA se muestra sin recargar (create/undo JS) %>
+          <% if jd_pendiente %>
+            <div id="jd-post-close-panel" class="jd-post-close-panel" style="display:none;" aria-hidden="true">
+              <% if current_user.tipoconsulta.to_s == 'PERSONA' %>
+                <%= link_to nueva_shoe_jugada_path(from_jugada_id: @jugada_id), method: :post, class: 'btn btn-success btn-block', id: 'jd-new-shoe-link-ajax' do %>
+                  <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_shoe) %>
+                <% end %>
+              <% else %>
+                <%= link_to t(:regresar), jugadas_path, class: 'jd-back-btn' %>
+              <% end %>
+            </div>
           <% end %>
         </div>
       </div>

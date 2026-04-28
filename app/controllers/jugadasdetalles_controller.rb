@@ -40,6 +40,7 @@ class JugadasdetallesController < ApplicationController
 
     # Correr el PRC con el id del registro actualizado/insertado
     ejecutar_prc_calculo_automatico(@detalle.id)
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
@@ -69,6 +70,8 @@ class JugadasdetallesController < ApplicationController
                .first
     ultimo.destroy if ultimo
 
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
@@ -82,6 +85,8 @@ class JugadasdetallesController < ApplicationController
   def reset
     # Eliminar todos los registros asociados a esta jugada
     Jugadasdetalle.where(jugada_id: @jugada_id).delete_all
+
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
     @jugadasdetalles   = []
     @total_movimientos = 0
@@ -182,7 +187,8 @@ class JugadasdetallesController < ApplicationController
     return if jugada.estado.to_s.upcase == 'PENDIENTE'
 
     respond_to do |format|
-      format.js   { render js: "alert('Solo con jugada PENDIENTE se pueden registrar apuestas (P/B) o deshacer/limpiar.');" }
+      # Sin alert: UI debe bloquearse vía jdLockPlayControls tras reload de estado; noop por si race.
+      format.js   { render js: '// jugada no PENDIENTE' }
       format.json { render json: { status: 'error', message: 'Jugada no PENDIENTE' }, status: :forbidden }
     end
   end

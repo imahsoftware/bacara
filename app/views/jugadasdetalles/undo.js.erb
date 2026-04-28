@@ -32,3 +32,8 @@ $('#prc-badge').hide();
         }, 50);
     }
 })();
+
+<% if @jugada.present? && @jugada.estado.to_s.upcase.strip != 'PENDIENTE' %>
+if (typeof window.jdLockPlayControls === 'function') { window.jdLockPlayControls(); }
+<% end %>
+
