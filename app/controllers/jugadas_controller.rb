@@ -84,10 +84,13 @@ class JugadasController < ApplicationController
 
     @jugada = Jugada.new(jugada_params)
     @jugada.user_id = current_user.id
+    @jugada.fecha = Time.current
+    @jugada.estado = 'PENDIENTE' if @jugada.estado.blank?
     respond_to do |format|
       if @jugada.save
+        @jugada.update(jugador: "SHOE#{@jugada.id}") if @jugada.jugador.blank?
         flash[:notice] = "#{t :notice_crea_msj}"
-        format.js { render inline: "location.reload();" }
+        format.js { render inline: "window.location = #{new_jugadasdetalle_path(jugada_id: @jugada.id).to_json};" }
       else
         format.js { render 'layouts/errors', locals: { object: @jugada } }
       end
@@ -106,7 +109,7 @@ class JugadasController < ApplicationController
 
   # Solo PERSONA, desde baccarat (viewspecial): crea jugada y abre su detalle.
   def nueva_shoe
-    unless current_user.tipoconsulta.to_s == 'PERSONA'
+    unless ['PERSONA', 'TODO'].include?(current_user.tipoconsulta.to_s)
       redirect_to root_path, alert: I18n.t(:accion_no_permitida)
       return
     end
@@ -117,7 +120,7 @@ class JugadasController < ApplicationController
       return
     end
 
-    if Jugada.persona_tiene_jugada_abierta?(current_user)
+    if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.id), alert: I18n.t(:otra_jugada_pendiente)
       return
     end
