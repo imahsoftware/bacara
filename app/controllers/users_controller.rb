@@ -325,12 +325,6 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     else
-      @usersmodulo = Usersmodulo.new
-      @userspermiso = Userspermiso.new
-      @usersvisita = Usersvisita.new
-      @usersportafolio = Usersportafolio.new
-      #@usersfecha = Usersfecha.new
-      #@usersimagen = Usersimagen.new
       render "user_form"
     end
   end

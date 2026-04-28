@@ -1,274 +1,1359 @@
+# Auto-generated/merged by translation completion script.
 en:
-  hello: "Hello world"
-  editar_perfil: "Edit Profile"
-  salir: "Log Out"
-  ver_todos: "See all"
-  hay: "There are"
-  buscar: "Search"
-  agregar: "Add"
-  title_editar: "Edit"
-  title_elimina: "Delete"
-  elimina_confirma: "Are you sure you want to delete?"
-  cancelar: "Cancel"
-  guardar: "Save"
-  notice_crea_msj: "Record created successfully."
-  notice_actualiza_msj: "Record updated successfully."
-  notice_elimina_msj: "Record deleted successfully."
-  atencion: "Attention!"
-  atencion_msj: "No data yet"
-  acciones: "Actions"
-  jugadas: "Plays"
-  buscar_placeholder: "Search..."
-  ver_detalle_jugada: "View play details"
-  ingreso_al_sistema: "System Login"
-  ingresa_credenciales: "Enter your credentials to continue"
-  usuario: "Username"
-  contrasena: "Password"
-  iniciar_sesion: "Sign In"
-  iniciando: "Signing in..."
-  olvido_contrasena: "Forgot your password?"
-  ingresar: "Sign In"
-  registrarse: "Sign Up"
-  olvido_su_contrasena: "Forgot your password?"
-  no_recibio_correo_confirmacion: "Did not receive confirmation email?"
-  no_recibio_instrucciones_desbloqueo: "Did not receive unlock instructions?"
-  soluciones_software_medida: "Custom software solutions"
-  desarrollo_medida: "Custom development"
-  integracion_sistemas: "System integration"
-  soporte_continuo: "Continuous support"
-  todos_derechos_reservados: "All rights reserved."
-
+  hello: Hello world
+  editar_perfil: Edit Profile
+  salir: Log Out
+  ver_todos: See all
+  hay: There are
+  buscar: Search
+  agregar: Add
+  title_editar: Edit
+  title_elimina: Delete
+  elimina_confirma: Are you sure you want to delete?
+  cancelar: Cancel
+  guardar: Save
+  notice_crea_msj: Record created successfully.
+  notice_actualiza_msj: Record updated successfully.
+  notice_elimina_msj: Record deleted successfully.
+  atencion: Attention!
+  atencion_msj: No data yet
+  acciones: Actions
+  jugadas: Plays
+  buscar_placeholder: Search...
+  ver_detalle_jugada: View play details
+  ingreso_al_sistema: System Login
+  ingresa_credenciales: Enter your credentials to continue
+  usuario: Username
+  contrasena: Password
+  iniciar_sesion: Sign In
+  iniciando: Signing in...
+  olvido_contrasena: Forgot your password?
+  ingresar: Sign In
+  registrarse: Sign Up
+  olvido_su_contrasena: Forgot your password?
+  no_recibio_correo_confirmacion: Did not receive confirmation email?
+  no_recibio_instrucciones_desbloqueo: Did not receive unlock instructions?
+  soluciones_software_medida: Custom software solutions
+  desarrollo_medida: Custom development
+  integracion_sistemas: System integration
+  soporte_continuo: Continuous support
+  todos_derechos_reservados: All rights reserved.
   will_paginate:
-    previous_label: "&#8592; Previous"
-    next_label: "Next &#8594;"
-    page_gap: "&hellip;"
-
+    previous_label: '&#8592; Previous'
+    next_label: Next &#8594;
+    page_gap: '&hellip;'
   activerecord:
     attributes:
       jugada:
-        jugador: "Player"
-
+        jugador: Player
+      comite:
+        temas: Topics
+        fecha: Date
+      comitesuser:
+        user_id: User
+        empresassede_id: Branch
+      contrato:
+        nro_contrato: Contract No.
+        objeto: Subject
+        tiposcontrato_id: Contract Type
+        municipio_id: Execution Municipality
+        direccion: Execution Address
+        estado: Status
+        valor: Value
+        plazo_mes: Term (months)
+        plazo_dia: Term (days)
+        fecha_firma: Signing Date
+        fecha_inicio: Start Date
+        fecha_fin: End Date
+        anticipo: Advance Payment?
+        valor_anticipo: Advance Value
+        fecha_liquidacion: Settlement Date
+        fechamasmodi: Date + Mod.
+        valormasmodi: Value + Mod.
+        tipo_validacion: Restriction Type
+        monto_maximo_mes: Maximum Amount per Month
+      contratosimagen:
+        tiposimagen_id: Document Type
+      contratospago:
+        tiposcuenta_id: Account Type
+        fecha_cuenta: Account Date
+        fecha_pago: Payment Date
+        valor: Paid Value
+        empresassede_id: Branch
+      insumo:
+        tipo: Product Type
+        bien_servicio: Good or Service
+        especificacion: Technical Specification
+        presentacion: Presentation
+        valor1: Price w/ VAT Region 1 to 11
+        valor2: Price w/ VAT Region 12 to 18
+      contratosinsumo:
+        insumo_id: Good
+        cantidad_mensual: Monthly Quantity
+        precio_unitario: Unit Price
+        descuento: Discount %
+        precio_condescuento: Unit Price with Discount
+        total: Total
+        marca_noreal: Billing Flag
+      contratosmaquinaria:
+        insumo_id: Equipment, Machine
+        cantidad_mensual: Monthly Quantity
+        precio_unitario: Unit Price
+        descuento: Discount %
+        precio_condescuento: Unit Price with Discount
+        total: Total
+        empresassede_id: Branch
+      contratoscargo:
+        tiposcargo_id: Position
+        perfil: Profile
+        disponibilidad: Availability
+        cantidad: Quantity
+        salario: Salary
+        empresassede_id: Branch
+      contratossede:
+        empresassede_id: Branch
+      contratospersona:
+        identificacion2: Validation ID
+        fecha_nacimiento2: Validation Birth Date
+        ciudad: Address City
+        user_asignado: Process Owner
+        user_interventor: Supervisor
+        puesto_nuevo: Position Assigned to New Staff
+      contratosuser:
+        user_interventor: Registered User
+        empresassede_id: Branch
+      contratosotro:
+        empresassede_id: Branch
+        descripcion: Service Detail / Description
+        cantidad_mensual: Monthly Quantity
+        precio_unitario: Unit Price
+        descuento: Discount %
+        precio_condescuento: Unit Price with Discount
+        total: Total
+      contratossoldetalle:
+        contratosinsumo_id: Select item
+        contratosmaquinaria_id: Select item
+        contratosotro_id: Select item
+      proveedor:
+        tiposdocumento_id: Document
+        identificacion: ID
+        digito: CD
+        nombre_proveedor: Vendor display name
+        nombre_camara: Vendor name registered at chamber of commerce
+        telefono: Landline
+        celular: Mobile phone
+        email: Email
+        direccion: Address
+        municipio: Municipality
+        nro_cuenta: Bank account number
+        entidad: Bank
+        tipo_cuenta: Account type
+        pertenece_cuenta: Who owns the account
+        identificacion_cuenta: Account owner ID
+        estado: Status
+      proveedoresimagen:
+        tiposimagen_id: Document Type
+        prodocumentos: Document
+      persona:
+        tiposdocumento_id: Document
+        identificacion: ID
+        digito: CD
+        primer_nombre: First name
+        segundo_nombre: Middle name
+        primer_apellido: Last name
+        segundo_apellido: Second last name
+        genero: Gender
+        estado_civil: Marital Status
+        fecha_nacimiento: Birth date
+        tipo_persona: Person Type
+        situacion_econo: Economic Situation
+        ocupacion: Occupation or position
+        salario: Salary
+        nombre_empresa: Name of employer company
+        direccion_empresa: Company address
+        telefono_empresa: Company phone
+        situacion_titular: Holder Situation
+        tipo_deudor: Debtor Type
+        porc_descuento: Cash payment discount percentage
+        porc_descuento_plazo: Term payment discount percentage
+        calificacion: Customer rating
+        codclavecic: Codclavecic
+        idc: Idc
+        nacionalidad: Nationality
+        gps_codigo_sensible: Sensitive Code
+        gps_fch_deteccion: Detection Date
+        useranalista_id: Judicial Analyst
+        representante_legal: Legal Representative
+        direccion: Home address
+        email: Email
+        email_institucional: Institutional Email
+        clv: Enter the password you will use to access your registration form
+        nacimiento_municipio_id: Birth municipality
+        zona: Zone
+        discapacidad: Do you have any disability?
+        tiposdiscapacidad_id: Disability type
+        residencia_municipio_id: Residence municipality
+        universidadesprograma_id: University and program
+        cohorte_id: Cohort
+        centro_id: Support Center
+        medio: How did you hear about EDUPOL?
+        ciudadexpedicion_id: City of Issue
+        parnaturalezadeudor_id: Debtor Nature
+        parsituaciondeudor_id: Debtor Situation
+        contac_parentesco: Relationship
+        contac_nombres: First names
+        contac_apellidos: Last names
+        contac_telefono: Phone
+      personasdireccion:
+        coordenada_x: X Coordinate
+        coordenada_y: Y Coordinate
+        origen_dato: Data Source
+      personastelefono:
+        origen_dato: Data Source
+      inmueblesingreso:
+        concepto: Concept
+        ingreso_moneda: Income Unit
+        fecha_ingreso: Income Date
+        fecha_minuta: Minute Date
+        fecha_venta: Sale Date
+        nro_cheque: Check No.
+      inmueblesajuste:
+        valor: Value
+        moneda: Unit
+        fecha: Date
+        concepto: Concept
+        observaciones: Observations
+      inmueblespatrimonio:
+        moneda: Unit
+        fecha: Date
+        patrimonio: Estate Type
+        tipospatrimonio_id: Concept
+      inmueblesgestion:
+        fecha_gestion: Management Date
+        observacion: Observation
+        tipo_gestion: Management Type
+      inmueblespropietario:
+        identificacion: ID
+        nombre: Name or Corporate Name
+        telefono: Phone
+        direccion: Address
+        email: Email
+        porcentaje_part: Ownership Percentage
+      inmueblestramite:
+        minuta_nro: Minute No.
+        minuta_fecha: Minute Date
+        escritura_nro: Deed No.
+        escritura_notaria: Notary
+        municipio_id: Municipality
+        perumunicipio_id: Municipality
+        escritura_fecha: Deed Date
+        fecha_entrega: Delivery Date
+        fecha_ingresoucn: UCN (start)
+        dias_ucn: UCN (days)
+        resultado_ucn: UCN (Compliance)
+        fecha_salidaucn: UCN (End)
+        seguimento_ucn: UCN (Follow-up)
+        fecha_seguimientoucn: UCN follow-up date
+        venta_concluida: Sale Completed
+      inmueblesarrendatario:
+        trabajo: Current Employer
+        telefono: Phone
+        celular: Mobile
+        fecha_inicio: Start Date
+        direccion: Address
+        tel_trabajo: Work Phone
+      personasproceso:
+        suspencion_inicio: Suspension Start
+        suspencion_fin: Suspension End
+        causal_terminacion: Termination Cause
+        comentarios_prestamo: Loan / Borrower Comments
+        comentarios_colateral: Collateral Comments
+        desafias: Key Challenges / Objectives
+        estrategias: Resolution Strategy
+        number_auction: Number of auction
+        minimum_bid: Minimum Starting Bid
+        expected_date: Expected resolution date
+        discount_rate: Discount Rate VNA (%)
+        loan_underwriter: Loan Underwriter
+        collateral_underwriter: Collateral underwriter
+        exhorto: Exhorto
+        fecha: Process Start Date
+      portafolio:
+        recaudo_prorrata: Prorated Collection?
+        forma_aplicacion: Application Method
+        aplicaregla1: Validate Obligation + ID
+        aplicaregla2: Validate only Obligation
+        aplicaregla3: Validate only ID
+        valida_cierre: Collections Control by Closing
+        aplica_recaudo: How to apply collections by ID?
+        bloqueo_recaudo: Collection Block
+        genera_mora: Settles Default Interest?
+        nacional: Colombia
+        act_dash: Activate Dashboard
+        acuerdos_fechas: Allow Agreements with Past Dates
+      personasinventidad:
+        tipo: Type
+        entidad: Entity
+        nro_cuenta: Account No.
+        oficina: Office
+        saldo: Balance
+        personascodeudor_id: Associated to
+      personaslaboral:
+        entidad: Entity
+        nit: Employer Tax ID
+        direccion: Address
+        municipio_id: Municipality
+        cargo: Position
+        salario: Salary
+        nombre_rh: Name
+        telefono_rh: Phone
+        email_rh: Email
+        fecha_vinculacion: Hire Date
+        fecha_finalizacion: End Date
+        personascodeudor_id: Associated to
+        observaciones: Observations
+      personasinvotro:
+        personascodeudor_id: Associated to
+        observaciones: Observations
+      personasinvempresa:
+        origen: Origin
+        nro_matricula: Registration No.
+        nit: Tax ID
+        nombre: Name
+        camara_comercio: Chamber of Commerce
+        direccion: Address
+        municipio_id: Municipality
+        representante_legal: Legal Representative
+        porc_participacion: Ownership %
+        personascodeudor_id: Associated to
+        observaciones: Observations
+      personasinvremanente:
+        juzgado_id: Court
+        tiposproceso_id: Process Types
+        tipo_bien: Asset Type
+      personasobligacion:
+        recibida_pa: Received PA
+        radicado_juzgado: Court Filing No.
+        aceptada: Accepted
+        subida_activo: Uploaded to Assets
+        tasa_final: Final Rate
+        tasa_mora: Default Rate
+        corte_plan: Cutoff Day
+        tasa_desgravamen: Annual Waiver Rate
+        tasa_igv: IGV Rate
+        tipotitulo: Title Type
+      portafolioscuenta:
+        propietario: Owner
+        banco: Bank
+        cuenta: Account
+        unidad_denominacion: Denomination Unit
+        codigo_reporte: Report Code
+        portafoliossucursal_id: Branch
+        cod_cuenta: Account Code
+        nit_titular: Holder Tax ID
+        tipo_cuenta: Account Type
+        convenio: Agreement
+        portafoliosvehiculo_id: Vehicle
+        tipospatrimonio_id: Estate
+      inmueblesestado:
+        estado: Property Status
+        fecha_estado: Date
+        grupo: Group
+        fecha_ingresoucn: UCN (start)
+        dias_ucn: UCN (days)
+        resultado_ucn: UCN (Compliance)
+      tanque:
+        fecha_mov: Deposit Date
+        obligacion: Obligation
+        identificacion: ID
+        cuenta: Account
+        codigo: Code
+        valor_recaudo: Collection Value
+        unidad_denominacion: Denomination Unit
+        nombre_archivo: File Name
+        parorigenespago_id: Payment Origin
+      personasacuerdosdato:
+        created_at: Approval Date
+      portafoliostasascambio:
+        hnl_dolar: Lempira per Dollar
+        soles_dolar: Soles per Dollar
+      gpsajuste:
+        patrimonio: Estate Type
+      personasproetapasdato:
+        strategy: Strategy
+        winning_bid: Winning bid (USD)
+        winning_bid_org: Winning bid (Original Currency)
+        winning_bid_currency: Winning bid Currency
+        tipo_toma: Type of Possession Taking
+        collection_date: Collection Date (Awarded by 3RD)
+        collection_amount: Collection Amount (3RD)
+        possible_collections: Possible collections date (3RD)
+        status: Status
+        comments_gps: Comments GPS
+        dpd_attimeofaction: DPD at Time of action
+        date_lastprocedural_action: Date last procedural action
+        minimun_startingbid: Minumun Starting Bid
+      personasprojudicial:
+        fecha_resol_estudio: Study Resolution Date
+        valor_resol_estudio: Study Resolution Value
+        unidad_estudio: Denomination
+        fecha_resol_gps: GPS Resolution Date
+        valor_resol_gps: GPS Resolution Value
+        unidad_gps: Denomination
+        tipo_resol: Resolution Type
+        tipoobs_resol: Resolution Observation Type
+        observacion: Resolution Observation
+        accion_inmediata: Immediate Action
+        fecha_accion: Immediate Action Date
+        observacion_accion: Immediate Action Observation
     errors:
       messages:
-        record_invalid: "Validation failed: %{errors}"
+        record_invalid: 'Validation failed: %{errors}'
         restrict_dependent_destroy:
-          has_one: "Cannot delete record because a dependent %{record} exists"
-          has_many: "Cannot delete record because dependent %{record} exist"
-
+          has_one: Cannot delete record because a dependent %{record} exists
+          has_many: Cannot delete record because dependent %{record} exist
   date:
     abbr_day_names:
-      - Sun
-      - Mon
-      - Tue
-      - Wed
-      - Thu
-      - Fri
-      - Sat
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
     abbr_month_names:
-      -
-      - Jan
-      - Feb
-      - Mar
-      - Apr
-      - May
-      - Jun
-      - Jul
-      - Aug
-      - Sep
-      - Oct
-      - Nov
-      - Dec
+    - null
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
     day_names:
-      - Sunday
-      - Monday
-      - Tuesday
-      - Wednesday
-      - Thursday
-      - Friday
-      - Saturday
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
     formats:
-      default: "%d/%m/%Y"
-      long: "%A, %d of %B of %Y"
-      short: "%d of %b"
+      default: '%d/%m/%Y'
+      long: '%A, %d of %B of %Y'
+      short: '%d of %b'
     month_names:
-      -
-      - January
-      - February
-      - March
-      - April
-      - May
-      - June
-      - July
-      - August
-      - September
-      - October
-      - November
-      - December
+    - null
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
     order:
-      - :day
-      - :month
-      - :year
-
+    - :day
+    - :month
+    - :year
   datetime:
     distance_in_words:
       about_x_hours:
-        one: "about 1 hour"
-        other: "about %{count} hours"
+        one: about 1 hour
+        other: about %{count} hours
       about_x_months:
-        one: "about 1 month"
-        other: "about %{count} months"
+        one: about 1 month
+        other: about %{count} months
       about_x_years:
-        one: "about 1 year"
-        other: "about %{count} years"
+        one: about 1 year
+        other: about %{count} years
       almost_x_years:
-        one: "almost 1 year"
-        other: "almost %{count} years"
-      half_a_minute: "half a minute"
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
       less_than_x_minutes:
-        one: "less than 1 minute"
-        other: "less than %{count} minutes"
+        one: less than 1 minute
+        other: less than %{count} minutes
       less_than_x_seconds:
-        one: "less than 1 second"
-        other: "less than %{count} seconds"
+        one: less than 1 second
+        other: less than %{count} seconds
       over_x_years:
-        one: "more than 1 year"
-        other: "more than %{count} years"
+        one: more than 1 year
+        other: more than %{count} years
       x_days:
-        one: "1 day"
-        other: "%{count} days"
+        one: 1 day
+        other: '%{count} days'
       x_minutes:
-        one: "1 minute"
-        other: "%{count} minutes"
+        one: 1 minute
+        other: '%{count} minutes'
       x_months:
-        one: "1 month"
-        other: "%{count} months"
+        one: 1 month
+        other: '%{count} months'
       x_seconds:
-        one: "1 second"
-        other: "%{count} seconds"
+        one: 1 second
+        other: '%{count} seconds'
     prompts:
-      day: "Day"
-      hour: "Hour"
-      minute: "Minute"
-      month: "Month"
-      second: "Seconds"
-      year: "Year"
-
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
   errors:
-    format: "%{attribute} %{message}"
+    format: '%{attribute} %{message}'
     messages:
-      accepted: "must be accepted"
-      blank: "can not be blank"
-      present: "it must be blank"
-      confirmation: "it does not match"
-      empty: "it cant be empty"
-      equal_to: "it must be equal to %{count}"
-      even: "must be an even number"
-      exclusion: "is reserved"
-      greater_than: "must be greater than %{count}"
-      greater_than_or_equal_to: "must be greater than or equal to %{count}"
-      inclusion: "is not included in the list"
-      invalid: "is invalid"
-      less_than: "must be less than %{count}"
-      less_than_or_equal_to: "must be less than or equal to %{count}"
-      model_invalid: "Validation failed: %{errors}"
-      not_a_number: "is not a number"
-      not_an_integer: "must be an integer"
-      odd: "must be an odd number"
-      required: "must exist"
-      taken: "has already been taken"
+      accepted: must be accepted
+      blank: can not be blank
+      present: it must be blank
+      confirmation: it does not match
+      empty: it cant be empty
+      equal_to: it must be equal to %{count}
+      even: must be an even number
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: 'Validation failed: %{errors}'
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be an odd number
+      required: must exist
+      taken: has already been taken
       too_long:
-        one: "is too long (maximum 1 character)"
-        other: "is too long (maximum %{count} characters)"
+        one: is too long (maximum 1 character)
+        other: is too long (maximum %{count} characters)
       too_short:
-        one: "is too short (minimum 1 character)"
-        other: "is too short (minimum %{count} characters)"
+        one: is too short (minimum 1 character)
+        other: is too short (minimum %{count} characters)
       wrong_length:
-        one: "wrong length (should be 1 character)"
-        other: "wrong length (should be %{count} characters)"
-      other_than: "must be different from %{count}"
-    template:
-      body: "Please review the following fields:"
-      header:
-        one: "%{model} could not be saved due to 1 error"
-        other: "%{model} could not be saved due to %{count} errors"
+        one: wrong length (should be 1 character)
+        other: wrong length (should be %{count} characters)
+      other_than: must be different from %{count}
+      not_saved: '%{count} error prohibited this %{resource} from being saved:
 
+        '
+    template:
+      body: 'Please review the following fields:'
+      header:
+        one: '%{model} could not be saved due to 1 error'
+        other: '%{model} could not be saved due to %{count} errors'
   helpers:
     select:
-      prompt: "Please select"
+      prompt: Please select
     submit:
-      create: "Create %{model}"
-      submit: "Save %{model}"
-      update: "Update %{model}"
-
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
   number:
     currency:
       format:
-        format: "%n %u"
-        unit: "$"
-        separator: ","
-        delimiter: "."
+        format: '%n %u'
+        unit: $
+        separator: ','
+        delimiter: .
         precision: 2
+        delimiter: .
     format:
-      delimiter: ","
+      delimiter: ','
       precision: 2
-      separator: "."
+      separator: .
       significant: false
       strip_insignificant_zeros: false
+      delimiter: ','
     human:
       decimal_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
-          billion: "billion"
+          billion: billion
           million:
-            one: "million"
-            other: "millions"
-          quadrillion: "quadrillion"
-          thousand: "thousand"
+            one: million
+            other: millions
+          quadrillion: quadrillion
+          thousand: thousand
           trillion:
-            one: "trillion"
-            other: "trillions"
-          unit: ""
+            one: trillion
+            other: trillions
+          unit: ''
       format:
-        delimiter: ","
+        delimiter: ','
         precision: 3
         significant: true
         strip_insignificant_zeros: true
+        delimiter: ','
       storage_units:
-        format: "%n %u"
+        format: '%n %u'
         units:
           byte:
-            one: "Byte"
-            other: "Bytes"
-          gb: "GB"
-          kb: "KB"
-          mb: "MB"
-          tb: "TB"
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
     percentage:
       format:
-        delimiter: ","
-        format: "%n%"
+        delimiter: ','
+        format: '%n%'
+        delimiter: ','
     precision:
       format:
-        delimiter: ","
-
+        delimiter: ','
+        delimiter: ','
   support:
     array:
-      last_word_connector: " and "
-      two_words_connector: " and "
-      words_connector: ", "
-
+      last_word_connector: ' and '
+      two_words_connector: ' and '
+      words_connector: ', '
   time:
-    am: "am"
+    am: am
     formats:
-      default: "%a, %d of %b of %Y at %H:%M:%S %Z"
-      long: "%A, %d of %B of %Y at %I:%M %p"
-      short: "%d of %b at %H:%M hrs"
-    pm: "pm"
-
+      default: '%a, %d of %b of %Y at %H:%M:%S %Z'
+      long: '%A, %d of %B of %Y at %I:%M %p'
+      short: '%d of %b at %H:%M hrs'
+    pm: pm
   views:
     pagination:
-      first: "&laquo; First"
-      last: "Latest &raquo;"
-      previous: "&lsaquo; Previous"
-      next: "Next &rsaquo;"
-      truncate: "..."
+      first: '&laquo; First'
+      last: Latest &raquo;
+      previous: '&lsaquo; Previous'
+      next: Next &rsaquo;
+      truncate: '...'
+  indicadores_presupuesto_ejecucion: Budget vs Execution Indicators
+  indicadores_cartera: Portfolio Indicators
+  presupuesto_mes: Monthly Budget
+  recaudos_mes: Current Month Collections
+  presupuesto_total: Total Budget
+  recaudo_total: Total Collection
+  soportes_pendientes: Pending Support
+  parametros_consulta: Query Parameters
+  activos: Active
+  total_activos: Total Active
+  total_creditos: Total Credits
+  al_dia: Up to date
+  en_mora: In default
+  recaudo_mes: Monthly Collection
+  recaudos: Collections
+  recaudo_aldia: Collections up to date
+  recaudomora_30: Collections in default less than 30 days
+  recaudosmora_90: Collections in default between 31 - 90 days
+  recaudosmora_180: Collections in default between 91 - 180 days
+  recaudosmora_100: Collections in default greater than 180 days
+  ppto_activos: Budget Active
+  nuevos_activos: New Active
+  ppto_nuevos_activos: Budget New Active
+  antiguos_activos: Old Active
+  ppto_antiguos_activos: Budget Old Active
+  en_proceso: In Process
+  inactivos: Inactive
+  total: Total
+  resumen_de_estados: Summary of States
+  inscripcion_basica: Basic Registration
+  pago_cuota_inicial: Paid Edupol Study (Non-Refundable)
+  selecciono_forma_de_pago: Selected Payment Method
+  gestion_documental_aprobada: Approved Document Management
+  indicadores_recaudo_presupuesto: Collection vs Budget Indicators
+  antiguos: Old
+  buscador_de_personas: People Finder
+  buscador_segmentos: Segment Finder
+  aceptar: Accept
+  documento: View Documents
+  documentos_msj: No Documents
+  cierre_msj: There is no consolidated closing therefore new collections cannot be registered
+  regresar: Return
+  menu: MENU OPTIONS
+  creacion: Creation Date
+  seguro: Are you sure?
+  entre: Between
+  nuevo: New
+  actualizar: Update
+  asignar: Assign
+  regresar_obligacion: Return to Obligations
+  notice_crearec_msj: Collection created
+  notice_resultado_msj: No search results
+  seleccionar: --Select
+  procesando: Processing
+  title_notificaciones_direcciones: Address Notification
+  title_notificaciones_correos: Email Notification
+  title_soporte_digital: Add Digital Support
+  title_gerente: Bulk Upload of Regional Managers
+  title_ver: View
+  title_plan_pagos: Payment Plan
+  title_recaudos: Collections
+  title_otros_recaudos: Other Collections
+  title_observacion_obligacion: Obligation Observation
+  title_detalle_factura: Invoice Details
+  title_historico_pagaduria: Payment History
+  title_historico_fondeadores: Funders History
+  title_autoria: Authorize
+  title_no_autoriza: Do not authorize
+  title_ver_certificado_deuda: View debt certificate
+  title_ver_paz_salvo: View Peace and Clearance
+  title_evaluacion_titulo: Title Evaluation
+  title_seguimiento_asignaciones: Assignment Tracking
+  menu_gestion: Management
+  menu_cargues: Uploads
+  menu_procesos: Processes
+  menu_parametrizacion: Parameterization
+  menu_dash: Dashboard
+  menu_parametrizacionedu: Education Parameters
+  menu_searchdoc: Search by Identification...
+  menu_principal: MAIN MENU
+  menu_personas: PEOPLE MENU
+  jugador_label: Player
+  seleccionar_resultado: Select Result
+  eliminar_ultimo: Delete Last
+  reset: Reset
+  your_next_bet: Your Next Bet
+  movimientos: Movements
+  prc_activo: PRC active
+  imahsoftware: ImahSoftware
+  aun_no_hay_movimientos: No movements yet. Click on P or B to start.
+  jugada_1: Play 1
+  jugada_2: Play 2
+  resultado: Result
+  mecanica: Mech
+  acumulado: Accum
+  final: Final
+  guardando: Saving...
+  detalle_jugada: Play Details
+  seguro_salir: Are you sure you want to leave
+  regresar_usuarios: Return to users
+  datos_basicos: Basic Data
+  modulos: Modules
+  permisos: Permissions
+  usuarios_visitas: User Visits
+  reportes: Reports
+  cargues_opciones: Uploads - Options
+  parametros: Parameters
+  edit_profile: Edit Profile
+  total_logins: Total Logins
+  query_type: Query Type
+  return: Return
+  user_profile: User Profile
+  identification: Identification
+  full_name: Full Name
+  mobile: Mobile
+  password: Password
+  password_hint: Leave blank if you don't want to change it
+  confirm_password: Confirm Password
+  save: Save
+  search_by_identification: Search by Identification...
+  profile: Profile
+  edit_profile_button: Edit Profile
+  logout: Logout
+  are_you_sure_logout: Are you sure
+  reestablish: Reestablish
+  deactivate_two_factor: Deactivate two factor
+  activate_two_factor: Activate two factor
+  users: Users
+  new_user: New User
+  search: Search...
+  username: Username
+  name: Name
+  email: Email
+  active: Active
+  inactivate_user: Inactivate user
+  activate_user: Activate user
+  unlock: Unlock
+  reset_password: Reset Password
+  reset_and_send_sms: Reset password, Unlock and send SMS
+  no_data_found: No data found
+  add_new: Add New
+  edit: Edit
+  user: User
+  company: Client
+  observations: Observations
+  node: Node
+  avatar: Avatar
+  accept: Accept
+  return_to_users: Return to users
+  error_procedure: An error occurred in the procedure, please report to the administrator.
+  page_not_found: Page not found
+  return_to_previous: To return to the previous page click
+  here: Here
+  all_rights_reserved: All rights reserved
+  modules: Modules
+  add: Add
+  general_parameters: General Parameters
+  new: New
+  objects: Objects
+  application_records: Application Records
+  refresh: Refresh
+  start_date: Start Date
+  end_date: End Date
+  object: Object
+  action: Action
+  create: Create
+  delete: Delete
+  update: Update
+  search_button: Search
+  portfolio: Portfolio
+  model: Model
+  actions: Actions
+  today: Today at
+  yesterday: Yesterday at
+  view_changes: View changes
+  database: Database
+  sql_running: SQL Running
+  jobs_running: Jobs Running
+  tablespace_space: Tablespace Space
+  creation_date: Creation Date
+  player: Player
+  status: Status
+  description: Description
+  controller: Controller
+  image: Image
+  message: Message
+  level: Level
+  authorized: Authorized
+  extended_description: Extended Description
+  field: Field
+  code_aportesenlínea: AportesEnLinea Code
+  visible: Visible
+  id: ID
+  municipality: Municipality
+  department: Department
+  permission: Permission
+  creates: Creates
+  updates: Updates
+  deletes: Deletes
+  assignment_date: Assignment Date
+  start_time: Start Time
+  end_time: End Time
+  interval: Interval
+  number_of_people_per_interval: Number of people per interval
+  report: Report
+  add_new_permission: Add New Permission
+  add_new_visit: Add New Visit
+  new_company: New Client
+  edit_company: Edit Client
+  sure: Sure?
+  job_name: Job Name
+  job_style: Job Style
+  assigned_parameters: Assigned Parameters
+  associated_reports: Associated Reports
+  associated_visits: Associated Visits
+  associated_modules: Associated Modules
+  municipalities: Municipalities
+  no_jobs_running: No jobs running
+  kill_job: Kill Job
+  dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
+  associated_permissions: Associated Permissions
+  schedules_hours: Schedules - Hours
+  create_play: Create Play
+  return_to_portfolios: Return to portfolios
+  create_company_alegra: Create company in Alegra
+  service_url_create_company: Service - URL Create Company
+  service_url_enable_company: Service - URL Enable Company
+  url_create_contributor: URL Create Contributor
+  select_user_copy_permissions: Select the user to copy permissions from
+  select_file: Select File
+  no_file_selected: No file selected
+  nothing_selected: Nothing Selected
+  return_to_portfolios_link: Return to portfolios
+  return_link: Return
+  select_user_to_copy: Select the user to copy permissions
+  quantity: Quantity
+  inactivate_schedule: Inactivate schedule
+  activate_schedule: Activate schedule
+  active_session_users: Users with active session
+  connected_users: connected users
+  deactivate_session: Deactivate session
+  bulk_user_process: Bulk User Process
+  total_validated_records: Total Validated Records
+  total_approved_records: Total Approved Records
+  total_records_inconsistencies: Total Records with Inconsistencies
+  view_inconsistencies: View Inconsistencies
+  confirm_bulk_upload: Confirm bulk upload
+  confirm_bulk_upload_inactivate: Confirm bulk upload to inactivate
+  are_you_sure_bulk_upload: Are you sure you want to execute the bulk user upload?
+  are_you_sure_bulk_upload_inactivate: Are you sure you want to execute the bulk user upload to inactivate them?
+  connection_date_time: Connection Date and Time
+  schedule: Schedule
+  images: Images
+  short_name: Short Name
+  api_services: API Services
+  payu: Payu
+  siigo: Siigo
+  alegra: Alegra
+  aportes_en_linea: Aportes en Línea
+  order_of_process: Order of Process
+  token_generation: Token Generation
+  contributor_creation: Contributor Creation
+  news_sending: News Sending
+  certificate_generation: Certificate Generation
+  enabled: Enabled
+  created: Created
+  recover_password: Recover Password
+  enter_username_to_reset: Enter your username to reset access
+  forgot_password_link: Forgot your password?
+  back_to_login: Back to login
+  new_password: New Password
+  confirm_new_password: Confirm New Password
+  system_login: System Login
+  sending: Sending...
+  signing_in: Signing in...
+  custom_software_solutions: Custom software solutions
+  custom_development: Custom development
+  system_integration: System integration
+  continuous_support: Continuous support
+  copyright: Copyright
+  bacwins: BacWins
+  campo: Field
+  codigo_aportes_en_linea: AportesEnLinea Code
+  estado: Status
+  descripcion: Description
+  descripcion_ampliada: Extended Description
+  autorizado: Authorized
+  si: true
+  'False': false
+  reporte: Report
+  campo_permitido: Allowed Field
+  modulo: Module
+  identificacion: Identification
+  nombre: Name
+  nombre_corto: Short Name
+  companias: Clients
+  nueva_compania: New Client
+  forma_vmn: VMN Form
+  agregar_formato: Add Format
+  agregar_usuario: Add User
+  cargar_documento: Load Document
+  cargar_archivo: Load File
+  nada_seleccionado: Nothing Selected
+  nº_celular: Mobile Number
+  nº_lote: Batch Number
+  contraseña: Password
+  confirmar_contraseña: Confirm Password
+  correo_electronico: Email
+  identificacion_acud: Identification
+  cambiar_correo_electronico: Change Email
+  fecha_de_nacimiento: Date of Birth
+  contrato: Contract
+  contrato_empresa: Contract - Company
+  nodo: Node
+  periodo: Period
+  usuario_title: User
+  clave: Password
+  confirmar_clave: Confirm Password
+  agregar_nuevo: Add New
+  editar: Edit
+  regresar_a_usuarios: Return to Users
+  seguro_question: Are you sure?
+  desbloquear: Unlock
+  reestablecer_clave: Reset Password
+  inactivar_usuario: Inactivate User
+  activar_usuario: Activate User
+  cargar: Load
+  generar: Generate
+  crear_empresa_en_alegra: Create Company in Alegra
+  desisten: Desist
+  aprobar: Approve
+  rechazar: Reject
+  sin_contacto: No Contact
+  seleccione_usuario_copiar_permisos: Select the user to copy permissions
+  tipo_consulta: Query Type
+  confirmar_mi_cuenta: Confirm my account
+  resend_unlock_instructions: Resend unlock instructions
+  puede_confirmar_correo: You can confirm your email through the following link
+  cuando_ingreses_sistema: When you enter our Information System you will find a menu at the top specifically an option that says "User", in this option you can change your System Access password as many
+    times as needed
+  usuario_menu: User
+  desconectarse: Disconnect
+  esta_seguro: Are you sure
+  que_quiere_desconectarse: that you want to disconnect?
+  eliminar: Delete
+  seguro_question_mark: Sure?
+  ver_imagen: View Image
+  eliminar_image: Delete
+  informe_gestion_revisado: Management Report Reviewed by?
+  informe_gestion_aprobado: Management Report Approved by?
+  api_key: API KEY
+  api_login: API LOGIN
+  llave_publica: Public Key
+  id_comercio: Commerce ID
+  id_cuenta: Account ID
+  dias_expira: Days Expires
+  moneda: Currency
+  prueba: Test
+  url_payu: Payu URL
+  url_confirmacion: Confirmation URL
+  url_respuesta: Response URL
+  basic: Basic
+  ocp: Ocp
+  doccode: DocCode
+  sales_man_identification: Sales man identification
+  payment_code: Payment Code
+  id_compania: Company ID
+  nombre_alegra: Name
+  nit_alegra: Nit Alegra
+  digito_verificacion: Check Digit
+  tipo: Type
+  token: Token
+  compania_habilitada: Company Enabled
+  set_id: Set Id
+  government_id: Government Id
+  servicio_url_emitir_nomina: Service - URL Issue Payroll
+  servicio_url_crear_empresa: Service - URL Create Company
+  servicio_url_habilitar_empresa: Service - URL Enable Company
+  aportes_username: Username
+  aportes_contrasena: Password
+  aportes_aplicacion: Application
+  aportes_tipo_id: Contributor ID Type
+  aportes_numero_id: Contributor ID Number
+  aportes_sucursal_principal: Main Branch
+  aportes_centro_trabajo: Work Center
+  url_creacion_novedades: URL Creation of News
+  informe_de_gestion_revisado_por: Management Report Reviewed by?
+  informe_de_gestion_aprobado_por: Management Report Approved by?
+  logo: Logo
+  siigo_username: Username
+  siigo_password: Password
+  siigo_basic: Basic
+  siigo_ocp: Ocp
+  siigo_doccode: DocCode
+  siigo_salesmansdentification: Sales man identification
+  siigo_paymentmeanscode: Payment Code
+  id_alegra: Company ID
+  name_alegra: Name
+  identificacion_alegra: Nit Alegra
+  dv_alegra: Check Digit
+  type_alegra: Type
+  token_alegra: Token
+  habilita_alegra: Company Enabled
+  setid_alegra: Set Id
+  governmentid_alegra: Government Id
+  url_alegra: Service - URL Issue Payroll
+  url_crear_empresa_alegra: Service - URL Create Company
+  url_habilitar_empresa_alegra: Service - URL Enable Company
+  aportes_username_label: Username
+  aportes_contrasena_label: Password
+  aportes_aplicacion_label: Application
+  aportes_tipoidaportante: Contributor ID Type
+  aportes_numeroidaportante: Contributor ID Number
+  aportes_sucursalprincipal: Main Branch
+  aportes_centro_trabajo_label: Work Center
+  aportes_url_certificado: Certificate URL
+  aportes_tipoidaportante_label: Contributor ID Type
+  aportes_numeroidaportante_label: Contributor ID Number
+  aportes_sucursalprincipal_label: Main Branch
+  aportes_centro_trabajo_label2: Work Center
+  url_token: URL Token
+  url_crear_cotizante: URL Create Contributor
+  url_generar_certificado: URL Generate Certificate
+  usuario_label: User
+  objeto: Object
+  permiso: Permission
+  close_or_finish_pending_play: Close or finish your pending play before creating another
+  create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
+  new_play: New Play
+  bet_amount: Bet Amount
+  date_time: Date & Time
+  daily_total: Daily Total
+  plays_lower: plays
+  administration_module: Administration Module
+  administration_modules: Administration Modules
+  expand_security_modules: Expand Security Modules
+  that_you_want_to_disconnect: that you want to disconnect
+  users_passwords_reset_email_sent: An email has been sent with instructions to reset your password.
+  users_passwords_user_not_found: No user was found with that email address.
+  users_passwords_password_updated: Your password has been updated successfully.
+  users_passwords_invalid_token: The password reset token is invalid.
+  users_passwords_recovery_subject: Password Recovery
+  users_unlock_subject: Account Unlock
+  users_unlock_email_sent: An email has been sent with instructions to unlock your account.
+  users_unlock_user_not_found: No user was found with that email address.
+  jugada_en_curso_pendiente: You have a play in progress (PENDING). Close or finish it before creating another.
+  accion_no_permitida: Action not allowed.
+  solo_crear_jugada_cuando_cerrada: You can only create a new play when the current one is CLOSED.
+  otra_jugada_pendiente: You have another PENDING play. Finish the active session before creating another.
+  jugada_cerrada_no_editar: 'The play is CLOSED: it cannot be edited or deleted.'
+  jugada_no_valida: Invalid play.
+  no_tiene_acceso_jugada: You do not have access to this play.
+  no_tiene_sesion_pendiente: You do not have a PENDING session. Use the play list.
+  solo_puede_acceder_jugada_pendiente: You can only access your active PENDING play (for security, other ids are not allowed).
+  fecha_larga_formato: '%{dia_semana}, %{mes} %{dia}, %{anio}'
+  day_names_full:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+  day_names_lower:
+    - sunday
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    - saturday
+  month_names_full:
+    - ''
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+  month_names_lower:
+    - ''
+    - january
+    - february
+    - march
+    - april
+    - may
+    - june
+    - july
+    - august
+    - september
+    - october
+    - november
+    - december
+  # === Phase B: application_helper select_* labels ===
+  helper_a_distancia: "Distance"
+  helper_academicos: "Academic"
+  helper_activo: "Active"
+  helper_actualizar: "Update"
+  helper_administrador: "Administrator"
+  helper_afrocolombiano: "Black, Afrodescendant, Afro-Colombian"
+  helper_alta: "High"
+  helper_anual: "Annual"
+  helper_anulado: "Voided"
+  helper_aplazado: "Postponed"
+  helper_aprobado: "Approved"
+  helper_aseo_fuerte: "Heavy Cleaning"
+  helper_aseo_normal: "Normal Cleaning"
+  helper_asignar: "Assign"
+  helper_baja: "Low"
+  helper_base_g: "Base G"
+  helper_brigada_aseo: "Cleaning Crew"
+  helper_candidato: "Candidate"
+  helper_cargar: "Load"
+  helper_casado: "Married"
+  helper_catolico: "Catholic"
+  helper_centro_trabajo_cargo: "Work Center and Position"
+  helper_cheque: "Check"
+  helper_clasico: "Classic"
+  helper_clausulas: "Clauses"
+  helper_cobranza: "Collection"
+  helper_colombia_compra_eficiente: "Colombia Efficient Purchase"
+  helper_comercial: "Commercial"
+  helper_completo: "Complete"
+  helper_consignacion: "Deposit"
+  helper_consolidado: "Consolidated"
+  helper_consumo: "Consumption"
+  helper_continuidad: "Continuity"
+  helper_contrato: "Contract"
+  helper_coordinador: "Coordinator"
+  helper_correcto: "Correct"
+  helper_correo_electronico: "E-mail"
+  helper_correo_fisico: "Physical Mail"
+  helper_credito: "Credit"
+  helper_cristiano: "Christian"
+  helper_cursos_especiales: "Special Courses"
+  helper_debito: "Debit"
+  helper_deduccion: "Deduction"
+  helper_definitivo: "Definitive"
+  helper_desarrollo_nuevo: "New Development"
+  helper_desempleado: "Unemployed"
+  helper_devengo: "Earnings"
+  helper_dia_domingo: "SUNDAY"
+  helper_dia_jueves: "THURSDAY"
+  helper_dia_lunes: "MONDAY"
+  helper_dia_martes: "TUESDAY"
+  helper_dia_miercoles: "WEDNESDAY"
+  helper_dia_sabado: "SATURDAY"
+  helper_dia_viernes: "FRIDAY"
+  helper_dialectrica: "Dielectric"
+  helper_diplomados: "Diplomas"
+  helper_diurno: "Daytime"
+  helper_divorciado: "Divorced"
+  helper_documento: "Document"
+  helper_dolar_americano: "US Dollar"
+  helper_domiciliaria: "Home Visit"
+  helper_elementos_equipos_maquinaria: "Elements, Equipment and Machinery"
+  helper_embargo: "Garnishment"
+  helper_empleado: "Employed"
+  helper_en_ejecucion: "In Execution"
+  helper_en_liquidacion: "In Liquidation"
+  helper_en_proceso: "In Progress"
+  helper_especializacion: "Specialization"
+  helper_estabilidad_laboral: "Job Stability"
+  helper_estadocivil_soltero: "Single"
+  helper_estudiante: "Student"
+  helper_evangelico: "Evangelical"
+  helper_extremo: "Extreme"
+  helper_femenino: "Female"
+  helper_fijo: "Fixed"
+  helper_fin_de_semana: "Weekend"
+  helper_finalizado: "Finished"
+  helper_financieros: "Financial"
+  helper_general: "General"
+  helper_gestion: "Management"
+  helper_gitano_rom: "Gypsy (ROM)"
+  helper_gran_contribuyente: "Major Taxpayer"
+  helper_heterosexual: "Heterosexual"
+  helper_hombre_trans: "Trans Man"
+  helper_homosexual: "Homosexual"
+  helper_inactivo: "Inactive"
+  helper_incorrecto: "Incorrect"
+  helper_indefinido: "Indefinite"
+  helper_independiente: "Self-employed"
+  helper_insumos: "Supplies"
+  helper_interventor: "Auditor"
+  helper_jornada_lun_dom: "MONDAY-SUNDAY"
+  helper_jornada_lun_sab: "MONDAY-SATURDAY"
+  helper_jornada_lun_vie: "MONDAY-FRIDAY"
+  helper_libranza: "Payroll Deduction"
+  helper_liquidado: "Liquidated"
+  helper_maestria: "Master's Degree"
+  helper_maquinaria: "Machinery"
+  helper_masculino: "Male"
+  helper_media: "Medium"
+  helper_medio_tiempo: "Part Time"
+  helper_mensual: "Monthly"
+  helper_mes_abril: "APRIL"
+  helper_mes_agosto: "AUGUST"
+  helper_mes_diciembre: "DECEMBER"
+  helper_mes_enero: "JANUARY"
+  helper_mes_febrero: "FEBRUARY"
+  helper_mes_julio: "JULY"
+  helper_mes_junio: "JUNE"
+  helper_mes_marzo: "MARCH"
+  helper_mes_mayo: "MAY"
+  helper_mes_noviembre: "NOVEMBER"
+  helper_mes_octubre: "OCTOBER"
+  helper_mes_septiembre: "SEPTEMBER"
+  helper_mestizo: "Mestizo"
+  helper_metro: "Meter"
+  helper_mujer_trans: "Trans Woman"
+  helper_nivel_cargues: "Uploads"
+  helper_nivel_gestion: "Management"
+  helper_nivel_parametrizacion: "Settings"
+  helper_nivel_parametrizacion_educacion: "Education Settings"
+  helper_nivel_procesos: "Processes"
+  helper_nivel_seguridad: "Security"
+  helper_no: "NO"
+  helper_no_aplica: "NOT APPLICABLE"
+  helper_nocturno: "Night"
+  helper_notificacion: "Notification"
+  helper_nuevo_sol_peruano: "Peruvian Sol"
+  helper_otra: "OTHER"
+  helper_otras: "Other"
+  helper_otro: "Other"
+  helper_otros: "Others"
+  helper_otros_devengo: "Other Earnings"
+  helper_palanquero: "Palenquero of San Basilio"
+  helper_pendiente: "Pending"
+  helper_pensionado: "Retired"
+  helper_perfeccionado: "Finalized"
+  helper_persona: "Person"
+  helper_persona_juridica: "Legal Entity"
+  helper_persona_natural: "Natural Person"
+  helper_personal: "Personnel"
+  helper_personalizada: "Customized"
+  helper_peso_argentino: "Argentine Peso"
+  helper_peso_chileno: "Chilean Peso"
+  helper_peso_colombiano: "Colombian Peso"
+  helper_peso_mexicano: "Mexican Peso"
+  helper_plastica: "Plastic"
+  helper_plazo: "Term"
+  helper_plazo_clausulas: "Term - Clauses"
+  helper_plazo_valor: "Term - Value"
+  helper_plazo_valor_clausulas: "Term - Value - Clauses"
+  helper_posgrado: "Postgraduate"
+  helper_produccion: "Production"
+  helper_profesional: "Professional"
+  helper_promesa_pago: "Payment Promise"
+  helper_proveedor: "Supplier"
+  helper_prueba: "Test"
+  helper_punteras: "Steel Toe"
+  helper_quincenal: "Biweekly"
+  helper_quitar: "Remove"
+  helper_raizal: "Raizal from San Andrés, Providencia and Santa Catalina"
+  helper_real_brasileno: "Brazilian Real"
+  helper_rechazado: "Rejected"
+  helper_rector: "Principal"
+  helper_regimen_comun: "Common Regime"
+  helper_regimen_simplificado: "Simplified Regime"
+  helper_restriccion: "Restriction"
+  helper_reunion: "Meeting"
+  helper_riesgo_1: "Risk I (0.00522) - Act-Eco: 1691001"
+  helper_riesgo_2: "Risk II (0.01044) - Act-Eco: 2811001"
+  helper_riesgo_3: "Risk III (0.02436) - Act-Eco: 3861001"
+  helper_riesgo_4: "Risk IV (0.04350) - Act-Eco: 4492301"
+  helper_riesgo_5: "Risk V (0.06960) - Act-Eco: 5812901"
+  helper_seguimiento: "Follow-up"
+  helper_semestral: "Biannual"
+  helper_separado: "Separated"
+  helper_servicio_especial: "Special Service"
+  helper_si: "YES"
+  helper_sin_dato: "NO DATA"
+  helper_sin_puntera: "No Toe Cap"
+  helper_sin_religion: "No Religion"
+  helper_socioeconomicos: "Socioeconomic"
+  helper_solicitud_soporte: "Support Request"
+  helper_supernumerario: "Supernumerary"
+  helper_supervisor: "Supervisor"
+  helper_tecnica_profesional: "Professional Technical"
+  helper_tecnico: "Technical"
+  helper_tecnologia: "Technology"
+  helper_tecnologico: "Technological"
+  helper_telefonica: "Telephone"
+  helper_teletrabajo: "Telework"
+  helper_terminado: "Terminated"
+  helper_testigo_jehova: "Jehovah's Witness"
+  helper_tiempo_completo: "Full Time"
+  helper_todo: "All"
+  helper_transferencia: "Transfer"
+  helper_union_libre: "Common-law Union"
+  helper_universitario: "University"
+  helper_valor: "Value"
+  helper_valor_clausulas: "Value - Clauses"
+  helper_virtual: "Virtual"
+  helper_viudo: "Widowed"
+  helper_vivienda_arriendo: "Rented"
+  helper_vivienda_familiar: "Family-owned"
+  helper_vivienda_propia: "Owned"
+  # === Game/Baccarat module: new keys ===
+  profit_label: "PROFIT:"
+  usd_title: "US Dollars (USD)"
+  baccarat_winners: "Baccarat Winners"
+  frequency_table: "Frequency Table"
+  undo_last_hand: "Undo Last Hand"
+  undoing: "Undoing..."
+  clear_session: "Clear Session"
+  clearing: "Clearing..."
+  finish_session: "Finish"
+  finishing: "Finishing..."
+  new_shoe: "New SHOE"
+  hand_number: "Hand"
+  play_number: "Play"
+  datepicker:
+    dformat: '%m/%d/%Y'
+    pformat: MM/DD/YYYY
+  timepicker:
+    dformat: '%R'
+    pformat: HH:mm
+  dayViewHeaderFormat: MMMM YYYY
+  'no': 'No'

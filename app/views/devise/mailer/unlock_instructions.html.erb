@@ -1,7 +1,13 @@
-<p>Hola <%= @resource.email %>!</p>
+<%
+  @token    = object0 if object0.present? rescue nil
+  @username = object1 if object1.present? rescue nil
+  @resource = User.find_by_username(@username) rescue nil
+%>
 
-<p>Su cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión.</p>
+<p><%= t :hola %> <%= @username rescue nil %>!</p>
 
-<p>Haga clic en el siguiente enlace para desbloquear su cuenta:</p>
+<p><%= t :su_cuenta_bloqueada %></p>
 
-<p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token) %></p>
+<p><%= t :haga_clic_desbloquear %></p>
+
+<p><%= link_to t(:desbloquear_mi_cuenta), url_for(controller: 'devise/unlocks', action: 'show', unlock_token: @token, host: 'https://appasearesp.com') %></p>

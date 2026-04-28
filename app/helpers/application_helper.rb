@@ -4,6 +4,14 @@ module ApplicationHelper
     content_for(:title) { page_title }
   end
 
+  def app_brand_name
+    ENV["NOMBRE_APLICACION"].presence || "BacWins"
+  end
+
+  def app_brand_name_short
+    ENV["NOMBRE_CORTO"].presence || "BacWins"
+  end
+
   def select_tipo_genero(params)
     if params == 'MASCULINO'
       'pantalon_hombre'
@@ -42,20 +50,20 @@ module ApplicationHelper
 
   def select_diassemana
     [
-      ['LUNES', 'LUNES'],
-      ['MARTES', 'MARTES'],
-      ['MIÉRCOLES', 'MIERCOLES'],
-      ['JUEVES', 'JUEVES'],
-      ['VIERNES', 'VIERNES'],
-      ['SÁBADO', 'SABADO'],
-      ['DOMINGO', 'DOMINGO']
+      [I18n.t(:helper_dia_lunes), 'LUNES'],
+      [I18n.t(:helper_dia_martes), 'MARTES'],
+      [I18n.t(:helper_dia_miercoles), 'MIERCOLES'],
+      [I18n.t(:helper_dia_jueves), 'JUEVES'],
+      [I18n.t(:helper_dia_viernes), 'VIERNES'],
+      [I18n.t(:helper_dia_sabado), 'SABADO'],
+      [I18n.t(:helper_dia_domingo), 'DOMINGO']
     ]
   end
 
   def select_act_clase
     [
-      ['ASEO NORMAL', 'ASEO NORMAL'],
-      ['ASEO FUERTE', 'ASEO FUERTE']
+      [I18n.t(:helper_aseo_normal), 'ASEO NORMAL'],
+      [I18n.t(:helper_aseo_fuerte), 'ASEO FUERTE']
     ]
   end
 
@@ -77,7 +85,7 @@ module ApplicationHelper
   def select_clasee
     [
       ['SERVICIO', 'SERVICIO'],
-      ['PERSONAL', 'PERSONAL']
+      [I18n.t(:helper_personal), 'PERSONAL']
     ]
   end
 
@@ -128,13 +136,13 @@ module ApplicationHelper
 
   def select_tipoprogramaedupol
     [
-      ['TECNICA PROFESIONAL', 'TECNICA PROFESIONAL'],
-      ['TECNOLOGÍA', 'TECNOLOGIA'],
-      ['PROFESIONAL', 'PROFESIONAL'],
-      ['CURSOS ESPECIALES', 'CURSOS ESPECIALES'],
-      ['ESPECIALIZACIÓN', 'ESPECIALIZACION'],
-      ['MAESTRÍA', 'MAESTRIA'],
-      ['DIPLOMADOS', 'DIPLOMADOS']
+      [I18n.t(:helper_tecnica_profesional), 'TECNICA PROFESIONAL'],
+      [I18n.t(:helper_tecnologia), 'TECNOLOGIA'],
+      [I18n.t(:helper_profesional), 'PROFESIONAL'],
+      [I18n.t(:helper_cursos_especiales), 'CURSOS ESPECIALES'],
+      [I18n.t(:helper_especializacion), 'ESPECIALIZACION'],
+      [I18n.t(:helper_maestria), 'MAESTRIA'],
+      [I18n.t(:helper_diplomados), 'DIPLOMADOS']
     ]
   end
 
@@ -190,41 +198,41 @@ module ApplicationHelper
 
   def select_sino
     [
-      ["SI", "SI"],
-      ["NO", "NO"]
+      [I18n.t(:helper_si), "SI"],
+      [I18n.t(:helper_no), "NO"]
     ]
   end
 
   def select_tipotraslado
     [
-      ["DEFINITIVO", "DEFINITIVO"],
-      ["ESTABILIDAD LABORAL", "ESTABILIDAD"],
-      ["CONTINUIDAD", "CONTINUIDAD"],
-      ["CENTRO DE TRABAJO Y CARGO", "CENTROCARGO"]
+      [I18n.t(:helper_definitivo), "DEFINITIVO"],
+      [I18n.t(:helper_estabilidad_laboral), "ESTABILIDAD"],
+      [I18n.t(:helper_continuidad), "CONTINUIDAD"],
+      [I18n.t(:helper_centro_trabajo_cargo), "CENTROCARGO"]
     ]
   end
 
   def select_clase_visita
     datos = []
-    datos << ["SEGUIMIENTO", "SEGUIMIENTO"]
-    datos << ["REUNION", "REUNION"]
-    datos << ["SERVICIO ESPECIAL", "SERVICIO ESPECIAL"]
+    datos << [I18n.t(:helper_seguimiento), "SEGUIMIENTO"]
+    datos << [I18n.t(:helper_reunion), "REUNION"]
+    datos << [I18n.t(:helper_servicio_especial), "SERVICIO ESPECIAL"]
     Userspermiso.where("user_id = #{is_admin} and objeto_id = 150").each do |a|
-      datos << ["TELETRABAJO", "TELETRABAJO"]
+      datos << [I18n.t(:helper_teletrabajo), "TELETRABAJO"]
     end
     Userspermiso.where("user_id = #{is_admin} and objeto_id = 151").each do |a|
-      datos << ["BRIGADA DE ASEO", "BRIGADA DE ASEO"]
+      datos << [I18n.t(:helper_brigada_aseo), "BRIGADA DE ASEO"]
     end
     return datos
   end
 
   def select_zapatos
     [
-      ["PUNTERAS", "PUNTERAS"],
-      ["DIALECTRICA", "DIALECTRICA"],
-      ["SIN PUNTERA", "SIN PUNTERA"],
-      ["PLASTICA", "PLASTICA"],
-      ["NO APLICA", "NO APLICA"]
+      [I18n.t(:helper_punteras), "PUNTERAS"],
+      [I18n.t(:helper_dialectrica), "DIALECTRICA"],
+      [I18n.t(:helper_sin_puntera), "SIN PUNTERA"],
+      [I18n.t(:helper_plastica), "PLASTICA"],
+      [I18n.t(:helper_no_aplica), "NO APLICA"]
     ]
   end
 
@@ -238,53 +246,53 @@ module ApplicationHelper
   def select_sinoingles
     [
       ["YES", "YES"],
-      ["NO", "NO"]
+      [I18n.t(:helper_no), "NO"]
     ]
   end
 
   def select_no
     [
-      ["NO", "NO"]
+      [I18n.t(:helper_no), "NO"]
     ]
   end
 
   def select_genero
     [
-      ["MASCULINO", "MASCULINO"],
-      ["FEMENINO", "FEMENINO"]
+      [I18n.t(:helper_masculino), "MASCULINO"],
+      [I18n.t(:helper_femenino), "FEMENINO"]
     ]
   end
 
   def select_situacion_econo
     [
-      ["EMPLEADO", "EMPLEADO"],
-      ["INDEPENDIENTE", "INDEPENDIENTE"],
-      ["DESEMPLEADO", "DESEMPLEADO"],
-      ["PENSIONADO", "PENSIONADO"],
-      ["SIN DATO", "SIN DATO"]
+      [I18n.t(:helper_empleado), "EMPLEADO"],
+      [I18n.t(:helper_independiente), "INDEPENDIENTE"],
+      [I18n.t(:helper_desempleado), "DESEMPLEADO"],
+      [I18n.t(:helper_pensionado), "PENSIONADO"],
+      [I18n.t(:helper_sin_dato), "SIN DATO"]
     ]
   end
 
   def select_tiposatencion
     [
-      ["PERSONALIZADA", "PERSONALIZADA"],
-      ["TELEFONICA", "TELEFONICA"],
-      ["DOMICILIARIA", "DOMICILIARIA"],
-      ["CORREO FISICO", "CORREO FISICO"],
-      ["CORREO ELECTRONICO", "CORREO ELECTRONICO"],
-      ["OTRA", "OTRA"]
+      [I18n.t(:helper_personalizada), "PERSONALIZADA"],
+      [I18n.t(:helper_telefonica), "TELEFONICA"],
+      [I18n.t(:helper_domiciliaria), "DOMICILIARIA"],
+      [I18n.t(:helper_correo_fisico), "CORREO FISICO"],
+      [I18n.t(:helper_correo_electronico), "CORREO ELECTRONICO"],
+      [I18n.t(:helper_otra), "OTRA"]
     ]
   end
 
   def select_tipogecasr
     [
-      ["PERSONALIZADA", "PERSONALIZADA"],
-      ["TELEFONICA", "TELEFONICA"],
-      ["DOMICILIARIA", "DOMICILIARIA"],
-      ["CORREO FISICO", "CORREO FISICO"],
-      ["CORREO ELECTRONICO", "CORREO ELECTRONICO"],
-      ["PROMESA PAGO", "PROMESA PAGO"],
-      ["OTRA", "OTRA"]
+      [I18n.t(:helper_personalizada), "PERSONALIZADA"],
+      [I18n.t(:helper_telefonica), "TELEFONICA"],
+      [I18n.t(:helper_domiciliaria), "DOMICILIARIA"],
+      [I18n.t(:helper_correo_fisico), "CORREO FISICO"],
+      [I18n.t(:helper_correo_electronico), "CORREO ELECTRONICO"],
+      [I18n.t(:helper_promesa_pago), "PROMESA PAGO"],
+      [I18n.t(:helper_otra), "OTRA"]
     ]
   end
 
@@ -322,21 +330,21 @@ module ApplicationHelper
 
   def select_tipopersona
     [
-      ["PERSONA NATURAL", "PERSONA NATURAL"],
-      ["PERSONA JURIDICA", "PERSONA JURIDICA"]
+      [I18n.t(:helper_persona_natural), "PERSONA NATURAL"],
+      [I18n.t(:helper_persona_juridica), "PERSONA JURIDICA"]
     ]
   end
 
   def select_estadocivil
     [
-      ["CASADO", "CASADO"],
-      ["DIVORCIADO", "DIVORCIADO"],
+      [I18n.t(:helper_casado), "CASADO"],
+      [I18n.t(:helper_divorciado), "DIVORCIADO"],
       ["ND", "ND"],
       ["Q.E.P.D.", "Q.E.P.D."],
-      ["SEPARADO", "SEPARADO"],
-      ["SOLTERO", "SOLTERO"],
-      ["UNION LIBRE", "UNION LIBRE"],
-      ["VIUDO", "VIUDO"]
+      [I18n.t(:helper_separado), "SEPARADO"],
+      [I18n.t(:helper_estadocivil_soltero), "SOLTERO"],
+      [I18n.t(:helper_union_libre), "UNION LIBRE"],
+      [I18n.t(:helper_viudo), "VIUDO"]
     ]
   end
 
@@ -358,15 +366,15 @@ module ApplicationHelper
 
   def select_sinocorto
     [
-      ["SI", "S"],
-      ["NO", "N"]
+      [I18n.t(:helper_si), "S"],
+      [I18n.t(:helper_no), "N"]
     ]
   end
 
   def select_sn_users
     [
-      ["SI", "S"],
-      ["NO", "N"]
+      [I18n.t(:helper_si), "S"],
+      [I18n.t(:helper_no), "N"]
     ]
   end
 
@@ -382,37 +390,37 @@ module ApplicationHelper
 
   def select_tipoconsulta
     [
-      ["SUPERVISOR", "SUPERVISOR"],
-      ["SUPERNUMERARIO", "SUPERNUMERARIO"],
-      ["ADMINISTRADOR", "ADMINISTRADOR"],
-      ["GESTION", "GESTION"],
-      ["PERSONA", "PERSONA"],
-      ["CONTRATO", "CONTRATO"],
-      ["METRO", "METRO"],
-      ["ESTUDIANTE", "ESTUDIANTE"],
-      ["CANDIDATO", "CANDIDATO"],
-      ["RECTOR", "RECTOR"],
-      ["TODO", "TODO"]
+      [I18n.t(:helper_supervisor), "SUPERVISOR"],
+      [I18n.t(:helper_supernumerario), "SUPERNUMERARIO"],
+      [I18n.t(:helper_administrador), "ADMINISTRADOR"],
+      [I18n.t(:helper_gestion), "GESTION"],
+      [I18n.t(:helper_persona), "PERSONA"],
+      [I18n.t(:helper_contrato), "CONTRATO"],
+      [I18n.t(:helper_metro), "METRO"],
+      [I18n.t(:helper_estudiante), "ESTUDIANTE"],
+      [I18n.t(:helper_candidato), "CANDIDATO"],
+      [I18n.t(:helper_rector), "RECTOR"],
+      [I18n.t(:helper_todo), "TODO"]
     ]
   end
 
   def select_estado
     [
-      ["ACTIVO", "ACTIVO"],
-      ["INACTIVO", "INACTIVO"]
+      [I18n.t(:helper_activo), "ACTIVO"],
+      [I18n.t(:helper_inactivo), "INACTIVO"]
     ]
   end
 
   def select_tipo_soporte
     [
-      ["DESARROLLO NUEVO", "DESARROLLO NUEVO"],
-      ["SOLICITUD SOPORTE", "SOLICITUD SOPORTE"]
+      [I18n.t(:helper_desarrollo_nuevo), "DESARROLLO NUEVO"],
+      [I18n.t(:helper_solicitud_soporte), "SOLICITUD SOPORTE"]
     ]
   end
 
   def select_tipo_capacitaciondocs
     [
-      ["DOCUMENTO", "DOCUMENTO"],
+      [I18n.t(:helper_documento), "DOCUMENTO"],
       ["VIDEO", "VIDEO"],
       ["LINK", "LINK"]
     ]
@@ -420,76 +428,76 @@ module ApplicationHelper
 
   def select_estado_tarea
     [
-      ["PENDIENTE", "0"],
-      ["COMPLETO", "1"]
+      [I18n.t(:helper_pendiente), "0"],
+      [I18n.t(:helper_completo), "1"]
     ]
   end
 
   def select_debcre
     [
-      ["DEBITO", "DEBITO"],
-      ["CREDITO", "CREDITO"]
+      [I18n.t(:helper_debito), "DEBITO"],
+      [I18n.t(:helper_credito), "CREDITO"]
     ]
   end
 
   def select_estadoperiodos
     [
-      ["PENDIENTE", "P"],
-      ["CONSOLIDADO", "C"]
+      [I18n.t(:helper_pendiente), "P"],
+      [I18n.t(:helper_consolidado), "C"]
     ]
   end
 
   def select_estadoinsumo
     [
-      ["ACTIVO", "ACTIVO"],
-      ["INACTIVO", "INACTIVO"],
-      ["PENDIENTE", "PENDIENTE"]
+      [I18n.t(:helper_activo), "ACTIVO"],
+      [I18n.t(:helper_inactivo), "INACTIVO"],
+      [I18n.t(:helper_pendiente), "PENDIENTE"]
     ]
   end
 
   def select_estado_ac
     [
-      ["ACTIVO", "ACTIVO"],
-      ["INACTIVO", "INACTIVO"]
+      [I18n.t(:helper_activo), "ACTIVO"],
+      [I18n.t(:helper_inactivo), "INACTIVO"]
     ]
   end
 
   def select_categoria_documentos
     [
-      ["SOCIOECONÓMICOS", "SOCIOECONÓMICOS"],
-      ["ACADÉMICOS", "ACADÉMICOS"],
-      ["FINANCIEROS", "FINANCIEROS"]
+      [I18n.t(:helper_socioeconomicos), "SOCIOECONÓMICOS"],
+      [I18n.t(:helper_academicos), "ACADÉMICOS"],
+      [I18n.t(:helper_financieros), "FINANCIEROS"]
     ]
   end
 
   def select_estado_portafolios
     [
-      ["ACTIVO", "ACTIVO"],
-      ["INACTIVO", "INACTIVO"]
+      [I18n.t(:helper_activo), "ACTIVO"],
+      [I18n.t(:helper_inactivo), "INACTIVO"]
     ]
   end
 
   def select_estadoestudiante2
     [
-      ["ACTIVO", "ACTIVO"],
-      ["INACTIVO", "INACTIVO"]
+      [I18n.t(:helper_activo), "ACTIVO"],
+      [I18n.t(:helper_inactivo), "INACTIVO"]
     ]
   end
 
   def select_mes
     [
-      ["ENERO", '01'],
-      ["FEBRERO", '02'],
-      ["MARZO", '03'],
-      ["ABRIL", '04'],
-      ["MAYO", '05'],
-      ["JUNIO", '06'],
-      ["JULIO", '07'],
-      ["AGOSTO", '08'],
-      ["SEPTIEMBRE", '09'],
-      ["OCTUBRE", '10'],
-      ["NOVIEMBRE", '11'],
-      ["DICIEMBRE", '12']
+      [I18n.t(:helper_mes_enero), '01'],
+      [I18n.t(:helper_mes_febrero), '02'],
+      [I18n.t(:helper_mes_marzo), '03'],
+      [I18n.t(:helper_mes_abril), '04'],
+      [I18n.t(:helper_mes_mayo), '05'],
+      [I18n.t(:helper_mes_junio), '06'],
+      [I18n.t(:helper_mes_julio), '07'],
+      [I18n.t(:helper_mes_agosto), '08'],
+      [I18n.t(:helper_mes_septiembre), '09'],
+      [I18n.t(:helper_mes_octubre), '10'],
+      [I18n.t(:helper_mes_noviembre), '11'],
+      [I18n.t(:helper_mes_diciembre), '12']
     ]
   end
 
@@ -515,7 +523,7 @@ module ApplicationHelper
 
   def select_mesedu
     [
-      ["DICIEMBRE", '12']
+      [I18n.t(:helper_mes_diciembre), '12']
     ]
   end
 
@@ -554,9 +562,9 @@ module ApplicationHelper
 
   def select_estado_veriservicios
     [
-      ["PENDIENTE", "PENDIENTE"],
-      ["EN PROCESO", "EN PROCESO"],
-      ["FINALIZADO", "FINALIZADO"]
+      [I18n.t(:helper_pendiente), "PENDIENTE"],
+      [I18n.t(:helper_en_proceso), "EN PROCESO"],
+      [I18n.t(:helper_finalizado), "FINALIZADO"]
     ]
   end
 
@@ -607,21 +615,21 @@ module ApplicationHelper
 
   def select_nivel
     [
-      ["GESTION", 1],
-      ["CARGUES", 6],
-      ["PROCESOS", 2],
-      ["PARAMETRIZACIÓN", 3],
-      ["SEGURIDAD", 4],
-      ["PARAMETRIZACIÓN EDUCACIÓN", 5]
+      [I18n.t(:helper_nivel_gestion), 1],
+      [I18n.t(:helper_nivel_cargues), 6],
+      [I18n.t(:helper_nivel_procesos), 2],
+      [I18n.t(:helper_nivel_parametrizacion), 3],
+      [I18n.t(:helper_nivel_seguridad), 4],
+      [I18n.t(:helper_nivel_parametrizacion_educacion), 5]
     ]
   end
 
   def select_prioridad
     [
-      ["EXTREMO", "EXTREMO"],
-      ["ALTA", "ALTA"],
-      ["MEDIA", "MEDIA"],
-      ["BAJA", "BAJA"]
+      [I18n.t(:helper_extremo), "EXTREMO"],
+      [I18n.t(:helper_alta), "ALTA"],
+      [I18n.t(:helper_media), "MEDIA"],
+      [I18n.t(:helper_baja), "BAJA"]
     ]
   end
 
@@ -642,17 +650,17 @@ module ApplicationHelper
 
   def select_niveleducativo
     [
-      ["TECNICO", "TECNICO"],
-      ["TECNOLOGICO", "TECNOLOGICO"],
-      ["UNIVERSITARIO", "UNIVERSITARIO"],
-      ["POSGRADO", "POSGRADO"]
+      [I18n.t(:helper_tecnico), "TECNICO"],
+      [I18n.t(:helper_tecnologico), "TECNOLOGICO"],
+      [I18n.t(:helper_universitario), "UNIVERSITARIO"],
+      [I18n.t(:helper_posgrado), "POSGRADO"]
     ]
   end
 
   def select_periodicidad
     [
-      ["SEMESTRAL", "SEMESTRAL"],
-      ["ANUAL", "ANUAL"]
+      [I18n.t(:helper_semestral), "SEMESTRAL"],
+      [I18n.t(:helper_anual), "ANUAL"]
     ]
   end
 
@@ -663,14 +671,14 @@ module ApplicationHelper
   def select_formapagohelena
     [
       ["EFECTIVO", "EFECTIVO"],
-      ["CONSIGNACION", "CONSIGNACION"]
+      [I18n.t(:helper_consignacion), "CONSIGNACION"]
     ]
   end
 
   def select_tiposgestion
     [
-      ['COBRANZA', 'COBRANZA'],
-      ['VIRTUAL', 'VIRTUAL']
+      [I18n.t(:helper_cobranza), 'COBRANZA'],
+      [I18n.t(:helper_virtual), 'VIRTUAL']
     ]
   end
 
@@ -711,76 +719,76 @@ module ApplicationHelper
 
   def select_estadocontrato
     [
-      ["PERFECCIONADO", "PERFECCIONADO"],
-      ["EN EJECUCION", "EN EJECUCION"],
-      ["EN LIQUIDACION", "EN LIQUIDACION"],
-      ["LIQUIDADO", "LIQUIDADO"],
-      ["ANULADO", "ANULADO"],
-      ["TERMINADO", "TERMINADO"]
+      [I18n.t(:helper_perfeccionado), "PERFECCIONADO"],
+      [I18n.t(:helper_en_ejecucion), "EN EJECUCION"],
+      [I18n.t(:helper_en_liquidacion), "EN LIQUIDACION"],
+      [I18n.t(:helper_liquidado), "LIQUIDADO"],
+      [I18n.t(:helper_anulado), "ANULADO"],
+      [I18n.t(:helper_terminado), "TERMINADO"]
     ]
   end
 
   def select_tipovalidacion
     [
-      ["RESTRICCION", "RESTRICCION"],
-      ["NOTIFICACION", "NOTIFICACION"]
+      [I18n.t(:helper_restriccion), "RESTRICCION"],
+      [I18n.t(:helper_notificacion), "NOTIFICACION"]
     ]
   end
 
   def select_tipomodificacion
     [
-      ["PLAZO", "PLAZO"],
-      ["PLAZO - VALOR", "PLAZO - VALOR"],
-      ["PLAZO - CLAUSULAS", "PLAZO - CLAUSULAS"],
-      ["PLAZO - VALOR - CLAUSULAS", "PLAZO - VALOR - CLAUSULAS"],
-      ["VALOR", "VALOR"],
-      ["VALOR - CLAUSULAS", "VALOR - CLAUSULAS"],
-      ["CLAUSULAS", "CLAUSULAS"]
+      [I18n.t(:helper_plazo), "PLAZO"],
+      [I18n.t(:helper_plazo_valor), "PLAZO - VALOR"],
+      [I18n.t(:helper_plazo_clausulas), "PLAZO - CLAUSULAS"],
+      [I18n.t(:helper_plazo_valor_clausulas), "PLAZO - VALOR - CLAUSULAS"],
+      [I18n.t(:helper_valor), "VALOR"],
+      [I18n.t(:helper_valor_clausulas), "VALOR - CLAUSULAS"],
+      [I18n.t(:helper_clausulas), "CLAUSULAS"]
     ]
   end
 
   def select_tipoinsumo
     [
-      ["CONSUMO", "CONSUMO"],
-      ["ELEMENTOS, EQUIPOS Y MAQUINARIA", "ELEMENTOS, EQUIPOS Y MAQUINARIA"]
+      [I18n.t(:helper_consumo), "CONSUMO"],
+      [I18n.t(:helper_elementos_equipos_maquinaria), "ELEMENTOS, EQUIPOS Y MAQUINARIA"]
     ]
   end
 
   def select_claseinsumo
     [
-      ["COLOMBIA COMPRA EFICIENTE", "COLOMBIA COMPRA EFICIENTE"],
-      ["GENERAL", "GENERAL"]
+      [I18n.t(:helper_colombia_compra_eficiente), "COLOMBIA COMPRA EFICIENTE"],
+      [I18n.t(:helper_general), "GENERAL"]
     ]
   end
 
   def select_disponibilidad
     [
-      ["TIEMPO COMPLETO", "TIEMPO COMPLETO"],
-      ["MEDIO TIEMPO", "MEDIO TIEMPO"]
+      [I18n.t(:helper_tiempo_completo), "TIEMPO COMPLETO"],
+      [I18n.t(:helper_medio_tiempo), "MEDIO TIEMPO"]
     ]
   end
 
   def select_tipointerventor
     [
-      ["SUPERVISOR", "SUPERVISOR"],
-      ["COORDINADOR", "COORDINADOR"],
-      ["INTERVENTOR", "INTERVENTOR"]
+      [I18n.t(:helper_supervisor), "SUPERVISOR"],
+      [I18n.t(:helper_coordinador), "COORDINADOR"],
+      [I18n.t(:helper_interventor), "INTERVENTOR"]
     ]
   end
 
   def select_claseimagen
     [
-      ["CONTRATO", "CONTRATO"],
-      ["PROVEEDOR", "PROVEEDOR"]
+      [I18n.t(:helper_contrato), "CONTRATO"],
+      [I18n.t(:helper_proveedor), "PROVEEDOR"]
     ]
   end
 
   def select_estadoexamen
     [
-      ["APROBADO", "APROBADO"],
-      ["PENDIENTE", "PENDIENTE"],
-      ["RECHAZADO", "RECHAZADO"],
-      ["APLAZADO", "APLAZADO"]
+      [I18n.t(:helper_aprobado), "APROBADO"],
+      [I18n.t(:helper_pendiente), "PENDIENTE"],
+      [I18n.t(:helper_rechazado), "RECHAZADO"],
+      [I18n.t(:helper_aplazado), "APLAZADO"]
     ]
   end
 
@@ -797,25 +805,25 @@ module ApplicationHelper
 
   def select_tipoproducto
     [
-      ["PERSONAL", '11020'],
-      ["INSUMOS", '11021'],
-      ["MAQUINARIA", '11022'],
-      ["OTROS", '11023'],
-      ["BASE G", '11024']
+      [I18n.t(:helper_personal), '11020'],
+      [I18n.t(:helper_insumos), '11021'],
+      [I18n.t(:helper_maquinaria), '11022'],
+      [I18n.t(:helper_otros), '11023'],
+      [I18n.t(:helper_base_g), '11024']
     ]
   end
 
   def select_embargo
     [
-      ["EMBARGO", "EMBARGO"],
-      ["LIBRANZA", "LIBRANZA"]
+      [I18n.t(:helper_embargo), "EMBARGO"],
+      [I18n.t(:helper_libranza), "LIBRANZA"]
     ]
   end
 
   def select_terminodescuento
     [
-      ["QUINCENAL", "QUINCENAL"],
-      ["MENSUAL", "MENSUAL"]
+      [I18n.t(:helper_quincenal), "QUINCENAL"],
+      [I18n.t(:helper_mensual), "MENSUAL"]
     ]
   end
 
@@ -873,9 +881,9 @@ module ApplicationHelper
 
   def select_tiponovedad
     [
-      ["DEVENGO", "DEVENGO"],
-      ["DEDUCCION", "DEDUCCION"],
-      ["OTROS DEVENGO", "OTROS DEVENGO"]
+      [I18n.t(:helper_devengo), "DEVENGO"],
+      [I18n.t(:helper_deduccion), "DEDUCCION"],
+      [I18n.t(:helper_otros_devengo), "OTROS DEVENGO"]
     ]
   end
 
@@ -905,8 +913,8 @@ module ApplicationHelper
 
   def select_claseproceso
     [
-      ["ASIGNAR", "ASIGNAR"],
-      ["QUITAR", "QUITAR"]
+      [I18n.t(:helper_asignar), "ASIGNAR"],
+      [I18n.t(:helper_quitar), "QUITAR"]
     ]
   end
 
@@ -920,17 +928,17 @@ module ApplicationHelper
 
   def select_riesgo
     [
-      ["Riesgo I (0.00522) - Act-Eco: 1691001 ", '0.0052'], # 00522
-      ["Riesgo II (0.01044) - Act-Eco: 2811001", '0.0104'], # 01044
-      ["Riesgo III (0.02436) - Act-Eco: 3861001", '0.0243'], # 02436
-      ["Riesgo IV (0.04350) - Act-Eco: 4492301", '0.0435'], # 04350
-      ["Riesgo V (0.06960) - Act-Eco: 5812901", '0.0696'] # 06960
+      [I18n.t(:helper_riesgo_1), '0.0052'], # 00522
+      [I18n.t(:helper_riesgo_2), '0.0104'], # 01044
+      [I18n.t(:helper_riesgo_3), '0.0243'], # 02436
+      [I18n.t(:helper_riesgo_4), '0.0435'], # 04350
+      [I18n.t(:helper_riesgo_5), '0.0696'] # 06960
     ]
   end
 
   def select_logo
     [
-      ["BACARA", "logo_inicio_bacara.png"]
+      ["BacWins", "logo.png"]
     ]
   end
 
@@ -949,26 +957,26 @@ module ApplicationHelper
 
   def select_jornada
     [
-      ["LUNES-SABADO", "LUNES-SABADO"],
-      ["LUNES-VIERNES", "LUNES-VIERNES"],
-      ["LUNES-DOMINGO", "LUNES-DOMINGO"]
+      [I18n.t(:helper_jornada_lun_sab), "LUNES-SABADO"],
+      [I18n.t(:helper_jornada_lun_vie), "LUNES-VIERNES"],
+      [I18n.t(:helper_jornada_lun_dom), "LUNES-DOMINGO"]
     ]
   end
 
   def select_proveedor
     [
-      ["RÉGIMEN COMÚN", "RÉGIMEN COMÚN"],
-      ["RÉGIMEN SIMPLIFICADO", "RÉGIMEN SIMPLIFICADO"],
-      ["GRAN CONTRIBUYENTE", "GRAN CONTRIBUYENTE"]
+      [I18n.t(:helper_regimen_comun), "RÉGIMEN COMÚN"],
+      [I18n.t(:helper_regimen_simplificado), "RÉGIMEN SIMPLIFICADO"],
+      [I18n.t(:helper_gran_contribuyente), "GRAN CONTRIBUYENTE"]
     ]
   end
 
   def select_formapago
     [
       ["EFECTIVO", "EFECTIVO"],
-      ["CONSIGNACION", "CONSIGNACION"],
-      ["TRANSFERENCIA", "TRANSFERENCIA"],
-      ["CHEQUE", "CHEQUE"]
+      [I18n.t(:helper_consignacion), "CONSIGNACION"],
+      [I18n.t(:helper_transferencia), "TRANSFERENCIA"],
+      [I18n.t(:helper_cheque), "CHEQUE"]
     ]
   end
 
@@ -1015,8 +1023,8 @@ module ApplicationHelper
 
   def select_clase
     [
-      ["CONTRATO", "CONTRATO"],
-      ["PROVEEDOR", "PROVEEDOR"]
+      [I18n.t(:helper_contrato), "CONTRATO"],
+      [I18n.t(:helper_proveedor), "PROVEEDOR"]
     ]
   end
 
@@ -1030,13 +1038,13 @@ module ApplicationHelper
 
   def select_monedapayu
     [
-      ['Peso Argentino', 'ARS'],
-      ['Real Brasileño', 'BRL'],
-      ['Peso Chileno', 'CLP'],
-      ['Peso Colombiano', 'COP'],
-      ['Peso Mexicano', 'MXN'],
-      ['Nuevo Sol Peruano', 'PEN'],
-      ['Dólar Americano', 'USD']
+      [I18n.t(:helper_peso_argentino), 'ARS'],
+      [I18n.t(:helper_real_brasileno), 'BRL'],
+      [I18n.t(:helper_peso_chileno), 'CLP'],
+      [I18n.t(:helper_peso_colombiano), 'COP'],
+      [I18n.t(:helper_peso_mexicano), 'MXN'],
+      [I18n.t(:helper_nuevo_sol_peruano), 'PEN'],
+      [I18n.t(:helper_dolar_americano), 'USD']
     ]
   end
 
@@ -1045,8 +1053,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_aportes
     [
-      ['PRUEBA', 'https://marketplacepruebas.aportesenlinea.com/Transversales.Servicios.Fachada/api/ControlAcceso/Autenticar'],
-      ['PRODUCCION', 'https://marketplace.aportesenlinea.com/Transversales.Servicios.Fachada/api/ControlAcceso/Autenticar']
+      [I18n.t(:helper_prueba), 'https://marketplacepruebas.aportesenlinea.com/Transversales.Servicios.Fachada/api/ControlAcceso/Autenticar'],
+      [I18n.t(:helper_produccion), 'https://marketplace.aportesenlinea.com/Transversales.Servicios.Fachada/api/ControlAcceso/Autenticar']
     ]
   end
 
@@ -1055,8 +1063,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_aportes_cotizante
     [
-      ['PRUEBA', 'https://marketplacepruebas.aportesenlinea.com/Fanaia.Servicios.Fachada/api/Cotizantes/CrearCotizante'],
-      ['PRODUCCION', 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/Cotizantes/ConsultarCotizantes']
+      [I18n.t(:helper_prueba), 'https://marketplacepruebas.aportesenlinea.com/Fanaia.Servicios.Fachada/api/Cotizantes/CrearCotizante'],
+      [I18n.t(:helper_produccion), 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/Cotizantes/ConsultarCotizantes']
     ]
   end
 
@@ -1065,8 +1073,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_aportes_certificado
     [
-      ['PRUEBA', 'https://aplicacionespruebas.aportesenlinea.com/Reportes.ServicioWeb/Reportes.svc/CertificadoAportes'],
-      ['PRODUCCION', 'https://aplicaciones.aportesenlinea.com/Reportes.ServicioWeb/Reportes.svc/CertificadoAportes']
+      [I18n.t(:helper_prueba), 'https://aplicacionespruebas.aportesenlinea.com/Reportes.ServicioWeb/Reportes.svc/CertificadoAportes'],
+      [I18n.t(:helper_produccion), 'https://aplicaciones.aportesenlinea.com/Reportes.ServicioWeb/Reportes.svc/CertificadoAportes']
     ]
   end
 
@@ -1075,8 +1083,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_aportes_novedades
     [
-      ['PRUEBA', 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/NovedadesRefactor/CrearNovedades'],
-      ['PRODUCCION', 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/NovedadesRefactor/CrearNovedades']
+      [I18n.t(:helper_prueba), 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/NovedadesRefactor/CrearNovedades'],
+      [I18n.t(:helper_produccion), 'https://marketplace.aportesenlinea.com/Fanaia.Servicios.Fachada/api/NovedadesRefactor/CrearNovedades']
     ]
   end
 
@@ -1085,8 +1093,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_aplicacion_aportes
     [
-      ['PRUEBA', 'E2271FA7-0FCA-4293-BF6D-53414286FDB0'],
-      ['PRODUCCION', 'FBC3E3BA-C0CA-4110-9EC5-FFA0C0E629F0']
+      [I18n.t(:helper_prueba), 'E2271FA7-0FCA-4293-BF6D-53414286FDB0'],
+      [I18n.t(:helper_produccion), 'FBC3E3BA-C0CA-4110-9EC5-FFA0C0E629F0']
     ]
   end
 
@@ -1095,8 +1103,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_alegra_emitir_nomina
     [
-      ['PRUEBA', 'https://sandbox-api.alegra.com/e-provider/col/v1/payrolls'],
-      ['PRODUCCION', 'https://api.alegra.com/e-provider/col/v1/payrolls']
+      [I18n.t(:helper_prueba), 'https://sandbox-api.alegra.com/e-provider/col/v1/payrolls'],
+      [I18n.t(:helper_produccion), 'https://api.alegra.com/e-provider/col/v1/payrolls']
     ]
   end
 
@@ -1105,8 +1113,8 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_alegra_crear_empresa
     [
-      ['PRUEBA', 'https://sandbox-api.alegra.com/e-provider/col/v1/companies'],
-      ['PRODUCCION', 'https://api.alegra.com/e-provider/col/v1/companies']
+      [I18n.t(:helper_prueba), 'https://sandbox-api.alegra.com/e-provider/col/v1/companies'],
+      [I18n.t(:helper_produccion), 'https://api.alegra.com/e-provider/col/v1/companies']
     ]
   end
 
@@ -1115,15 +1123,15 @@ module ApplicationHelper
   # Autor: AFP
   def select_url_alegra_crear_empresa
     [
-      ['PRUEBA', 'https://sandbox-api.alegra.com/e-provider/col/v1/test-sets'],
-      ['PRODUCCION', 'https://api.alegra.com/e-provider/col/v1/test-sets']
+      [I18n.t(:helper_prueba), 'https://sandbox-api.alegra.com/e-provider/col/v1/test-sets'],
+      [I18n.t(:helper_produccion), 'https://api.alegra.com/e-provider/col/v1/test-sets']
     ]
   end
 
   def select_sinopayu
     [
-      ['SI', 1],
-      ['NO', 0]
+      [I18n.t(:helper_si), 1],
+      [I18n.t(:helper_no), 0]
     ]
   end
 
@@ -1174,8 +1182,8 @@ module ApplicationHelper
 
   def select_tipo_cargue_examen
     [
-      ["CARGAR", "CARGAR"],
-      ["ACTUALIZAR", "ACTUALIZAR"]
+      [I18n.t(:helper_cargar), "CARGAR"],
+      [I18n.t(:helper_actualizar), "ACTUALIZAR"]
     ]
   end
 
@@ -1189,57 +1197,57 @@ module ApplicationHelper
 
   def select_encuesta_clase
     [
-      ["CORRECTO", "CORRECTO"],
-      ["INCORRECTO", "INCORRECTO"]
+      [I18n.t(:helper_correcto), "CORRECTO"],
+      [I18n.t(:helper_incorrecto), "INCORRECTO"]
     ]
   end
 
   def select_clasificacion_respuesta
     [
-      ["CORRECTO", 1],
-      ["INCORRECTO", 0]
+      [I18n.t(:helper_correcto), 1],
+      [I18n.t(:helper_incorrecto), 0]
     ]
   end
 
   def select_tipo_bachiller
     [
-      ["CLASICO", "CLASICO"],
-      ["TECNICO", "TECNICO"],
-      ["COMERCIAL", "COMERCIAL"],
-      ["OTRO", "OTRO"]
+      [I18n.t(:helper_clasico), "CLASICO"],
+      [I18n.t(:helper_tecnico), "TECNICO"],
+      [I18n.t(:helper_comercial), "COMERCIAL"],
+      [I18n.t(:helper_otro), "OTRO"]
     ]
   end
 
   def select_tipo_educacion
     [
-      ["TECNICO", "TECNICO"],
-      ["TECNOLOGICO", "TECNOLOGICO"],
-      ["PROFESIONAL", "PROFESIONAL"]
+      [I18n.t(:helper_tecnico), "TECNICO"],
+      [I18n.t(:helper_tecnologico), "TECNOLOGICO"],
+      [I18n.t(:helper_profesional), "PROFESIONAL"]
 
     ]
   end
 
   def select_horario_educacion
     [
-      ["DIURNO", "DIURNO"],
-      ["NOCTURNO", "NOCTURNO"],
-      ["FIN DE SEMANA", "FIN DE SEMANA"],
-      ["A DISTANCIA", "A DISTANCIA"]
+      [I18n.t(:helper_diurno), "DIURNO"],
+      [I18n.t(:helper_nocturno), "NOCTURNO"],
+      [I18n.t(:helper_fin_de_semana), "FIN DE SEMANA"],
+      [I18n.t(:helper_a_distancia), "A DISTANCIA"]
 
     ]
   end
 
   def select_tipo_contrato_form
     [
-      ["INDEFINIDO", "INDEFINIDO"],
-      ["FIJO", "FIJO"]
+      [I18n.t(:helper_indefinido), "INDEFINIDO"],
+      [I18n.t(:helper_fijo), "FIJO"]
     ]
   end
 
   def select_estadoCompromiso
     [
-      ["PENDIENTE", "PENDIENTE"],
-      ["FINALIZADO", "FINALIZADO"]
+      [I18n.t(:helper_pendiente), "PENDIENTE"],
+      [I18n.t(:helper_finalizado), "FINALIZADO"]
     ]
   end
 
@@ -1258,41 +1266,41 @@ module ApplicationHelper
 
   def select_orientacion_sexual
     [
-      ['HETEROSEXUAL','HETEROSEXUAL'],
-      ['HOMOSEXUAL','HOMOSEXUAL'],
-      ['MUJER TRANS','MUJER TRANS'],
-      ['HOMBRE TRANS','HOMBRE TRANS'],
-      ['OTROS','OTROS']
+      [I18n.t(:helper_heterosexual),'HETEROSEXUAL'],
+      [I18n.t(:helper_homosexual),'HOMOSEXUAL'],
+      [I18n.t(:helper_mujer_trans),'MUJER TRANS'],
+      [I18n.t(:helper_hombre_trans),'HOMBRE TRANS'],
+      [I18n.t(:helper_otros),'OTROS']
     ]
   end
 
   def select_tipo_religion
     [
-      ['CATÓLICO','CATÓLICO'],
-      ['CRISTIANO','CRISTIANO'],
-      ['EVANGÉLICO','EVANGÉLICO'],
-      ['TESTIGO DE JEHOVÁ','TESTIGO DE JEHOVÁ'],
-      ['OTRAS','OTRAS'],
-      ['SIN RELIGIÓN','SIN RELIGIÓN']
+      [I18n.t(:helper_catolico),'CATÓLICO'],
+      [I18n.t(:helper_cristiano),'CRISTIANO'],
+      [I18n.t(:helper_evangelico),'EVANGÉLICO'],
+      [I18n.t(:helper_testigo_jehova),'TESTIGO DE JEHOVÁ'],
+      [I18n.t(:helper_otras),'OTRAS'],
+      [I18n.t(:helper_sin_religion),'SIN RELIGIÓN']
     ]
   end
 
   def select_tipo_etnia
     [
-      ['MESTIZO','MESTIZO'],
-      ['GITANO (A) (ROM)','GITANO (A) (ROM)'],
-      ['RAIZAL DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA','RAIZAL DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA'],
-      ['PALANQUERO (A) DE SAN BASILIO','PALANQUERO (A) DE SAN BASILIO'],
-      ['NEGRO (A), AFRODESCENDIENTE, AFROCOLOMBIANO (A)','NEGRO (A), AFRODESCENDIENTE, AFROCOLOMBIANO (A)'],
-      ['OTRAS','OTRAS']
+      [I18n.t(:helper_mestizo),'MESTIZO'],
+      [I18n.t(:helper_gitano_rom),'GITANO (A) (ROM)'],
+      [I18n.t(:helper_raizal),'RAIZAL DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA'],
+      [I18n.t(:helper_palanquero),'PALANQUERO (A) DE SAN BASILIO'],
+      [I18n.t(:helper_afrocolombiano),'NEGRO (A), AFRODESCENDIENTE, AFROCOLOMBIANO (A)'],
+      [I18n.t(:helper_otras),'OTRAS']
     ]
   end
 
   def select_tipo_vivienda
     [
-      ['PROPIA','PROPIA'],
-      ['EN ARRIENDO','EN ARRIENDO'],
-      ['FAMILIAR','FAMILIAR']
+      [I18n.t(:helper_vivienda_propia),'PROPIA'],
+      [I18n.t(:helper_vivienda_arriendo),'EN ARRIENDO'],
+      [I18n.t(:helper_vivienda_familiar),'FAMILIAR']
     ]
   end
 

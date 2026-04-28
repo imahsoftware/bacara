@@ -12,13 +12,13 @@
       <% if is_sygma %>
         <li>
           <%= link_to portafolios_path do %>
-            <i class="fa fa-arrow-left text-danger"></i> Regresar a portafolios
+            <i class="fa fa-arrow-left text-danger"></i> <%= t :return_to_portfolios %>
           <% end %>
         </li>
       <% else %>
         <li>
           <%= link_to root_path do %>
-            <i class="fa fa-arrow-left text-danger"></i> Regresar
+            <i class="fa fa-arrow-left text-danger"></i> <%= t :return %>
           <% end %>
         </li>
       <% end -%>
@@ -28,24 +28,10 @@
         <li class="treeview">
         <li class="<%= active_class(edit_portafolio_path(etapa: "A", id: @portafolio.id)) %>">
           <%= link_to edit_portafolio_path(etapa: "A", id: @portafolio.id) do %>
-            <i class="fa fa-bullseye"></i><span>Compañia</span>
+            <i class="fa fa-bullseye"></i><span><%= t :company %></span>
           <% end %>
         </li>
-        <% if is_sygma %>
-           <li class="<%= active_class(edit_portafolio_path(etapa: "B", id: @portafolio.id)) %>">
-            <%= link_to edit_portafolio_path(etapa: "B", id: @portafolio.id) do %>
-              <i class="fa fa-bullseye"></i><span>Barberos</span>
-            <% end %>
-          </li>
-        <% else %>
-          <li class="<%= active_class(edit_portafolio_path(etapa: "B", id: @portafolio.id)) %>">
-            <%= link_to edit_portafolio_path(etapa: "B", id: @portafolio.id) do %>
-              <i class="fa fa-bullseye"></i><span>Barberos</span>
-            <% end %>
-          </li>
-        <% end %>
       <% end %>
-      </li>
     </ul>
   </section>
 </aside>

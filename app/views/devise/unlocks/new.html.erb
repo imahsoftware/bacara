@@ -1,19 +1,42 @@
-<h2>Resend unlock instructions</h2>
+<div id="wrapper">
 
-<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.full_error :unlock_token %>
+  <%= render 'devise/shared/auth_showcase' %>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
+  <!-- ── PANEL DERECHO: Formulario ── -->
+  <div id="left">
+    <div id="signin">
+
+      <div class="logo">
+        <h1><%= t :resend_unlock_instructions %></h1>
+        <p class="form-subtitle"><%= t :ingresa_credenciales %></p>
+      </div>
+
+      <%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <%= f.full_error :unlock_token %>
+
+        <div>
+          <label><%= t :correo_electronico %></label>
+          <%= f.input_field :email, required: true, autofocus: true, class: 'form-control', placeholder: "#{t :correo_electronico}", autocomplete: 'email' %>
+        </div>
+
+        <br/>
+        <div>
+          <%= f.button :submit, t(:resend_unlock_instructions), class: 'primary-btn', disabled_with: "#{t :enviando}" %>
+        </div>
+      <% end %>
+
+      <div class="links">
+        <%= render "devise/shared/links" %>
+      </div>
+
+      <%= render 'layouts/flash_messages' %>
+    </div>
+
+    <footer id="main-footer">
+      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> · <span class="footer-app">BacWins</span> · <%= t :todos_derechos_reservados %>
+    </footer>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Resend unlock instructions" %>
-  </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+<%= render 'devise/shared/auth_styles' %>

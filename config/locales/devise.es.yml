@@ -25,27 +25,27 @@ es:
       timeout: Tu sesión expiró. Por favor, inicia sesión nuevamente para continuar.
       unauthenticated: Tienes que iniciar sesión o registrarte para poder continuar.
       unconfirmed: Tienes que confirmar tu cuenta para poder continuar.
-      session_limited: 'Sus credenciales de inicio de sesión se usaron en otro navegador. Inicie sesión de nuevo para continuar en este navegador.'
+      session_limited: Sus credenciales de inicio de sesión se usaron en otro navegador. Inicie sesión de nuevo para continuar en este navegador.
     mailer:
       confirmation_instructions:
         action: Confirmar mi cuenta
-        greeting: "¡Bienvenido %{recipient}!"
+        greeting: ¡Bienvenido %{recipient}!
         instruction: 'Usted puede confirmar el correo electrónico de su cuenta a través de este enlace:'
         subject: Instrucciones de confirmación
       password_change:
-        greeting:
-        message:
-        subject: "Contraseña actualizada"
+        greeting: ¡Hola %{recipient}!
+        message: Le contactamos para notificarle que su contraseña ha sido cambiada.
+        subject: Contraseña actualizada
       reset_password_instructions:
         action: Cambiar mi contraseña
-        greeting: "¡Hola %{recipient}!"
+        greeting: ¡Hola %{recipient}!
         instruction: Alguien ha solicitado una liga para cambiar su contraseña, lo que se puede realizar a través del siguiente enlace.
         instruction_2: Si usted no lo ha solicitado, por favor ignore este correo electrónico.
         instruction_3: Su contraseña no será cambiada hasta que usted acceda el enlace y cree una nueva contraseña.
         subject: Instrucciones de recuperación de contraseña
       unlock_instructions:
         action: Desbloquear mi cuenta
-        greeting: "¡Hola %{recipient}!"
+        greeting: ¡Hola %{recipient}!
         instruction: 'Haga click en el siguiente enlace para desbloquear su cuenta:'
         message: Su cuenta ha sido bloqueada debido a una cantidad excesiva de intentos infructuosos para ingresar.
         subject: Instrucciones para desbloquear tu cuenta
@@ -59,17 +59,18 @@ es:
         confirm_new_password: Confirme la nueva contraseña
         new_password: Nueva contraseña
       new:
-        forgot_your_password: "¿Ha olvidado su contraseña?"
+        forgot_your_password: ¿Ha olvidado su contraseña?
         send_me_reset_password_instructions: Envíame las instrucciones para establecer mi nueva contraseña
-      no_token: No puedes acceder a esta página si no es a través de un enlace para restablecer tu contraseña. Si has llegado hasta aquí desde el email para restablecer tu contraseña, por favor asegúrate de que la URL introducida está completa.
+      no_token: No puedes acceder a esta página si no es a través de un enlace para restablecer tu contraseña. Si has llegado hasta aquí desde el email para restablecer tu contraseña, por favor asegúrate
+        de que la URL introducida está completa.
       send_instructions: En unos minutos recibirás un correo con instrucciones sobre cómo restablecer tu contraseña.
       send_paranoid_instructions: Si tu correo existe en nuestra base de datos, recibirás en tu bandeja de entrada un correo con instrucciones sobre cómo restablecer tu contraseña.
       updated: Tu contraseña ha sido cambiada exitosamente. Ya puedes iniciar sesión.
       updated_not_active: Tu contraseña ha sido cambiada.
     registrations:
-      destroyed: "¡Adiós! Tu cuenta ha sido cancelada exitosamente. Esperamos verte pronto."
+      destroyed: ¡Adiós! Tu cuenta ha sido cancelada exitosamente. Esperamos verte pronto.
       edit:
-        are_you_sure: "¿Está usted seguro?"
+        are_you_sure: ¿Está usted seguro?
         cancel_my_account: Eliminar mi cuenta
         currently_waiting_confirmation_for_email: 'Actualmente esperando la confirmacion de: %{email} '
         leave_blank_if_you_don_t_want_to_change_it: dejar en blanco si no desea cambiarlo
@@ -83,7 +84,8 @@ es:
       signed_up_but_inactive: Tu cuenta ha sido creada exitosamente. Sin embargo, no puedes iniciar sesión ya que tu cuenta aún no está activada.
       signed_up_but_locked: Tu cuenta ha sido creada correctamente. Sin embargo, no es posible iniciar la sesión porque que tu cuenta se encuentra bloqueada.
       signed_up_but_unconfirmed: Se ha enviado un mensaje con un enlace de confirmación a tu correo electrónico. Abre el enlace para activar tu cuenta.
-      update_needs_confirmation: Has actualizado tu cuenta exitosamente, pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo y sigue el enlace de confirmación para finalizar la comprobación del nuevo correo electrónico.
+      update_needs_confirmation: Has actualizado tu cuenta exitosamente, pero es necesario confirmar tu nuevo correo electrónico. Por favor, comprueba tu correo y sigue el enlace de confirmación para finalizar
+        la comprobación del nuevo correo electrónico.
       updated: Tu cuenta ha sido actualizada exitosamente.
     sessions:
       already_signed_out: Se ha cerrado la sesión con éxito.
@@ -91,14 +93,14 @@ es:
         sign_in: Iniciar sésion
       signed_in: Has Iniciado Sesión Correctamente. Bienvenido
       signed_out: Sesión finalizada.
-      user_signed_in: 'Ya has iniciado sesión en otro equipo'
-      user_status: 'Tu cuenta esta inactiva'
+      user_signed_in: Ya has iniciado sesión en otro equipo
+      user_status: Tu cuenta esta inactiva
     shared:
       links:
         back: Regresar
-        didn_t_receive_confirmation_instructions: "¿No ha recibido las instrucciones de confirmación?"
-        didn_t_receive_unlock_instructions: "¿No ha recibido instrucciones para desbloquear?"
-        forgot_your_password: "¿Ha olvidado su contraseña?"
+        didn_t_receive_confirmation_instructions: ¿No ha recibido las instrucciones de confirmación?
+        didn_t_receive_unlock_instructions: ¿No ha recibido instrucciones para desbloquear?
+        forgot_your_password: ¿Ha olvidado su contraseña?
         sign_in: Iniciar sésion
         sign_in_with_provider: Iniciar sésion con %{provider}
         sign_up: Registrarse
@@ -117,4 +119,4 @@ es:
       not_locked: no se encuentra bloqueada
       not_saved:
         one: 'Un error ocurrió al tratar de guardar %{resource}:'
-        other: "%{count} errores ocurrieron al tratar de guardar %{resource}:"
+        other: '%{count} errores ocurrieron al tratar de guardar %{resource}:'

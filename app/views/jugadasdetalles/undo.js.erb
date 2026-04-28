@@ -5,6 +5,12 @@ $('#mov-count').text('<%= @total_movimientos %>');
 $('#badge-count').text('<%= @total_movimientos %>');
 $('#next-bet-text').text('<%= j @proximo_bet %>');
 $('#jd-profit-amount').text('<%= j Jugadasdetalle.formatted_profit_for_jugada(@jugada_id) %>');
+if (typeof window.applyProfitColor === 'function') { window.applyProfitColor(); }
+<% if @total_movimientos.to_i > 0 %>
+$('#btn-finish').show();
+<% else %>
+$('#btn-finish').hide();
+<% end %>
 
 <% if @total_movimientos < 5 %>
 $('#prc-badge').hide();
@@ -12,11 +18,27 @@ $('#prc-badge').hide();
 
 // ═══ Reiniciar floating header + auto-scroll ═══
 (function(){
+    if (typeof window.syncMovimientosHeight === 'function') {
+        window.syncMovimientosHeight();
+    }
     if (typeof window.setupFloatingHeader === 'function') {
         window.setupFloatingHeader();
     }
     var el = document.getElementById('jd-movimientos-scroll');
     if (el) {
-        setTimeout(function(){ el.scrollTop = el.scrollHeight; }, 50);
+        setTimeout(function(){
+            if (typeof window.syncMovimientosHeight === 'function') {
+                window.syncMovimientosHeight();
+            }
+            if (typeof window.setupFloatingHeader === 'function') {
+                window.setupFloatingHeader();
+            }
+            el.scrollTop = el.scrollHeight;
+        }, 50);
     }
 })();
+
+<% if @jugada.present? && @jugada.estado.to_s.upcase.strip != 'PENDIENTE' %>
+if (typeof window.jdLockPlayControls === 'function') { window.jdLockPlayControls(); }
+<% end %>
+

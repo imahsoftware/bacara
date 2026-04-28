@@ -3,15 +3,15 @@
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
         <% if @parametro == 'ADMIN' %>
-          <%= f.input :campo, as: :select, collection: select_campo, input_html: { data: { width: '100%' }, class: 'select2' }, label: "Campo" %>
+          <%= f.input :campo, as: :select, collection: select_campo, input_html: { data: { width: '100%' }, class: 'select2' }, label: t('campo') %>
         <% elsif @parametro == 'ASIGNADO' %>
-          <%= f.input :campo, as: :select, collection: select_campo_asignado, input_html: { data: { width: '100%' }, class: 'select2' }, label: "Campo" %>
+          <%= f.input :campo, as: :select, collection: select_campo_asignado, input_html: { data: { width: '100%' }, class: 'select2' }, label: t('campo') %>
         <% end %>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><%= f.input :descripcion, input_html: { :onchange => "javascript:this.value=this.value.toUpperCase();" } %></div>
-      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :codigo_aportes, label: "Codigo AportesEnLinea", input_html: { :onchange => "javascript:this.value=this.value.toUpperCase();" } %></div>
-      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :estado, as: :select, collection: select_estado, input_html: { data: { width: '100%' }, class: 'select2' }, label: "Estado" %></div>
-      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :visible, as: :select, collection: select_sino, input_html: { data: { width: '100%' }, class: 'select2' }, label: "Visible" %></div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :codigo_aportes, label: t('codigo_aportes_en_linea'), input_html: { :onchange => "javascript:this.value=this.value.toUpperCase();" } %></div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :estado, as: :select, collection: select_estado, input_html: { data: { width: '100%' }, class: 'select2' }, label: t('estado') %></div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><%= f.input :visible, as: :select, collection: select_sino, input_html: { data: { width: '100%' }, class: 'select2' }, label: t('visible') %></div>
     </div>
     <div class="row">
       <div class="col-md-6">

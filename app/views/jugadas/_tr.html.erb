@@ -1,18 +1,31 @@
-<tr id="jugada_<%= jugada.id %>">
+<%
+  cerrada = jugada.estado.to_s.strip.upcase == 'CERRADA'
+  profit  = Jugadasdetalle.where(jugada_id: jugada.id).sum(:acumuladof).to_f
+  profit_class = profit > 0 ? 'jd-profit-pos' : (profit < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+  iv_str   = profit == profit.to_i ? profit.to_i.to_s : sprintf('%.1f', profit)
+  profit_text = profit > 0 ? "+#{iv_str}" : iv_str
+
+  # Locales opcionales para el agrupado por día
+  row_day_class    = local_assigns[:day_class].to_s
+  row_initially_hidden = local_assigns[:initially_hidden] == true
+%>
+<tr id="jugada_<%= jugada.id %>"
+    class="jugada-row <%= row_day_class %>"
+    <%= row_initially_hidden ? 'style="display:none;"'.html_safe : '' %>>
   <td class="text-center">
-    <% if current_user.tipoconsulta.to_s == 'TODO' %>
-      <%= link_to edit_jugada_path(jugada), remote: true, class: 'edit_jugada_button', data: { toggle: 'tooltip' }, title: "#{t :title_editar}" do %>
-        <button class="btn btn-xs btn-warning"><i class="fa fa-edit"></i></button>
-      <% end %>
+    <% if current_user.tipoconsulta.to_s == 'TODO' && !cerrada %>
       <%= link_to jugada, remote: true, method: :delete, data: { confirm: "#{t :elimina_confirma}", toggle: 'tooltip' }, title: "#{t :title_elimina}" do %>
         <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
       <% end %>
     <% end %>
-
+    <% if cerrada && current_user.tipoconsulta.to_s == 'TODO' %>
+      <%= link_to detalle_jugadas_jugadas_path(id: jugada.to_param, format: :pdf), class: 'popup', data: { toggle: 'tooltip' }, title: 'Ver Detalle' do %>
+        <button class="btn btn-xs btn-primary"><i class="fa fa-file-pdf-o"></i></button>
+      <% end %>
+    <% end %>
 
     <%# Botón para abrir el detalle de jugada en nueva ventana %>
-    <%= link_to new_jugadasdetalle_path(jugada_id: jugada.id),
-                target: "_blank",
+    <%= link_to new_jugadasdetalle_path(jugada_id: jugada.to_param),
                 rel: "noopener",
                 data: { toggle: 'tooltip' },
                 title: "#{t :ver_detalle_jugada}" do %>
@@ -20,9 +33,9 @@
         <i class="fa fa-play-circle"></i>
       </button>
     <% end %>
-
   </td>
-  <td width="15%" class="text-center"><%= jugada.created_at.strftime("%Y-%m-%d %X") %></td>
-  <td><%= jugada.jugador %></td>
-  <td width="15%" class="text-center"><%= jugada.estado %></td>
+  <td class="text-center"><strong>#<%= jugada.id %></strong></td>
+  <td class="text-center"><%= jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+  <td class="text-center"><%= jugada.estado %></td>
+  <td class="text-right <%= profit_class %>"><strong><%= profit_text %></strong></td>
 </tr>

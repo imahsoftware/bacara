@@ -1,7 +1,7 @@
 class JugadasdetallesController < ApplicationController
   before_action :set_jugada_id
   before_action :authorize_jugada_acceso
-  before_action :block_if_finalizada, only: [:create, :undo, :reset]
+  before_action :block_unless_pendiente, only: [:create, :undo, :reset]
 
   layout :set_layout
 
@@ -40,6 +40,7 @@ class JugadasdetallesController < ApplicationController
 
     # Correr el PRC con el id del registro actualizado/insertado
     ejecutar_prc_calculo_automatico(@detalle.id)
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
@@ -69,6 +70,9 @@ class JugadasdetallesController < ApplicationController
                .order(id: :desc)
                .first
     ultimo.destroy if ultimo
+
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+
 =end
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
@@ -84,6 +88,8 @@ class JugadasdetallesController < ApplicationController
     # Eliminar todos los registros asociados a esta jugada
     Jugadasdetalle.where(jugada_id: @jugada_id).delete_all
 
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+
     @jugadasdetalles   = []
     @total_movimientos = 0
     @proximo_bet       = "No Bet"
@@ -91,6 +97,33 @@ class JugadasdetallesController < ApplicationController
     respond_to do |format|
       format.js { render 'undo' }
       format.json { render json: { status: "ok", total: 0 } }
+    end
+  end
+
+  # Marca jugada CERRADA sin recargar; UI bloquea P/B/undo/clear/finish vía finish.js.erb + jdLockPlayControls.
+  def finish
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+
+    unless @jugada.estado.to_s.upcase == 'PENDIENTE'
+      respond_to do |format|
+        format.js   { render :finish }
+        format.json { render json: { status: 'ok', already_closed: true } }
+      end
+      return
+    end
+
+    unless @jugada.update(estado: 'CERRADA')
+      msg = @jugada.errors.full_messages.to_sentence.presence || 'Error'
+      respond_to do |format|
+        format.js   { render js: "alert(#{msg.to_json});" }
+        format.json { render json: { status: 'error', errors: @jugada.errors.full_messages }, status: :unprocessable_entity }
+      end
+      return
+    end
+
+    respond_to do |format|
+      format.js   { render :finish }
+      format.json { render json: { status: 'ok' } }
     end
   end
 
@@ -109,7 +142,16 @@ class JugadasdetallesController < ApplicationController
   private
 
   def set_jugada_id
-    @jugada_id = params[:jugada_id].to_i
+    # Acepta UUID o id integer en la URL. Internamente seguimos usando el integer.
+    raw = params[:jugada_id].to_s
+    if raw.blank?
+      @jugada_id = 0
+    elsif raw =~ /\A\d+\z/
+      @jugada_id = raw.to_i
+    else
+      jugada = Jugada.find_by(uuid: raw)
+      @jugada_id = jugada ? jugada.id : 0
+    end
   end
 
   def ejecutar_prc_calculo_automatico(jugada_detalle_id)
@@ -126,12 +168,55 @@ class JugadasdetallesController < ApplicationController
 
   def authorize_jugada_acceso
     if @jugada_id.blank? || @jugada_id.to_i <= 0
-      redirect_to root_path, alert: 'Jugada no válida.'
+      redirect_to root_path, alert: I18n.t(:jugada_no_valida)
       return
     end
 
     unless Jugada.for_user_list(current_user).exists?(id: @jugada_id)
-      redirect_to root_path, alert: 'No tiene acceso a esta jugada.'
+      redirect_to root_path, alert: I18n.t(:no_tiene_acceso_jugada)
+      return
+    end
+
+    return unless ensure_persona_solo_jugada_pendiente
+  end
+
+  # tipoconsulta PERSONA: no puede abrir otra jugada (IDOR) por URL; solo la sesión PENDIENTE activa.
+  def ensure_persona_solo_jugada_pendiente
+    return true unless current_user.tipoconsulta.to_s == "PERSONA"
+
+    pend = Jugada.primera_pendiente_para(current_user)
+
+    if pend.present?
+      if pend.id != @jugada_id.to_i
+        correcta = new_jugadasdetalle_path(jugada_id: pend.to_param)
+        denegar_acceso_baccarat_persona(
+          correcta,
+          I18n.t(:solo_puede_acceder_jugada_pendiente)
+        )
+        return false
+      end
+      return true
+    end
+
+    # Sin PENDIENTE: permitir solo finish idempotente sobre jugada propia (tras cerrar, mismo POST no redirige).
+    if action_name == 'finish' && Jugada.for_user_list(current_user).exists?(id: @jugada_id.to_i)
+      return true
+    end
+
+    denegar_acceso_baccarat_persona(
+      jugadas_path,
+      I18n.t(:no_tiene_sesion_pendiente)
+    )
+    false
+  end
+
+  def denegar_acceso_baccarat_persona(redirect_path, message)
+    respond_to do |format|
+      format.html { redirect_to redirect_path, alert: message }
+      format.js do
+        render js: "alert(#{message.to_json}); window.location.replace(#{redirect_path.to_json});"
+      end
+      format.json { render json: { error: message, redirect: redirect_path }, status: :forbidden }
     end
   end
 

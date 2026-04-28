@@ -2,13 +2,13 @@
   <div class="bs-callout">
     <div class="row">
       <div class="col-md-5">
-        <%= f.input :descripcion, label: "Descripción", input_html: { class: 'clean' } %>
+        <%= f.input :descripcion, label: t('descripcion'), input_html: { class: 'clean' } %>
       </div>
       <div class="col-md-2">
-        <%= f.input :autorizado, as: :select, collection: { "SI" => "SI","NO" => "NO"}, input_html: { class: 'clean select2' }, include_blank: true, label: "Autorizado?" %>
+        <%= f.input :autorizado, as: :select, collection: { t('si') => "SI", t('no') => "NO"}, input_html: { class: 'clean select2' }, include_blank: true, label: t('autorizado') %>
       </div>
       <div class="col-md-5">
-        <%= f.input :descripcion_ampliada, label: "Descripción Ampliada", input_html: { class: 'clean' } %>
+        <%= f.input :descripcion_ampliada, label: t('descripcion_ampliada'), input_html: { class: 'clean' } %>
       </div>
     </div>
     <div class="row">

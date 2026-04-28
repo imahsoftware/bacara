@@ -1,11 +1,11 @@
 <% if is_sygma %>
   <div class="box box-primary">
     <div class="box-header">
-      <legend>Usuarios con sesión activa <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="<%= @usersactivos.count %> usuarios conectados"><%= @usersactivos.count %></span></legend>
+      <legend><%= t :active_session_users %> <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="<%= @usersactivos.count %> <%= t :connected_users %>"><%= @usersactivos.count %></span></legend>
       <div class="box-tools pull-right">
         <%= search_form_for @q, url: usersactivos_path do |f| %>
           <div class="input-group input-group-sm" style="width: 180px;">
-            <%= f.search_field :email_or_username_or_nombre_or_identificacion_cont, class: 'form-control pull-right', placeholder: 'Buscar...' %>
+            <%= f.search_field :email_or_username_or_nombre_or_identificacion_cont, class: 'form-control pull-right', placeholder: t(:search) %>
             <div class="input-group-btn">
               <%= button_tag(type: "submit", class: "btn btn-default") do %>
                 <i class="fa fa-search"></i>
@@ -21,12 +21,12 @@
           <table class="table table-bordered">
             <thead>
               <tr class="thcolor">
-                <th>ID</th>
-                <th>Usuario</th>
-                <th>Nombre</th>
-                <th>Portafolio</th>
-                <th>Documento</th>
-                <th>Fecha y hora de conexión</th>
+                <th><%= t :id %></th>
+                <th><%= t :username %></th>
+                <th><%= t :name %></th>
+                <th><%= t :portfolio %></th>
+                <th><%= t :identification %></th>
+                <th><%= t :connection_date_time %></th>
                 <th></th>
               </tr>
             </thead>
@@ -40,7 +40,7 @@
                   <td><%= user.identificacion rescue nil %></td>
                   <td><%= user.current_sign_in_at.strftime("%Y-%m-%d %I:%M %p") rescue nil %></td>
                   <td>
-                    <%= link_to cerrarsesion_usersactivos_path(id: user.id), data: { toggle: 'tooltip', confirm: '¿Esta seguro?' }, title: 'Desactivar sesión' do %>
+                    <%= link_to cerrarsesion_usersactivos_path(id: user.id), data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:deactivate_session) do %>
                       <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
                     <% end %>
                   </td>
@@ -53,10 +53,10 @@
           <%= will_paginate @usersactivos, renderer: BootstrapPagination::Rails %>
         </div>
       <% else %>
-        <h4 class="text-center">No se encontraron datos</h4>
+        <h4 class="text-center"><%= t :no_data_found %></h4>
       <% end %>
     </div>
   </div>
 <% else %>
-  <h2>Página no encontrada</h2>
+  <h2><%= t :page_not_found %></h2>
 <% end %>

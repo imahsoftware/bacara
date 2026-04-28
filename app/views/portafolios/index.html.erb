@@ -1,15 +1,15 @@
 <div class="box box-primary">
   <div class="box-header with-border">
     <legend>
-      Compañias
+      <%= t :companias %>
       <%= link_to new_portafolio_path, class: 'btn btn-sm btn-info' do %>
-        <i class="fa fa-plus-square"> </i> <span>Nueva compañia</span>
+        <i class="fa fa-plus-square"> </i> <span><%= t :nueva_compania %></span>
       <% end %>
     </legend>
     <div class="box-tools pull-right">
       <%= search_form_for @q do |f| %>
         <div class="input-group input-group-sm" style="width: 180px;">
-          <%= f.search_field :email_or_nombre_or_estado_cont, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'form-control pull-right input_uppercase', placeholder: 'Buscar...' %>
+          <%= f.search_field :email_or_nombre_or_estado_cont, onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'form-control pull-right input_uppercase', placeholder: "#{t :buscar}..." %>
           <div class="input-group-btn">
             <%= button_tag(type: "submit", class: "btn btn-default") do %>
               <i class="fa fa-search"></i>
@@ -31,11 +31,15 @@
         <table class="table table-bordered table-condensed table-striped">
           <thead>
             <tr class="thcolor">
-              <th width="10%"></th>
-              <th width="35%">Nombre</th>
-              <th width="20%">Nombre Corto</th>
-              <th width="20%">Forma VMN</th>
-              <th width="10%"><div align="center">Estado</div></th>
+              <th width="8%"></th>
+              <th width="18%"><%= t :nombre %></th>
+              <th width="10%"><%= t :nombre_corto %></th>
+              <th width="12%"><%= t :identificacion %></th>
+              <th width="14%"><%= t :correo_electronico %></th>
+              <th width="12%"><%= t :username %></th>
+              <th width="10%"><%= t :clave %></th>
+              <th width="8%"><%= t :forma_vmn %></th>
+              <th width="8%"><div align="center"><%= t :estado %></div></th>
             </tr>
           </thead>
           <tbody id="portafolios-tbody">

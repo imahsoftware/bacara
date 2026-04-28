@@ -5,7 +5,8 @@ class Bacaramail::SendmailServices
 
   def general(receiver, subject, template, fpath, fname, *args)
     mail = SendGrid::Mail.new
-    mail.from = Email.new(email: 'notifier.bacara@gmail.com')
+    sender = ENV.fetch('SENDGRID_FROM_EMAIL', 'notifier.bacara@gmail.com')
+    mail.from = Email.new(email: sender)
     personalization = Personalization.new
     receiver = receiver.class == Array ? receiver : receiver.split(" ")
     receiver.each do |email|
@@ -33,8 +34,21 @@ class Bacaramail::SendmailServices
       attachment.content_id = 'Reports Sheet'
       mail.add_attachment(attachment)
     end
-    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    api_key = ENV['SENDGRID_API_KEY']
+    if api_key.blank?
+      Rails.logger.error("[Bacaramail] SENDGRID_API_KEY no está definido — el correo NO se envió a #{receiver.inspect}")
+      return nil
+    end
+
+    sg = SendGrid::API.new(api_key: api_key)
     response = sg.client.mail._('send').post(request_body: mail.to_json)
-    return response
+
+    if response.status_code.to_i == 202
+      Rails.logger.info("[Bacaramail] ✅ SendGrid aceptó el correo para #{receiver.inspect} (status 202)")
+    else
+      Rails.logger.error("[Bacaramail] ❌ SendGrid rechazó el correo para #{receiver.inspect} — status=#{response.status_code} body=#{response.body}")
+    end
+
+    response
   end
 end

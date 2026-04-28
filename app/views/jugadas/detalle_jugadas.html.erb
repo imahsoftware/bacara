@@ -1,0 +1,366 @@
+<style>
+  body {
+    background: #fff;
+    font-family: Arial, sans-serif;
+    color: #0a0a0a;
+  }
+  .pdf-mini {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 11px;
+  }
+  .pdf-mini th, .pdf-mini td {
+    border: 1px solid #d1d5db;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .pdf-mini thead th {
+    background: #191d26;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+  }
+  .pdf-mini tbody td {
+    background: #f9fafb;
+  }
+  .pdf-mini .text-right {
+    text-align: right;
+    padding-right: 10px;
+  }
+  .pdf-mini .jd-profit-pos { color: #15803d; font-weight: 700; }
+  .pdf-mini .jd-profit-neg { color: #b91c1c; font-weight: 700; }
+  .pdf-mini .jd-profit-zero { color: #6b7280; font-weight: 700; }
+  .pdf-mini .play-num {
+    font-weight: 700;
+  }
+  .pdf-head {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0 0 12px;
+  }
+  .pdf-head-left,
+  .pdf-head-right {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .pdf-head-left {
+    width: 30%;
+    padding-right: 10px;
+  }
+  .pdf-head-right {
+    width: 70%;
+  }
+  .pdf-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pdf-logo-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .pdf-logo-text {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #06176B;
+    line-height: 1;
+  }
+  .pdf-logo-text .wins {
+    color: #0ea5b7;
+  }
+  .pdf-table-wrap .jd-empty { display: none; }
+
+  /* ===== CSS baccarat tabla (inline para PDF) ===== */
+  :root {
+    --pdf-head-h: 28px;
+    --pdf-row-h: 32px;
+  }
+  .pdf-table-wrap {
+    width: 100%;
+    overflow: visible;
+    font-size: 11px;
+    margin-top: 8px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .pdf-grid {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  .pdf-grid td {
+    vertical-align: top;
+    padding: 0;
+  }
+  .pdf-grid .col-left-top,
+  .pdf-grid .col-right-top { height: calc(var(--pdf-head-h) + (var(--pdf-row-h) * 5)); }
+  .pdf-grid .col-left  { width: 46%; }
+  .pdf-grid .col-mid   { width: 8%; border-left: none; border-right: none; background: #eef4fb; overflow: hidden; }
+  .pdf-grid .col-right { width: 46%; }
+  .pdf-grid .col-mid .bac-table {
+    margin-top: calc(var(--pdf-row-h) - 8px);
+    margin-bottom: calc((var(--pdf-row-h) - 8px) * -1);
+    border-left: 3px solid #9ca3af;
+    border-right: 3px solid #9ca3af;
+  }
+
+  .pdf-table-wrap .bac-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 11px;
+    background: #fff;
+  }
+  .pdf-table-wrap .bac-table th,
+  .pdf-table-wrap .bac-table td {
+    border: 1px solid #d8dde4;
+    padding: 0 8px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .pdf-table-wrap .bac-table thead th {
+    height: var(--pdf-head-h);
+    line-height: var(--pdf-head-h);
+  }
+  .pdf-table-wrap .bac-table tbody td {
+    height: var(--pdf-row-h);
+    line-height: var(--pdf-row-h);
+  }
+
+  .pdf-table-wrap .bac-table thead tr.tr-grupos th,
+  .pdf-table-wrap .bac-table thead tr.tr-cols th {
+    background: #191d26;
+    color: #fff;
+    border-color: #2c3138;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .pdf-table-wrap .bac-table thead tr.tr-grupos th {
+    line-height: var(--pdf-head-h);
+  }
+  .pdf-table-wrap .bac-table thead tr.tr-cols th.col-p-head { color: #7fb2ff !important; }
+  .pdf-table-wrap .bac-table thead tr.tr-cols th.col-b-head { color: #ff8d8d !important; }
+
+  .pdf-table-wrap .bac-table tbody tr:nth-child(odd) td { background: #f3f4f6; }
+  .pdf-table-wrap .bac-table tbody tr:nth-child(even) td { background: #dfe7e3; }
+  .pdf-table-wrap .bac-table tbody tr.tr-finalizar-ok td { background: #d9f2df !important; }
+  .pdf-table-wrap .bac-table tbody tr.tr-finalizar td { background: #ffe4e4 !important; }
+
+  .pdf-table-wrap .bac-table tbody td { color: #0a0a0a; font-weight: 400; }
+  .pdf-table-wrap .td-num { background: #eceff1 !important; width: 28px; }
+  .pdf-table-wrap .td-central-p { background: #e8f1ff !important; }
+  .pdf-table-wrap .td-central-b { background: #fde8e9 !important; }
+
+  .pdf-table-wrap .bac-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .pdf-table-wrap .bac-chip-p { background: #2563eb; }
+  .pdf-table-wrap .bac-chip-b { background: #dc2626; }
+  .pdf-table-wrap .bac-chip-none {
+    background: transparent;
+    color: #4b5563;
+    font-weight: 400;
+    font-size: 12px;
+  }
+
+  .pdf-table-wrap .bac-pos,
+  .pdf-table-wrap .bac-neg,
+  .pdf-table-wrap .bac-zero,
+  .pdf-table-wrap .bac-ok,
+  .pdf-table-wrap .bac-no,
+  .pdf-table-wrap .bac-dash {
+    color: #0a0a0a !important;
+    font-weight: 400 !important;
+  }
+  .pdf-table-wrap .col-mid .bac-table td.td-central-p { border-left: none; }
+  .pdf-table-wrap .col-mid .bac-table td.td-central-b { border-right: none; }
+  .pdf-table-wrap .col-mid .bac-table tbody td {
+    height: calc(var(--pdf-row-h) + 1px);
+    line-height: calc(var(--pdf-row-h) + 1px);
+  }
+
+  .pdf-table-wrap .bac-table thead tr:first-child th:first-child { border-top-left-radius: 8px; }
+  .pdf-table-wrap .bac-table thead tr:first-child th:last-child  { border-top-right-radius: 8px; }
+</style>
+
+<div class="pdf-head">
+  <div class="pdf-head-left">
+    <div class="pdf-logo-wrap">
+      <svg class="pdf-logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="6" fill="#06176B"/>
+        <circle cx="32" cy="32" r="4" fill="white"/>
+        <circle cx="12" cy="18" r="3.5" fill="#06176B" opacity="0.9"/>
+        <circle cx="52" cy="18" r="3.5" fill="#06176B" opacity="0.9"/>
+        <circle cx="12" cy="46" r="3.5" fill="#06176B" opacity="0.7"/>
+        <circle cx="52" cy="46" r="3.5" fill="#06176B" opacity="0.7"/>
+        <circle cx="32" cy="8"  r="3" fill="#06176B" opacity="0.6"/>
+        <circle cx="32" cy="56" r="3" fill="#06176B" opacity="0.6"/>
+        <line x1="32" y1="26" x2="32" y2="11" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="32" y1="38" x2="32" y2="53" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+        <line x1="27" y1="29" x2="15" y2="21" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="37" y1="29" x2="49" y2="21" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="27" y1="35" x2="15" y2="43" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+        <line x1="37" y1="35" x2="49" y2="43" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+      </svg>
+      <div class="pdf-logo-text">Bac<span class="wins">Wins</span></div>
+    </div>
+  </div>
+  <div class="pdf-head-right">
+    <%
+      pdf_profit_val = @jugadasdetalles.sum { |d| d.acumuladof.to_f }
+      pdf_profit_str = if pdf_profit_val == pdf_profit_val.to_i
+                         pdf_profit_val.to_i.to_s
+                       else
+                         sprintf('%.1f', pdf_profit_val)
+                       end
+      pdf_profit_txt = pdf_profit_val > 0 ? "+#{pdf_profit_str}" : pdf_profit_str
+      pdf_profit_cls = pdf_profit_val > 0 ? 'jd-profit-pos' : (pdf_profit_val < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+    %>
+    <table class="pdf-mini">
+      <thead>
+        <tr>
+          <th><%= t(:play_number) %></th>
+          <th><%= t(:date_time) %></th>
+          <th><%= t(:status) %></th>
+          <th><%= t(:profit_label) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="play-num">#<%= @jugada.id %></td>
+          <td><%= @jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td><%= @jugada.estado %></td>
+          <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%
+  pdf_rows = @jugadasdetalles.select do |d|
+    d.r_player.present? || d.r_banker.present? ||
+    d.player1.present? || d.banquer1.present? || d.resultado1.present? || d.final.present? || d.acumulado.present? ||
+    d.player2.present? || d.banquer2.present? || d.resultado2.present? || d.final2.present? || d.acumulado2.present? ||
+    d.acumuladof.present?
+  end
+  pdf_primeros = pdf_rows.first(5)
+  pdf_resto    = pdf_rows.drop(5)
+%>
+
+<div class="pdf-table-wrap jd-bw-page">
+  <table class="pdf-grid">
+    <tr>
+      <td class="col-left col-left-top"></td>
+
+      <td class="col-mid" rowspan="2">
+        <table class="bac-table">
+          <thead>
+            <tr class="tr-grupos">
+              <th colspan="2">P &nbsp;|&nbsp; B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pdf_rows.each do |d| %>
+              <tr class="<%= d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : '' %>">
+                <td class="td-central-p">
+                  <% if d.r_player == 1 %>
+                    <span class="bac-chip bac-chip-p">P</span>
+                  <% else %>
+                    <span class="bac-chip bac-chip-none">–</span>
+                  <% end %>
+                </td>
+                <td class="td-central-b">
+                  <% if d.r_banker == 1 %>
+                    <span class="bac-chip bac-chip-b">B</span>
+                  <% else %>
+                    <span class="bac-chip bac-chip-none">–</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+
+      <td class="col-right col-right-top"></td>
+    </tr>
+    <tr>
+      <td class="col-left">
+        <table class="bac-table">
+          <thead>
+            <tr class="tr-cols">
+              <th style="width:28px;">#</th>
+              <th class="col-p-head">P</th>
+              <th class="col-b-head">B</th>
+              <th>✓/✗</th>
+              <th>RESULT</th>
+              <th>ACCUM</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pdf_resto.each_with_index do |d, i| %>
+              <tr class="<%= d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : '' %>">
+                <td class="td-num"><%= i + 1 %></td>
+                <td><%= d.player1.present? ? d.player1 : '—' %></td>
+                <td><%= d.banquer1.present? ? d.banquer1 : '—' %></td>
+                <td>
+                  <% if d.resultado1 == 1 %>✓
+                  <% elsif d.resultado1 == 0 %>✗
+                  <% else %>—<% end %>
+                </td>
+                <td><%= d.final.present? ? (d.final > 0 ? "+#{d.final}" : d.final) : '—' %></td>
+                <td><%= d.acumulado.present? ? (d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado) : '—' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+      <td class="col-right">
+        <table class="bac-table">
+          <thead>
+            <tr class="tr-cols">
+              <th class="col-p-head">P</th>
+              <th class="col-b-head">B</th>
+              <th>✓/✗</th>
+              <th>RESULT</th>
+              <th>ACCUM</th>
+              <th>FINAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% pdf_resto.each do |d| %>
+              <tr class="<%= d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : '' %>">
+                <td><%= d.player2.present? ? d.player2 : '—' %></td>
+                <td><%= d.banquer2.present? ? d.banquer2 : '—' %></td>
+                <td>
+                  <% if d.resultado2 == 1 %>✓
+                  <% elsif d.resultado2 == 0 %>✗
+                  <% else %>—<% end %>
+                </td>
+                <td><%= d.final2.present? ? (d.final2 > 0 ? "+#{d.final2}" : d.final2) : '—' %></td>
+                <td><%= d.acumulado2.present? ? (d.acumulado2 > 0 ? "+#{d.acumulado2}" : d.acumulado2) : '—' %></td>
+                <td><%= d.acumuladof.present? ? (d.acumuladof > 0 ? "+#{d.acumuladof}" : d.acumuladof) : '—' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>

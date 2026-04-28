@@ -24,7 +24,7 @@
     </div>
     <div class="row">
       <div class="col-md-2">
-        <%= f.input :autorizado, as: :select, collection: { "SI" => "SI","NO" => "NO"}, input_html: { class: 'select2 clean' }, include_blank: true, label: "Autorizado?" %>
+        <%= f.input :autorizado, as: :select, collection: { t('si') => "SI", t('no') => "NO"}, input_html: { class: 'select2 clean' }, include_blank: true, label: t('autorizado') %>
       </div>
       <div class="col-md-2">
         <%= f.input :clase, input_html: { class: 'clean' } %>

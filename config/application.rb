@@ -13,7 +13,7 @@ Bundler.require(*Rails.groups)
 
 module Bacara
   class Application < Rails::Application
-    config.app_name = "Bacara"
+    config.app_name = "BacWins"
     config.action_mailer.default_url_options = { host: 'imahsoftware.com' }
     config.action_cable.disable_request_forgery_protection = true
     # Settings in config/environments/* take precedence over those specified here.
@@ -26,7 +26,7 @@ module Bacara
     config.i18n.load_path += Dir[Rails.root.join('lib', 'locale', '*.{rb,yml}')]
     I18n.config.enforce_available_locales = true
     config.i18n.available_locales = [:es, :en]
-    config.i18n.default_locale = :es
+    config.i18n.default_locale = :en
     config.exceptions_app = self.routes
     # Mantener el comportamiento antiguo (antes de Rails 5.1)
     config.active_record.time_zone_aware_types = [:datetime]

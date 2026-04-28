@@ -8,8 +8,7 @@
 
 <!-- Logo -->
 <%= link_to root_path, class: 'logo'  do %>
-  <span class="logo-mini"><%= image_tag 'logo.png', alt: 'Logo Bacara', width: '90%' %></span>
-  <span class="logo-lg" style="font-size: 18px;"><b><%= ENV['NOMBRE_CORTO'] %></b></span>
+  <%= render "shared/header_brand_with_image" %>
   <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{usr.nombre}" + ' que quiere desconectarse?' } do %>
     <button class="btn btn-flat btn-default"><i class="fa fa-sign-in"> <b>Salir</b></i></button>
   <% end %>

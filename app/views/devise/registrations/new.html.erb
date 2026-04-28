@@ -1,68 +1,69 @@
-<script type="text/javascript">
-  document.addEventListener('contextmenu', event => event.preventDefault());
-  function disableF5(e) { if ((e.which || e.keyCode) == 116) e.preventDefault()};
-  $(document).ready(function(){
-       $(document).on("keydown", disableF5);
-  });
-</script>
-<div class="container">
-  <div class="col-md-12" style="padding-top: 10px">
-    <div class="login-box" style="width:450px !important;margin-top: 0%">
-      <div class="login-box-body text-center" style="height: 180px; background-color: #1b86a5;border-top-right-radius: 10px;border-top-left-radius: 10px;">
-        <%= image_tag('logowhite.png',style: "width: 40%;") %>
-        <h4 class="login-box-msg" style="color: white; margin-top: 10px;padding-bottom: 10px"><b>Registro Usuario</b></h4>
+<div id="wrapper">
+
+  <%= render 'devise/shared/auth_showcase' %>
+
+  <!-- ── PANEL DERECHO: Formulario ── -->
+  <div id="left">
+    <div id="signin">
+
+      <div class="logo">
+        <h1><%= t :registro_usuario %></h1>
+        <p class="form-subtitle"><%= t :ingresa_credenciales %></p>
       </div>
-      <div class="login-box-body" style="border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <div class="form-login">
-            <%= f.hidden_field :gestion_id ,value: 10002 %>
-            <div class="input-group" style="margin-bottom: 15px;">
-              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-              <%= f.input :email, autocomplete: 'off', autofocus: true, id: 'email',
-              class: 'form-control', placeholder: 'Correo Electronico',label: false %>
-            </div>
-            <div class="input-group" style="margin-bottom: 15px;">
-              <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-              <%= f.input :identificacion, class: 'form-control',
-              placeholder: 'Identificacion',label: false %>
-            </div>
-            <div class="input-group" style="margin-bottom: 15px;">
-              <span class="input-group-addon" style="background: #EDEDED;"><strong><i class="fa fa-calendar"></i></strong></span>
-              <%= f.input :fecha_nacimiento, as: :string, placeholder: 'Fecha de Nacimiento',
-              input_html: {class: 'form-control datepicker ',data: {date_options: {format: 'DD/MM/YYYY', ignoreReadonly: true}},
-              readonly: true}, label: false %>
-            </div>
-            <div class="input-group" style="margin-bottom: 15px;">
-              <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-              <%= f.input :password,id: 'password', class: 'form-control',
-              placeholder: 'Contraseña',label: false %>
-            </div>
-            <div class="input-group" style="margin-bottom: 15px;">
-              <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-              <%= f.input :password_confirmation, class: 'form-control',
-              placeholder: 'Confirmar contraseña',label: false %>
-            </div>
-          </div>
-          <div class="box-footer" style="padding: 0px !important; border-top: 0px !important">
-            <div class="row">
-              <div class="col-md-12" style="padding: 0px !important">
-                <div class="col-md-6" style="padding-left: 15px !important;padding-top: 15px">
-                  <%= render "devise/shared/links" %>
-                </div>
-                <div class="col-md-6" style="padding-right: 15px !important;padding-top: 25px">
-                  <%= f.button :submit, 'Crear Cuenta', class: 'btn-primary btn-flat pull-right' %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
+
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: 'idformreg', autocomplete: 'off' }) do |f| %>
+
+        <%= f.hidden_field :gestion_id, value: 10002 %>
+
+        <div>
+          <label><%= t :correo_electronico %></label>
+          <%= f.input_field :email, autocomplete: 'off', required: false, autofocus: true, class: 'form-control', placeholder: "#{t :correo_electronico}" %>
+        </div>
+
+        <div>
+          <label><%= t :identificacion %></label>
+          <%= f.input_field :identificacion, required: false, class: 'form-control', placeholder: "#{t :identificacion}" %>
+        </div>
+
+        <div>
+          <label><%= t :fecha_nacimiento %></label>
+          <%= f.input_field :fecha_nacimiento, as: :string, required: false, class: 'form-control datepicker', placeholder: "#{t :fecha_nacimiento}", data: { date_options: { format: 'DD/MM/YYYY', ignoreReadonly: true } }, readonly: true %>
+        </div>
+
+        <div>
+          <label><%= t :contrasena %></label>
+          <%= f.input_field :password, required: false, class: 'form-control', placeholder: "#{t :contrasena}", autocomplete: 'off', id: 'password_field' %>
+        </div>
+
+        <div>
+          <label><%= t :confirmar_contrasena %></label>
+          <%= f.input_field :password_confirmation, required: false, class: 'form-control', placeholder: "#{t :confirmar_contrasena}", autocomplete: 'off' %>
+        </div>
+
+        <br/>
+        <div>
+          <%= f.button :submit, "#{t :crear_cuenta}", class: 'primary-btn', disabled_with: "#{t :procesando}" %>
+        </div>
+
+      <% end %>
+
+      <div class="links">
+        <%= render "devise/shared/links" %>
       </div>
+
+      <%= render 'layouts/flash_messages' %>
     </div>
+
+    <footer id="main-footer">
+      Copyright &copy; <%= Time.now.strftime("%Y") %> <b>ImahSoftware</b> · <span class="footer-app">BacWins</span> · <%= t :todos_derechos_reservados %>
+    </footer>
   </div>
+
 </div>
 
-<%= render 'layouts/flash_messages' %>
+<%= render 'devise/shared/auth_styles' %>
 
-
-
-
+<style>
+    /* Ajuste para el form largo: que el card scrollee por dentro y no desborde */
+    #left { overflow-y: auto; }
+</style>

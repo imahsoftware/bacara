@@ -76,5 +76,6 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  config.i18n.available_locales = :es
+  config.i18n.available_locales = [:en, :es]
+  config.i18n.default_locale = :en
 end

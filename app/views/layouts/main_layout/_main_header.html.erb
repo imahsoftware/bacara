@@ -7,20 +7,19 @@
 <header class="main-header">
   <% permit = Usersmodulo.where(user_id: isadmin, modulo_id: 1).exists? %>
   <%= link_to root_path, class: 'logo', style: "back" do %>
-    <span class="logo-mini"><b>B<span style="color:#3c8dbc;">A</span></b></span>
-    <span class="logo-lg" style="font-size: 18px; margin-top: -4px; color: #1e293b;">
-    <b>BAC<span style="color:#3c8dbc;">ARA</span></b>
-  </span>
+    <%= render "shared/header_brand_wordmark" %>
   <% end %>
 
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
+    <% unless is_persona %>
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
       <span class="sr-only">Toggle navigation</span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </a>
+    <% end %>
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <li class="dropdown user user-menu">
@@ -43,7 +42,7 @@
                 <% end %>
               </div>
               <div class="pull-right">
-                <%= link_to logout_path, data: { confirm: '¿Esta seguro ' + "#{user.nombre}" + ' que quiere desconectarse?' } do %>
+                <%= link_to logout_path, data: { confirm: t('are_you_sure_logout') + ' ' + "#{user.nombre}" + ' ' + t('that_you_want_to_disconnect') + '?' } do %>
                   <button class="btn btn-flat btn-default">
                     <i class="fa fa-sign-in"> <b style="font-size: 11px;"><%= t :salir %></b></i></button>
                 <% end %>
@@ -69,7 +68,7 @@
                     <ul class="nav navbar-nav">
                       <li>
                         <%= link_to reestablecesusuario_users_path do %>
-                          <span style="font-size: 12px !important; ">Reestablecer</span>
+                          <span style="font-size: 12px !important; "><%= t('reestablish') %></span>
 
                         <% end %>
                       </li>
@@ -88,7 +87,7 @@
                             <%= form_tag cambiousuario_users_path, method: :get, id: "search-form", class: 'navbar-form navbar-left', role: 'search' do %>
                               <%= hidden_field_tag :user_id %>
                               <div class="input-group">
-                                <%= autocomplete_field_tag :nombre, '', autocomplete_cambio_user2_users_path(portafolio_id: isportafolio), class: "form-control", id: 'navbar-search-input', id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+                                <%= autocomplete_field_tag :nombre, '', autocomplete_cambio_user2_users_path(portafolio_id: isportafolio), class: "form-control", id: 'navbar-search-input', id_element: '#user_id', placeholder: t('buscar'), type: "search" %>
                               </div>
                             <% end %>
                             <script type="text/javascript" charset="utf-8">
@@ -120,11 +119,11 @@
                 <section class="content-header">
                   <h1>
                     <i class="fa fa-th-list"></i>
-                    <small>Administración Modulos</small>
+                    <small><%= t('administration_modules') %></small>
                   </h1>
                   <ol class="breadcrumb">
                     <li class="header">
-                      <%= link_to menu_menus_path, remote: true, data: { toggle: 'tooltip' }, title: 'Ampliar Modulos de Seguridad' do %>
+                      <%= link_to menu_menus_path, remote: true, data: { toggle: 'tooltip' }, title: t('expand_security_modules') do %>
                         <i class="fa fa-arrows-h"></i>
                       <% end %>
                     </li>
@@ -133,18 +132,25 @@
                 <br/>
                 <li>
                   <ul class="menu">
-                    <%
-                      @modulosseguridad.each do |item| %>
+                    <% @modulosseguridad.each do |item| %>
                       <% if item.metodo.to_s == "" %>
                         <% item.metodo = 'GET' %>
                       <% end %>
-                      <li><!-- start message -->
+                      <%
+                        label = case item.controlador
+                                when "/modulos"      then "Modules"
+                                when "/objetos"      then "Objects"
+                                when "/portafolios"  then "Clients"
+                                when "/admin/users"  then "Users"
+                                else item.controlador
+                                end
+                      %>
+                      <li>
                         <%= link_to item.controlador, class: 'a-control-sidebar' do %>
                           <div class="pull-left">
                             <i class="<%= item.imagen.blank? ? 'fa fa-link' : item.imagen %>" style="font-size: 25px; color: #000;"></i>
                           </div>
-                          <h4><%= item.descripcion %></h4>
-                          <p><%= item.mensaje.blank? ? 'Modulo de administracion' : truncate(item.mensaje, :length => 45) %></p>
+                          <h4><%= label %></h4>
                         <% end %>
                       </li>
                     <% end %>
