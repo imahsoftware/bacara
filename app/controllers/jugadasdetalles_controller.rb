@@ -57,7 +57,6 @@ class JugadasdetallesController < ApplicationController
     # Borrar el slot del PRC (último registro con r_player=0, r_banker=0)
     slot_prc = Jugadasdetalle
                  .where(jugada_id: @jugada_id)
-                 #.where(r_player: 0, r_banker: 0)
                  .order(id: :desc)
                  .first
     ActiveRecord::Base.connection.execute("CALL prc_reversion_automatico(#{slot_prc.id.to_i})")
