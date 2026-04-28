@@ -1,15 +1,78 @@
-<table class="table table-bordered table-condensed table-striped">
+<%
+  format_profit = ->(v) {
+    iv = v.to_f
+    str = iv == iv.to_i ? iv.to_i.to_s : sprintf('%.1f', iv)
+    iv > 0 ? "+#{str}" : str
+  }
+  jugadas_by_day = @jugadas.order(created_at: :desc).group_by { |j| j.created_at.to_date }
+  today = Date.current
+%>
+
+<table class="table table-bordered table-condensed table-striped jugadas-table">
   <thead>
   <tr class="thcolor">
-    <th class="text-center" width="15%"><%= t :actions %></th>
-    <th width="15%" class="text-center"><%= t :creation_date %></th>
-    <th><%= t :player %></th>
-    <th width="15%" class="text-center"><%= t :status %></th>
+    <th class="text-center" width="14%"><%= t :actions %></th>
+    <th class="text-center" width="10%"><%= t :play_number %></th>
+    <th class="text-center" width="22%"><%= t :date_time %></th>
+    <th class="text-center" width="14%"><%= t :status %></th>
+    <th class="text-right"  width="14%"><%= t :profit_label %></th>
   </tr>
   </thead>
   <tbody id="tbody_jugadas">
-  <% @jugadas.order(created_at: :desc).each do |jugada| %>
-    <%= render 'jugadas/tr', jugada: jugada %>
+  <% jugadas_by_day.each do |day, jugadas_del_dia| %>
+    <%
+      es_hoy       = (day == today)
+      day_id       = day.strftime("%Y%m%d")
+      day_total    = (@daily_totals && @daily_totals[day]) ? @daily_totals[day].to_f : 0.0
+      total_class  = day_total > 0 ? 'jd-profit-pos' : (day_total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+    %>
+
+    <% if es_hoy %>
+      <%# ─── HOY: filas siempre visibles + footer Daily Total ─────── %>
+      <% jugadas_del_dia.each do |jugada| %>
+        <%= render 'jugadas/tr', jugada: jugada %>
+      <% end %>
+      <tr class="jugadas-day-total <%= total_class %>">
+        <td colspan="4" class="text-right">
+          <strong><%= t(:daily_total) %>:</strong>
+        </td>
+        <td class="text-right">
+          <strong><%= format_profit.call(day_total) %></strong>
+        </td>
+      </tr>
+
+    <% else %>
+      <%# ─── DÍA PASADO: header colapsable (click para desplegar) ─── %>
+      <tr class="jugadas-day-header jugadas-day-header--collapsible <%= total_class %>"
+          data-toggle-day="day-<%= day_id %>"
+          aria-expanded="false"
+          role="button"
+          tabindex="0">
+        <td colspan="5">
+          <div class="jugadas-day-header__layout">
+            <div class="jugadas-day-header__left">
+              <i class="fa fa-chevron-right jugadas-day-toggle-icon"></i>
+              <i class="fa fa-calendar-o"></i>
+              <strong><%= day.strftime("%Y-%m-%d") %></strong>
+              <span class="jugadas-day-header__count">
+                (<%= jugadas_del_dia.size %> <%= t(:plays_lower) %>)
+              </span>
+            </div>
+            <div class="jugadas-day-header__right">
+              <%= format_profit.call(day_total) %>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <%# Las filas de este día empiezan ocultas; el JS las muestra al click %>
+      <% jugadas_del_dia.each do |jugada| %>
+        <%= render 'jugadas/tr',
+                   jugada: jugada,
+                   day_class: "day-#{day_id}",
+                   initially_hidden: true %>
+      <% end %>
+    <% end %>
   <% end %>
   </tbody>
 </table>
@@ -19,3 +82,32 @@
     <%= will_paginate @jugadas, renderer: BootstrapPagination::Rails %>
   </div>
 </div>
+
+<script>
+  // Toggle para los grupos de días pasados (click en el header expande/colapsa).
+  // Idempotente: se puede re-ejecutar sin duplicar handlers.
+  (function(){
+    if (window.__jugadasDayToggleBound) return;
+    window.__jugadasDayToggleBound = true;
+
+    function toggleDay(headerEl){
+      var target = headerEl.getAttribute('data-toggle-day');
+      if(!target) return;
+      var expanded = headerEl.getAttribute('aria-expanded') === 'true';
+      var rows = document.querySelectorAll('tr.jugada-row.' + target);
+      rows.forEach(function(r){ r.style.display = expanded ? 'none' : ''; });
+      headerEl.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    }
+
+    document.addEventListener('click', function(ev){
+      var header = ev.target.closest('.jugadas-day-header--collapsible');
+      if(header) toggleDay(header);
+    });
+
+    document.addEventListener('keydown', function(ev){
+      if(ev.key !== 'Enter' && ev.key !== ' ') return;
+      var header = ev.target.closest('.jugadas-day-header--collapsible');
+      if(header){ ev.preventDefault(); toggleDay(header); }
+    });
+  })();
+</script>

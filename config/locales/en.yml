@@ -1059,6 +1059,10 @@ en:
   close_or_finish_pending_play: Close or finish your pending play before creating another
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: New Play
+  bet_amount: Bet Amount
+  date_time: Date & Time
+  daily_total: Daily Total
+  plays_lower: plays
   administration_module: Administration Module
   administration_modules: Administration Modules
   expand_security_modules: Expand Security Modules

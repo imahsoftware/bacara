@@ -696,26 +696,34 @@ body.vsp-body:has(.jd-bw-page) {
 }
 .jd-bw-profit {
     margin: 0;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #111;
-    line-height: 1.3;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+}
+.jd-bw-profit__label,
+.jd-bw-profit__currency,
+.jd-bw-profit #jd-profit-amount {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
     letter-spacing: 0.01em;
 }
 .jd-bw-profit__label {
-    margin-right: 0.35em;
+    margin-right: 0;
 }
 .jd-bw-profit__wrap {
     white-space: nowrap;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.25rem;
 }
 .jd-bw-profit__currency {
-    font-weight: 800;
-    margin-right: 0.1em;
-    font-variant-numeric: tabular-nums;
-}
-.jd-bw-profit #jd-profit-amount {
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
+    margin-right: 0;
 }
 
 /* ── Coloreo dinámico del PROFIT según ganancia/pérdida ───────── */
@@ -740,6 +748,76 @@ body.vsp-body:has(.jd-bw-page) {
     color: #6b7280;
     transition: color .25s ease;
 }
+
+/* ── Tabla de jugadas: agrupación por día + colores de profit ─── */
+.jugadas-table .jd-profit-pos { color: #15803d; }
+.jugadas-table .jd-profit-neg { color: #b91c1c; }
+.jugadas-table .jd-profit-zero { color: #6b7280; }
+
+/* Header del día (separador entre grupos) */
+.jugadas-table tr.jugadas-day-header > td {
+    background: #06176B;
+    color: #fff;
+    font-size: 12px;
+    padding: 8px 12px;
+    border-top: 2px solid #06176B;
+    border-bottom: none;
+}
+.jugadas-day-header__count {
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    font-size: 11px;
+}
+/* Layout flex: izquierda info del día, derecha total */
+.jugadas-day-header__layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+}
+.jugadas-day-header__left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+}
+.jugadas-day-header__right {
+    font-weight: 800;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* Versión colapsable: cursor pointer + chevron rotable + total coloreado */
+.jugadas-table tr.jugadas-day-header--collapsible {
+    cursor: pointer;
+    transition: background-color .15s ease;
+}
+.jugadas-table tr.jugadas-day-header--collapsible:hover > td {
+    background: #0a2294;
+}
+.jugadas-day-toggle-icon {
+    transition: transform .2s ease;
+    width: 12px;
+}
+.jugadas-table tr.jugadas-day-header[aria-expanded="true"] .jugadas-day-toggle-icon {
+    transform: rotate(90deg);
+}
+/* Total coloreado en el header (sobre fondo oscuro: usar tonos brillantes) */
+.jugadas-table tr.jugadas-day-header--collapsible.jd-profit-pos .jugadas-day-header__right { color: #5eead4; }
+.jugadas-table tr.jugadas-day-header--collapsible.jd-profit-neg .jugadas-day-header__right { color: #fca5a5; }
+.jugadas-table tr.jugadas-day-header--collapsible.jd-profit-zero .jugadas-day-header__right { color: #d1d5db; }
+
+/* Footer con el total del día */
+.jugadas-table tr.jugadas-day-total > td {
+    background: #f3f4f6;
+    border-top: 1px solid #d8d8de;
+    font-size: 13px;
+    padding: 8px 10px;
+}
+.jugadas-table tr.jugadas-day-total.jd-profit-pos > td:last-child { color: #15803d; }
+.jugadas-table tr.jugadas-day-total.jd-profit-neg > td:last-child { color: #b91c1c; }
+.jugadas-table tr.jugadas-day-total.jd-profit-zero > td:last-child { color: #6b7280; }
 .jd-bw-sub {
     margin: 10px 0 0;
     font-size: 12px;

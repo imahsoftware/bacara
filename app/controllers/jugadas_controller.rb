@@ -26,16 +26,36 @@ class JugadasController < ApplicationController
     @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
     @persona_ultima_cerrada = Jugada.ultima_cerrada_para_nueva_shoe(current_user)
 
+    # Totales diarios: por cada día visible en la página actual, sumar el profit
+    # de TODAS las jugadas del usuario en ese día (no solo las visibles).
+    @daily_totals = compute_daily_totals(@jugadas, current_user)
+
     respond_to do |format|
       format.html
     end
   end
+
+  # Devuelve hash { Date => Float } con el profit total por día.
+  def compute_daily_totals(jugadas, user)
+    dates = jugadas.map { |j| j.created_at.to_date }.uniq
+    return {} if dates.empty?
+
+    totals = {}
+    dates.each do |date|
+      day_range = date.beginning_of_day..date.end_of_day
+      jugada_ids = Jugada.for_user_list(user).where(created_at: day_range).pluck(:id)
+      totals[date] = Jugadasdetalle.where(jugada_id: jugada_ids).sum(:acumuladof).to_f
+    end
+    totals
+  end
+  helper_method :compute_daily_totals
 
   def show
     respond_to { |format| format.js }
   end
 
   def new
+    @valor_apuesta = Iparametro.find_by(campo: 'VALOR_APUESTA')&.valor
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
       respond_to do |format|
         format.js { render js: "alert(#{I18n.t(:jugada_en_curso_pendiente).to_json});" }
