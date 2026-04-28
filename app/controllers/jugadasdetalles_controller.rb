@@ -56,11 +56,12 @@ class JugadasdetallesController < ApplicationController
     # Borrar el slot del PRC (último registro con r_player=0, r_banker=0)
     slot_prc = Jugadasdetalle
                  .where(jugada_id: @jugada_id)
-                 .where(r_player: 0, r_banker: 0)
+                 #.where(r_player: 0, r_banker: 0)
                  .order(id: :desc)
                  .first
+    ActiveRecord::Base.connection.execute("CALL prc_reversion_automatico(#{slot_prc.id.to_i})")
     slot_prc.destroy if slot_prc
-
+=begin
     # Borrar el último movimiento confirmado por el usuario
     ultimo = Jugadasdetalle
                .where(jugada_id: @jugada_id)
@@ -68,7 +69,7 @@ class JugadasdetallesController < ApplicationController
                .order(id: :desc)
                .first
     ultimo.destroy if ultimo
-
+=end
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
