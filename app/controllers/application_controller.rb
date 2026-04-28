@@ -804,7 +804,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(user)
     if user.tipoconsulta.to_s == 'PERSONA'
       pend = Jugada.primera_pendiente_para(user)
-      return new_jugadasdetalle_path(jugada_id: pend.id) if pend
+      return new_jugadasdetalle_path(jugada_id: pend.to_param) if pend
       return jugadas_path
     end
     super

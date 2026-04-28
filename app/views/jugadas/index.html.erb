@@ -9,7 +9,7 @@
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
         </span>
       <% elsif is_persona && @persona_ultima_cerrada.present? %>
-        <%= link_to nueva_shoe_jugada_path(from_jugada_id: @persona_ultima_cerrada.id),
+        <%= link_to nueva_shoe_jugada_path(from_jugada_id: @persona_ultima_cerrada.to_param),
             method: :post,
             class: 'btn btn-sm btn-success btn-flat',
             id: 'new_jugada_button',

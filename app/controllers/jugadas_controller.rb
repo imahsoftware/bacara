@@ -17,7 +17,7 @@ class JugadasController < ApplicationController
     return unless request.format.html?
 
     pend = Jugada.primera_pendiente_para(current_user)
-    redirect_to new_jugadasdetalle_path(jugada_id: pend.id) and return if pend
+    redirect_to new_jugadasdetalle_path(jugada_id: pend.to_param) and return if pend
   end
 
   def index
@@ -90,7 +90,7 @@ class JugadasController < ApplicationController
       if @jugada.save
         @jugada.update(jugador: "SHOE#{@jugada.id}") if @jugada.jugador.blank?
         flash[:notice] = "#{t :notice_crea_msj}"
-        format.js { render inline: "window.location = #{new_jugadasdetalle_path(jugada_id: @jugada.id).to_json};" }
+        format.js { render inline: "window.location = #{new_jugadasdetalle_path(jugada_id: @jugada.to_param).to_json};" }
       else
         format.js { render 'layouts/errors', locals: { object: @jugada } }
       end
@@ -98,7 +98,7 @@ class JugadasController < ApplicationController
   end
 
   def detalle_jugadas
-    @jugada = Jugada.find(params[:id])
+    @jugada = Jugada.find_by_param!(params[:id])
     @jugadasdetalles = @jugada.jugadasdetalles
     respond_to do |format|
       format.pdf { render pdf: "Jugada #{@jugada.jugador.downcase }", template: "jugadas/detalle_jugadas.html.erb", encoding: "UTF-8",
@@ -114,14 +114,14 @@ class JugadasController < ApplicationController
       return
     end
 
-    from = Jugada.for_user_list(current_user).find_by(id: params[:from_jugada_id].to_i)
+    from = Jugada.for_user_list(current_user).find_by_param(params[:from_jugada_id])
     if from.blank? || from.estado.to_s.upcase != 'CERRADA'
       redirect_back fallback_location: jugadas_path, alert: I18n.t(:solo_crear_jugada_cuando_cerrada)
       return
     end
 
     if current_user.tipoconsulta.to_s == 'PERSONA' && Jugada.persona_tiene_jugada_abierta?(current_user)
-      redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.id), alert: I18n.t(:otra_jugada_pendiente)
+      redirect_back fallback_location: new_jugadasdetalle_path(jugada_id: from.to_param), alert: I18n.t(:otra_jugada_pendiente)
       return
     end
 
@@ -133,7 +133,7 @@ class JugadasController < ApplicationController
     )
     if @jugada.save
       @jugada.update!(jugador: "SHOE#{@jugada.id}")
-      redirect_to new_jugadasdetalle_path(jugada_id: @jugada.id)
+      redirect_to new_jugadasdetalle_path(jugada_id: @jugada.to_param)
     else
       msg = @jugada.errors.full_messages.to_sentence
       redirect_back fallback_location: jugadas_path, alert: msg
@@ -163,7 +163,13 @@ class JugadasController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_jugada
-    @jugada = Jugada.for_user_list(current_user).find(params[:id])
+    # Soporta tanto UUID (URLs nuevas) como id integer (URLs viejas en transición)
+    scope = Jugada.for_user_list(current_user)
+    @jugada = if params[:id].to_s =~ /\A\d+\z/
+                scope.find(params[:id])
+              else
+                scope.find_by!(uuid: params[:id])
+              end
   end
 
   def reject_if_cerrada

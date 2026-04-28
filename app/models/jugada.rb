@@ -4,6 +4,43 @@ class Jugada < ApplicationRecord
 
   validates_presence_of :monto_apostar
 
+  # ── UUID público para URLs ─────────────────────────────────────
+  # Se genera automáticamente al crear; el integer id sigue siendo PK
+  # y FK interna (jugadasdetalles.jugada_id, etc.).
+  before_create :generate_uuid
+
+  def to_param
+    uuid.presence || id.to_s
+  end
+
+  # Resuelve un valor que viene de URL (puede ser UUID o id integer
+  # durante el periodo de transición) y devuelve la Jugada.
+  def self.find_by_param!(value)
+    raise ActiveRecord::RecordNotFound, "Jugada param blank" if value.blank?
+    if value.to_s =~ /\A\d+\z/
+      find(value)
+    else
+      find_by!(uuid: value)
+    end
+  end
+
+  def self.find_by_param(value)
+    return nil if value.blank?
+    if value.to_s =~ /\A\d+\z/
+      find_by(id: value)
+    else
+      find_by(uuid: value)
+    end
+  end
+
+  private
+
+  def generate_uuid
+    self.uuid ||= SecureRandom.uuid
+  end
+
+  public
+
   # Jugadas no finalizadas (p. ej. otras lógicas)
   scope :sin_finalizar, -> {
     where('jugadas.estado IS NULL OR jugadas.estado <> ?', 'FINALIZADA')

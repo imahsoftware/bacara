@@ -140,7 +140,16 @@ class JugadasdetallesController < ApplicationController
   private
 
   def set_jugada_id
-    @jugada_id = params[:jugada_id].to_i
+    # Acepta UUID o id integer en la URL. Internamente seguimos usando el integer.
+    raw = params[:jugada_id].to_s
+    if raw.blank?
+      @jugada_id = 0
+    elsif raw =~ /\A\d+\z/
+      @jugada_id = raw.to_i
+    else
+      jugada = Jugada.find_by(uuid: raw)
+      @jugada_id = jugada ? jugada.id : 0
+    end
   end
 
   def ejecutar_prc_calculo_automatico(jugada_detalle_id)
@@ -177,7 +186,7 @@ class JugadasdetallesController < ApplicationController
 
     if pend.present?
       if pend.id != @jugada_id.to_i
-        correcta = new_jugadasdetalle_path(jugada_id: pend.id)
+        correcta = new_jugadasdetalle_path(jugada_id: pend.to_param)
         denegar_acceso_baccarat_persona(
           correcta,
           I18n.t(:solo_puede_acceder_jugada_pendiente)
