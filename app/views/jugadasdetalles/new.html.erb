@@ -91,7 +91,8 @@
           <button type="button" class="jd-finish-btn jd-finish-btn--bw" id="btn-finish"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="<%= t(:finish_session) %>"
-                  data-label-loading="<%= t(:finishing) %>">
+                  data-label-loading="<%= t(:finishing) %>"
+                  style="<%= @total_movimientos.to_i > 0 ? '' : 'display:none;' %>">
             <%= t(:finish_session) %>
           </button>
           <% end %>
