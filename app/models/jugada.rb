@@ -2,7 +2,7 @@ class Jugada < ApplicationRecord
   belongs_to :user, optional: true
   has_many :jugadasdetalles
 
-  validates_presence_of :jugador
+  validates_presence_of :monto_apostar
 
   # Jugadas no finalizadas (p. ej. otras lógicas)
   scope :sin_finalizar, -> {

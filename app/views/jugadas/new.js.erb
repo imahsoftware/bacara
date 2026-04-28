@@ -5,5 +5,9 @@ $("#jugada_form").html("<%= j render 'form' %>");
 $(".datetimepicker").datetimepicker();
 $(".tooltip").tooltip("hide");
 $('[data-toggle="tooltip"]').tooltip();
-$("#jugada_form").collapse("show");
-$(".select2").select2();
+$("#jugada_form_modal").modal("show");
+// Inicializar select2 después de que el modal sea visible (si lo inicializamos antes,
+// queda con el ancho mal porque el contenedor padre todavía está display:none)
+$("#jugada_form_modal").one("shown.bs.modal", function(){
+	$("#jugada_form .select2").select2({ dropdownParent: $("#jugada_form_modal") });
+});

@@ -1,8 +1,8 @@
 # Auto-generated/merged by translation completion script.
 es:
-  editar_perfil: Edit Profile
-  salir: Log Out
-  ver_todos: See all
+  editar_perfil: Editar perfil
+  salir: Cerrar sesión
+  ver_todos: Ver todos
   hay: There are
   buscar: Buscar
   indicadores_presupuesto_ejecucion: Budget vs Execution Indicators
@@ -39,39 +39,39 @@ es:
   selecciono_forma_de_pago: Selected Payment Method
   gestion_documental_aprobada: Approved Document Management
   indicadores_recaudo_presupuesto: Collection vs Budget Indicators
-  antiguos: Old
-  buscador_de_personas: People Finder
-  buscador_segmentos: Segment Finder
-  aceptar: Accept
-  agregar: Add
-  atencion: Attention!
-  atencion_msj: No data yet
-  documento: View Documents
-  documentos_msj: No Documents
-  cierre_msj: There is no consolidated closing therefore new collections cannot be registered
+  antiguos: Antiguos
+  buscador_de_personas: Buscador de personas
+  buscador_segmentos: Buscador de segmentos
+  aceptar: Aceptar
+  agregar: Agregar
+  atencion: ¡Atención!
+  atencion_msj: Aún no hay datos
+  documento: Ver documentos
+  documentos_msj: No hay documentos
+  cierre_msj: No hay un cierre consolidado, por lo tanto no se pueden registrar nuevos recaudos
   regresar: Regresar
-  menu: MENU OPTIONS
-  creacion: Creation Date
-  seguro: Are you sure?
-  entre: Between
-  nuevo: New
-  actualizar: Update
-  asignar: Assign
-  regresar_obligacion: Return to Obligations
-  notice_crea_msj: Record created successfully.
-  notice_crearec_msj: Collection created
-  notice_actualiza_msj: Record updated successfully.
-  notice_elimina_msj: Record deleted successfully.
-  notice_resultado_msj: No search results
-  guardar: Save
-  seleccionar: --Select
-  procesando: Processing
-  cancelar: Cancel
-  elimina_confirma: Are you sure you want to delete?
-  title_elimina: Delete
-  title_editar: Edit
-  title_notificaciones_direcciones: Address Notification
-  title_notificaciones_correos: Email Notification
+  menu: OPCIONES DEL MENÚ
+  creacion: Fecha de creación
+  seguro: ¿Estás seguro?
+  entre: Entre
+  nuevo: Nuevo
+  actualizar: Actualizar
+  asignar: Asignar
+  regresar_obligacion: Regresar a obligaciones
+  notice_crea_msj: Registro creado exitosamente.
+  notice_crearec_msj: Recaudo creado
+  notice_actualiza_msj: Registro actualizado exitosamente.
+  notice_elimina_msj: Registro eliminado exitosamente.
+  notice_resultado_msj: No hay resultados de búsqueda
+  guardar: Guardar
+  seleccionar: --Seleccionar
+  procesando: Procesando
+  cancelar: Cancelar
+  elimina_confirma: ¿Estás seguro de que quieres eliminar?
+  title_elimina: Eliminar
+  title_editar: Editar
+  title_notificaciones_direcciones: Notificación de dirección
+  title_notificaciones_correos: Notificación por correo
   title_soporte_digital: Add Digital Support
   title_gerente: Bulk Upload of Regional Managers
   title_ver: View
@@ -144,52 +144,52 @@ es:
   reportes: Reports
   cargues_opciones: Uploads - Options
   parametros: Parameters
-  edit_profile: Edit Profile
-  total_logins: Total Logins
-  query_type: Query Type
-  return: Return
-  user_profile: User Profile
-  identification: Identification
-  full_name: Full Name
-  mobile: Mobile
-  password: Password
-  password_hint: Leave blank if you don't want to change it
-  confirm_password: Confirm Password
-  save: Save
-  search_by_identification: Search by Identification...
-  profile: Profile
+  edit_profile: Editar perfil
+  total_logins: Total de ingresos
+  query_type: Tipo de consulta
+  return: Regresar
+  user_profile: Perfil de usuario
+  identification: Identificación
+  full_name: Nombre completo
+  mobile: Móvil
+  password: Contraseña
+  password_hint: Dejar en blanco si no se desea cambiar
+  confirm_password: Confirmar contraseña
+  save: Guardar
+  search_by_identification: Buscar por identificación...
+  profile: Perfil
   edit_profile_button: Edit Profile
   logout: Logout
   are_you_sure_logout: Are you sure
   reestablish: Reestablish
-  deactivate_two_factor: Deactivate two factor
-  activate_two_factor: Activate two factor
-  users: Users
+  deactivate_two_factor: Desactivar doble factor
+  activate_two_factor: Activar doble factor
+  users: Usuarios
   new_user: Nuevo usuario
   search: Buscar...
   username: Usuario
   name: Nombre
   email: Correo
-  active: Active
-  inactivate_user: Inactivate user
-  activate_user: Activate user
-  unlock: Unlock
-  reset_password: Reset Password
-  reset_and_send_sms: Reset password, Unlock and send SMS
-  no_data_found: No data found
-  add_new: Add New
+  active: Activo
+  inactivate_user: Desactivar usuario
+  activate_user: Activar usuario
+  unlock: Desbloquear
+  reset_password: Restablecer contraseña
+  reset_and_send_sms: Restablecer contraseña, desbloquear y enviar SMS
+  no_data_found: No se encontraron datos
+  add_new: Agregar nuevo
   edit: Editar
   user: Usuario
   company: Cliente
   observations: Observaciones
-  node: Node
+  node: Nodo
   avatar: Avatar
-  accept: Accept
-  return_to_users: Return to users
-  error_procedure: An error occurred in the procedure, please report to the administrator.
-  page_not_found: Page not found
-  return_to_previous: To return to the previous page click
-  here: Here
+  accept: Aceptar
+  return_to_users: Regresar a usuarios
+  error_procedure: Ocurrió un error en el procedimiento, por favor reporta al administrador.
+  page_not_found: Página no encontrada
+  return_to_previous: Para regresar a la página anterior haz clic
+  here: Aquí
   all_rights_reserved: All rights reserved
   modules: Modules
   add: Add
@@ -355,20 +355,20 @@ es:
   news_sending: News Sending
   certificate_generation: Certificate Generation
   enabled: Enabled
-  created: Created
-  recover_password: Recover Password
-  enter_username_to_reset: Enter your username to reset access
-  forgot_password_link: Forgot your password?
-  back_to_login: Back to login
-  new_password: New Password
-  confirm_new_password: Confirm New Password
-  system_login: System Login
-  sending: Sending...
-  signing_in: Signing in...
-  custom_software_solutions: Custom software solutions
-  custom_development: Custom development
-  system_integration: System integration
-  continuous_support: Continuous support
+  created: Creado
+  recover_password: Recuperar contraseña
+  enter_username_to_reset: Ingresa tu usuario para restablecer el acceso
+  forgot_password_link: ¿Olvidaste tu contraseña?
+  back_to_login: Volver al inicio de sesión
+  new_password: Nueva contraseña
+  confirm_new_password: Confirmar nueva contraseña
+  system_login: Acceso al sistema
+  sending: Enviando...
+  signing_in: Iniciando sesión...
+  custom_software_solutions: Soluciones de software a la medida
+  custom_development: Desarrollo a la medida
+  system_integration: Integración de sistemas
+  continuous_support: Soporte continuo
   copyright: Copyright
   bacwins: BacWins
   campo: Campo
@@ -518,6 +518,10 @@ es:
   close_or_finish_pending_play: Close or finish your pending play before creating another
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: New Play
+  bet_amount: Bet Amount
+  date_time: Date & Time
+  daily_total: Daily Total
+  plays_lower: plays
   administration_module: Administration Module
   administration_modules: Administration Modules
   expand_security_modules: Expand Security Modules
@@ -1347,37 +1351,37 @@ es:
   dayViewHeaderFormat: MMMM YYYY
   'no': 'No'
   # === Devise Registration & Confirmation ===
-  registro_usuario: User Registration
-  correo_electronico: Email
-  crear_cuenta: Create Account
-  reenvio_correo_confirmacion: Resend Confirmation Email
-  reenviar_correo: Resend Email
-  identificacion: Identification
-  fecha_nacimiento: Date of Birth
+  registro_usuario: Registro de usuario
+  correo_electronico: Correo electrónico
+  crear_cuenta: Crear cuenta
+  reenvio_correo_confirmacion: Reenvío de correo de confirmación
+  reenviar_correo: Reenviar correo
+  identificacion: Identificación
+  fecha_nacimiento: Fecha de nacimiento
   # === Devise Mailer ===
-  hola: Hello
-  alguien_solicito_cambiar_contrasena: Someone has requested to change your password. You can do this through the following link.
-  cambiar_mi_contrasena: Change my password
-  si_no_solicito_ignore: If you did not request this, please ignore this email.
-  contrasena_no_cambiara: Your password will not change until you access the link above and create a new one.
-  nos_comunicamos_contrasena_modificada: We are writing to notify you that your password has been changed.
-  bienvenido: Welcome
-  puede_confirmar_correo_enlace: You can confirm your email account through the following link
-  confirmar_mi_cuenta: Confirm my account
+  hola: Hola
+  alguien_solicito_cambiar_contrasena: Alguien solicitó cambiar tu contraseña. Puedes hacerlo a través del siguiente enlace.
+  cambiar_mi_contrasena: Cambiar mi contraseña
+  si_no_solicito_ignore: Si no solicitaste esto, por favor ignora este correo.
+  contrasena_no_cambiara: Tu contraseña no cambiará hasta que accedas al enlace anterior y crees una nueva.
+  nos_comunicamos_contrasena_modificada: Te escribimos para notificarte que tu contraseña ha sido modificada.
+  bienvenido: Bienvenido
+  puede_confirmar_correo_enlace: Puedes confirmar tu cuenta de correo a través del siguiente enlace
+  confirmar_mi_cuenta: Confirmar mi cuenta
   resend_unlock_instructions: Reenviar instrucciones de desbloqueo
   # === Additional Devise Mailer ===
-  su_cuenta_bloqueada: Your account has been locked due to an excessive number of failed login attempts.
-  haga_clic_desbloquear: Click the following link to unlock your account
-  desbloquear_mi_cuenta: Unlock my account
-  correo_se_esta_cambiando: We are writing to notify you that your email is being changed to
-  correo_ha_cambiado: We are writing to notify you that your email has been changed to
+  su_cuenta_bloqueada: Tu cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión.
+  haga_clic_desbloquear: Haz clic en el siguiente enlace para desbloquear tu cuenta
+  desbloquear_mi_cuenta: Desbloquear mi cuenta
+  correo_se_esta_cambiando: Te escribimos para notificarte que tu correo está siendo cambiado a
+  correo_ha_cambiado: Te escribimos para notificarte que tu correo ha sido cambiado a
   # === User Email Change Modal ===
-  cambiar_correo_electronico: Change Email
-  nombre: Name
-  correo_actual: Current Email
-  nuevo_correo: New Email
+  cambiar_correo_electronico: Cambiar correo electrónico
+  nombre: Nombre
+  correo_actual: Correo actual
+  nuevo_correo: Nuevo correo
   # === Bulk Upload ===
-  carga_masiva_usuarios: Bulk User Upload
+  carga_masiva_usuarios: Carga masiva de usuarios
   atencion_archivo: Attention!
   recuerde_archivo: Remember that the file must have extension XLS or XLSX, must not have headers and must be in the established order
   orden_archivo: File Order

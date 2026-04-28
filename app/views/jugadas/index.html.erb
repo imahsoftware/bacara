@@ -15,15 +15,15 @@
             id: 'new_jugada_button',
             data: { toggle: 'tooltip' },
             title: t('create_new_shoe_from_closed_play') do %>
-          <i class="fa fa-plus" aria-hidden="true"></i> New SHOE
+          <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_play) %>
         <% end %>
       <% elsif is_persona %>
-        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-default', data: { toggle: 'tooltip' }, title: t('new_play') do %>
-          <i class="fa fa-plus fa-fw text-success" aria-hidden="true"></i>
+        <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-success', data: { toggle: 'tooltip' }, title: t('new_play') do %>
+          <i class="fa fa-plus fa-fw" aria-hidden="true"></i> <%= t(:new_play) %>
         <% end %>
       <% else %>
         <%= link_to new_jugada_path, remote: true, id: 'new_jugada_button', class: 'btn btn-sm btn-success', data: { toggle: 'tooltip' }, title: t('new_play') do %>
-          <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
+          <i class="fa fa-plus fa-fw" aria-hidden="true"></i> <%= t(:new_play) %>
         <% end %>
       <% end %>
     </div>
@@ -32,7 +32,19 @@
   <div class="box-body">
     <div class="row">
       <div class="col-md-12">
-        <div id="jugada_form" class="collapse"></div>
+        <%# Modal para crear una nueva jugada (se llena vía AJAX desde new.js.erb) %>
+        <div class="modal fade" id="jugada_form_modal" tabindex="-1" role="dialog" aria-labelledby="jugada_form_modal_label">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="jugada_form_modal_label"><%= t(:new_play) %></h4>
+              </div>
+              <div class="modal-body" id="jugada_form"></div>
+            </div>
+          </div>
+        </div>
+
         <div id="jugadas">
           <% if @jugadas.present? %>
             <%= render 'jugadas/tabla' %>

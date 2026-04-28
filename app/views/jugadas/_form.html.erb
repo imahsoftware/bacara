@@ -2,13 +2,23 @@
   <div class="bs-callout">
     <div class="row">
       <div class="col-md-4">
-        <%= f.input :jugador, input_html: { class: 'clean', :onchange => "javascript:this.value=this.value.toUpperCase();" } %>
+        <%= f.input :monto_apostar,
+                    label: t(:bet_amount),
+                    collection: Iparametro.where("campo = 'VALOR_APUESTA'")
+                                          .order(:descripcion)
+                                          .collect { |p| [p.valor.to_i, p.valor.to_i] },
+                    input_html: {
+                      class: 'select2',
+                      style: 'width: 100%'
+                    },
+                    as: :select,
+                    include_blank: true %>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <% if @jugada.new_record? %>
-          <%= button_tag "#{t :cancelar}", type: 'button', data: { target: '#jugada_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
+          <%= button_tag "#{t :cancelar}", type: 'button', data: { dismiss: 'modal', target: '#jugada_form' }, class: 'cancel_button btn btn-flat btn-default pull-left', aria_hidden: true %>
         <% else %>
           <%= link_to "#{t :cancelar}", jugada_path(@jugada), class: 'btn btn-flat btn-default pull-left', aria_hidden: true, remote: true %>
         <% end %>
