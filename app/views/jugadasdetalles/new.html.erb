@@ -28,10 +28,12 @@
             var $circles = $('.jd-circles--bw');
             var $undo = $('#btn-undo');
             var $reset = $('#btn-reset');
+            var $finish = $('#btn-finish');
             var $panel = $('#jd-post-close-panel');
             $circles.hide();
             $undo.hide();
             $reset.hide();
+            $finish.hide();
             if ($panel.length) {
               $panel.show().attr('aria-hidden', 'false');
             }
@@ -83,6 +85,12 @@
                   data-label-default="<%= t(:clear_session) %>"
                   data-label-loading="<%= t(:clearing) %>">
             <%= t(:clear_session) %>
+          </button>
+          <button type="button" class="jd-finish-btn jd-finish-btn--bw" id="btn-finish"
+                  data-jugada-id="<%= @jugada_id %>"
+                  data-label-default="<%= t(:finish_session) %>"
+                  data-label-loading="<%= t(:finishing) %>">
+            <%= t(:finish_session) %>
           </button>
           <% end %>
           <% if jd_muestra_regresar %>

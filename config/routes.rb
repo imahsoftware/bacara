@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
-  resources :jugadas
+  resources :jugadas do
+    collection do
+      get 'detalle_jugadas'
+    end
+  end
+
   post 'jugadas/nueva_shoe', to: 'jugadas#nueva_shoe', as: :nueva_shoe_jugada
-  post 'jugadasdetalles/undo',  to: 'jugadasdetalles#undo'
-  post 'jugadasdetalles/reset', to: 'jugadasdetalles#reset'
+  post 'jugadasdetalles/undo',   to: 'jugadasdetalles#undo'
+  post 'jugadasdetalles/reset',  to: 'jugadasdetalles#reset'
+  post 'jugadasdetalles/finish', to: 'jugadasdetalles#finish'
 
   resources :jugadasdetalles, only: [:index, :new, :create] do
     collection do

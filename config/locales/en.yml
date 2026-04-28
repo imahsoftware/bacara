@@ -1340,6 +1340,8 @@ en:
   undoing: "Undoing..."
   clear_session: "Clear Session"
   clearing: "Clearing..."
+  finish_session: "Finish"
+  finishing: "Finishing..."
   new_shoe: "New SHOE"
   hand_number: "Hand"
   play_number: "Play"

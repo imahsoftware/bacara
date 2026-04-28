@@ -1333,6 +1333,8 @@ es:
   undoing: "Deshaciendo..."
   clear_session: "Limpiar sesión"
   clearing: "Limpiando..."
+  finish_session: "Finalizar"
+  finishing: "Finalizando..."
   new_shoe: "Nueva SHOE"
   hand_number: "Mano"
   play_number: "Jugada"

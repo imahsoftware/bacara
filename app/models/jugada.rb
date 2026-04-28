@@ -1,5 +1,6 @@
 class Jugada < ApplicationRecord
   belongs_to :user, optional: true
+  has_many :jugadasdetalles
 
   validates_presence_of :jugador
 

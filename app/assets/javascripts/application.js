@@ -710,4 +710,29 @@ $(document).ready(function () {
             });
         });
 
+    // ── Botón Finish (cerrar jugada CERRADA en BD, sin recargar) ──
+    $(document).off('click.jd', '#btn-finish')
+        .on ('click.jd', '#btn-finish', function () {
+            var $btn     = $(this);
+            var jugadaId = $btn.data('jugada-id');
+
+            $btn.prop('disabled', true).text($btn.data('label-loading') || 'Finishing...');
+            showSpinner();
+
+            $.ajax({
+                url:      '/jugadasdetalles/finish',
+                type:     'POST',
+                dataType: 'script',
+                headers:  { 'X-CSRF-Token': csrfToken() },
+                data:     { jugada_id: jugadaId },
+                error:    function () { alert('Error al finalizar la sesión.'); },
+                complete: function () {
+                    if ($('#btn-finish').is(':visible')) {
+                        $btn.prop('disabled', false).text($btn.data('label-default') || 'Finish');
+                    }
+                    hideSpinner();
+                }
+            });
+        });
+
 })();

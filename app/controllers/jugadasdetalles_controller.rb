@@ -98,6 +98,33 @@ class JugadasdetallesController < ApplicationController
     end
   end
 
+  # Marca jugada CERRADA sin recargar; UI bloquea P/B/undo/clear/finish vía finish.js.erb + jdLockPlayControls.
+  def finish
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+
+    unless @jugada.estado.to_s.upcase == 'PENDIENTE'
+      respond_to do |format|
+        format.js   { render :finish }
+        format.json { render json: { status: 'ok', already_closed: true } }
+      end
+      return
+    end
+
+    unless @jugada.update(estado: 'CERRADA')
+      msg = @jugada.errors.full_messages.to_sentence.presence || 'Error'
+      respond_to do |format|
+        format.js   { render js: "alert(#{msg.to_json});" }
+        format.json { render json: { status: 'error', errors: @jugada.errors.full_messages }, status: :unprocessable_entity }
+      end
+      return
+    end
+
+    respond_to do |format|
+      format.js   { render :finish }
+      format.json { render json: { status: 'ok' } }
+    end
+  end
+
   def index
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
@@ -148,24 +175,28 @@ class JugadasdetallesController < ApplicationController
 
     pend = Jugada.primera_pendiente_para(current_user)
 
-    if pend.blank?
-      denegar_acceso_baccarat_persona(
-        jugadas_path,
-        I18n.t(:no_tiene_sesion_pendiente)
-      )
-      return false
+    if pend.present?
+      if pend.id != @jugada_id.to_i
+        correcta = new_jugadasdetalle_path(jugada_id: pend.id)
+        denegar_acceso_baccarat_persona(
+          correcta,
+          I18n.t(:solo_puede_acceder_jugada_pendiente)
+        )
+        return false
+      end
+      return true
     end
 
-    if pend.id != @jugada_id.to_i
-      correcta = new_jugadasdetalle_path(jugada_id: pend.id)
-      denegar_acceso_baccarat_persona(
-        correcta,
-        I18n.t(:solo_puede_acceder_jugada_pendiente)
-      )
-      return false
+    # Sin PENDIENTE: permitir solo finish idempotente sobre jugada propia (tras cerrar, mismo POST no redirige).
+    if action_name == 'finish' && Jugada.for_user_list(current_user).exists?(id: @jugada_id.to_i)
+      return true
     end
 
-    true
+    denegar_acceso_baccarat_persona(
+      jugadas_path,
+      I18n.t(:no_tiene_sesion_pendiente)
+    )
+    false
   end
 
   def denegar_acceso_baccarat_persona(redirect_path, message)

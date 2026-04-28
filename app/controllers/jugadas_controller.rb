@@ -74,6 +74,16 @@ class JugadasController < ApplicationController
     end
   end
 
+  def detalle_jugadas
+    @jugada = Jugada.find(params[:id])
+    @jugadasdetalles = @jugada.jugadasdetalles
+    respond_to do |format|
+      format.pdf { render pdf: "Jugada #{@jugada.jugador.downcase }", template: "jugadas/detalle_jugadas.html.erb", encoding: "UTF-8",
+                          page_size: 'Letter', orientation: 'Landscape',
+                          margin: { top: 12, bottom: 12, left: 10, right: 10 } }
+    end
+  end
+
   # Solo PERSONA, desde baccarat (viewspecial): crea jugada y abre su detalle.
   def nueva_shoe
     unless current_user.tipoconsulta.to_s == 'PERSONA'

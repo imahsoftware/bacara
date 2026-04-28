@@ -1,0 +1,4 @@
+// app/views/jugadasdetalles/finish.js.erb — jugada CERRADA (o ya estaba): bloquear controles sin recargar
+if (typeof window.jdLockPlayControls === 'function') {
+  window.jdLockPlayControls();
+}
