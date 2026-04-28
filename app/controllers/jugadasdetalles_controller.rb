@@ -69,10 +69,9 @@ class JugadasdetallesController < ApplicationController
                .order(id: :desc)
                .first
     ultimo.destroy if ultimo
-
+=end
     @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
-=end
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
@@ -223,13 +222,14 @@ class JugadasdetallesController < ApplicationController
     'viewspecial'
   end
 
-  def block_if_finalizada
+  def block_unless_pendiente
     jugada = Jugada.for_user_list(current_user).find(@jugada_id)
-    return unless jugada.estado.to_s.upcase == 'FINALIZADA'
+    return if jugada.estado.to_s.upcase == 'PENDIENTE'
 
     respond_to do |format|
-      format.js   { render js: "alert('Jugada FINALIZADA. No se permite modificar.');" }
-      format.json { render json: { status: 'error', message: 'Jugada FINALIZADA' }, status: :forbidden }
+      # Sin alert: UI debe bloquearse vía jdLockPlayControls tras reload de estado; noop por si race.
+      format.js   { render js: '// jugada no PENDIENTE' }
+      format.json { render json: { status: 'error', message: 'Jugada no PENDIENTE' }, status: :forbidden }
     end
   end
 end
