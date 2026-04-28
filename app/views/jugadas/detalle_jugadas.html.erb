@@ -7,18 +7,69 @@
   .pdf-mini {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 0 12px;
+    margin: 0;
     font-size: 11px;
   }
   .pdf-mini th, .pdf-mini td {
     border: 1px solid #d1d5db;
     padding: 6px 8px;
-    text-align: left;
+    text-align: center;
   }
-  .pdf-mini th {
-    width: 90px;
-    background: #f3f4f6;
+  .pdf-mini thead th {
+    background: #191d26;
+    color: #fff;
     font-weight: 700;
+    font-size: 10px;
+  }
+  .pdf-mini tbody td {
+    background: #f9fafb;
+  }
+  .pdf-mini .text-right {
+    text-align: right;
+    padding-right: 10px;
+  }
+  .pdf-mini .jd-profit-pos { color: #15803d; font-weight: 700; }
+  .pdf-mini .jd-profit-neg { color: #b91c1c; font-weight: 700; }
+  .pdf-mini .jd-profit-zero { color: #6b7280; font-weight: 700; }
+  .pdf-mini .play-num {
+    font-weight: 700;
+  }
+  .pdf-head {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    margin: 0 0 12px;
+  }
+  .pdf-head-left,
+  .pdf-head-right {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .pdf-head-left {
+    width: 30%;
+    padding-right: 10px;
+  }
+  .pdf-head-right {
+    width: 70%;
+  }
+  .pdf-logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pdf-logo-icon {
+    width: 64px;
+    height: 64px;
+  }
+  .pdf-logo-text {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #06176B;
+    line-height: 1;
+  }
+  .pdf-logo-text .wins {
+    color: #0ea5b7;
   }
   .pdf-table-wrap .jd-empty { display: none; }
 
@@ -147,16 +198,59 @@
   .pdf-table-wrap .bac-table thead tr:first-child th:last-child  { border-top-right-radius: 8px; }
 </style>
 
-<table class="pdf-mini">
-  <tr>
-    <th>Jugada</th>
-    <td><%= @jugada.jugador.presence || '-' %></td>
-  </tr>
-  <tr>
-    <th>Estado</th>
-    <td><%= @jugada.estado.presence || '-' %></td>
-  </tr>
-</table>
+<div class="pdf-head">
+  <div class="pdf-head-left">
+    <div class="pdf-logo-wrap">
+      <svg class="pdf-logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="6" fill="#06176B"/>
+        <circle cx="32" cy="32" r="4" fill="white"/>
+        <circle cx="12" cy="18" r="3.5" fill="#06176B" opacity="0.9"/>
+        <circle cx="52" cy="18" r="3.5" fill="#06176B" opacity="0.9"/>
+        <circle cx="12" cy="46" r="3.5" fill="#06176B" opacity="0.7"/>
+        <circle cx="52" cy="46" r="3.5" fill="#06176B" opacity="0.7"/>
+        <circle cx="32" cy="8"  r="3" fill="#06176B" opacity="0.6"/>
+        <circle cx="32" cy="56" r="3" fill="#06176B" opacity="0.6"/>
+        <line x1="32" y1="26" x2="32" y2="11" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="32" y1="38" x2="32" y2="53" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+        <line x1="27" y1="29" x2="15" y2="21" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="37" y1="29" x2="49" y2="21" stroke="#06176B" stroke-width="1.2" opacity="0.5"/>
+        <line x1="27" y1="35" x2="15" y2="43" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+        <line x1="37" y1="35" x2="49" y2="43" stroke="#06176B" stroke-width="1.2" opacity="0.4"/>
+      </svg>
+      <div class="pdf-logo-text">Bac<span class="wins">Wins</span></div>
+    </div>
+  </div>
+  <div class="pdf-head-right">
+    <%
+      pdf_profit_val = @jugadasdetalles.sum { |d| d.acumuladof.to_f }
+      pdf_profit_str = if pdf_profit_val == pdf_profit_val.to_i
+                         pdf_profit_val.to_i.to_s
+                       else
+                         sprintf('%.1f', pdf_profit_val)
+                       end
+      pdf_profit_txt = pdf_profit_val > 0 ? "+#{pdf_profit_str}" : pdf_profit_str
+      pdf_profit_cls = pdf_profit_val > 0 ? 'jd-profit-pos' : (pdf_profit_val < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+    %>
+    <table class="pdf-mini">
+      <thead>
+        <tr>
+          <th><%= t(:play_number) %></th>
+          <th><%= t(:date_time) %></th>
+          <th><%= t(:status) %></th>
+          <th><%= t(:profit_label) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="play-num">#<%= @jugada.id %></td>
+          <td><%= @jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+          <td><%= @jugada.estado %></td>
+          <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <%
   pdf_rows = @jugadasdetalles.select do |d|
