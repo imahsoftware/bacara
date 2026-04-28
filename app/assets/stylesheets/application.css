@@ -1063,9 +1063,10 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-page .bac-table tbody tr:nth-child(odd) td {
     background: #fff;
 }
-.jd-bw-page .bac-scorecard-left table tbody tr:last-child td,
-.jd-bw-page .bac-scorecard-right table tbody tr:last-child td,
-.jd-bw-page .bac-table-central-bottom tbody tr:last-child td {
+/* Última fila en blanco salvo filas finalizar (Y/N): tr-finalizar-* pierde sin :not por especificidad vs tr:last-child */
+.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td,
+.jd-bw-page .bac-scorecard-right table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td,
+.jd-bw-page .bac-table-central-bottom tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td {
     background: #fff !important;
     border-bottom-color: #e9ecef;
 }
@@ -1077,7 +1078,7 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-page .bac-table tbody tr:last-child td {
     border-bottom: 2px solid #e9ecef;
 }
-.jd-bw-page .bac-scorecard-left table tbody tr:last-child td.td-num {
+.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td.td-num {
     background: #f1f3f5 !important;
 }
 .jd-bw-page .bac-chip-p {
