@@ -1350,7 +1350,7 @@ en:
   finishing: "Finishing..."
   new_shoe: "New SHOE"
   hand_number: "Hand"
-  play_number: "Play"
+  play_number: "Shoe"
   datepicker:
     dformat: '%m/%d/%Y'
     pformat: MM/DD/YYYY

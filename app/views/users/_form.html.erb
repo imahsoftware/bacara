@@ -33,6 +33,7 @@
             <div class="col-md-2"><%= f.input :identificacion, label: t(:identification) %></div>
             <div class="col-md-6"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
             <div class="col-md-1"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: {class: 'select2'} %></div>
+            <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
             <div class="col-md-1"><%#= f.input :geintac, as: :select, collection: select_sinocorto, label: 'Imah ?', input_html: {class: 'select2'} %></div>
             <div class="col-md-2"><%#= f.input :ingresoseguro, label: 'Ingreso Seguro', as: :select, collection: select_sino, input_html: {class: 'select2'} %></div>
           </div>
@@ -42,8 +43,7 @@
             <div class="col-md-2"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
             <div class="col-md-4"><%= f.input :email %></div>
           </div>
-          <%# tipoconsulta forzado a PERSONA por defecto (campo oculto) %>
-          <%= f.hidden_field :tipoconsulta, value: 'PERSONA' %>
+
 
           <div class="row">
             <div class="col-md-3">

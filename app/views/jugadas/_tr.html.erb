@@ -38,13 +38,10 @@
   <td class="text-center"><strong>#<%= jugada.id %></strong></td>
   <td class="text-center"><%= jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
   <% if show_player_col %>
-    <td class="text-center">
+    <td class="text-left">
       <% u = jugada.user %>
       <% if u %>
-        <strong><%= u.username %></strong>
-        <% if u.nombre.present? %>
-          <small class="text-muted" style="display:block; font-size:11px;"><%= u.nombre %></small>
-        <% end %>
+        <strong><%= u.username %></strong><% if u.nombre.present? %> <small class="text-muted" style="font-size:11px;">(<%= u.nombre %>)</small><% end %>
       <% else %>
         <span class="text-muted">—</span>
       <% end %>
