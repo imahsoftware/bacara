@@ -306,6 +306,7 @@
           <thead>
             <tr class="tr-cols">
               <th style="width:28px;">#</th>
+              <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
               <th class="col-p-head">P</th>
               <th class="col-b-head">B</th>
               <th>✓/✗</th>
@@ -317,6 +318,7 @@
             <% pdf_resto.each_with_index do |d, i| %>
               <tr class="<%= d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : '' %>">
                 <td class="td-num"><%= i + 1 %></td>
+                <% if @pdf_show_mecanicas %><td><%= d.mecanica1.presence || '—' %></td><% end %>
                 <td><%= d.player1.present? ? d.player1 : '—' %></td>
                 <td><%= d.banquer1.present? ? d.banquer1 : '—' %></td>
                 <td>
@@ -335,6 +337,7 @@
         <table class="bac-table">
           <thead>
             <tr class="tr-cols">
+              <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
               <th class="col-p-head">P</th>
               <th class="col-b-head">B</th>
               <th>✓/✗</th>
@@ -346,6 +349,7 @@
           <tbody>
             <% pdf_resto.each do |d| %>
               <tr class="<%= d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : '' %>">
+                <% if @pdf_show_mecanicas %><td><%= d.mecanica2.presence || '—' %></td><% end %>
                 <td><%= d.player2.present? ? d.player2 : '—' %></td>
                 <td><%= d.banquer2.present? ? d.banquer2 : '—' %></td>
                 <td>

@@ -355,7 +355,7 @@ body.persona-no-sidebar .main-footer {
 
 .bac-table thead tr.tr-cols th {
     font-size: 11px; font-weight: 700; color: #6b7280;
-    background: #f9fafb; text-transform: uppercase; letter-spacing: .04em;
+    background: #f9fafb; text-transform: none; letter-spacing: .02em;
 }
 
 .bac-table .sep-left  { border-left:  3px solid #9ca3af !important; }
@@ -408,12 +408,12 @@ body.persona-no-sidebar .main-footer {
 .jd-row-new td { animation: bac-row-flash 1.4s ease forwards; }
 
 /* Fila finalizada — fondo rojo muy suave */
-.tr-finalizar td    { background-color: #fff1f1 !important; }
-.tr-finalizar:hover td { background-color: #ffe4e4 !important; }
+.tr-finalizar td    { background-color: #fecaca !important; }
+.tr-finalizar:hover td { background-color: #fca5a5 !important; }
 
 /* Fila finalizada OK (Y) — fondo verde muy suave */
-.tr-finalizar-ok td    { background-color: #f0fdf4 !important; }
-.tr-finalizar-ok:hover td { background-color: #dcfce7 !important; }
+.tr-finalizar-ok td    { background-color: #bbf7d0 !important; }
+.tr-finalizar-ok:hover td { background-color: #86efac !important; }
 
 /* ══════════════════════════════════════════════════════════════
    HEADER JUGADOR
@@ -1155,6 +1155,8 @@ body.vsp-body:has(.jd-bw-page) {
     color: #fff !important;
     font-size: 10px;
     font-weight: 700;
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
     border-bottom: 1px solid #2c3138 !important;
     padding-top: 5px;
     padding-bottom: 5px;

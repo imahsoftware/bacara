@@ -102,11 +102,38 @@ class JugadasController < ApplicationController
   end
 
   def detalle_jugadas
-    @jugada = Jugada.find_by_param!(params[:id])
-    @jugadasdetalles = @jugada.jugadasdetalles
+    # Solo admins (no-PERSONA) pueden generar el PDF
+    if current_user.tipoconsulta.to_s == 'PERSONA'
+      redirect_to jugadas_path, alert: I18n.t(:accion_no_permitida) and return
+    end
+
+    # Blindado contra IDOR: solo jugadas que el usuario tiene permitidas ver.
+    raw = params[:id].to_s
+    scope = Jugada.for_user_list(current_user)
+    @jugada = if raw =~ /\A\d+\z/
+                scope.find_by(id: raw)
+              else
+                scope.find_by(uuid: raw)
+              end
+
+    if @jugada.blank?
+      redirect_to jugadas_path, alert: I18n.t(:no_tiene_acceso_jugada) and return
+    end
+
+    # Orden estable para que el PDF salga consistente
+    @jugadasdetalles = @jugada.jugadasdetalles.order(:orden, :id)
+
+    # Mostrar mecánicas en el PDF cuando el usuario actual NO es PERSONA (mismo criterio que la UI live)
+    @pdf_show_mecanicas = current_user.tipoconsulta.to_s != 'PERSONA'
+
+    pdf_filename = "Jugada-#{@jugada.jugador.to_s.downcase.presence || @jugada.id}"
+
     respond_to do |format|
-      format.pdf { render pdf: "Jugada #{@jugada.jugador.downcase }", template: "jugadas/detalle_jugadas.html.erb", encoding: "UTF-8",
-                          page_size: 'Letter', orientation: 'Landscape',
+      format.pdf { render pdf: pdf_filename,
+                          template: "jugadas/detalle_jugadas.html.erb",
+                          encoding: "UTF-8",
+                          page_size: 'Letter',
+                          orientation: 'Landscape',
                           margin: { top: 12, bottom: 12, left: 10, right: 10 } }
     end
   end

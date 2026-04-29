@@ -19,7 +19,8 @@
         <button class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></button>
       <% end %>
     <% end %>
-    <% if cerrada && current_user.tipoconsulta.to_s == 'TODO' %>
+    <%# Solo admins (no-PERSONA) pueden generar el PDF %>
+    <% if cerrada && current_user.tipoconsulta.to_s != 'PERSONA' %>
       <%= link_to detalle_jugadas_jugadas_path(id: jugada.to_param, format: :pdf), class: 'popup', data: { toggle: 'tooltip' }, title: 'Ver Detalle' do %>
         <button class="btn btn-xs btn-primary"><i class="fa fa-file-pdf-o"></i></button>
       <% end %>

@@ -4,7 +4,7 @@
 <% jd_profit_class   = jd_profit_value > 0 ? 'jd-bw-profit--win' : (jd_profit_value < 0 ? 'jd-bw-profit--lose' : 'jd-bw-profit--zero') %>
 <% jd_pendiente = @jugada.estado.to_s.upcase == 'PENDIENTE' %>
 <% jd_muestra_new_shoe = @jugada.present? && @jugada.estado.to_s.upcase == 'CERRADA' %>
-<% jd_muestra_regresar = !jd_muestra_new_shoe && current_user.tipoconsulta.to_s != 'PERSONA' %>
+<% jd_muestra_regresar = current_user.tipoconsulta.to_s != 'PERSONA' %>
 
 <input type="hidden" id="jd-base-bet" value="10" />
 
@@ -96,13 +96,14 @@
             <%= t(:finish_session) %>
           </button>
           <% end %>
-          <% if jd_muestra_regresar %>
-            <%= link_to t(:regresar), jugadas_path, class: 'jd-back-btn', id: 'jd-back-default' %>
-          <% elsif jd_muestra_new_shoe %>
+          <% if jd_muestra_new_shoe %>
             <%# Misma UX de index: abrir modal new_jugada con select de monto_apostar %>
             <%= link_to new_jugada_path(active_id: @jugada_id), remote: true, class: 'btn btn-success btn-block', id: 'jd-new-shoe-modal-link' do %>
               <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_shoe) %>
             <% end %>
+          <% end %>
+          <% if jd_muestra_regresar %>
+            <%= link_to t(:regresar), jugadas_path, class: 'jd-back-btn', id: 'jd-back-default' %>
           <% end %>
           <%# Panel oculto si sesión empezó PENDIENTE: tras PRC/CERRADA se muestra sin recargar (create/undo JS) %>
           <% if jd_pendiente %>
