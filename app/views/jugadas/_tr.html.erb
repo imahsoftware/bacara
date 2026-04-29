@@ -8,6 +8,7 @@
   # Locales opcionales para el agrupado por día
   row_day_class    = local_assigns[:day_class].to_s
   row_initially_hidden = local_assigns[:initially_hidden] == true
+  show_player_col  = local_assigns[:show_player_col] == true
 %>
 <tr id="jugada_<%= jugada.id %>"
     class="jugada-row <%= row_day_class %>"
@@ -36,6 +37,19 @@
   </td>
   <td class="text-center"><strong>#<%= jugada.id %></strong></td>
   <td class="text-center"><%= jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+  <% if show_player_col %>
+    <td class="text-center">
+      <% u = jugada.user %>
+      <% if u %>
+        <strong><%= u.username %></strong>
+        <% if u.nombre.present? %>
+          <small class="text-muted" style="display:block; font-size:11px;"><%= u.nombre %></small>
+        <% end %>
+      <% else %>
+        <span class="text-muted">—</span>
+      <% end %>
+    </td>
+  <% end %>
   <td class="text-center"><%= jugada.estado %></td>
   <td class="text-right <%= profit_class %>"><strong><%= profit_text %></strong></td>
 </tr>

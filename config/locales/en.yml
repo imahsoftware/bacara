@@ -46,6 +46,7 @@ en:
     attributes:
       jugada:
         jugador: Player
+        monto_apostar: Bet Amount
       comite:
         temas: Topics
         fecha: Date
@@ -1058,8 +1059,9 @@ en:
   permiso: Permission
   close_or_finish_pending_play: Close or finish your pending play before creating another
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
-  new_play: New Play
+  new_play: New Shoe
   bet_amount: Bet Amount
+  player_owner: Player
   date_time: Date & Time
   daily_total: Daily Total
   plays_lower: plays
@@ -1336,7 +1338,7 @@ en:
   helper_vivienda_familiar: "Family-owned"
   helper_vivienda_propia: "Owned"
   # === Game/Baccarat module: new keys ===
-  profit_label: "PROFIT:"
+  profit_label: "PROFIT"
   usd_title: "US Dollars (USD)"
   baccarat_winners: "Baccarat Winners"
   frequency_table: "Frequency Table"

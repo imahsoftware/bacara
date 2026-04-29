@@ -6,16 +6,22 @@
   }
   jugadas_by_day = @jugadas.order(created_at: :desc).group_by { |j| j.created_at.to_date }
   today = Date.current
+  show_player_col = current_user.tipoconsulta.to_s != 'PERSONA'
+  total_cols      = show_player_col ? 6 : 5
+  total_colspan   = show_player_col ? 5 : 4
 %>
 
 <table class="table table-bordered table-condensed table-striped jugadas-table">
   <thead>
   <tr class="thcolor">
-    <th class="text-center" width="14%"><%= t :actions %></th>
-    <th class="text-center" width="10%"><%= t :play_number %></th>
-    <th class="text-center" width="22%"><%= t :date_time %></th>
-    <th class="text-center" width="14%"><%= t :status %></th>
-    <th class="text-right"  width="14%"><%= t :profit_label %></th>
+    <th class="text-center" width="12%"><%= t :actions %></th>
+    <th class="text-center" width="8%"><%= t :play_number %></th>
+    <th class="text-center" width="18%"><%= t :date_time %></th>
+    <% if show_player_col %>
+      <th class="text-center" width="18%"><%= t :player_owner %></th>
+    <% end %>
+    <th class="text-center" width="12%"><%= t :status %></th>
+    <th class="text-right"  width="12%"><%= t :profit_label %></th>
   </tr>
   </thead>
   <tbody id="tbody_jugadas">
@@ -30,10 +36,10 @@
     <% if es_hoy %>
       <%# ─── HOY: filas siempre visibles + footer Daily Total ─────── %>
       <% jugadas_del_dia.each do |jugada| %>
-        <%= render 'jugadas/tr', jugada: jugada %>
+        <%= render 'jugadas/tr', jugada: jugada, show_player_col: show_player_col %>
       <% end %>
       <tr class="jugadas-day-total <%= total_class %>">
-        <td colspan="4" class="text-right">
+        <td colspan="<%= total_colspan %>" class="text-right">
           <strong><%= t(:daily_total) %>:</strong>
         </td>
         <td class="text-right">
@@ -48,7 +54,7 @@
           aria-expanded="false"
           role="button"
           tabindex="0">
-        <td colspan="5">
+        <td colspan="<%= total_cols %>">
           <div class="jugadas-day-header__layout">
             <div class="jugadas-day-header__left">
               <i class="fa fa-chevron-right jugadas-day-toggle-icon"></i>
@@ -69,6 +75,7 @@
       <% jugadas_del_dia.each do |jugada| %>
         <%= render 'jugadas/tr',
                    jugada: jugada,
+                   show_player_col: show_player_col,
                    day_class: "day-#{day_id}",
                    initially_hidden: true %>
       <% end %>
@@ -76,12 +83,6 @@
   <% end %>
   </tbody>
 </table>
-
-<div class="box-footer clear-fix">
-  <div class="box-tools pull-right">
-    <%= will_paginate @jugadas, renderer: BootstrapPagination::Rails %>
-  </div>
-</div>
 
 <script>
   // Toggle para los grupos de días pasados (click en el header expande/colapsa).

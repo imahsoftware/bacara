@@ -22,12 +22,16 @@ class JugadasController < ApplicationController
 
   def index
     @jugadas_base = Jugada.for_user_list(current_user)
-    @jugadas = @jugadas_base.order(id: :desc).paginate(page: params[:page], per_page: 10)
+    # Sin paginador. Mostramos todas las jugadas de los últimos 10 días.
+    # Eager loading de user para evitar N+1 cuando se muestra la columna Player.
+    @jugadas = @jugadas_base
+                 .includes(:user)
+                 .where('jugadas.created_at >= ?', 10.days.ago.beginning_of_day)
+                 .order(id: :desc)
     @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
     @persona_ultima_cerrada = Jugada.ultima_cerrada_para_nueva_shoe(current_user)
 
-    # Totales diarios: por cada día visible en la página actual, sumar el profit
-    # de TODAS las jugadas del usuario en ese día (no solo las visibles).
+    # Totales diarios: por cada día visible, sumar el profit de TODAS las jugadas del usuario en ese día.
     @daily_totals = compute_daily_totals(@jugadas, current_user)
 
     respond_to do |format|
