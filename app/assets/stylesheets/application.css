@@ -1083,6 +1083,41 @@ body.vsp-body:has(.jd-bw-page) {
         align-self: flex-end;
     }
 }
+
+/* ── Tablets y celulares: 4 botones en una sola fila ────────── */
+@media (max-width: 1100px) {
+    .jd-bw-row-btns {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 6px;
+    }
+    .jd-bw-row-btns .jd-undo-btn--bw,
+    .jd-bw-row-btns .jd-reset-btn,
+    .jd-bw-row-btns .jd-finish-btn--bw,
+    .jd-bw-row-btns .jd-back-btn,
+    .jd-bw-row-btns .btn.btn-block {
+        flex: 1 1 0;
+        width: auto !important;
+        min-width: 0;
+        padding: 8px 4px !important;
+        font-size: 11px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* En celulares más estrechos, achicamos un poco más texto/padding */
+@media (max-width: 480px) {
+    .jd-bw-row-btns .jd-undo-btn--bw,
+    .jd-bw-row-btns .jd-reset-btn,
+    .jd-bw-row-btns .jd-finish-btn--bw,
+    .jd-bw-row-btns .jd-back-btn,
+    .jd-bw-row-btns .btn.btn-block {
+        padding: 8px 2px !important;
+        font-size: 10px !important;
+    }
+}
 .jd-badge--ft {
     font-size: 11px;
     min-height: 22px;
