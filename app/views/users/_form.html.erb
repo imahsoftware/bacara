@@ -38,10 +38,10 @@
             <div class="col-md-2"><%#= f.input :ingresoseguro, label: 'Ingreso Seguro', as: :select, collection: select_sino, input_html: {class: 'select2'} %></div>
           </div>
           <div class="row">
-            <div class="col-md-4"><%= f.input :username, label: t(:username) %></div>
-            <div class="col-md-2"><%= f.input :password, label: t(:password) %></div>
-            <div class="col-md-2"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
-            <div class="col-md-4"><%= f.input :email %></div>
+            <%# El email se genera automáticamente como "<username>@bacwins.com" en el modelo (before_validation) %>
+            <div class="col-md-6"><%= f.input :username, label: t(:username) %></div>
+            <div class="col-md-3"><%= f.input :password, label: t(:password) %></div>
+            <div class="col-md-3"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
           </div>
 
 

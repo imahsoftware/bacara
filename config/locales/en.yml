@@ -768,6 +768,7 @@ en:
   inactivate_user: Inactivate user
   activate_user: Activate user
   unlock: Unlock
+  unlock_all_users: Unlock all users
   reset_password: Reset Password
   reset_and_send_sms: Reset password, Unlock and send SMS
   no_data_found: No data found
@@ -1061,6 +1062,8 @@ en:
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: New Shoe
   bet_amount: Bet Amount
+  stop_playing_this_shoe: STOP PLAYING THIS SHOE
+  clear_session_and_start_new_shoe: CLEAR YOUR SESSION AND START A NEW SHOE
   player_owner: Player
   date_time: Date & Time
   daily_total: Daily Total
@@ -1359,3 +1362,8 @@ en:
     pformat: HH:mm
   dayViewHeaderFormat: MMMM YYYY
   'no': 'No'
+  user_unlocked_successfully: User unlocked successfully
+  users_unlocked_successfully: Users unlocked successfully
+  user_unlocked_and_sms_sent: 'User unlocked successfully and SMS sent to: %{mobile}'
+  user_deactivated_successfully: User deactivated successfully
+  user_activated_successfully: User activated successfully

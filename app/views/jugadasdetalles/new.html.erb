@@ -31,6 +31,7 @@
             var $finish = $('#btn-finish');
             var $backDefault = $('#jd-back-default');
             var $panel = $('#jd-post-close-panel');
+            var $stopWarning = $('#jd-stop-shoe-warning');
             $circles.hide();
             $undo.hide();
             $reset.hide();
@@ -38,6 +39,9 @@
             $backDefault.hide();
             if ($panel.length) {
               $panel.show().attr('aria-hidden', 'false');
+            }
+            if ($stopWarning.length) {
+              $stopWarning.show().attr('aria-hidden', 'false');
             }
           };
           // Recolorea el bloque PROFIT según el signo del monto actual.
@@ -117,6 +121,19 @@
             </div>
           <% end %>
         </div>
+
+        <%# Banner de aviso: aparece DEBAJO de todos los botones, ancho completo.
+            Visible al cargar si la shoe ya está cerrada; oculto inicialmente si
+            está PENDIENTE. El JS jdLockPlayControls lo muestra cuando se cierra. %>
+        <% if jd_muestra_new_shoe || jd_pendiente %>
+          <div class="jd-stop-shoe-warning"
+               id="jd-stop-shoe-warning"
+               style="<%= 'display:none;' if jd_pendiente %>"
+               aria-hidden="<%= jd_pendiente ? 'true' : 'false' %>">
+            <strong><%= t(:stop_playing_this_shoe) %></strong>
+            <strong><%= t(:clear_session_and_start_new_shoe) %></strong>
+          </div>
+        <% end %>
       </div>
 
       <footer class="jd-bw-foot jd-bw-foot--sidebar">

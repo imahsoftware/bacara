@@ -2,49 +2,51 @@
   <section class="sidebar">
     <!-- <%= image_tag 'logo.png', class: 'user-image', size: '230x100', alt: 'BacWins' %> -->
     <!--  Sidebar Menu -->
-    <ul class="sidebar-menu" data-widget="tree">
-			<li>
-        <%= link_to users_path do %>
-          <i class="fa fa-arrow-left text-success"></i> <%= t :regresar_usuarios %>
-        <% end %>
-			</li>
-      <li class="header"><%=t :menu%></li>
-      <!-- Optionally, you can add icons to the links -->
-      <li class="<%= active_class(edit_user_path(etapa: "A", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "A", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :datos_basicos %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "B", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "B", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :modulos %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "C", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "C", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :permisos %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "V", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "V", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :usuarios_visitas %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "I", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "I", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :reportes %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "J", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "J", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :cargues_opciones %></span>
-        <% end %>
-      </li>
-      <li class="<%= active_class(edit_user_path(etapa: "K", id: @user.id)) %>">
-        <%= link_to edit_user_path(etapa: "K", id: @user.id) do %>
-          <i class="fa fa-bullseye"></i> <span><%= t :parametros %></span>
-        <% end %>
-      </li>
-    </ul>
+    <% if current_user && current_user.geintac.to_s == 'S' %>
+      <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <%= link_to users_path do %>
+            <i class="fa fa-arrow-left text-success"></i> <%= t :regresar_usuarios %>
+          <% end %>
+        </li>
+        <li class="header"><%=t :menu%></li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="<%= active_class(edit_user_path(etapa: "A", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "A", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :datos_basicos %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "B", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "B", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :modulos %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "C", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "C", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :permisos %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "V", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "V", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :usuarios_visitas %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "I", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "I", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :reportes %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "J", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "J", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :cargues_opciones %></span>
+          <% end %>
+        </li>
+        <li class="<%= active_class(edit_user_path(etapa: "K", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "K", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span><%= t :parametros %></span>
+          <% end %>
+        </li>
+      </ul>
+    <% end %>
   </section>
 </aside>

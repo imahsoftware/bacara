@@ -174,6 +174,7 @@ es:
   inactivate_user: Desactivar usuario
   activate_user: Activar usuario
   unlock: Desbloquear
+  unlock_all_users: Desbloquear todos los usuarios
   reset_password: Restablecer contraseña
   reset_and_send_sms: Restablecer contraseña, desbloquear y enviar SMS
   no_data_found: No se encontraron datos
@@ -519,6 +520,8 @@ es:
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: Nuevo Shoe
   bet_amount: Bet Amount
+  stop_playing_this_shoe: DETENGA ESTE SHOE
+  clear_session_and_start_new_shoe: REINICIE LA SESIÓN E INICIE UN NUEVO SHOE
   player_owner: Jugador
   date_time: Date & Time
   daily_total: Daily Total

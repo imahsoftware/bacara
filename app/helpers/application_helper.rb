@@ -390,16 +390,7 @@ module ApplicationHelper
 
   def select_tipoconsulta
     [
-      [I18n.t(:helper_supervisor), "SUPERVISOR"],
-      [I18n.t(:helper_supernumerario), "SUPERNUMERARIO"],
-      [I18n.t(:helper_administrador), "ADMINISTRADOR"],
-      [I18n.t(:helper_gestion), "GESTION"],
       [I18n.t(:helper_persona), "PERSONA"],
-      [I18n.t(:helper_contrato), "CONTRATO"],
-      [I18n.t(:helper_metro), "METRO"],
-      [I18n.t(:helper_estudiante), "ESTUDIANTE"],
-      [I18n.t(:helper_candidato), "CANDIDATO"],
-      [I18n.t(:helper_rector), "RECTOR"],
       [I18n.t(:helper_todo), "TODO"]
     ]
   end

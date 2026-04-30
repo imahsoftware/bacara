@@ -192,35 +192,24 @@ class UsersController < ApplicationController
   end
 
   def index
-    @blockedusers = User.where(failed_attempts: 3)
+    @blockedusers = User.where(failed_attempts: 3).where.not(id: [1, 2])
     @q = User.ransack(params[:q])
-    @users = @q.result.paginate(:page => params[:page], :per_page => 10)
+    @users = @q.result.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
     @q = User.ransack(params[:q])
 
     if @q == nil
-      @users = User.all.paginate(:page => params[:page], :per_page => 10)
+      @users = User.all.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
     else
-      @users = @q.result.paginate(:page => params[:page], :per_page => 10)
+      @users = @q.result.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
     end
     if params[:nombre]
-      @users = User.name_like("%#{params[:nombre].upcase}%").order(:nombre).paginate(:page => params[:page], :per_page => 10)
+      @users = User.name_like("%#{params[:nombre].upcase}%").where.not(id: [1, 2]).order(:nombre).paginate(:page => params[:page], :per_page => 10)
       if @users.count == 1
         @user = @users.last
         redirect_to edit_user_path(etapa: "A", id: params[:user_id])
       end
     else
     end
-=begin
-    else
-      @blockedusers = User.where(failed_attempts: 3, portafolio_id: is_portafolio)
-      @q = User.ransack(params[:q])
-      @users = @q.result.paginate(:page => params[:page], :per_page => 10).where(["portafolio_id= #{is_portafolio} and (geintac = 'N' or geintac is null)"])
-      if @users.count == 1
-        @user = @users.last
-        redirect_to edit_user_path(etapa: "A", id: @user.id)
-      end
-    end
-=end
   end
 
   def new
@@ -334,7 +323,7 @@ class UsersController < ApplicationController
     @user.unlock_token = nil
     @user.locked_at = nil
     @user.save(validate: false)
-    flash['success'] = "Desbloqueado correctamente"
+    flash['success'] = I18n.t(:user_unlocked_successfully)
     redirect_to users_path
   end
 
@@ -347,7 +336,7 @@ class UsersController < ApplicationController
     @user.save(validate: false)
     mensaje = "BACARA: Estimad@ #{@user.nombres}, nos permitimos enviar su usuario #{@user.identificacion} y contrasena #{@user.identificacion} para el ingreso a la plataforma de ASEAR, la cual sera una herramienta clave para el seguimiento y control de los colaboradores. - Url: https://appasearesp.com".html_safe
     Bacarasms::SendsmsServices.new.send_sms_users(@user.id, mensaje)
-    flash['success'] = "Desbloqueado correctamente y mensaje enviado al celular: #{@user.celular.to_s}"
+    flash['success'] = I18n.t(:user_unlocked_and_sms_sent, mobile: @user.celular.to_s)
     redirect_to users_path
   end
 
@@ -356,7 +345,7 @@ class UsersController < ApplicationController
     @user.unlock_token = nil
     @user.locked_at = nil
     @user.save(validate: false)
-    flash['success'] = "Desbloqueado correctamente"
+    flash['success'] = I18n.t(:user_unlocked_successfully)
     redirect_to personas_path
   end
 
@@ -368,8 +357,8 @@ class UsersController < ApplicationController
       u.locked_at = nil
       u.save(validate: false)
     end
-    flash['success'] = "Usuarios desbloqueados correctamente"
-    redirect_to root_path
+    flash['success'] = I18n.t(:users_unlocked_successfully)
+    redirect_to users_path
   end
 
   def edupol_desbloquearusuario
@@ -378,21 +367,21 @@ class UsersController < ApplicationController
     @user.unlock_token = nil
     @user.locked_at = nil
     @user.save(validate: false)
-    flash['success'] = "Desbloqueado correctamente"
+    flash['success'] = I18n.t(:user_unlocked_successfully)
     redirect_to root_path
   end
 
   def inactivaruser
     @user.activo = 'N'
     @user.save
-    flash['success'] = "Usuario inactivado correctamente"
+    flash['success'] = I18n.t(:user_deactivated_successfully)
     redirect_to users_path
   end
 
   def activaruser
     @user.activo = 'S'
     @user.save
-    flash['success'] = "Usuario activado correctamente"
+    flash['success'] = I18n.t(:user_activated_successfully)
     redirect_to users_path
   end
 

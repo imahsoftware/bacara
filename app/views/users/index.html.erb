@@ -6,6 +6,9 @@
   <div class="box-header" style="margin-bottom: -32px;">
     <legend><%= t :users %></legend>
     <div class="box-tools pull-right">
+      <%= link_to desbloquearusuariof_users_path, data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock_all_users), class: 'btn btn-sm btn-warning' do %>
+        <i class="fa fa-unlock-alt"> </i> <span><%= t :unlock_all_users %></span>
+      <% end %>
       <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
         <i class="fa fa-plus-square"> </i> <span><%= t :new_user %></span>
       <% end %>
