@@ -460,8 +460,23 @@
     @media (max-width: 900px) {
         body { overflow: auto; }
         #wrapper { flex-direction: column; height: auto; }
-        #right { display: none; }
-        #left { min-height: 100vh; padding: 2.5rem 1.5rem 5rem; height: auto; }
+        #right {
+            display: flex;
+            flex: 0 0 auto;          /* no estira; tamaño fijo arriba */
+            height: 180px;
+            padding: 0.75rem;
+        }
+        .login-hero-image {
+            width: auto;
+            height: 100%;
+            max-height: 160px;
+            object-fit: contain;     /* en móvil mostramos el logo COMPLETO */
+        }
+        #left {
+            min-height: calc(100vh - 180px);
+            padding: 2rem 1.5rem 5rem;
+            height: auto;
+        }
         #signin { width: 100%; max-width: 100%; padding: 2rem 1.5rem; }
         #main-footer { position: relative; bottom: auto; margin-top: 2rem; }
     }
