@@ -1,71 +1,8 @@
 <div id="wrapper">
 
-  <!-- ── PANEL IZQUIERDO OSCURO ── -->
+  <!-- ── PANEL IZQUIERDO: Imagen ── -->
   <div id="right">
-    <div id="showcase">
-
-      <!-- Marca BacWins · bacwins.bot -->
-      <div class="showcase-content">
-        <div class="brand-logo">
-          <!-- Ícono: nodo de red (identidad de producto) -->
-          <svg class="brand-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Círculo central -->
-            <circle cx="32" cy="32" r="6" fill="#06176B"/>
-            <circle cx="32" cy="32" r="4" fill="white"/>
-            <!-- Nodos satélite -->
-            <circle cx="12" cy="18" r="3.5" fill="white" opacity="0.9"/>
-            <circle cx="52" cy="18" r="3.5" fill="white" opacity="0.9"/>
-            <circle cx="12" cy="46" r="3.5" fill="white" opacity="0.7"/>
-            <circle cx="52" cy="46" r="3.5" fill="white" opacity="0.7"/>
-            <circle cx="32" cy="8"  r="3"   fill="white" opacity="0.6"/>
-            <circle cx="32" cy="56" r="3"   fill="white" opacity="0.6"/>
-            <!-- Líneas de conexión -->
-            <line x1="32" y1="26" x2="32" y2="11"  stroke="white" stroke-width="1.2" opacity="0.5"/>
-            <line x1="32" y1="38" x2="32" y2="53"  stroke="white" stroke-width="1.2" opacity="0.4"/>
-            <line x1="27" y1="29" x2="15" y2="21"  stroke="white" stroke-width="1.2" opacity="0.5"/>
-            <line x1="37" y1="29" x2="49" y2="21"  stroke="white" stroke-width="1.2" opacity="0.5"/>
-            <line x1="27" y1="35" x2="15" y2="43"  stroke="white" stroke-width="1.2" opacity="0.4"/>
-            <line x1="37" y1="35" x2="49" y2="43"  stroke="white" stroke-width="1.2" opacity="0.4"/>
-            <!-- Líneas cruzadas sutiles -->
-            <line x1="15" y1="21" x2="32" y2="11"  stroke="white" stroke-width="0.7" opacity="0.2"/>
-            <line x1="49" y1="21" x2="32" y2="11"  stroke="white" stroke-width="0.7" opacity="0.2"/>
-            <line x1="15" y1="43" x2="32" y2="53"  stroke="white" stroke-width="0.7" opacity="0.2"/>
-            <line x1="49" y1="43" x2="32" y2="53"  stroke="white" stroke-width="0.7" opacity="0.2"/>
-          </svg>
-
-          <div class="brand-wordmark">
-            <span class="brand-name" aria-label="BacWins">
-              <span class="brand-name__bac">Bac</span><span class="brand-name__wins">Wins</span>
-            </span>
-            <span class="brand-sub">bacwins.bot</span>
-          </div>
-        </div>
-
-        <p class="showcase-tagline"><%= t :soluciones_software_medida %></p>
-
-        <!-- Features -->
-        <div class="showcase-features">
-          <div class="sf-item">
-            <span class="sf-dot"></span>
-            <span><%= t :desarrollo_medida %></span>
-          </div>
-          <div class="sf-item">
-            <span class="sf-dot"></span>
-            <span><%= t :integracion_sistemas %></span>
-          </div>
-          <div class="sf-item">
-            <span class="sf-dot"></span>
-            <span><%= t :soporte_continuo %></span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Decoración fondo -->
-      <div class="deco deco-1"></div>
-      <div class="deco deco-2"></div>
-      <div class="deco deco-3"></div>
-      <div class="grid-overlay"></div>
-    </div>
+    <%= image_tag 'logo_bacwim.jpeg', alt: 'BacWins', class: 'login-hero-image' %>
   </div>
 
   <!-- ── PANEL DERECHO: Formulario ── -->
@@ -103,26 +40,6 @@
         </div>
 
       <% end %>
-
-      <div class="links">
-        <ul>
-          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <li>
-              <%= link_to new_password_path(resource_name) do %>
-                <span><%= t :olvido_contrasena %></span>
-              <% end %>
-            </li>
-          <% end %>
-
-          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-            <li>
-              <%= link_to new_unlock_path(resource_name) do %>
-                <span><%= t :no_recibio_instrucciones_desbloqueo %></span>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
 
       <%= render 'layouts/flash_messages' %>
     </div>
@@ -172,7 +89,21 @@
         height: 100vh;
     }
 
-    #right { flex: 1; }
+    #right {
+        flex: 1;
+        background: #000000;        /* mismo negro que la imagen para que se mezcle */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .login-hero-image {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;          /* la imagen cubre el área asignada sin deformarse */
+        object-position: center;
+        display: block;
+    }
     #left {
         flex: 1;
         display: flex;
