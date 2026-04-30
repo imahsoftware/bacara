@@ -27,6 +27,10 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/default_user_avatar.svg"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
+  # El email se genera automáticamente concatenando username + @bacwins.com.
+  # Se actualiza siempre que el username cambie.
+  before_validation :set_email_from_username
+
   validates :nombre, :username, :email, :tipoconsulta, presence: true
 
   validates :email, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :multiline => true, message: "* Correo electrónico invalido" }
@@ -212,5 +216,29 @@ class User < ApplicationRecord
 
   def nombrecompletosuper
     return self.identificacion.to_s + ' - ' + self.nombre.to_s + ' (' + self.email.to_s + ')'
+  end
+
+  # ── Override de notificaciones de Devise ────────────────────────────────────
+  # Bloqueamos el envío del correo de unlock_instructions porque las credenciales
+  # SMTP de Gmail no están funcionando y se cae con Net::SMTPAuthenticationError,
+  # mostrando la pantalla de error 500 al usuario al final de los intentos fallidos.
+  # Mientras lo arreglamos, los admins pueden desbloquear manualmente desde la UI
+  # (botón con candado abierto) o vía consola: User.find(id).unlock_access!
+  def send_devise_notification(notification, *args)
+    return if notification == :unlock_instructions
+    super
+  end
+
+  private
+
+  # Genera el email automáticamente como "<username>@bacwins.com".
+  # Solo se ejecuta cuando:
+  #   - es un usuario nuevo (new_record?), o
+  #   - el usuario existente no tiene email (en blanco)
+  # Esto preserva los correos reales de usuarios ya existentes.
+  def set_email_from_username
+    return if username.blank?
+    return unless new_record? || email.blank?
+    self.email = "#{username.to_s.strip.downcase}@bacwins.com"
   end
 end
