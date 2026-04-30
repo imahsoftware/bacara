@@ -1062,8 +1062,8 @@ en:
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: New Shoe
   bet_amount: Bet Amount
-  stop_playing_this_shoe: STOP PLAYING THIS SHOE
-  clear_session_and_start_new_shoe: CLEAR YOUR SESSION AND START A NEW SHOE
+  stop_playing_this_shoe: STOP PLAYING THIS SHOE, START A NEW SHOE
+  clear_session_and_start_new_shoe: STOP PLAYING THIS SHOE, START A NEW SHOE
   player_owner: Player
   date_time: Date & Time
   daily_total: Daily Total
