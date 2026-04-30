@@ -1014,6 +1014,10 @@ body.vsp-body:has(.jd-bw-page) {
     margin-left: 2px;
 }
 .jd-bw-row-btns .btn.btn-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     text-align: center;
     font-weight: 800;
     border-radius: 10px;
@@ -1028,6 +1032,26 @@ body.vsp-body:has(.jd-bw-page) {
     flex-direction: column;
     gap: 10px;
     margin-top: 6px;
+}
+
+/* Banner rojo de aviso: se muestra cuando el shoe está CERRADO / FINALIZADO */
+.jd-stop-shoe-warning {
+    background: #fde0e0;
+    border: 1px solid #f5b5b5;
+    color: #b91c1c;
+    border-radius: 12px;
+    padding: 14px 18px;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.jd-stop-shoe-warning strong {
+    display: block;
+    color: #b91c1c;
 }
 
 .jd-bw-frequency {
