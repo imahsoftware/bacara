@@ -47,14 +47,26 @@ class Jugada < ApplicationRecord
   }
 
   # Listado: PERSONA solo sus jugadas (user_id); el resto ve todo el listado
+  # Devuelve las jugadas que el usuario actual puede listar:
+  # - PERSONA: solo las suyas propias (filtra por user_id)
+  # - sygma/geintac (geintac == 'S'): TODAS las jugadas
+  # - Admin no-sygma: solo jugadas de usuarios cuyo portafolio_id esté asignado al admin
+  #   (vía usersportafolios + el propio portafolio_id del admin como fallback)
   def self.for_user_list(user)
     return none if user.blank?
 
-    if user.tipoconsulta.to_s == 'PERSONA'
-      where(user_id: user.id)
-    else
-      all
-    end
+    return where(user_id: user.id) if user.tipoconsulta.to_s == 'PERSONA'
+
+    return all if user.geintac.to_s.upcase == 'S'
+
+    # Admin no-sygma: portafolios asignados vía usersportafolios + su propio portafolio_id
+    portafolio_ids = user.usersportafolios.pluck(:portafolio_id)
+    portafolio_ids << user.portafolio_id if user.portafolio_id.present?
+    portafolio_ids = portafolio_ids.compact.uniq
+
+    return none if portafolio_ids.empty?
+
+    joins(:user).where(users: { portafolio_id: portafolio_ids })
   end
 
   # PERSONA: tiene una sesión de juego activa (estado PENDIENTE) — no puede abrir otra

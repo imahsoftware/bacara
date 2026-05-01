@@ -31,6 +31,12 @@ class User < ApplicationRecord
   # Se actualiza siempre que el username cambie.
   before_validation :set_email_from_username
 
+  # Tras guardar (create o update), nos aseguramos que exista una fila en
+  # usersportafolios que vincule este usuario con su portafolio_id actual.
+  # Esto mantiene la tabla many-to-many sincronizada para que el filtro de
+  # Jugada.for_user_list funcione correctamente.
+  after_save :ensure_usersportafolio_link
+
   validates :nombre, :username, :email, :tipoconsulta, presence: true
 
   validates :email, format: { with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :multiline => true, message: "* Correo electrónico invalido" }
@@ -258,5 +264,12 @@ class User < ApplicationRecord
     return if username.blank?
     return unless new_record? || email.blank?
     self.email = "#{username.to_s.strip.downcase}@bacwins.com"
+  end
+
+  # Crea la fila en usersportafolios si no existe ya.
+  # Idempotente: si ya está, no hace nada (gracias a find_or_create_by).
+  def ensure_usersportafolio_link
+    return if portafolio_id.blank?
+    usersportafolios.find_or_create_by(portafolio_id: portafolio_id)
   end
 end
