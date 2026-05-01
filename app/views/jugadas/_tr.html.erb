@@ -52,6 +52,14 @@
       <% end %>
     </td>
   <% end %>
-  <td class="text-center"><%= jugada.estado %></td>
+  <td class="text-center">
+    <% estado_text = case jugada.estado.to_s.upcase
+      when 'PENDIENTE' then t(:pending)
+      when 'CERRADA' then t(:closed)
+      when 'FINALIZADA' then t(:finalized)
+      else jugada.estado
+    end %>
+    <%= estado_text %>
+  </td>
   <td class="text-right <%= profit_class %>"><strong><%= profit_text %></strong></td>
 </tr>

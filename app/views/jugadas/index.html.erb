@@ -66,12 +66,12 @@
                   </li>
                 <% end %>
                 <li role="presentation">
-                  <a href="#jugadas-buscar-usuario"
+                  <a href="#jugadas-buscar"
                      class="jugadas-search-tab"
                      data-toggle="tab"
                      role="tab"
                      aria-expanded="false">
-                    <i class="fa fa-gamepad"></i> Buscar usuario
+                    <i class="fa fa-search"></i> <%= t(:buscar) %>
                   </a>
                 </li>
               </ul>
@@ -89,26 +89,26 @@
                 <% end %>
                 <div role="tabpanel"
                      class="tab-pane"
-                     id="jugadas-buscar-usuario"
+                     id="jugadas-buscar"
                      data-jugadas-search-loaded="false">
                   <div class="box box-default" style="margin-top:10px;">
                     <div class="box-body">
-                      <form id="jugadas-user-search-form" class="form-inline">
+                      <form id="jugadas-search-form" class="form-inline">
                         <div class="form-group" style="width:100%;max-width:680px;">
-                          <label class="sr-only" for="jugadas-user-search-input">Usuario</label>
-                          <input id="jugadas-user-search-input"
+                          <label class="sr-only" for="jugadas-search-input">Buscar</label>
+                          <input id="jugadas-search-input"
                                  type="text"
                                  class="form-control"
                                  style="width:80%;"
-                                 placeholder="Nombre, username o identificacion">
+                                 placeholder="Número de jugada o nombre de usuario">
                           <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-search"></i> Buscar
+                            <i class="fa fa-search"></i> <%= t(:search_button) %>
                           </button>
                         </div>
                       </form>
                       <hr style="margin:12px 0;">
-                      <div id="jugadas-user-search-results" class="text-muted">
-                        Busca usuario para ver historial completo de jugadas.
+                      <div id="jugadas-search-results" class="text-muted">
+                        Ingresa un número de jugada o nombre de usuario para buscar.
                       </div>
                     </div>
                   </div>
@@ -154,35 +154,35 @@
     loadTab($(e.target));
   });
 
-  function loadUserSearchResults(params){
-    var $results = $('#jugadas-user-search-results');
+  function loadSearchResults(params){
+    var $results = $('#jugadas-search-results');
     if(!$results.length) return;
     $results.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> Buscando...</p>');
 
-    $.get('<%= tabla_usuario_jugadas_path %>', params || {})
+    $.get('<%= tabla_buscar_jugadas_path %>', params || {})
       .done(function(html){
         $results.html(html);
       })
       .fail(function(){
-        $results.html('<div class="alert alert-danger">No se pudo consultar usuarios.</div>');
+        $results.html('<div class="alert alert-danger">No se pudo realizar la búsqueda.</div>');
       });
   }
 
-  $(document).on('submit', '#jugadas-user-search-form', function(ev){
+  $(document).on('submit', '#jugadas-search-form', function(ev){
     ev.preventDefault();
-    var q = $.trim($('#jugadas-user-search-input').val());
+    var q = $.trim($('#jugadas-search-input').val());
     if(!q){
-      $('#jugadas-user-search-results').html('<div class="alert alert-warning">Ingresa un criterio de busqueda.</div>');
+      $('#jugadas-search-results').html('<div class="alert alert-warning">Ingresa un criterio de búsqueda.</div>');
       return;
     }
-    loadUserSearchResults({ q: q });
+    loadSearchResults({ q: q });
   });
 
   $(document).on('click', '.jugadas-user-pick', function(ev){
     ev.preventDefault();
     var userId = $(this).data('user-id');
     if(!userId) return;
-    loadUserSearchResults({ user_id: userId });
+    loadSearchResults({ user_id: userId });
   });
 
   $(function(){

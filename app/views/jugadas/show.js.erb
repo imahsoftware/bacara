@@ -1,3 +1,4 @@
 $("#jugada_<%= @jugada.id %>").replaceWith("<%= j render 'tr', jugada: @jugada %>");
+$("tr[data-jugada-id='<%= @jugada.id %>']").replaceWith("<%= j render 'tr', jugada: @jugada %>");
 
 $('[data-toggle="tooltip"]').tooltip();

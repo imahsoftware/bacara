@@ -214,7 +214,15 @@
         <tr>
           <td class="play-num">#<%= @jugada.id %></td>
           <td><%= @jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td><%= @jugada.estado %></td>
+          <td>
+            <% estado_text = case @jugada.estado.to_s.upcase
+              when 'PENDIENTE' then t(:pending)
+              when 'CERRADA' then t(:closed)
+              when 'FINALIZADA' then t(:finalized)
+              else @jugada.estado
+            end %>
+            <%= estado_text %>
+          </td>
           <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
         </tr>
       </tbody>

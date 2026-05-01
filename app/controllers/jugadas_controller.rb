@@ -74,9 +74,66 @@ class JugadasController < ApplicationController
     render partial: 'jugadas/tabla_usuario_resultados'
   end
 
+  # Búsqueda combinada: por jugada (ID) o por usuario
+  def tabla_buscar
+    @consulta = params[:q].to_s.strip
+    @jugada = nil
+    @selected_user = nil
+    @matched_users = []
+    @error = nil
+    @search_type = nil
+
+    if @consulta.present?
+      # Primero intentar buscar por ID de jugada (si es un número)
+      if @consulta.to_i.to_s == @consulta || @consulta =~ /^\d+$/
+        jugada_id = @consulta.to_i
+        if jugada_id > 0
+          @jugada = Jugada.for_user_list(current_user).find_by(id: jugada_id)
+          @search_type = 'jugada' if @jugada.present?
+          @error = "No tienes permiso para ver esta jugada" if @jugada.blank? && Jugada.exists?(jugada_id)
+        end
+      end
+
+      # Si no encontró jugada, buscar por usuario
+      if @jugada.blank? && @search_type.blank?
+        users_scope = users_with_jugadas_scope
+        @selected_user = find_user_for_query(users_scope, @consulta)
+        @matched_users = search_users_for_query(users_scope, @consulta) if @selected_user.blank?
+        @search_type = 'usuario' if @selected_user.present? || @matched_users.present?
+      end
+    end
+
+    if @jugada.present?
+      @jugadas = [@jugada]
+      @daily_totals = compute_daily_totals(Jugada.where(id: @jugada.id))
+    elsif @selected_user.present?
+      @jugadas = Jugada.for_user_list(current_user)
+                       .includes(:user)
+                       .where(user_id: @selected_user.id)
+                       .order(id: :desc)
+      @daily_totals = compute_daily_totals(@jugadas)
+    else
+      @jugadas = []
+      @daily_totals = {}
+    end
+
+    render partial: 'jugadas/tabla_buscar_resultados'
+  rescue => e
+    @error = "Error al buscar: #{e.message}"
+    @jugadas = []
+    @daily_totals = {}
+    render partial: 'jugadas/tabla_buscar_resultados'
+  end
+
   # Devuelve hash { Date => Float } con profit total por día para un scope dado.
   def compute_daily_totals(jugadas_scope)
     return {} if jugadas_scope.blank?
+
+    # Si es un Array, convertir a scope
+    if jugadas_scope.is_a?(Array)
+      jugada_ids = jugadas_scope.map(&:id)
+      jugadas_scope = Jugada.where(id: jugada_ids)
+    end
 
     rows = Jugadasdetalle
            .joins(:jugada)
@@ -91,7 +148,10 @@ class JugadasController < ApplicationController
   helper_method :compute_daily_totals
 
   def show
-    respond_to { |format| format.js }
+    respond_to do |format|
+      format.js
+      format.html { redirect_to jugadas_path }
+    end
   end
 
   def new

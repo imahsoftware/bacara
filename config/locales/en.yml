@@ -21,6 +21,21 @@ en:
   jugadas: Plays
   buscar_placeholder: Search...
   ver_detalle_jugada: View play details
+  search_play_or_user: Enter a play number or username to search.
+  shoes: SHOES
+  id: ID
+  player: Player
+  status: Status
+  play_date: Date
+  profit: Profit
+  actions: Actions
+  download_pdf: Download PDF
+  summary_by_day: Summary by Day
+  total_profit: Total Profit
+  selected_user: Selected user
+  multiple_users_found: "Multiple users found. Select one:"
+  user_not_found: User not found
+  no_results_found: No results found
   ingreso_al_sistema: System Login
   ingresa_credenciales: Enter your credentials to continue
   usuario: Username
@@ -1089,6 +1104,9 @@ en:
   no_tiene_acceso_jugada: You do not have access to this play.
   no_tiene_sesion_pendiente: You do not have a PENDING session. Use the play list.
   solo_puede_acceder_jugada_pendiente: You can only access your active PENDING play (for security, other ids are not allowed).
+  pending: Pending
+  closed: Closed
+  finalized: Finalized
   fecha_larga_formato: '%{dia_semana}, %{mes} %{dia}, %{anio}'
   day_names_full:
     - Sunday

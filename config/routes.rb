@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'detalle_jugadas'
       get 'tabla_portafolio'
       get 'tabla_usuario'
+      get 'tabla_buscar'
     end
   end
 
