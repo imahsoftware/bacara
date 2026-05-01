@@ -1,0 +1,23 @@
+<%#
+  Columnas del detalle (Actions, Shoe, Date & Time, …) pegadas al bloque de datos del día.
+  show_player_col — mismo criterio que el resto del listado
+  day_class — ej. day-20260430; si viene + initially_hidden, se oculta con el acordeón del día
+  initially_hidden — solo aplica si day_class presente (días pasados colapsados)
+%>
+<%
+  show_player_col = local_assigns[:show_player_col]
+  day_class       = local_assigns[:day_class].to_s.presence
+  init_hidden     = local_assigns[:initially_hidden] == true && day_class.present?
+  classes = ['thcolor', 'jugadas-datagrid-head-row']
+  classes << "jugada-row #{day_class}" if day_class.present?
+%>
+<tr class="<%= classes.join(' ') %>"<%= ' style="display:none;"'.html_safe if init_hidden %>>
+  <th scope="col" class="text-center jugadas-datagrid-col-actions"><%= t(:actions) %></th>
+  <th scope="col" class="text-center jugadas-datagrid-col-shoe"><%= t(:play_number) %></th>
+  <th scope="col" class="text-center jugadas-datagrid-col-datetime"><%= t(:date_time) %></th>
+  <% if show_player_col %>
+    <th scope="col" class="text-center jugadas-datagrid-col-player"><%= t(:player_owner) %></th>
+  <% end %>
+  <th scope="col" class="text-center jugadas-datagrid-col-status"><%= t(:status) %></th>
+  <th scope="col" class="text-right jugadas-datagrid-col-profit"><%= t(:profit_label) %></th>
+</tr>

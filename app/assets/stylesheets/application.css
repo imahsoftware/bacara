@@ -819,22 +819,115 @@ body.vsp-body:has(.jd-bw-page) {
 .jugadas-table tr.jugadas-day-total.jd-profit-neg > td:last-child { color: #b91c1c; }
 .jugadas-table tr.jugadas-day-total.jd-profit-zero > td:last-child { color: #6b7280; }
 
-/* Consolidado por usuario dentro de cada día */
+/* Consolidado por usuario + gráfico gerencial por día */
 .jugadas-consolidado-dia-cell {
     background: #f9fafb;
     padding: 10px 12px !important;
     vertical-align: top;
 }
+.jugadas-consolidado-dia-layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px 28px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.jugadas-consolidado-dia-panel-tabla {
+    flex: 0 1 auto;
+    text-align: center;
+}
+.jugadas-consolidado-dia-panel-chart {
+    flex: 1 1 280px;
+    min-width: 260px;
+    max-width: 460px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    box-sizing: border-box;
+}
 .jugadas-consolidado-dia-head {
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    text-align: center;
+}
+.jugadas-consolidado-dia-head .jugadas-consolidado-dia-head-icon {
+    margin-right: 6px;
+    opacity: 0.75;
 }
 .jugadas-consolidado-dia-head .text-muted {
     margin-left: 6px;
     font-weight: 400;
 }
-.jugadas-consolidado-dia-inner {
-    margin-bottom: 0 !important;
+.jugadas-consolidado-chart-head {
+    flex-shrink: 0;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #374151;
+}
+.jugadas-consolidado-chart-head-icon {
+    margin-right: 6px;
+    opacity: 0.75;
+}
+.jugadas-consolidado-chart-host {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
     background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 4px 6px 2px;
+    box-sizing: border-box;
+}
+.jugadas-consolidado-dia-inner {
+    margin: 0 auto !important;
+    background: #fff;
+    width: auto;
+    max-width: 523px; /* ~25% más que 418px */
+    table-layout: fixed;
+    font-size: 11px;
+}
+.jugadas-consolidado-dia-inner thead th,
+.jugadas-consolidado-dia-inner tbody td {
+    padding: 3px 6px !important;
+    line-height: 1.25;
+}
+.jugadas-consolidado-dia-inner .jugadas-consolidado-col-player {
+    width: 58%;
+    overflow: hidden;
+}
+.jugadas-consolidado-dia-inner .jugadas-consolidado-player-line {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.jugadas-consolidado-dia-inner .jugadas-consolidado-col-count {
+    width: 16%;
+}
+.jugadas-consolidado-dia-inner .jugadas-consolidado-col-profit {
+    width: 26%;
+}
+.jugadas-consolidado-dia-inner tfoot td {
+    background: #e8edf4;
+    border-top: 2px solid #c5d0e0 !important;
+    font-size: 11px;
+    padding: 4px 6px !important;
+}
+
+/* Fila de encabezado del detalle (repetida por día, dentro del tbody) */
+.jugadas-table tbody tr.jugadas-datagrid-head-row > th {
+    background: #000000 !important;
+    color: #fff !important;
+    font-size: 11px;
+    padding: 6px 4px !important;
+    border-color: #333 !important;
+    font-weight: 700;
 }
 
 .jd-bw-sub {

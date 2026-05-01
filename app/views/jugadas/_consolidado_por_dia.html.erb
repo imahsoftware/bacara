@@ -11,46 +11,95 @@
 <% return if rows.blank? %>
 
 <%
+  esc = ->(s) { ERB::Util.html_escape(s.to_s) }
+
+  sum_plays   = rows.sum { |r| r[:count].to_i }
+  sum_profit  = rows.sum { |r| r[:total].to_f }
+  foot_class  = sum_profit > 0 ? 'jd-profit-pos' : (sum_profit < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
   total_cols   = local_assigns.fetch(:total_cols, 6)
   day_class    = local_assigns[:day_class].to_s.presence
   init_hidden  = local_assigns[:initially_hidden] == true
   tr_class     = day_class.present? ? "jugada-row #{day_class}" : nil
   tr_style     = (init_hidden && day_class.present?) ? 'display:none;' : nil
+
+  chart_categories = rows.map { |r| (r[:user]&.username).presence || '—' }
+  chart_profits    = rows.map { |r| r[:total].to_f }
+  chart_height     = [[rows.size * 38 + 168, 210].max, 440].min
+
+  chart_tooltips_json = rows.map.with_index do |r, i|
+    u = r[:user]
+    nombre_part = u&.nombre.present? ? %( <span style=\"color:#888\">(#{esc.call(u.nombre)})</span>) : ''
+    "<b>#{esc.call(chart_categories[i])}</b>#{nombre_part}<br/><span>#{r[:count]} #{esc.call(I18n.t(:plays_lower))}</span> · <b>#{esc.call(format_jugada_profit_value(r[:total]))}</b>"
+  end
+
+  chart_payload = {
+    categories: chart_categories,
+    profits: chart_profits,
+    height: chart_height,
+    title: I18n.t(:jugadas_consolidado_chart_title),
+    subtitle: "#{sum_plays} #{I18n.t(:plays_lower)} — #{I18n.t(:jugadas_consolidado_total_fila)}: #{format_jugada_profit_value(sum_profit)}",
+    series_name: I18n.t(:profit_label).to_s.sub(/\s*:\s*\z/, ''),
+    y_axis_title: I18n.t(:jugadas_consolidado_chart_yaxis),
+    tooltips: chart_tooltips_json
+  }
 %>
 <tr<% if tr_class.present? %> class="<%= tr_class %>"<% end %><% if tr_style.present? %> style="<%= tr_style %>"<% end %>>
   <td colspan="<%= total_cols %>" class="jugadas-consolidado-dia-cell">
-    <div class="jugadas-consolidado-dia-head">
-      <strong><%= t(:jugadas_consolidado_titulo) %></strong>
-      <small class="text-muted"><%= t(:jugadas_consolidado_dia) %></small>
+    <div class="jugadas-consolidado-dia-layout">
+      <div class="jugadas-consolidado-dia-panel-tabla">
+        <div class="jugadas-consolidado-dia-head">
+          <span class="jugadas-consolidado-dia-head-icon" aria-hidden="true"><i class="fa fa-table"></i></span>
+          <strong><%= t(:jugadas_consolidado_titulo) %></strong>
+          <small class="text-muted"><%= t(:jugadas_consolidado_dia) %></small>
+        </div>
+        <table class="table table-bordered table-condensed jugadas-table jugadas-consolidado-dia-inner">
+          <thead>
+            <tr class="thcolor">
+              <th class="text-left jugadas-consolidado-col-player"><%= t(:player_owner) %></th>
+              <th class="text-center jugadas-consolidado-col-count"><%= t(:jugadas_consolidado_cantidad) %></th>
+              <th class="text-right jugadas-consolidado-col-profit"><%= t(:profit_label) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% rows.each do |r| %>
+              <%
+                u = r[:user]
+                total = r[:total].to_f
+                profit_class = total > 0 ? 'jd-profit-pos' : (total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+                player_title = u ? [u.username, u.nombre].compact.join(' — ') : ''
+              %>
+              <tr>
+                <td class="text-left jugadas-consolidado-col-player" title="<%= player_title %>">
+                  <% if u %>
+                    <span class="jugadas-consolidado-player-line"><strong><%= u.username %></strong><% if u.nombre.present? %> <small class="text-muted">(<%= u.nombre %>)</small><% end %></span>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </td>
+                <td class="text-center jugadas-consolidado-col-count"><%= r[:count] %></td>
+                <td class="text-right jugadas-consolidado-col-profit <%= profit_class %>"><strong><%= format_jugada_profit_value(total) %></strong></td>
+              </tr>
+            <% end %>
+          </tbody>
+          <tfoot>
+            <tr class="jugadas-consolidado-dia-tfoot">
+              <td class="text-left jugadas-consolidado-col-player"><strong><%= t(:jugadas_consolidado_total_fila) %></strong></td>
+              <td class="text-center jugadas-consolidado-col-count"><strong><%= sum_plays %></strong></td>
+              <td class="text-right jugadas-consolidado-col-profit <%= foot_class %>"><strong><%= format_jugada_profit_value(sum_profit) %></strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="jugadas-consolidado-dia-panel-chart">
+        <div class="jugadas-consolidado-chart-head">
+          <span class="jugadas-consolidado-chart-head-icon" aria-hidden="true"><i class="fa fa-bar-chart"></i></span>
+          <strong><%= t(:jugadas_consolidado_chart_heading) %></strong>
+        </div>
+        <div class="jugadas-consolidado-chart-host">
+          <script type="application/json" class="jugadas-consolidado-json"><%= raw(chart_payload.to_json) %></script>
+        </div>
+      </div>
     </div>
-    <table class="table table-bordered table-condensed table-striped jugadas-table jugadas-consolidado-dia-inner">
-      <thead>
-        <tr class="thcolor">
-          <th class="text-left" width="50%"><%= t(:player_owner) %></th>
-          <th class="text-center" width="20%"><%= t(:jugadas_consolidado_cantidad) %></th>
-          <th class="text-right" width="30%"><%= t(:profit_label) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% rows.each do |r| %>
-          <%
-            u = r[:user]
-            total = r[:total].to_f
-            profit_class = total > 0 ? 'jd-profit-pos' : (total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
-          %>
-          <tr>
-            <td class="text-left">
-              <% if u %>
-                <strong><%= u.username %></strong><% if u.nombre.present? %> <small class="text-muted" style="font-size:11px;">(<%= u.nombre %>)</small><% end %>
-              <% else %>
-                <span class="text-muted">—</span>
-              <% end %>
-            </td>
-            <td class="text-center"><%= r[:count] %></td>
-            <td class="text-right <%= profit_class %>"><strong><%= format_jugada_profit_value(total) %></strong></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
   </td>
 </tr>
