@@ -95,12 +95,12 @@
                     <div class="box-body">
                       <form id="jugadas-search-form" class="form-inline">
                         <div class="form-group" style="width:100%;max-width:680px;">
-                          <label class="sr-only" for="jugadas-search-input">Buscar</label>
+                          <label class="sr-only" for="jugadas-search-input">Search</label>
                           <input id="jugadas-search-input"
                                  type="text"
                                  class="form-control"
                                  style="width:80%;"
-                                 placeholder="Número de jugada o nombre de usuario">
+                                 placeholder="Play ID, name, username, or ID number">
                           <button type="submit" class="btn btn-primary">
                             <i class="fa fa-search"></i> <%= t(:search_button) %>
                           </button>
@@ -108,7 +108,7 @@
                       </form>
                       <hr style="margin:12px 0;">
                       <div id="jugadas-search-results" class="text-muted">
-                        Ingresa un número de jugada o nombre de usuario para buscar.
+                        Enter a play ID or user criteria to search.
                       </div>
                     </div>
                   </div>
@@ -144,6 +144,7 @@
       .done(function(html){
         $pane.html(html);
         $pane.data('jugadas-loaded', true);
+        if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
         $pane.html('<div class="alert alert-danger">No se pudo cargar jugadas de este portafolio.</div>');
@@ -162,6 +163,7 @@
     $.get('<%= tabla_buscar_jugadas_path %>', params || {})
       .done(function(html){
         $results.html(html);
+        if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
         $results.html('<div class="alert alert-danger">No se pudo realizar la búsqueda.</div>');

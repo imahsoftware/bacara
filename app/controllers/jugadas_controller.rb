@@ -83,7 +83,15 @@ class JugadasController < ApplicationController
     @error = nil
     @search_type = nil
 
-    if @consulta.present?
+    if params[:user_id].present?
+      users_scope = users_with_jugadas_scope
+      @selected_user = users_scope.find_by(id: params[:user_id].to_i)
+      if @selected_user.present?
+        @search_type = 'usuario'
+      else
+        @error = 'Usuario no encontrado o sin acceso.'
+      end
+    elsif @consulta.present?
       # Primero intentar buscar por ID de jugada (si es un número)
       if @consulta.to_i.to_s == @consulta || @consulta =~ /^\d+$/
         jugada_id = @consulta.to_i
@@ -104,8 +112,9 @@ class JugadasController < ApplicationController
     end
 
     if @jugada.present?
-      @jugadas = [@jugada]
-      @daily_totals = compute_daily_totals(Jugada.where(id: @jugada.id))
+      # Relation (no Array): _tabla usa .order sobre @jugadas
+      @jugadas = Jugada.where(id: @jugada.id).includes(:user).order(id: :desc)
+      @daily_totals = compute_daily_totals(@jugadas)
     elsif @selected_user.present?
       @jugadas = Jugada.for_user_list(current_user)
                        .includes(:user)
@@ -113,14 +122,14 @@ class JugadasController < ApplicationController
                        .order(id: :desc)
       @daily_totals = compute_daily_totals(@jugadas)
     else
-      @jugadas = []
+      @jugadas = Jugada.none
       @daily_totals = {}
     end
 
     render partial: 'jugadas/tabla_buscar_resultados'
   rescue => e
     @error = "Error al buscar: #{e.message}"
-    @jugadas = []
+    @jugadas = Jugada.none
     @daily_totals = {}
     render partial: 'jugadas/tabla_buscar_resultados'
   end
@@ -331,13 +340,22 @@ class JugadasController < ApplicationController
     counts = scope.joins(:user).group('users.portafolio_id').count
     names_by_id = Portafolio.where(id: portafolio_ids).pluck(:id, :nombre).to_h
 
-    portafolio_ids.sort_by { |id| names_by_id[id].to_s }.map do |id|
+    portafolio_ids.sort.map do |id|
+      raw_name = names_by_id[id].presence || "Portafolio #{id}"
       {
         id: id,
-        name: names_by_id[id].presence || "Portafolio #{id}",
+        name: format_portfolio_tab_name(raw_name),
         count: counts[id].to_i
       }
     end
+  end
+
+  # Primera letra mayúscula, resto minúsculas (respeta UTF-8 / acentos).
+  def format_portfolio_tab_name(label)
+    s = label.to_s.strip
+    return s if s.blank?
+
+    s.mb_chars.capitalize.to_s
   end
 
   def users_with_jugadas_scope

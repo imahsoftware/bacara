@@ -28,7 +28,8 @@
     u.nombre.presence || u.username.presence || '—'
   end
   chart_profits    = rows.map { |r| r[:total].to_f }
-  chart_height     = [[rows.size * 38 + 168, 210].max, 440].min
+  # Barras finas (pointWidth en JS): menos px por fila → contenedor más bajo, alineado con tabla.
+  chart_height     = [[rows.size * 22 + 118, 168].max, 360].min
 
   chart_tooltips_json = rows.map.with_index do |r, i|
     u = r[:user]
@@ -56,6 +57,7 @@
           <strong><%= t(:jugadas_consolidado_titulo) %></strong>
           <small class="text-muted"><%= t(:jugadas_consolidado_dia) %></small>
         </div>
+        <div class="jugadas-consolidado-dia-tabla-host" style="min-height: <%= chart_height %>px">
         <table class="table table-bordered table-condensed jugadas-table jugadas-consolidado-dia-inner">
           <thead>
             <tr class="thcolor">
@@ -99,6 +101,7 @@
             </tr>
           </tfoot>
         </table>
+        </div>
       </div>
 
       <div class="jugadas-consolidado-dia-panel-chart">
@@ -106,7 +109,7 @@
           <span class="jugadas-consolidado-chart-head-icon" aria-hidden="true"><i class="fa fa-bar-chart"></i></span>
           <strong><%= t(:jugadas_consolidado_chart_heading) %></strong>
         </div>
-        <div class="jugadas-consolidado-chart-host">
+        <div class="jugadas-consolidado-chart-host" data-min-chart-height="<%= chart_height %>" style="min-height: <%= chart_height %>px">
           <script type="application/json" class="jugadas-consolidado-json"><%= raw(chart_payload.to_json) %></script>
         </div>
       </div>
