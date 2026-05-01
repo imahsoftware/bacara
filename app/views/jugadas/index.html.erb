@@ -144,6 +144,7 @@
       .done(function(html){
         $pane.html(html);
         $pane.data('jugadas-loaded', true);
+        if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
         $pane.html('<div class="alert alert-danger">No se pudo cargar jugadas de este portafolio.</div>');
@@ -162,6 +163,7 @@
     $.get('<%= tabla_buscar_jugadas_path %>', params || {})
       .done(function(html){
         $results.html(html);
+        if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
         $results.html('<div class="alert alert-danger">No se pudo realizar la búsqueda.</div>');

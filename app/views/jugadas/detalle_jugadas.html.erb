@@ -4,6 +4,26 @@
     font-family: Arial, sans-serif;
     color: #0a0a0a;
   }
+  .pdf-document-root {
+    position: relative;
+  }
+  /* Logo en flujo: misma fila que .pdf-mini → vertical-align middle alinea sin absolute */
+  .pdf-logo-wrap {
+    position: relative;
+    left: 80px;
+    display: inline-block;
+    max-width: 180px;
+    width: 100%;
+    line-height: 0;
+    vertical-align: middle;
+  }
+  .pdf-logo-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
   .pdf-mini {
     width: 100%;
     border-collapse: collapse;
@@ -50,18 +70,49 @@
   .pdf-head-left {
     width: 30%;
     padding-right: 10px;
+    text-align: left;
   }
   .pdf-head-right {
     width: 70%;
+    text-align: right;
   }
-  .pdf-logo-wrap {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+  /* Tabla resumen al borde derecho del bloque header */
+  .pdf-head-right .pdf-mini {
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    display: inline-table;
+  }
+  .pdf-score-stack {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  /* Sin doble línea entre última fila fase A y fila transición (cabeceras + PB mano 5) */
+  .pdf-score-stack .pdf-phase-a + .pdf-phase-b tbody:first-of-type tr.pdf-row-transition > th,
+  .pdf-score-stack .pdf-phase-a + .pdf-phase-b tbody:first-of-type tr.pdf-row-transition > td {
+    border-top: none !important;
+  }
+  /* Cabeceras laterales en fila transición (misma altura que fila datos) */
+  .pdf-phase-b tr.pdf-row-transition > th {
+    height: var(--pdf-row-h);
+    line-height: var(--pdf-row-h);
+    background: #191d26 !important;
+    color: #fff;
+    border-color: #2c3138;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .pdf-phase-b tr.pdf-row-transition > th.col-p-head { color: #7fb2ff !important; }
+  .pdf-phase-b tr.pdf-row-transition > th.col-b-head { color: #ff8d8d !important; }
+  /* No pintar encabezados con verde/rojo finalizar */
+  .pdf-phase-b tr.pdf-row-transition.tr-finalizar-ok > th,
+  .pdf-phase-b tr.pdf-row-transition.tr-finalizar > th {
+    background: #191d26 !important;
+    color: #fff !important;
   }
   .pdf-table-wrap .jd-empty { display: none; }
 
-  /* ===== CSS baccarat tabla (inline para PDF) ===== */
+  /* ===== Una sola tabla = mismo salto de página en izq / centro / der (wkhtmltopdf) ===== */
   :root {
     --pdf-head-h: 24px;
     --pdf-row-h: 28px;
@@ -77,83 +128,86 @@
     box-shadow: none;
     padding: 0;
   }
-  .pdf-grid {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
-  .pdf-grid td {
-    vertical-align: top;
-    padding: 0;
-  }
-  /*
-   * Fila 1 izq/der vacías con altura ≈ cabecera P|B + 5 filas del centro.
-   * Las tablas laterales solo muestran pdf_resto (sin los 5 primeros); deben arrancar alineadas con la fila 6 del centro.
-   */
-  .pdf-grid .col-left-top,
-  .pdf-grid .col-right-top {
-    height: calc(var(--pdf-head-h) + (var(--pdf-row-h) * 5));
-  }
-  .pdf-grid .col-left  { width: 46%; }
-  /* Fondo blanco: si no, el margin-top de .bac-table deja hueco y #eef4fb “sube” sobre la cabecera P|B */
-  .pdf-grid .col-mid   { width: 8%; border-left: none; border-right: none; background: #fff; overflow: hidden; }
-  .pdf-grid .col-right { width: 46%; }
-  .pdf-grid .col-mid .bac-table {
-    margin-top: 18px;
-    margin-bottom: 0;
-    border-left: 3px solid #9ca3af;
-    border-right: 3px solid #9ca3af;
-  }
-
-  .pdf-table-wrap .bac-table {
+  .pdf-unified {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     font-size: 11px;
     background: #fff;
   }
-  .pdf-table-wrap .bac-table th,
-  .pdf-table-wrap .bac-table td {
+  .pdf-unified thead {
+    display: table-header-group;
+  }
+  .pdf-unified th,
+  .pdf-unified td {
     border: 1px solid #d8dde4;
-    padding: 0 8px;
+    padding: 0 6px;
     text-align: center;
     vertical-align: middle;
     white-space: nowrap;
-  }
-  .pdf-table-wrap .bac-table thead th {
-    height: var(--pdf-head-h);
-    line-height: var(--pdf-head-h);
-  }
-  .pdf-table-wrap .bac-table tbody td {
     height: var(--pdf-row-h);
     line-height: var(--pdf-row-h);
+    color: #0a0a0a;
+    font-weight: 400;
   }
-
-  .pdf-table-wrap .bac-table thead tr.tr-grupos th,
-  .pdf-table-wrap .bac-table thead tr.tr-cols th {
+  .pdf-unified thead th {
+    height: var(--pdf-head-h);
+    line-height: var(--pdf-head-h);
     background: #191d26;
     color: #fff;
     border-color: #2c3138;
     font-size: 10px;
     font-weight: 700;
   }
-  .pdf-table-wrap .bac-table thead tr.tr-grupos th {
-    line-height: var(--pdf-head-h);
+  .pdf-unified thead th.col-p-head { color: #7fb2ff !important; }
+  .pdf-unified thead th.col-b-head { color: #ff8d8d !important; }
+  /* Primeras 5 filas: laterales sin encabezado ni contenido visible */
+  .pdf-unified thead th.pdf-th-side-blank {
+    background: #fff !important;
+    border-color: #fff !important;
+    color: transparent !important;
+    padding: 0 !important;
   }
-  .pdf-table-wrap .bac-table thead tr.tr-cols th.col-p-head { color: #7fb2ff !important; }
-  .pdf-table-wrap .bac-table thead tr.tr-cols th.col-b-head { color: #ff8d8d !important; }
+  .pdf-unified tbody td.pdf-empty-zone {
+    background: #fff !important;
+    border-color: #fff !important;
+    padding: 0 !important;
+    height: var(--pdf-row-h);
+  }
+  .pdf-phase-a { margin: 0; border-spacing: 0; }
+  .pdf-phase-b { margin: 0; border-spacing: 0; }
+  /* Un tbody por mano: evita partir solo la columna central al saltar página */
+  .pdf-unified tbody.pdf-hand-block {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .pdf-unified tbody.pdf-hand-block tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  .pdf-unified tbody.pdf-hand-block tr.pdf-row-a td { background: #f3f4f6; }
+  .pdf-unified tbody.pdf-hand-block tr.pdf-row-b td { background: #dfe7e3; }
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-ok td { background: #9dd9ad !important; }
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar td { background: #f5bcbc !important; }
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-ok td.pdf-empty-zone,
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar td.pdf-empty-zone {
+    background: #fff !important;
+  }
 
-  .pdf-table-wrap .bac-table tbody tr:nth-child(odd) td { background: #f3f4f6; }
-  .pdf-table-wrap .bac-table tbody tr:nth-child(even) td { background: #dfe7e3; }
-  .pdf-table-wrap .bac-table tbody tr.tr-finalizar-ok td { background: #9dd9ad !important; }
-  .pdf-table-wrap .bac-table tbody tr.tr-finalizar td { background: #f5bcbc !important; }
-
-  .pdf-table-wrap .bac-table tbody td { color: #0a0a0a; font-weight: 400; }
-  .pdf-table-wrap .td-num { background: #eceff1 !important; width: 28px; }
-  .pdf-table-wrap .td-central-p { background: #e8f1ff !important; }
-  .pdf-table-wrap .td-central-b { background: #fde8e9 !important; }
-
-  .pdf-table-wrap .bac-chip {
+  .pdf-unified .td-num { background: #eceff1 !important; width: 28px; }
+  .pdf-unified .td-central-p {
+    background: #e8f1ff !important;
+    border-left: 3px solid #9ca3af;
+  }
+  .pdf-unified .td-central-b {
+    background: #fde8e9 !important;
+    border-right: 3px solid #9ca3af;
+  }
+  .pdf-unified thead th.pdf-th-central-pb {
+    border-left: 3px solid #9ca3af !important;
+    border-right: 3px solid #9ca3af !important;
+  }
+  .pdf-unified .bac-chip {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -164,39 +218,24 @@
     font-size: 10px;
     font-weight: 700;
   }
-  .pdf-table-wrap .bac-chip-p { background: #2563eb; }
-  .pdf-table-wrap .bac-chip-b { background: #dc2626; }
-  .pdf-table-wrap .bac-chip-none {
+  .pdf-unified .bac-chip-p { background: #2563eb; }
+  .pdf-unified .bac-chip-b { background: #dc2626; }
+  .pdf-unified .bac-chip-none {
     background: transparent;
     color: #4b5563;
     font-weight: 400;
     font-size: 12px;
   }
 
-  .pdf-table-wrap .bac-pos,
-  .pdf-table-wrap .bac-neg,
-  .pdf-table-wrap .bac-zero,
-  .pdf-table-wrap .bac-ok,
-  .pdf-table-wrap .bac-no,
-  .pdf-table-wrap .bac-dash {
-    color: #0a0a0a !important;
-    font-weight: 400 !important;
-  }
-  .pdf-table-wrap .col-mid .bac-table td.td-central-p { border-left: none; }
-  .pdf-table-wrap .col-mid .bac-table td.td-central-b { border-right: none; }
-  .pdf-table-wrap .col-mid .bac-table tbody td {
-    height: calc(var(--pdf-row-h) + 1px);
-    line-height: calc(var(--pdf-row-h) + 1px);
-  }
-
-  .pdf-table-wrap .bac-table thead tr:first-child th:first-child { border-top-left-radius: 8px; }
-  .pdf-table-wrap .bac-table thead tr:first-child th:last-child  { border-top-right-radius: 8px; }
+  .pdf-unified thead tr:first-child th:first-child { border-top-left-radius: 8px; }
+  .pdf-unified thead tr:first-child th:last-child  { border-top-right-radius: 8px; }
 </style>
 
+<div class="pdf-document-root">
 <div class="pdf-head">
   <div class="pdf-head-left">
-    <div class="pdf-logo-wrap">
-      <img src="https://bacwins.bot/assets/logo_bacwim-4ef753dc6cbb22b7fa74b36e61951516a87fa9362a3382d840bb2e5531bf8b6d.jpg" alt="BacWins" style="width: 70%;">
+    <div class="pdf-logo-wrap" aria-hidden="true">
+      <img src="https://bacwins.bot/assets/bacwins-a620e961d39557f10389f72bb8938d43bca7b190d1f92bb45516e8fb0772a9d5.png" alt="BacWins">
     </div>
   </div>
   <div class="pdf-head-right">
@@ -246,116 +285,158 @@
     d.player2.present? || d.banquer2.present? || d.resultado2.present? || d.final2.present? || d.acumulado2.present? ||
     d.acumuladof.present?
   end
-  pdf_primeros = pdf_rows.first(5)
-  pdf_resto    = pdf_rows.drop(5)
+  pdf_left_cols  = @pdf_show_mecanicas ? 7 : 6
+  pdf_right_cols = @pdf_show_mecanicas ? 7 : 6
+  # 4 filas solo centro; la 5ª mano va en la misma fila que cabeceras izq/der
+  pdf_phase_a = pdf_rows.first(4)
+  pdf_hand5   = pdf_rows[4] if pdf_rows.size >= 5
+  pdf_phase_b = pdf_rows.drop(5)
   pdf_fin_row_class = lambda do |d|
     fv = d.respond_to?(:finalizar) ? d.finalizar.to_s.strip.upcase : ''
     fv == 'Y' ? 'tr-finalizar-ok' : (fv.present? ? 'tr-finalizar' : '')
   end
+  # Anchos iguales fase A / B → columna P|B alineada en todo el bloque (mockup imagen 2)
+  pdf_mid_col_w  = 7.0
+  pdf_side_col_w = (43.0 / pdf_left_cols).round(4)
 %>
 
 <div class="pdf-table-wrap jd-bw-page">
-  <table class="pdf-grid">
-    <tr>
-      <td class="col-left col-left-top"></td>
+  <div class="pdf-score-stack">
+  <% if pdf_phase_a.any? %>
+    <table class="pdf-unified pdf-phase-a">
+      <colgroup>
+        <% pdf_left_cols.times do %>
+          <col style="width: <%= pdf_side_col_w %>%;">
+        <% end %>
+        <col style="width: <%= pdf_mid_col_w %>%;">
+        <col style="width: <%= pdf_mid_col_w %>%;">
+        <% pdf_right_cols.times do %>
+          <col style="width: <%= pdf_side_col_w %>%;">
+        <% end %>
+      </colgroup>
+      <thead>
+        <tr>
+          <th colspan="<%= pdf_left_cols %>" class="pdf-th-side-blank">&nbsp;</th>
+          <th colspan="2" class="pdf-th-central-pb">P &nbsp;|&nbsp; B</th>
+          <th colspan="<%= pdf_right_cols %>" class="pdf-th-side-blank">&nbsp;</th>
+        </tr>
+      </thead>
+      <% pdf_phase_a.each_with_index do |d, idx| %>
+        <tbody class="pdf-hand-block">
+          <tr class="<%= pdf_fin_row_class.call(d) %> <%= idx.even? ? 'pdf-row-a' : 'pdf-row-b' %>">
+            <td colspan="<%= pdf_left_cols %>" class="pdf-empty-zone"><%# lateral vacío %></td>
+            <td class="td-central-p">
+              <% if d.r_player == 1 %>
+                <span class="bac-chip bac-chip-p">P</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <td class="td-central-b">
+              <% if d.r_banker == 1 %>
+                <span class="bac-chip bac-chip-b">B</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <td colspan="<%= pdf_right_cols %>" class="pdf-empty-zone"><%# lateral vacío %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
 
-      <td class="col-mid" rowspan="2">
-        <table class="bac-table">
-          <thead>
-            <tr class="tr-grupos">
-              <th colspan="2">P &nbsp;|&nbsp; B</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% pdf_rows.each do |d| %>
-              <tr class="<%= pdf_fin_row_class.call(d) %>">
-                <td class="td-central-p">
-                  <% if d.r_player == 1 %>
-                    <span class="bac-chip bac-chip-p">P</span>
-                  <% else %>
-                    <span class="bac-chip bac-chip-none">–</span>
-                  <% end %>
-                </td>
-                <td class="td-central-b">
-                  <% if d.r_banker == 1 %>
-                    <span class="bac-chip bac-chip-b">B</span>
-                  <% else %>
-                    <span class="bac-chip bac-chip-none">–</span>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-
-      <td class="col-right col-right-top"></td>
-    </tr>
-    <tr>
-      <td class="col-left">
-        <table class="bac-table">
-          <thead>
-            <tr class="tr-cols">
-              <th style="width:28px;">#</th>
-              <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
-              <th class="col-p-head">P</th>
-              <th class="col-b-head">B</th>
-              <th>✓/✗</th>
-              <th>RESULT</th>
-              <th>ACCUM</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% pdf_resto.each_with_index do |d, i| %>
-              <tr class="<%= pdf_fin_row_class.call(d) %>">
-                <td class="td-num"><%= i + 1 %></td>
-                <% if @pdf_show_mecanicas %><td><%= d.mecanica1.presence || '—' %></td><% end %>
-                <td><%= d.player1.present? ? d.player1 : '—' %></td>
-                <td><%= d.banquer1.present? ? d.banquer1 : '—' %></td>
-                <td>
-                  <% if d.resultado1 == 1 %>✓
-                  <% elsif d.resultado1 == 0 %>✗
-                  <% else %>—<% end %>
-                </td>
-                <td><%= d.final.present? ? (d.final > 0 ? "+#{d.final}" : d.final) : '—' %></td>
-                <td><%= d.acumulado.present? ? (d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado) : '—' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-      <td class="col-right">
-        <table class="bac-table">
-          <thead>
-            <tr class="tr-cols">
-              <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
-              <th class="col-p-head">P</th>
-              <th class="col-b-head">B</th>
-              <th>✓/✗</th>
-              <th>RESULT</th>
-              <th>ACCUM</th>
-              <th>FINAL</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% pdf_resto.each do |d| %>
-              <tr class="<%= pdf_fin_row_class.call(d) %>">
-                <% if @pdf_show_mecanicas %><td><%= d.mecanica2.presence || '—' %></td><% end %>
-                <td><%= d.player2.present? ? d.player2 : '—' %></td>
-                <td><%= d.banquer2.present? ? d.banquer2 : '—' %></td>
-                <td>
-                  <% if d.resultado2 == 1 %>✓
-                  <% elsif d.resultado2 == 0 %>✗
-                  <% else %>—<% end %>
-                </td>
-                <td><%= d.final2.present? ? (d.final2 > 0 ? "+#{d.final2}" : d.final2) : '—' %></td>
-                <td><%= d.acumulado2.present? ? (d.acumulado2 > 0 ? "+#{d.acumulado2}" : d.acumulado2) : '—' %></td>
-                <td><%= d.acumuladof.present? ? (d.acumuladof > 0 ? "+#{d.acumuladof}" : d.acumuladof) : '—' %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </table>
+  <% if pdf_hand5.present? || pdf_phase_b.any? %>
+    <table class="pdf-unified pdf-phase-b">
+      <colgroup>
+        <% pdf_left_cols.times do %>
+          <col style="width: <%= pdf_side_col_w %>%;">
+        <% end %>
+        <col style="width: <%= pdf_mid_col_w %>%;">
+        <col style="width: <%= pdf_mid_col_w %>%;">
+        <% pdf_right_cols.times do %>
+          <col style="width: <%= pdf_side_col_w %>%;">
+        <% end %>
+      </colgroup>
+      <% if pdf_hand5.present? %>
+        <tbody class="pdf-hand-block">
+          <tr class="pdf-row-transition <%= pdf_fin_row_class.call(pdf_hand5) %> <%= 4.even? ? 'pdf-row-a' : 'pdf-row-b' %>">
+            <th>#</th>
+            <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
+            <th class="col-p-head">P</th>
+            <th class="col-b-head">B</th>
+            <th>✓ / ✗</th>
+            <th>RESULT</th>
+            <th>ACCUM</th>
+            <td class="td-central-p">
+              <% if pdf_hand5.r_player == 1 %>
+                <span class="bac-chip bac-chip-p">P</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <td class="td-central-b">
+              <% if pdf_hand5.r_banker == 1 %>
+                <span class="bac-chip bac-chip-b">B</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <% if @pdf_show_mecanicas %><th>MEC</th><% end %>
+            <th class="col-p-head">P</th>
+            <th class="col-b-head">B</th>
+            <th>✓ / ✗</th>
+            <th>RESULT</th>
+            <th>ACCUM</th>
+            <th>FINAL</th>
+          </tr>
+        </tbody>
+      <% end %>
+      <% pdf_phase_b.each_with_index do |d, i| %>
+        <% idx = i + 5 %>
+        <tbody class="pdf-hand-block">
+          <tr class="<%= pdf_fin_row_class.call(d) %> <%= idx.even? ? 'pdf-row-a' : 'pdf-row-b' %>">
+            <td class="td-num"><%= i + 1 %></td>
+            <% if @pdf_show_mecanicas %><td><%= d.mecanica1.presence || '—' %></td><% end %>
+            <td><%= d.player1.present? ? d.player1 : '—' %></td>
+            <td><%= d.banquer1.present? ? d.banquer1 : '—' %></td>
+            <td>
+              <% if d.resultado1 == 1 %>✓
+              <% elsif d.resultado1 == 0 %>✗
+              <% else %>—<% end %>
+            </td>
+            <td><%= d.final.present? ? (d.final > 0 ? "+#{d.final}" : d.final) : '—' %></td>
+            <td><%= d.acumulado.present? ? (d.acumulado > 0 ? "+#{d.acumulado}" : d.acumulado) : '—' %></td>
+            <td class="td-central-p">
+              <% if d.r_player == 1 %>
+                <span class="bac-chip bac-chip-p">P</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <td class="td-central-b">
+              <% if d.r_banker == 1 %>
+                <span class="bac-chip bac-chip-b">B</span>
+              <% else %>
+                <span class="bac-chip bac-chip-none">–</span>
+              <% end %>
+            </td>
+            <% if @pdf_show_mecanicas %><td><%= d.mecanica2.presence || '—' %></td><% end %>
+            <td><%= d.player2.present? ? d.player2 : '—' %></td>
+            <td><%= d.banquer2.present? ? d.banquer2 : '—' %></td>
+            <td>
+              <% if d.resultado2 == 1 %>✓
+              <% elsif d.resultado2 == 0 %>✗
+              <% else %>—<% end %>
+            </td>
+            <td><%= d.final2.present? ? (d.final2 > 0 ? "+#{d.final2}" : d.final2) : '—' %></td>
+            <td><%= d.acumulado2.present? ? (d.acumulado2 > 0 ? "+#{d.acumulado2}" : d.acumulado2) : '—' %></td>
+            <td><%= d.acumuladof.present? ? (d.acumuladof > 0 ? "+#{d.acumuladof}" : d.acumuladof) : '—' %></td>
+          </tr>
+        </tbody>
+      <% end %>
+    </table>
+  <% end %>
+  </div>
+</div>
 </div>
