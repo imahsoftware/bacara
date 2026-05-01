@@ -1,0 +1,8 @@
+<% if @jugadas.present? %>
+  <%= render 'jugadas/tabla' %>
+<% else %>
+  <div class="alert alert-warning">
+    <h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4>
+    No hay jugadas en este portafolio para los ultimos 10 dias.
+  </div>
+<% end %>

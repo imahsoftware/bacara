@@ -49,8 +49,72 @@
         </div>
 
         <div id="jugadas">
-          <% if @jugadas.present? %>
-            <%= render 'jugadas/tabla' %>
+          <% if @portafolio_tabs.present? %>
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs" role="tablist">
+                <% @portafolio_tabs.each_with_index do |tab, idx| %>
+                  <li role="presentation" class="<%= 'active' if idx.zero? %>">
+                    <a href="#jugadas-portafolio-<%= tab[:id] %>"
+                       class="jugadas-portafolio-tab"
+                       data-toggle="tab"
+                       data-portafolio-id="<%= tab[:id] %>"
+                       role="tab"
+                       aria-expanded="<%= idx.zero? ? 'true' : 'false' %>">
+                      <i class="fa fa-gamepad"></i>
+                      <%= tab[:name] %> <span class="label label-default"><%= tab[:count] %></span>
+                    </a>
+                  </li>
+                <% end %>
+                <li role="presentation">
+                  <a href="#jugadas-buscar-usuario"
+                     class="jugadas-search-tab"
+                     data-toggle="tab"
+                     role="tab"
+                     aria-expanded="false">
+                    <i class="fa fa-gamepad"></i> Buscar usuario
+                  </a>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <% @portafolio_tabs.each_with_index do |tab, idx| %>
+                  <div role="tabpanel"
+                       class="tab-pane <%= 'active' if idx.zero? %>"
+                       id="jugadas-portafolio-<%= tab[:id] %>"
+                       data-jugadas-loaded="false">
+                    <div class="text-muted">
+                      <i class="fa fa-info-circle"></i>
+                      Click en pestaña para cargar jugadas.
+                    </div>
+                  </div>
+                <% end %>
+                <div role="tabpanel"
+                     class="tab-pane"
+                     id="jugadas-buscar-usuario"
+                     data-jugadas-search-loaded="false">
+                  <div class="box box-default" style="margin-top:10px;">
+                    <div class="box-body">
+                      <form id="jugadas-user-search-form" class="form-inline">
+                        <div class="form-group" style="width:100%;max-width:680px;">
+                          <label class="sr-only" for="jugadas-user-search-input">Usuario</label>
+                          <input id="jugadas-user-search-input"
+                                 type="text"
+                                 class="form-control"
+                                 style="width:80%;"
+                                 placeholder="Nombre, username o identificacion">
+                          <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-search"></i> Buscar
+                          </button>
+                        </div>
+                      </form>
+                      <hr style="margin:12px 0;">
+                      <div id="jugadas-user-search-results" class="text-muted">
+                        Busca usuario para ver historial completo de jugadas.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% else %>
             <div class="alert alert-warning"><h4><i class="icon fa fa-info"></i> <%= t :atencion %></h4><%= t :atencion_msj %></div>
           <% end %>
@@ -59,3 +123,71 @@
     </div>
   </div>
 </div>
+
+<script>
+(function(){
+  if (window.__jugadasPortafolioTabsBound) return;
+  window.__jugadasPortafolioTabsBound = true;
+
+  function loadTab($tabLink){
+    var portafolioId = $tabLink.data('portafolio-id');
+    var target = $tabLink.attr('href');
+    if(!portafolioId || !target) return;
+
+    var $pane = $(target);
+    if(!$pane.length) return;
+    if($pane.data('jugadas-loaded') === true) return;
+
+    $pane.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> Cargando jugadas...</p>');
+
+    $.get('<%= tabla_portafolio_jugadas_path %>', { portafolio_id: portafolioId })
+      .done(function(html){
+        $pane.html(html);
+        $pane.data('jugadas-loaded', true);
+      })
+      .fail(function(){
+        $pane.html('<div class="alert alert-danger">No se pudo cargar jugadas de este portafolio.</div>');
+      });
+  }
+
+  $(document).on('shown.bs.tab', '.jugadas-portafolio-tab', function(e){
+    loadTab($(e.target));
+  });
+
+  function loadUserSearchResults(params){
+    var $results = $('#jugadas-user-search-results');
+    if(!$results.length) return;
+    $results.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> Buscando...</p>');
+
+    $.get('<%= tabla_usuario_jugadas_path %>', params || {})
+      .done(function(html){
+        $results.html(html);
+      })
+      .fail(function(){
+        $results.html('<div class="alert alert-danger">No se pudo consultar usuarios.</div>');
+      });
+  }
+
+  $(document).on('submit', '#jugadas-user-search-form', function(ev){
+    ev.preventDefault();
+    var q = $.trim($('#jugadas-user-search-input').val());
+    if(!q){
+      $('#jugadas-user-search-results').html('<div class="alert alert-warning">Ingresa un criterio de busqueda.</div>');
+      return;
+    }
+    loadUserSearchResults({ q: q });
+  });
+
+  $(document).on('click', '.jugadas-user-pick', function(ev){
+    ev.preventDefault();
+    var userId = $(this).data('user-id');
+    if(!userId) return;
+    loadUserSearchResults({ user_id: userId });
+  });
+
+  $(function(){
+    var $first = $('.jugadas-portafolio-tab').first();
+    if($first.length) loadTab($first);
+  });
+})();
+</script>

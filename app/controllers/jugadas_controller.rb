@@ -21,36 +21,72 @@ class JugadasController < ApplicationController
   end
 
   def index
-    @jugadas_base = Jugada.for_user_list(current_user)
-    # Sin paginador. Mostramos todas las jugadas de los últimos 10 días.
-    # Eager loading de user para evitar N+1 cuando se muestra la columna Player.
-    @jugadas = @jugadas_base
-                 .includes(:user)
-                 .where('jugadas.created_at >= ?', 10.days.ago.beginning_of_day)
-                 .order(id: :desc)
+    @jugadas_base = jugadas_scope_base
+    @portafolio_tabs = build_portafolio_tabs(@jugadas_base)
     @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
     @persona_ultima_cerrada = Jugada.ultima_cerrada_para_nueva_shoe(current_user)
-
-    # Totales diarios: por cada día visible, sumar el profit de TODAS las jugadas del usuario en ese día.
-    @daily_totals = compute_daily_totals(@jugadas, current_user)
 
     respond_to do |format|
       format.html
     end
   end
 
-  # Devuelve hash { Date => Float } con el profit total por día.
-  def compute_daily_totals(jugadas, user)
-    dates = jugadas.map { |j| j.created_at.to_date }.uniq
-    return {} if dates.empty?
+  # Carga diferida por tab (portafolio) para index.
+  def tabla_portafolio
+    @jugadas_base = jugadas_scope_base
+    portafolio_id = params[:portafolio_id].to_i
 
-    totals = {}
-    dates.each do |date|
-      day_range = date.beginning_of_day..date.end_of_day
-      jugada_ids = Jugada.for_user_list(user).where(created_at: day_range).pluck(:id)
-      totals[date] = Jugadasdetalle.where(jugada_id: jugada_ids).sum(:acumuladof).to_f
+    unless allowed_portafolio_ids(@jugadas_base).include?(portafolio_id)
+      head :forbidden and return
     end
-    totals
+
+    @jugadas = @jugadas_base
+               .joins(:user)
+               .where(users: { portafolio_id: portafolio_id })
+               .order(id: :desc)
+    @daily_totals = compute_daily_totals(@jugadas)
+
+    render partial: 'jugadas/tabla_portafolio'
+  end
+
+  # Búsqueda de usuario para ver historial completo de jugadas (sin límite de fecha).
+  def tabla_usuario
+    @consulta = params[:q].to_s.strip
+    users_scope = users_with_jugadas_scope
+    @selected_user = nil
+    @matched_users = []
+
+    if params[:user_id].present?
+      @selected_user = users_scope.find_by(id: params[:user_id].to_i)
+    elsif @consulta.present?
+      @selected_user = find_user_for_query(users_scope, @consulta)
+      @matched_users = search_users_for_query(users_scope, @consulta) if @selected_user.blank?
+    end
+
+    if @selected_user.present?
+      @jugadas = Jugada.for_user_list(current_user)
+                       .includes(:user)
+                       .where(user_id: @selected_user.id)
+                       .order(id: :desc)
+      @daily_totals = compute_daily_totals(@jugadas)
+    end
+
+    render partial: 'jugadas/tabla_usuario_resultados'
+  end
+
+  # Devuelve hash { Date => Float } con profit total por día para un scope dado.
+  def compute_daily_totals(jugadas_scope)
+    return {} if jugadas_scope.blank?
+
+    rows = Jugadasdetalle
+           .joins(:jugada)
+           .merge(jugadas_scope.except(:order))
+           .group('DATE(jugadas.created_at)')
+           .sum(:acumuladof)
+
+    rows.each_with_object({}) do |(day, amount), out|
+      out[day.to_date] = amount.to_f
+    end
   end
   helper_method :compute_daily_totals
 
@@ -216,6 +252,65 @@ class JugadasController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def jugada_params
     params.require(:jugada).permit!
+  end
+
+  def jugadas_scope_base
+    Jugada.for_user_list(current_user)
+          .includes(:user)
+          .where('jugadas.created_at >= ?', 10.days.ago.beginning_of_day)
+  end
+
+  def allowed_portafolio_ids(scope)
+    scope.joins(:user).distinct.pluck('users.portafolio_id').compact
+  end
+
+  def build_portafolio_tabs(scope)
+    portafolio_ids = allowed_portafolio_ids(scope)
+    return [] if portafolio_ids.empty?
+
+    counts = scope.joins(:user).group('users.portafolio_id').count
+    names_by_id = Portafolio.where(id: portafolio_ids).pluck(:id, :nombre).to_h
+
+    portafolio_ids.sort_by { |id| names_by_id[id].to_s }.map do |id|
+      {
+        id: id,
+        name: names_by_id[id].presence || "Portafolio #{id}",
+        count: counts[id].to_i
+      }
+    end
+  end
+
+  def users_with_jugadas_scope
+    user_ids_scope = Jugada.for_user_list(current_user).where.not(user_id: nil).select(:user_id)
+    User.where(id: user_ids_scope).distinct
+  end
+
+  def find_user_for_query(scope, query)
+    q = query.to_s.strip
+    return nil if q.blank?
+
+    if q.match?(/\A\d+\z/)
+      by_id = scope.find_by(id: q.to_i)
+      return by_id if by_id.present?
+
+      by_ident = scope.find_by(identificacion: q)
+      return by_ident if by_ident.present?
+    end
+
+    scope.where('LOWER(users.username) = ?', q.downcase).first ||
+      scope.where('LOWER(users.nombre) = ?', q.downcase).first
+  end
+
+  def search_users_for_query(scope, query)
+    q = query.to_s.strip
+    return [] if q.blank?
+
+    normalized = "%#{q.upcase}%"
+    scope.where('UPPER(users.nombre) LIKE :q OR UPPER(users.username) LIKE :q OR users.identificacion LIKE :q2',
+                q: normalized,
+                q2: "%#{q}%")
+         .order(:nombre)
+         .limit(25)
   end
 
   def set_layout

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :jugadas do
     collection do
       get 'detalle_jugadas'
+      get 'tabla_portafolio'
+      get 'tabla_usuario'
     end
   end
 

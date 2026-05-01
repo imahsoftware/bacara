@@ -1,0 +1,50 @@
+<% if @selected_user.present? %>
+  <div class="alert alert-info" style="margin-bottom:10px;">
+    <strong>Usuario:</strong>
+    <%= @selected_user.nombre %>
+    <% if @selected_user.username.present? %>
+      (<%= @selected_user.username %>)
+    <% end %>
+    <% if @selected_user.identificacion.present? %>
+      - <%= @selected_user.identificacion %>
+    <% end %>
+  </div>
+
+  <% if @jugadas.present? %>
+    <%= render 'jugadas/tabla' %>
+  <% else %>
+    <div class="alert alert-warning">
+      Usuario no tiene jugadas registradas.
+    </div>
+  <% end %>
+<% elsif @consulta.present? %>
+  <% if @matched_users.present? %>
+    <div class="alert alert-warning" style="margin-bottom:10px;">
+      Se encontraron varios usuarios. Selecciona uno:
+    </div>
+    <div class="list-group">
+      <% @matched_users.each do |usr| %>
+        <a href="#"
+           class="list-group-item jugadas-user-pick"
+           data-user-id="<%= usr.id %>">
+          <i class="fa fa-user"></i>
+          <strong><%= usr.nombre %></strong>
+          <% if usr.username.present? %>
+            - <%= usr.username %>
+          <% end %>
+          <% if usr.identificacion.present? %>
+            (<%= usr.identificacion %>)
+          <% end %>
+        </a>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-warning">
+      No se encontro usuario con ese criterio.
+    </div>
+  <% end %>
+<% else %>
+  <div class="text-muted">
+    Busca por nombre, username o identificacion.
+  </div>
+<% end %>
