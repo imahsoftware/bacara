@@ -407,13 +407,13 @@ body.persona-no-sidebar .main-footer {
 }
 .jd-row-new td { animation: bac-row-flash 1.4s ease forwards; }
 
-/* Fila finalizada — fondo rojo muy suave */
-.tr-finalizar td    { background-color: #fecaca !important; }
-.tr-finalizar:hover td { background-color: #fca5a5 !important; }
+/* Fila finalizada (X / presente y no Y) — rojo un poco más marcado */
+.tr-finalizar td    { background-color: #fca5a5 !important; }
+.tr-finalizar:hover td { background-color: #f87171 !important; }
 
-/* Fila finalizada OK (Y) — fondo verde muy suave */
-.tr-finalizar-ok td    { background-color: #bbf7d0 !important; }
-.tr-finalizar-ok:hover td { background-color: #86efac !important; }
+/* Fila finalizada OK (Y) — verde un poco más marcado */
+.tr-finalizar-ok td    { background-color: #86efac !important; }
+.tr-finalizar-ok:hover td { background-color: #4ade80 !important; }
 
 /* ══════════════════════════════════════════════════════════════
    HEADER JUGADOR
