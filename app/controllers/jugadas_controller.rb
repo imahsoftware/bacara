@@ -133,7 +133,7 @@ class JugadasController < ApplicationController
                           template: "jugadas/detalle_jugadas.html.erb",
                           encoding: "UTF-8",
                           page_size: 'Letter',
-                          orientation: 'Landscape',
+                          orientation: 'Portrait',
                           margin: { top: 12, bottom: 12, left: 10, right: 10 } }
     end
   end

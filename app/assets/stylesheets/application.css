@@ -756,11 +756,11 @@ body.vsp-body:has(.jd-bw-page) {
 
 /* Header del día (separador entre grupos) */
 .jugadas-table tr.jugadas-day-header > td {
-    background: #06176B;
+    background: #4a5f7a;
     color: #fff;
     font-size: 12px;
     padding: 8px 12px;
-    border-top: 2px solid #06176B;
+    border-top: 2px solid #5a7088;
     border-bottom: none;
 }
 .jugadas-day-header__count {
@@ -794,7 +794,7 @@ body.vsp-body:has(.jd-bw-page) {
     transition: background-color .15s ease;
 }
 .jugadas-table tr.jugadas-day-header--collapsible:hover > td {
-    background: #0a2294;
+    background: #5a7088;
 }
 .jugadas-day-toggle-icon {
     transition: transform .2s ease;
@@ -818,6 +818,25 @@ body.vsp-body:has(.jd-bw-page) {
 .jugadas-table tr.jugadas-day-total.jd-profit-pos > td:last-child { color: #15803d; }
 .jugadas-table tr.jugadas-day-total.jd-profit-neg > td:last-child { color: #b91c1c; }
 .jugadas-table tr.jugadas-day-total.jd-profit-zero > td:last-child { color: #6b7280; }
+
+/* Consolidado por usuario dentro de cada día */
+.jugadas-consolidado-dia-cell {
+    background: #f9fafb;
+    padding: 10px 12px !important;
+    vertical-align: top;
+}
+.jugadas-consolidado-dia-head {
+    margin-bottom: 8px;
+}
+.jugadas-consolidado-dia-head .text-muted {
+    margin-left: 6px;
+    font-weight: 400;
+}
+.jugadas-consolidado-dia-inner {
+    margin-bottom: 0 !important;
+    background: #fff;
+}
+
 .jd-bw-sub {
     margin: 10px 0 0;
     font-size: 12px;

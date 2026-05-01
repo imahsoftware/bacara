@@ -1,14 +1,10 @@
 <%
-  format_profit = ->(v) {
-    iv = v.to_f
-    str = iv == iv.to_i ? iv.to_i.to_s : sprintf('%.1f', iv)
-    iv > 0 ? "+#{str}" : str
-  }
   jugadas_by_day = @jugadas.order(created_at: :desc).group_by { |j| j.created_at.to_date }
   today = Date.current
   show_player_col = current_user.tipoconsulta.to_s != 'PERSONA'
   total_cols      = show_player_col ? 6 : 5
   total_colspan   = show_player_col ? 5 : 4
+  profit_by_jugada = Jugadasdetalle.where(jugada_id: @jugadas.map(&:id)).group(:jugada_id).sum(:acumuladof)
 %>
 
 <table class="table table-bordered table-condensed table-striped jugadas-table">
@@ -34,7 +30,15 @@
     %>
 
     <% if es_hoy %>
-      <%# ─── HOY: filas siempre visibles + footer Daily Total ─────── %>
+      <%# ─── HOY: consolidado del día + filas + footer Daily Total ── %>
+      <% if show_player_col %>
+        <%= render 'jugadas/consolidado_por_dia',
+                   rows: jugadas_consolidado_rows_for_dia(jugadas_del_dia, profit_by_jugada),
+                   total_cols: total_cols,
+                   show_player_col: show_player_col,
+                   day_class: nil,
+                   initially_hidden: false %>
+      <% end %>
       <% jugadas_del_dia.each do |jugada| %>
         <%= render 'jugadas/tr', jugada: jugada, show_player_col: show_player_col %>
       <% end %>
@@ -43,7 +47,7 @@
           <strong><%= t(:daily_total) %>:</strong>
         </td>
         <td class="text-right">
-          <strong><%= format_profit.call(day_total) %></strong>
+          <strong><%= format_jugada_profit_value(day_total) %></strong>
         </td>
       </tr>
 
@@ -65,12 +69,20 @@
               </span>
             </div>
             <div class="jugadas-day-header__right">
-              <%= format_profit.call(day_total) %>
+              <%= format_jugada_profit_value(day_total) %>
             </div>
           </div>
         </td>
       </tr>
 
+      <% if show_player_col %>
+        <%= render 'jugadas/consolidado_por_dia',
+                   rows: jugadas_consolidado_rows_for_dia(jugadas_del_dia, profit_by_jugada),
+                   total_cols: total_cols,
+                   show_player_col: show_player_col,
+                   day_class: "day-#{day_id}",
+                   initially_hidden: true %>
+      <% end %>
       <%# Las filas de este día empiezan ocultas; el JS las muestra al click %>
       <% jugadas_del_dia.each do |jugada| %>
         <%= render 'jugadas/tr',

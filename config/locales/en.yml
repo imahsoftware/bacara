@@ -1342,6 +1342,9 @@ en:
   helper_vivienda_propia: "Owned"
   # === Game/Baccarat module: new keys ===
   profit_label: "PROFIT"
+  jugadas_consolidado_titulo: "Summary by user"
+  jugadas_consolidado_cantidad: "Plays"
+  jugadas_consolidado_dia: "(this day)"
   usd_title: "US Dollars (USD)"
   baccarat_winners: "Baccarat Winners"
   frequency_table: "Frequency Table"
