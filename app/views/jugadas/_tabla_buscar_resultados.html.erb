@@ -1,0 +1,61 @@
+<% if @error.present? %>
+  <div class="alert alert-danger"><%= @error %></div>
+<% end %>
+
+<% if @jugada.present? && @jugadas.respond_to?(:any?) && @jugadas.any? %>
+  <div class="alert alert-success" style="margin-bottom:10px;">
+    <strong>Jugada encontrada:</strong>
+    #<%= @jugada.id %>
+    <% if @jugada.jugador.present? %>
+      — <%= @jugada.jugador %>
+    <% end %>
+  </div>
+  <%= render 'jugadas/tabla' %>
+<% elsif @selected_user.present? %>
+  <div class="alert alert-info" style="margin-bottom:10px;">
+    <strong>Usuario:</strong>
+    <%= @selected_user.nombre %>
+    <% if @selected_user.username.present? %>
+      (<%= @selected_user.username %>)
+    <% end %>
+    <% if @selected_user.identificacion.present? %>
+      - <%= @selected_user.identificacion %>
+    <% end %>
+  </div>
+
+  <% if @jugadas.respond_to?(:any?) && @jugadas.any? %>
+    <%= render 'jugadas/tabla' %>
+  <% else %>
+    <div class="alert alert-warning">
+      Usuario no tiene jugadas registradas.
+    </div>
+  <% end %>
+<% elsif @consulta.present? && @matched_users.present? %>
+  <div class="alert alert-warning" style="margin-bottom:10px;">
+    Se encontraron varios usuarios. Selecciona uno:
+  </div>
+  <div class="list-group">
+    <% @matched_users.each do |usr| %>
+      <a href="#"
+         class="list-group-item jugadas-user-pick"
+         data-user-id="<%= usr.id %>">
+        <i class="fa fa-user"></i>
+        <strong><%= usr.nombre %></strong>
+        <% if usr.username.present? %>
+          - <%= usr.username %>
+        <% end %>
+        <% if usr.identificacion.present? %>
+          (<%= usr.identificacion %>)
+        <% end %>
+      </a>
+    <% end %>
+  </div>
+<% elsif @consulta.present? && @error.blank? %>
+  <div class="alert alert-warning">
+    No se encontraron resultados para esa búsqueda.
+  </div>
+<% elsif @consulta.blank? && @error.blank? %>
+  <div class="text-muted">
+    Busca por número de jugada, nombre, username o identificación.
+  </div>
+<% end %>
