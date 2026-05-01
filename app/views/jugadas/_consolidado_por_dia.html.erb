@@ -22,14 +22,18 @@
   tr_class     = day_class.present? ? "jugada-row #{day_class}" : nil
   tr_style     = (init_hidden && day_class.present?) ? 'display:none;' : nil
 
-  chart_categories = rows.map { |r| (r[:user]&.username).presence || '—' }
+  chart_categories = rows.map do |r|
+    u = r[:user]
+    next '—' unless u
+    u.nombre.presence || u.username.presence || '—'
+  end
   chart_profits    = rows.map { |r| r[:total].to_f }
   chart_height     = [[rows.size * 38 + 168, 210].max, 440].min
 
   chart_tooltips_json = rows.map.with_index do |r, i|
     u = r[:user]
-    nombre_part = u&.nombre.present? ? %( <span style=\"color:#888\">(#{esc.call(u.nombre)})</span>) : ''
-    "<b>#{esc.call(chart_categories[i])}</b>#{nombre_part}<br/><span>#{r[:count]} #{esc.call(I18n.t(:plays_lower))}</span> · <b>#{esc.call(format_jugada_profit_value(r[:total]))}</b>"
+    user_part = (u&.nombre.present? && u&.username.present?) ? %( <span style=\"color:#888\">(#{esc.call(u.username)})</span>) : ''
+    "<b>#{esc.call(chart_categories[i])}</b>#{user_part}<br/><span>#{r[:count]} #{esc.call(I18n.t(:plays_lower))}</span> · <b>#{esc.call(format_jugada_profit_value(r[:total]))}</b>"
   end
 
   chart_payload = {
@@ -66,12 +70,18 @@
                 u = r[:user]
                 total = r[:total].to_f
                 profit_class = total > 0 ? 'jd-profit-pos' : (total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
-                player_title = u ? [u.username, u.nombre].compact.join(' — ') : ''
+                player_title = u ? [u.nombre, u.username].compact.join(' — ') : ''
               %>
               <tr>
                 <td class="text-left jugadas-consolidado-col-player" title="<%= player_title %>">
                   <% if u %>
-                    <span class="jugadas-consolidado-player-line"><strong><%= u.username %></strong><% if u.nombre.present? %> <small class="text-muted">(<%= u.nombre %>)</small><% end %></span>
+                    <span class="jugadas-consolidado-player-line">
+                      <% if u.nombre.present? %>
+                        <strong><%= u.nombre %></strong><% if u.username.present? %> <small class="text-muted">(<%= u.username %>)</small><% end %>
+                      <% else %>
+                        <strong><%= u.username %></strong>
+                      <% end %>
+                    </span>
                   <% else %>
                     <span class="text-muted">—</span>
                   <% end %>
