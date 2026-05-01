@@ -269,15 +269,19 @@ class User < ApplicationRecord
   # Crea la fila en usersportafolios si no existe ya.
   # Mantiene sincronizada la tabla usersportafolios con el portafolio_id actual del usuario.
   # Como un usuario solo puede pertenecer a UN portafolio:
-  # 1. Elimina cualquier asociación anterior
-  # 2. Crea/actualiza la asociación con el portafolio actual
+  # Actualiza la asociación existente o crea una nueva si no existe
   def ensure_usersportafolio_link
     return if portafolio_id.blank?
     
-    # Eliminar todas las asociaciones anteriores (excepto la actual)
-    usersportafolios.where.not(portafolio_id: portafolio_id).delete_all
+    # Buscar si ya existe una asociación para este usuario
+    existing = usersportafolios.first
     
-    # Crear o mantener la asociación con el portafolio actual
-    usersportafolios.find_or_create_by(portafolio_id: portafolio_id)
+    if existing
+      # Si existe, actualizar el portafolio_id
+      existing.update(portafolio_id: portafolio_id) if existing.portafolio_id != portafolio_id
+    else
+      # Si no existe, crear una nueva
+      usersportafolios.create(portafolio_id: portafolio_id)
+    end
   end
 end
