@@ -248,7 +248,7 @@ class UsersController < ApplicationController
       @user.portafolio_id = is_portafolio
     end
     if @user.save
-      flash[:notice] = "Creado con Exito."
+      flash[:notice] = I18n.t(:notice_crea_msj)
       redirect_to edit_user_path(etapa: "A", id: @user.id)
     else
       @user.etapa = 'A'
@@ -302,7 +302,7 @@ class UsersController < ApplicationController
       @user.unconfirmed_otp_secret = nil
     end
     if @user.update(user_params)
-      flash['success'] = "Usuario actualizado"
+      flash['success'] = I18n.t(:user_updated_successfully)
       if is_permit('admin/users') == true
         #ActiveRecord::Base.connection.execute("CALL prc_actperfilsupervisor()") if params[:process_action] != 'update_user'
         if params[:process_action] != 'update_user'
@@ -473,7 +473,7 @@ class UsersController < ApplicationController
     @user.save(validate: false)
     ProcesoJob.perform_now("prc_userscargos(#{@user.id},#{params[:portafolioscargo_id]})")
 
-    flash[:notice] = "Cargo actualizado con exito"
+    flash[:notice] = I18n.t(:position_updated_successfully)
     redirect_to edit_user_path(:id => @user.id)
   end
 

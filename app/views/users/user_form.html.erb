@@ -7,11 +7,10 @@
   </section>
 <% end %>
 <% if @user.etapa.to_s == "A" %>
-  <% if is_sygma %>
-    <%= render partial: "form", locals: {user: @user} %>
-  <% else %>
-    <%= render partial: "formotros", locals: {user: @user} %>
-  <% end %>
+  <%# Siempre usamos _form: ya distingue internamente entre super-admin (id 1/2)
+      y otros usuarios (defaults PERSONA + portafolio 1). _formotros está obsoleto
+      y referencia el modelo Contrato que no existe en este proyecto. %>
+  <%= render partial: "form", locals: {user: @user} %>
   <% unless @user.new_record? %>
     <% if is_auth_c('copiarusuario') %>
       <%= render "copyuser" %>
@@ -21,12 +20,8 @@
   <%= render 'usersmodulos/usersmodulos' %>
 <% elsif @user.etapa.to_s == "C" %>
   <%= render 'userspermisos/userspermisos' %>
-<% elsif @user.etapa.to_s == "V" %>
-  <%= render 'usersvisitas/usersvisitas' %>
 <% elsif @user.etapa.to_s == "I" %>
   <%= render 'usersreportes/usersreportes' %>
-<% elsif @user.etapa.to_s == "J" %>
-  <%= render 'migracionesusers/migracionesusers' %>
 <% elsif @user.etapa.to_s == "E" %>
     <% @usersimagenes.each do |p| %>
       <%= render '/usersimagenes/usersimagenes', :p, p %>

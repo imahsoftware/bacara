@@ -1370,3 +1370,5 @@ en:
   user_unlocked_and_sms_sent: 'User unlocked successfully and SMS sent to: %{mobile}'
   user_deactivated_successfully: User deactivated successfully
   user_activated_successfully: User activated successfully
+  user_updated_successfully: User updated successfully
+  position_updated_successfully: Position updated successfully

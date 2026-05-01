@@ -9,12 +9,10 @@ class PortafoliosController < ApplicationController
   end
 
   def index
-    if is_sygma == true
-       @q = Portafolio.ransack(params[:q])
-       @portafolios = @q.result.paginate(:page => params[:page], :per_page => 10)
-    else
-      redirect_to edit_portafolio_path(etapa: "A", id: is_portafolio)
-    end
+    # Antes: solo sygma veía la lista; los demás eran redirigidos al edit de su propio
+    # portafolio. Ahora todos los usuarios con permiso al módulo /portafolios ven la lista.
+    @q = Portafolio.ransack(params[:q])
+    @portafolios = @q.result.paginate(:page => params[:page], :per_page => 10)
   end
 
   def vertasas

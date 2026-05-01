@@ -304,11 +304,11 @@ es:
   job_name: Job Name
   job_style: Job Style
   assigned_parameters: Assigned Parameters
-  associated_reports: Associated Reports
-  associated_visits: Associated Visits
-  associated_modules: Associated Modules
-  municipalities: Municipalities
-  no_jobs_running: No jobs running
+  associated_reports: Reportes asociados
+  associated_visits: Visitas asociadas
+  associated_modules: Módulos asociados
+  municipalities: Municipios
+  no_jobs_running: No hay procesos en ejecución
   kill_job: Kill Job
   dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
   associated_permissions: Associated Permissions
@@ -380,9 +380,9 @@ es:
   autorizado: Authorized
   si: true
   false: false
-  reporte: Report
-  campo_permitido: Allowed Field
-  modulo: Module
+  reporte: Reporte
+  campo_permitido: Campo permitido
+  modulo: Módulo
   identificacion: Identificación
   nombre: Nombre
   nombre_corto: Nombre corto
@@ -1423,5 +1423,12 @@ es:
   no: No
   # === Audits Sidebar ===
   general: General
-  especifico: Specific
-  fecha: Date
+  especifico: Específico
+  fecha: Fecha
+  user_unlocked_successfully: Usuario desbloqueado correctamente
+  users_unlocked_successfully: Usuarios desbloqueados correctamente
+  user_unlocked_and_sms_sent: 'Usuario desbloqueado correctamente y SMS enviado a: %{mobile}'
+  user_deactivated_successfully: Usuario desactivado correctamente
+  user_activated_successfully: Usuario activado correctamente
+  user_updated_successfully: Usuario actualizado correctamente
+  position_updated_successfully: Cargo actualizado correctamente

@@ -229,6 +229,24 @@ class User < ApplicationRecord
     super
   end
 
+  # ── Inmunidad al bloqueo para usuarios geintac (Imah/admins internos) ───────
+  # Los usuarios con geintac == 'S' nunca se bloquean por failed_attempts.
+  # 1) lock_access! es no-op → Devise no marca el lock en BD
+  # 2) access_locked? siempre false → aunque tengan un locked_at viejo, pueden entrar
+  def geintac?
+    geintac.to_s.upcase == 'S'
+  end
+
+  def lock_access!(opts = {})
+    return if geintac?
+    super
+  end
+
+  def access_locked?
+    return false if geintac?
+    super
+  end
+
   private
 
   # Genera el email automáticamente como "<username>@bacwins.com".
