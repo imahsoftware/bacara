@@ -4,7 +4,7 @@
 
 <% if @jugada.present? && @jugadas.respond_to?(:any?) && @jugadas.any? %>
   <div class="alert alert-success" style="margin-bottom:10px;">
-    <strong>Jugada encontrada:</strong>
+    <strong><%= t(:play_found) %></strong>
     #<%= @jugada.id %>
     <% if @jugada.jugador.present? %>
       — <%= @jugada.jugador %>

@@ -25,7 +25,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   }
   .pdf-mini {
-    width: 100%;
+    width: auto;
     border-collapse: collapse;
     margin: 0;
     font-size: 10px;
@@ -239,43 +239,47 @@
     </div>
   </div>
   <div class="pdf-head-right">
-    <%
-      pdf_profit_val = @jugadasdetalles.sum { |d| d.acumuladof.to_f }
-      pdf_profit_str = if pdf_profit_val == pdf_profit_val.to_i
-                         pdf_profit_val.to_i.to_s
-                       else
-                         sprintf('%.1f', pdf_profit_val)
-                       end
-      pdf_profit_txt = pdf_profit_val > 0 ? "+#{pdf_profit_str}" : pdf_profit_str
-      pdf_profit_cls = pdf_profit_val > 0 ? 'jd-profit-pos' : (pdf_profit_val < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
-    %>
-    <table class="pdf-mini">
-      <thead>
-        <tr>
-          <th><%= t(:play_number) %></th>
-          <th><%= t(:date_time) %></th>
-          <th><%= t(:status) %></th>
-          <th><%= t(:profit_label) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="play-num">#<%= @jugada.id %></td>
-          <td><%= @jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-          <td>
-            <% estado_text = case @jugada.estado.to_s.upcase
-              when 'PENDIENTE' then t(:pending)
-              when 'CERRADA' then t(:closed)
-              when 'FINALIZADA' then t(:finalized)
-              else @jugada.estado
-            end %>
-            <%= estado_text %>
-          </td>
-          <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
-        </tr>
-      </tbody>
-    </table>
   </div>
+</div>
+
+<%
+  pdf_profit_val = @jugadasdetalles.sum { |d| d.acumuladof.to_f }
+  pdf_profit_str = if pdf_profit_val == pdf_profit_val.to_i
+                     pdf_profit_val.to_i.to_s
+                   else
+                     sprintf('%.1f', pdf_profit_val)
+                   end
+  pdf_profit_txt = pdf_profit_val > 0 ? "+#{pdf_profit_str}" : pdf_profit_str
+  pdf_profit_cls = pdf_profit_val > 0 ? 'jd-profit-pos' : (pdf_profit_val < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+%>
+
+<div style="margin-top: 12px; display: table; width: 100%;">
+  <table class="pdf-mini" style="display: table; width: auto; margin-left: 60px;">
+    <thead>
+      <tr>
+        <th><%= t(:shoes) %></th>
+        <th><%= t(:date_time) %></th>
+        <th><%= t(:status) %></th>
+        <th><%= t(:profit) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="play-num">#<%= @jugada.id %></td>
+        <td><%= @jugada.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td>
+          <% estado_text = case @jugada.estado.to_s.upcase
+            when 'PENDIENTE' then t(:pending)
+            when 'CERRADA' then t(:closed)
+            when 'FINALIZADA' then t(:finalized)
+            else @jugada.estado
+          end %>
+          <%= estado_text %>
+        </td>
+        <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <%

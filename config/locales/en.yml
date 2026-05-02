@@ -36,6 +36,7 @@ en:
   multiple_users_found: "Multiple users found. Select one:"
   user_not_found: User not found
   no_results_found: No results found
+  play_found: "Play found:"
   ingreso_al_sistema: System Login
   ingresa_credenciales: Enter your credentials to continue
   usuario: Username
