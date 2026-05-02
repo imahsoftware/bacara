@@ -1,0 +1,466 @@
+<%# Shared auth styles for all devise views (sessions, passwords, unlocks, confirmations, registrations). %>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+
+    :root {
+        --blue:      #06176B;
+        --blue-mid:  #0d2494;
+        --blue-glow: rgba(6,23,107,0.18);
+        --accent:    #2dd4bf;
+        --accent-bright: #5eead4;
+        --black:     #0a0a0f;
+        --panel:     #0e0e1a;
+        --white:     #ffffff;
+        --gray-bg:   #f4f4f6;
+        --border:    #d8d8de;
+        --muted:     #888;
+        --font:      'DM Sans', sans-serif;
+        --font-logo: 'Syne', sans-serif;
+        --ease:      cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: var(--font);
+        font-weight: 400;
+        background: var(--gray-bg);
+        overflow: hidden;
+        margin: 0;
+        height: 100vh;
+    }
+
+    /* Layout 50/50 */
+    #wrapper {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    #right {
+        flex: 1;
+        background: #000000;        /* mismo negro que la imagen para que se mezcle */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .login-hero-image {
+        width: 80%;
+        height: 80%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+    #left {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: var(--gray-bg);
+        position: relative;
+        overflow-y: auto;
+    }
+
+    /* Panel oscuro */
+    #showcase {
+        width: 100%; height: 100%;
+        background: var(--panel);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .deco {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .deco-1 {
+        width: 600px; height: 600px;
+        top: -160px; right: -160px;
+        background: radial-gradient(circle, rgba(6,23,107,0.35) 0%, transparent 65%);
+    }
+    .deco-2 {
+        width: 400px; height: 400px;
+        bottom: -100px; left: -100px;
+        background: radial-gradient(circle, rgba(6,23,107,0.2) 0%, transparent 65%);
+    }
+    .deco-3 {
+        width: 250px; height: 250px;
+        top: 55%; left: 55%;
+        transform: translate(-50%,-50%);
+        border: 1px solid rgba(255,255,255,0.04);
+        animation: spin 25s linear infinite;
+    }
+    @keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+    .grid-overlay {
+        position: absolute; inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 50px 50px;
+        pointer-events: none;
+    }
+
+    /* Brand logo */
+    .showcase-content {
+        position: relative; z-index: 1;
+        text-align: center;
+        animation: fadeUp .9s var(--ease) both;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.8rem;
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+    }
+
+    .brand-icon {
+        width: 80px; height: 80px;
+        filter: drop-shadow(0 0 18px rgba(6,23,107,0.7));
+    }
+
+    .brand-wordmark {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1;
+    }
+
+    .brand-name {
+        font-family: var(--font-logo);
+        font-size: 3rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        display: flex;
+        align-items: baseline;
+        gap: 0.02em;
+    }
+
+    .brand-name__bac { color: var(--white); }
+
+    .brand-name__wins {
+        background: linear-gradient(125deg, var(--accent-bright) 0%, #fbbf24 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: none;
+        filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.25));
+    }
+
+    @supports not (background-clip: text) {
+        .brand-name__wins { color: var(--accent-bright); }
+    }
+
+    .brand-sub {
+        font-family: var(--font-logo);
+        font-size: 1rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.38);
+        letter-spacing: 0.22em;
+        margin-top: 0.45rem;
+        text-transform: lowercase;
+    }
+
+    .showcase-tagline {
+        color: rgba(255,255,255,0.38);
+        font-size: 1.05rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-weight: 300;
+        margin-top: -0.5rem;
+    }
+
+    /* Features */
+    .showcase-features {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        align-items: flex-start;
+        margin-top: 0.5rem;
+    }
+
+    .sf-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 1.1rem;
+        color: rgba(255,255,255,0.45);
+        font-weight: 400;
+    }
+
+    .sf-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
+        flex-shrink: 0;
+    }
+
+    @keyframes fadeUp {
+        from { opacity:0; transform:translateY(16px); }
+        to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* Card */
+    #signin {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 3rem 3rem;
+        width: 82%;
+        max-width: 480px;
+        box-shadow:
+          0 1px 3px rgba(0,0,0,0.05),
+          0 12px 40px rgba(0,0,0,0.1),
+          0 0 0 1px rgba(0,0,0,0.04);
+        animation: fadeUp .55s var(--ease) .1s both;
+    }
+
+    #signin .logo { margin-bottom: 2rem; }
+
+    #signin .logo h1,
+    #signin .logo h2,
+    #signin .logo h3,
+    #signin .logo .titulo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--black);
+        letter-spacing: -0.035em;
+        line-height: 1.2;
+    }
+
+    .form-subtitle {
+        font-size: 1.15rem;
+        color: var(--muted);
+        margin-top: 0.35rem;
+        font-weight: 400;
+    }
+
+    /* Labels */
+    #signin label {
+        display: block;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--black);
+        line-height: 2rem;
+        margin-bottom: 0;
+    }
+
+    /* Inputs */
+    .form-control {
+        width: 100%;
+        height: 4.1rem;
+        border-radius: 8px;
+        background: #f8f8f9;
+        border: 1.5px solid var(--border);
+        color: var(--black);
+        padding: 0 1.1rem;
+        font-family: var(--font);
+        font-size: 1.35rem;
+        font-weight: 400;
+        outline: none;
+        transition: border-color .2s var(--ease), box-shadow .2s var(--ease), background .2s;
+        -webkit-appearance: none;
+        display: block;
+    }
+
+    .form-control::placeholder { color: #b8b8bf; font-weight: 300; }
+
+    .form-control:focus {
+        background: var(--white);
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+
+    #signin form > div { margin-bottom: 1.2rem; }
+
+    /* Password */
+    .pass-wrap { margin-bottom: 1.2rem; }
+
+    .pass-label-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .pass-label-row label { line-height: 2rem; }
+
+    .forgot-inline {
+        font-size: 0.76rem;
+        font-weight: 500;
+        color: var(--blue);
+        text-decoration: none;
+        transition: opacity .2s;
+        white-space: nowrap;
+    }
+    .forgot-inline:hover { opacity: .7; }
+
+    .pass-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    .pass-field .form-control { padding-right: 2.8rem; }
+
+    .eye-toggle {
+        position: absolute; right: 0.8rem;
+        background: none; border: none;
+        cursor: pointer; color: var(--muted);
+        display: flex; align-items: center;
+        padding: 0.3rem; transition: color .2s;
+    }
+    .eye-toggle:hover { color: var(--blue); }
+
+    /* Botón */
+    .primary-btn {
+        width: 100%;
+        height: 4.1rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 8px;
+        font-family: var(--font);
+        font-size: 1.35rem;
+        font-weight: 600;
+        background: var(--blue);
+        color: var(--white);
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: background .2s, transform .15s, box-shadow .2s;
+        letter-spacing: 0.01em;
+    }
+
+    .primary-btn::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(255,255,255,.1), transparent);
+    }
+
+    .primary-btn:hover {
+        background: var(--blue-mid);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(6,23,107,0.35);
+        color: var(--white);
+    }
+    .primary-btn:active { transform: translateY(0); }
+
+    /* Botón secundario (para links que se ven como botones) */
+    .secondary-btn {
+        width: 100%;
+        height: 4.1rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: var(--font);
+        font-size: 1.2rem;
+        font-weight: 500;
+        background: transparent;
+        color: var(--blue);
+        cursor: pointer;
+        text-decoration: none;
+        transition: background .2s, border-color .2s;
+    }
+    .secondary-btn:hover {
+        background: #f0f0f4;
+        border-color: var(--blue);
+        color: var(--blue);
+        text-decoration: none;
+    }
+
+    /* Links */
+    .links { margin-top: 1rem; width: 100%; }
+    .links ul { list-style: none; }
+    .links a {
+        display: block;
+        color: var(--blue);
+        text-decoration: none;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: opacity .2s;
+    }
+    .links a:hover { opacity: .7; }
+
+    /* Footer */
+    #main-footer {
+        position: absolute;
+        bottom: 1.5rem;
+        font-size: 0.95rem;
+        color: #aaa;
+        text-align: center;
+        width: 100%;
+        padding: 0 2rem;
+    }
+    #main-footer b { color: var(--blue); font-weight: 600; }
+    #main-footer .footer-app {
+        color: var(--blue);
+        font-weight: 600;
+    }
+
+    /* Flash */
+    .callout_message-danger {
+        background: #fef2f2; color: #b91c1c;
+        border: 1px solid #fecaca;
+        padding: 0.85rem 1.1rem; border-radius: 10px;
+        font-size: 0.95rem; margin-top: 1rem;
+    }
+    .callout_message-success {
+        background: #f0fdf4; color: #15803d;
+        border: 1px solid #bbf7d0;
+        padding: 0.85rem 1.1rem; border-radius: 10px;
+        font-size: 0.95rem; margin-top: 1rem;
+    }
+    .alert_remove { font-size: 14px; }
+    .hidden { display: none !important; }
+
+    /* Errores de simple_form */
+    .has-error .form-control,
+    .field_with_errors .form-control { border-color: #b91c1c; }
+    .error, .help-block, small.error {
+        display: block;
+        color: #b91c1c;
+        font-size: 0.9rem;
+        margin-top: 0.35rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        body { overflow: auto; }
+        #wrapper { flex-direction: column; height: auto; }
+        #right {
+            display: flex;
+            flex: 0 0 auto;          /* no estira; tamaño fijo arriba */
+            height: 320px;
+            padding: 0.75rem;
+        }
+        .login-hero-image {
+            width: auto;
+            height: 100%;
+            max-height: 300px;
+            object-fit: contain;     /* en móvil mostramos el logo COMPLETO */
+        }
+        #left {
+            min-height: calc(100vh - 320px);
+            padding: 2rem 1.5rem 5rem;
+            height: auto;
+        }
+        #signin { width: 100%; max-width: 100%; padding: 2rem 1.5rem; }
+        #main-footer { position: relative; bottom: auto; margin-top: 2rem; }
+    }
+</style>
