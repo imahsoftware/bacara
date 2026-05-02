@@ -1,0 +1,1113 @@
+ # Este es ....
+# Este es ....
+# Este es ....
+es:
+  editar_perfil: Edit Profile
+  salir: Log Out
+  ver_todos: See all
+  hay: There are
+  buscar: Search
+  indicadores_presupuesto_ejecucion: Budget vs Execution Indicators
+  indicadores_cartera: Portfolio Indicators
+  presupuesto_mes: Monthly Budget
+  recaudos_mes: Current Month Collections
+  presupuesto_total: Total Budget
+  recaudo_total: Total Collection
+  soportes_pendientes: Pending Support
+  parametros_consulta: Query Parameters
+  activos: Active
+  total_activos: Total Active
+  total_creditos: Total Credits
+  al_dia: Up to date
+  en_mora: In default
+  recaudo_mes: Monthly Collection
+  recaudos: Collections
+  recaudo_aldia: Collections up to date
+  recaudomora_30: Collections in default less than 30 days
+  recaudosmora_90: Collections in default between 31 - 90 days
+  recaudosmora_180: Collections in default between 91 - 180 days
+  recaudosmora_100: Collections in default greater than 180 days
+  ppto_activos: Budget Active
+  nuevos_activos: New Active
+  ppto_nuevos_activos: Budget New Active
+  antiguos_activos: Old Active
+  ppto_antiguos_activos: Budget Old Active
+  en_proceso: In Process
+  inactivos: Inactive
+  total: Total
+  resumen_de_estados: Summary of States
+  inscripcion_basica: Basic Registration
+  pago_cuota_inicial: Paid Edupol Study (Non-Refundable)
+  selecciono_forma_de_pago: Selected Payment Method
+  gestion_documental_aprobada: Approved Document Management
+  indicadores_recaudo_presupuesto: Collection vs Budget Indicators
+  antiguos: Old
+  buscador_de_personas: People Finder
+  buscador_segmentos: Segment Finder
+  aceptar: Accept
+  agregar: Add
+  atencion: Attention!
+  atencion_msj: No data yet
+  documento: View Documents
+  documentos_msj: No Documents
+  cierre_msj: There is no consolidated closing therefore new collections cannot be registered
+  regresar: Return
+  menu: MENU OPTIONS
+  creacion: Creation Date
+  seguro: Are you sure?
+  entre: Between
+  nuevo: New
+  actualizar: Update
+  asignar: Assign
+  regresar_obligacion: Return to Obligations
+  notice_crea_msj: Record created successfully.
+  notice_crearec_msj: Collection created
+  notice_actualiza_msj: Record updated successfully.
+  notice_elimina_msj: Record deleted successfully.
+  notice_resultado_msj: No search results
+  guardar: Save
+  seleccionar: --Select
+  procesando: Processing
+  cancelar: Cancel
+  elimina_confirma: Are you sure you want to delete?
+  title_elimina: Delete
+  title_editar: Edit
+  title_notificaciones_direcciones: Address Notification
+  title_notificaciones_correos: Email Notification
+  title_soporte_digital: Add Digital Support
+  title_gerente: Bulk Upload of Regional Managers
+  title_ver: View
+  title_plan_pagos: Payment Plan
+  title_recaudos: Collections
+  title_otros_recaudos: Other Collections
+  title_observacion_obligacion: Obligation Observation
+  title_detalle_factura: Invoice Details
+  title_historico_pagaduria: Payment History
+  title_historico_fondeadores: Funders History
+  title_autoria: Authorize
+  title_no_autoriza: Do not authorize
+  title_ver_certificado_deuda: View debt certificate
+  title_ver_paz_salvo: View Peace and Clearance
+  title_evaluacion_titulo: Title Evaluation
+  title_seguimiento_asignaciones: Assignment Tracking
+  menu_gestion: Management
+  menu_cargues: Uploads
+  menu_procesos: Processes
+  menu_parametrizacion: Parameterization
+  menu_dash: Dashboard
+  menu_parametrizacionedu: Education Parameters
+  menu_searchdoc: Search by Identification...
+  menu_principal: MAIN MENU
+  menu_personas: PEOPLE MENU
+  acciones: Actions
+  jugadas: Plays
+  buscar_placeholder: Search...
+  ver_detalle_jugada: View play details
+  ingreso_al_sistema: System Login
+  ingresa_credenciales: Enter your credentials to continue
+  usuario: Username
+  contrasena: Password
+  iniciar_sesion: Sign In
+  iniciando: Signing in...
+  olvido_contrasena: Forgot your password?
+  ingresar: Sign In
+  registrarse: Sign Up
+  olvido_su_contrasena: Forgot your password?
+  no_recibio_correo_confirmacion: Did not receive confirmation email?
+  no_recibio_instrucciones_desbloqueo: Did not receive unlock instructions?
+  soluciones_software_medida: Custom software solutions
+  desarrollo_medida: Custom development
+  integracion_sistemas: System integration
+  soporte_continuo: Continuous support
+  todos_derechos_reservados: All rights reserved.
+
+  # Jugadas Detalladas translations
+  jugador_label: Player
+  seleccionar_resultado: Select Result
+  eliminar_ultimo: Delete Last
+  reset: Reset
+  your_next_bet: Your Next Bet
+  movimientos: Movements
+  prc_activo: PRC active
+  imahsoftware: ImahSoftware
+  aun_no_hay_movimientos: No movements yet. Click on P or B to start.
+  jugada_1: Play 1
+  jugada_2: Play 2
+  resultado: Result
+  mecanica: Mech
+  acumulado: Accum
+  final: Final
+  guardando: Saving...
+  detalle_jugada: Play Details
+  seguro_salir: Are you sure you want to leave
+  regresar_usuarios: Return to users
+  datos_basicos: Basic Data
+  modulos: Modules
+  permisos: Permissions
+  usuarios_visitas: User Visits
+  reportes: Reports
+  cargues_opciones: Uploads - Options
+  parametros: Parameters
+  edit_profile: Edit Profile
+  total_logins: Total Logins
+  query_type: Query Type
+  return: Return
+  user_profile: User Profile
+  identification: Identification
+  full_name: Full Name
+  mobile: Mobile
+  password: Password
+  password_hint: Leave blank if you don't want to change it
+  confirm_password: Confirm Password
+  save: Save
+  search_by_identification: Search by Identification...
+  profile: Profile
+  edit_profile_button: Edit Profile
+  logout: Logout
+  are_you_sure_logout: Are you sure you want to log out?
+  reestablish: Reestablish
+  deactivate_two_factor: Deactivate two factor
+  activate_two_factor: Activate two factor
+  users: Users
+  new_user: New User
+  search: Search...
+  username: Username
+  name: Name
+  email: Email
+  mobile: Mobile
+  active: Active?
+  inactivate_user: Inactivate user
+  activate_user: Activate user
+  unlock: Unlock
+  reset_password: Reset Password
+  reset_and_send_sms: Reset password, Unlock and send SMS
+  no_data_found: No data found
+  add_new: Add New
+  edit: Edit
+  user: User
+  identification: Identification
+  active: Active
+  username: Username
+  password: Password
+  confirm_password: Confirm Password
+  company: Company
+  query_type: Query Type
+  mobile: Mobile
+  observations: Observations
+  node: Node
+  avatar: Avatar
+  accept: Accept
+  return_to_users: Return to users
+  unlock: Unlock
+  reset_password: Reset Password
+  error_procedure: An error occurred in the procedure, please report to the administrator.
+  page_not_found: The page you are looking for does not exist.
+  return_to_previous: To return to the previous page click
+  here: Here
+  all_rights_reserved: All rights reserved
+  modules: Modules
+  add: Add
+  search: Search...
+  general_parameters: General Parameters
+  new: New
+  objects: Objects
+  application_records: Application Records
+  refresh: Refresh
+  start_date: Start Date
+  end_date: End Date
+  object: Object
+  action: Action
+  create: Create
+  delete: Delete
+  update: Update
+  search: Search...
+  search_button: Search
+  date: Date
+  user: User
+  portfolio: Portfolio
+  model: Model
+  actions: Actions
+  today: Today at
+  yesterday: Yesterday at
+  view_changes: View changes
+  database: Database
+  sql_running: SQL Running
+  jobs_running: Jobs Running
+  tablespace_space: Tablespace Space
+  actions: Actions
+  creation_date: Creation Date
+  player: Player
+  status: Status
+  description: Description
+  controller: Controller
+  image: Image
+  message: Message
+  level: Level
+  authorized: Authorized
+  extended_description: Extended Description
+  field: Field
+  code_aportesenlínea: AportesEnLinea Code
+  visible: Visible
+  id: ID
+  name: Name
+  municipality: Municipality
+  department: Department
+  permission: Permission
+  creates: Creates
+  updates: Updates
+  deletes: Deletes
+  field: Field
+  assignment_date: Assignment Date
+  start_time: Start Time
+  end_time: End Time
+  interval: Interval
+  number_of_people_per_interval: Number of people per interval
+  report: Report
+  add_new_permission: Add New Permission
+  add_new_visit: Add New Visit
+  new_company: New Company
+  edit_company: Edit Company
+  sure: Sure?
+  job_name: Job Name
+  job_style: Job Style
+  assigned_parameters: Assigned Parameters
+  associated_reports: Associated Reports
+  associated_visits: Associated Visits
+  associated_modules: Associated Modules
+  municipalities: Municipalities
+  no_jobs_running: No jobs running
+  kill_job: Kill Job
+  dangerous_button: This is a very DANGEROUS button, are you sure you want to kill the JOB?
+  associated_permissions: Associated Permissions
+  schedules_hours: Schedules - Hours
+  return: Return
+  create_play: Create Play
+  return_to_portfolios: Return to portfolios
+  new_company: New Company
+  edit_company: Edit Company
+  create_company_alegra: Create company in Alegra
+  service_url_create_company: Service - URL Create Company
+  service_url_enable_company: Service - URL Enable Company
+  url_create_contributor: URL Create Contributor
+  select_user_copy_permissions: Select the user to copy permissions from
+  select_file: Select File
+  no_file_selected: No file selected
+  nothing_selected: Nothing Selected
+  update: Update
+  return_to_portfolios_link: Return to portfolios
+  return_link: Return
+  select_user_to_copy: Select the user to copy permissions
+  quantity: Quantity
+  inactivate_schedule: Inactivate schedule
+  activate_schedule: Activate schedule
+  active_session_users: Users with active session
+  connected_users: connected users
+  deactivate_session: Deactivate session
+  page_not_found: Page not found
+  bulk_user_process: Bulk User Process
+  total_validated_records: Total Validated Records
+  total_approved_records: Total Approved Records
+  total_records_inconsistencies: Total Records with Inconsistencies
+  view_inconsistencies: View Inconsistencies
+  confirm_bulk_upload: Confirm bulk upload
+  confirm_bulk_upload_inactivate: Confirm bulk upload to inactivate
+  are_you_sure_bulk_upload: Are you sure you want to execute the bulk user upload?
+  are_you_sure_bulk_upload_inactivate: Are you sure you want to execute the bulk user upload to inactivate them?
+  connection_date_time: Connection Date and Time
+  schedule: Schedule
+  images: Images
+  company: Company
+  short_name: Short Name
+  creation_date: Creation Date
+  api_services: API Services
+  payu: Payu
+  siigo: Siigo
+  alegra: Alegra
+  aportes_en_linea: Aportes en Línea
+  order_of_process: Order of Process
+  token_generation: Token Generation
+  contributor_creation: Contributor Creation
+  news_sending: News Sending
+  certificate_generation: Certificate Generation
+  enabled: Enabled
+  created: Created
+  recover_password: Recover Password
+  enter_username_to_reset: Enter your username to reset access
+  forgot_password_link: Forgot your password?
+  back_to_login: Back to login
+  new_password: New Password
+  confirm_new_password: Confirm New Password
+  system_login: System Login
+  sending: Sending...
+  signing_in: Signing in...
+  custom_software_solutions: Custom software solutions
+  custom_development: Custom development
+  system_integration: System integration
+  continuous_support: Continuous support
+  all_rights_reserved: All rights reserved
+  copyright: Copyright
+  imahsoftware: ImahSoftware
+  bacwins: BacWins
+  campo: Field
+  codigo_aportes_en_linea: AportesEnLinea Code
+  estado: Status
+  visible: Visible
+  descripcion: Description
+  descripcion_ampliada: Extended Description
+  autorizado: Authorized
+  si: Yes
+  no: No
+  reporte: Report
+  campo_permitido: Allowed Field
+  modulo: Module
+  identificacion: Identification
+  nombre: Name
+  nombre_corto: Short Name
+  agregar_formato: Add Format
+  agregar_usuario: Add User
+  cargar_documento: Load Document
+  cargar_archivo: Load File
+  nada_seleccionado: Nothing Selected
+  nº_celular: Mobile Number
+  nº_lote: Batch Number
+  contraseña: Password
+  confirmar_contraseña: Confirm Password
+  correo_electronico: Email
+  identificacion_acud: Identification
+  cambiar_correo_electronico: Change Email
+  fecha_de_nacimiento: Date of Birth
+  contrato: Contract
+  contrato_empresa: Contract - Company
+  nodo: Node
+  periodo: Period
+  usuario_title: User
+  clave: Password
+  confirmar_clave: Confirm Password
+  agregar_nuevo: Add New
+  editar: Edit
+  regresar_a_usuarios: Return to Users
+  seguro_question: Are you sure?
+  desbloquear: Unlock
+  reestablecer_clave: Reset Password
+  inactivar_usuario: Inactivate User
+  activar_usuario: Activate User
+  cargar: Load
+  procesando: Processing
+  buscar: Search
+  generar: Generate
+  crear_empresa_en_alegra: Create Company in Alegra
+  desisten: Desist
+  aprobar: Approve
+  rechazar: Reject
+  sin_contacto: No Contact
+  seleccione_usuario_copiar_permisos: Select the user to copy permissions
+  tipo_consulta: Query Type
+  confirmar_mi_cuenta: Confirm my account
+  puede_confirmar_correo: You can confirm your email through the following link
+  cuando_ingreses_sistema: When you enter our Information System you will find a menu at the top specifically an option that says "User", in this option you can change your System Access password as many times as needed
+  usuario_menu: User
+  desconectarse: Disconnect
+  esta_seguro: Are you sure
+  que_quiere_desconectarse: that you want to disconnect?
+  eliminar: Delete
+  seguro_question_mark: Sure?
+  ver_imagen: View Image
+  eliminar_image: Delete
+  informe_gestion_revisado: Management Report Reviewed by?
+  informe_gestion_aprobado: Management Report Approved by?
+  api_key: API KEY
+  api_login: API LOGIN
+  llave_publica: Public Key
+  id_comercio: Commerce ID
+  id_cuenta: Account ID
+  dias_expira: Days Expires
+  moneda: Currency
+  prueba: Test
+  url_payu: Payu URL
+  url_confirmacion: Confirmation URL
+  url_respuesta: Response URL
+  username: Username
+  password: Password
+  basic: Basic
+  ocp: Ocp
+  doccode: DocCode
+  sales_man_identification: Sales man identification
+  payment_code: Payment Code
+  id_compania: Company ID
+  nombre_alegra: Name
+  nit_alegra: Nit Alegra
+  digito_verificacion: Check Digit
+  tipo: Type
+  token: Token
+  compania_habilitada: Company Enabled
+  set_id: Set Id
+  government_id: Government Id
+  servicio_url_emitir_nomina: Service - URL Issue Payroll
+  servicio_url_crear_empresa: Service - URL Create Company
+  servicio_url_habilitar_empresa: Service - URL Enable Company
+  aportes_username: Username
+  aportes_contrasena: Password
+  aportes_aplicacion: Application
+  aportes_tipo_id: Type ID Aportes
+  aportes_numero_id: Number ID Aportes
+  aportes_sucursal_principal: Main Branch
+  aportes_centro_trabajo: Work Center
+  url_creacion_novedades: URL Creation of News
+  informe_de_gestion_revisado_por: Management Report Reviewed by?
+  informe_de_gestion_aprobado_por: Management Report Approved by?
+  logo: Logo
+  siigo_username: Username
+  siigo_password: Password
+  siigo_basic: Basic
+  siigo_ocp: Ocp
+  siigo_doccode: DocCode
+  siigo_salesmansdentification: Sales man identification
+  siigo_paymentmeanscode: Payment Code
+  id_alegra: Company ID
+  name_alegra: Name
+  identificacion_alegra: Nit Alegra
+  dv_alegra: Check Digit
+  type_alegra: Type
+  token_alegra: Token
+  habilita_alegra: Company Enabled
+  setid_alegra: Set Id
+  governmentid_alegra: Government Id
+  url_alegra: Service - URL Issue Payroll
+  url_crear_empresa_alegra: Service - URL Create Company
+  url_habilitar_empresa_alegra: Service - URL Enable Company
+  aportes_username_label: Username
+  aportes_contrasena_label: Password
+  aportes_aplicacion_label: Application
+  aportes_tipoidaportante: Type ID Aportes
+  aportes_numeroidaportante: Number ID Aportes
+  aportes_sucursalprincipal: Main Branch
+  aportes_centro_trabajo_label: Work Center
+  aportes_url_certificado: Certificate URL
+  aportes_tipoidaportante_label: Type ID Aportes
+  aportes_numeroidaportante_label: Number ID Aportes
+  aportes_sucursalprincipal_label: Main Branch
+  aportes_centro_trabajo_label2: Work Center
+  url_token: URL Token
+  url_crear_cotizante: URL Create Contributor
+  url_generar_certificado: URL Generate Certificate
+  nuevo: New
+  regresar_a_usuarios: Return to Users
+  agregar_nuevo: Add New
+  editar: Edit
+  usuario_label: User
+  identificacion: Identification
+  clave: Password
+  confirmar_clave: Confirm Password
+  tipo_consulta: Query Type
+  nodo: Node
+  contrato_empresa: Contract - Company
+  aceptar: Accept
+  objeto: Object
+  permiso: Permission
+  creates: Creates
+  updates: Updates
+  deletes: Deletes
+  actualizar: Update
+  si: Yes
+  no: No
+  autorizado: Authorized
+  close_or_finish_pending_play: Close or finish your pending play before creating another
+  create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
+  new_play: New Play
+  administration_module: Administration Module
+  administration_modules: Administration Modules
+  expand_security_modules: Expand Security Modules
+  are_you_sure_logout: Are you sure
+  that_you_want_to_disconnect: that you want to disconnect
+  reestablish: Reestablish
+
+  will_paginate:
+    previous_label: "&#8592; Previous"
+    next_label: "Next &#8594;"
+    page_gap: "&hellip;"
+  activerecord:
+    attributes:
+      jugada:
+        jugador: Player
+      comite:
+        temas: Temas
+        fecha: Fecha
+      comitesuser:
+        user_id: Usuario
+        empresassede_id: Sede
+      contrato:
+        nro_contrato: Nro Contrato
+        objeto: Objeto
+        tiposcontrato_id: Tipo de Contrato
+        municipio_id: Municipio de ejecución
+        direccion: Dirección de ejecución
+        estado: Estado
+        valor: Valor
+        plazo_mes: Plazo meses
+        plazo_dia: Plazo dias
+        fecha_firma: Fecha firma
+        fecha_inicio: Fecha de inicio
+        fecha_fin: Fecha finalización
+        anticipo: Anticipo?
+        valor_anticipo: Valor anticipo
+        fecha_liquidacion: Fecha liquidación
+        fechamasmodi: Fecha + Mod.
+        valormasmodi: Valor + Mod.
+        tipo_validacion: Tipo Restriccion
+        monto_maximo_mes: Monto maximo por mes
+      contratosimagen:
+        tiposimagen_id: Tipo de documento
+      contratospago:
+        tiposcuenta_id: Tipo de cuenta
+        fecha_cuenta: Fecha cuenta
+        fecha_pago: Fecha pago
+        valor: Valor pagado
+        empresassede_id: Sede
+      insumo:
+        tipo: Tipo producto
+        bien_servicio: Bien o Servicio
+        especificacion: Especificación Técnica
+        presentacion: Presentación
+        valor1: Precio con IVA Región 1 a 11
+        valor2: Precio con IVA Región 12 a 18
+      contratosinsumo:
+        insumo_id: Bien
+        cantidad_mensual: Cantidad Mensual
+        precio_unitario: Precio unitario
+        descuento: Descuento %
+        precio_condescuento: Precio Unitario con Descuento
+        total: Total
+        marca_noreal: Marcacion Facturar
+      contratosmaquinaria:
+        insumo_id: Equipo, Maquina
+        cantidad_mensual: Cantidad Mensual
+        precio_unitario: Precio unitario
+        descuento: Descuento %
+        precio_condescuento: Precio Unitario con Descuento
+        total: Total
+        empresassede_id: Sede
+      contratoscargo:
+        tiposcargo_id: Cargo
+        perfil: Perfil
+        disponibilidad: Disponibilidad
+        cantidad: Cantidad
+        salario: Salario
+        empresassede_id: Sede
+      contratossede:
+        empresassede_id: Sede
+      contratospersona:
+        identificacion2: Identificación Validacion
+        fecha_nacimiento2: Fecha nacimiento Validacion
+        ciudad: Ciudad de la dirección
+        user_asignado: Responsable proceso
+        user_interventor: Interventor
+        puesto_nuevo: Puesto asignado a personal nuevo
+      contratosuser:
+        user_interventor: Usuario registrado
+        empresassede_id: Sede
+      contratosotro:
+        empresassede_id: Sede
+        descripcion: Detalle / Descripción del servicio
+        cantidad_mensual: Cantidad Mensual
+        precio_unitario: Precio unitario
+        descuento: Descuento %
+        precio_condescuento: Precio Unitario con Descuento
+        total: Total
+      contratossoldetalle:
+        contratosinsumo_id: Seleccione el item
+        contratosmaquinaria_id: Seleccione el item
+        contratosotro_id: Seleccione el item
+      proveedor:
+        tiposdocumento_id: Documento
+        identificacion: Identificación
+        digito: DV
+        nombre_proveedor: Nombre popular del proveedor
+        nombre_camara: Nombre del proveedor registrado en camara de comercio
+        telefono: Telefono fijo
+        celular: Telefono celular
+        email: Email
+        direccion: Direccion
+        municipio: Municipio
+        nro_cuenta: Numero de cuenta bancaria
+        entidad: Banco
+        tipo_cuenta: Tipo de cuenta
+        pertenece_cuenta: A quien pertenece la cuenta
+        identificacion_cuenta: Cedula a la que pertenece la cuenta
+        estado: Estado
+      proveedoresimagen:
+        tiposimagen_id: Tipo de documento
+        prodocumentos: Documento
+      persona:
+        tiposdocumento_id: Documento
+        identificacion: Identificación
+        digito: DV
+        primer_nombre: Primer nombre
+        segundo_nombre: Segundo nombre
+        primer_apellido: Primer apellido
+        segundo_apellido: Segundo apellido
+        genero: Género
+        estado_civil: Estado Civil
+        fecha_nacimiento: Fecha nacimiento
+        tipo_persona: Tipo de Persona
+        situacion_econo: Situación economica
+        ocupacion: Ocupación ó cargo
+        salario: Salario
+        nombre_empresa: Nombre empresa donde labora
+        direccion_empresa: Dirección empresa
+        telefono_empresa: Telefono empresa
+        situacion_titular: Situación del Titular
+        tipo_deudor: Tipo de deudor
+        porc_descuento: Porcentaje descuento pago contado
+        porc_descuento_plazo: Porcentaje descuento pago plazo
+        calificacion: Calificación cliente
+        codclavecic: Codclavecic
+        idc: Idc
+        nacionalidad: Nacionalidad
+        gps_codigo_sensible: Codigo Sensible
+        gps_fch_deteccion: Fecha de Detección
+        useranalista_id: Analista Judicial
+        representante_legal: Representante Legal
+        direccion: Dirección residencia
+        email: Correo electrónico
+        email_institucional: Correo Institucional
+        clv: Digite la clave con la cual usted podrá ingresar a su formulario de inscripción
+        nacimiento_municipio_id: Municipio de nacimiento
+        zona: Zona de residencia
+        discapacidad: ¿Tiene alguna discapacidad?
+        tiposdiscapacidad_id: Tipo de discapacidad
+        residencia_municipio_id: Municipio de la residencia
+        universidadesprograma_id: Universidad y programa
+        cohorte_id: Cohorte
+        centro_id: Centro de Apoyo
+        medio: ¿Por cuál medio se enteró de EDUPOL?
+        ciudadexpedicion_id: 'Ciudad de Expedición'
+        zona: Zona
+        parnaturalezadeudor_id: Naturaleza del Deudor
+        parsituaciondeudor_id: Situación del Deudor
+        contac_parentesco: Parentesco
+        contac_nombres: Nombres
+        contac_apellidos: Apellidos
+        contac_telefono: Teléfono
+      personasdireccion:
+        coordenada_x: Coordenada X
+        coordenada_y: Coordenada Y
+        origen_dato: Procedencia del dato
+      personastelefono:
+        origen_dato: Procedencia del dato
+      inmueblesingreso:
+        concepto: Concepto
+        ingreso_moneda: Unidad del Ingreso
+        fecha_ingreso: Fecha del Ingreso
+        fecha_minuta: Fecha Minuta
+        fecha_venta: Fecha Venta
+        nro_cheque: Nro de Cheques
+      inmueblesajuste:
+        valor: Valor
+        moneda: Unidad
+        fecha: Fecha
+        concepto: Concepto
+        observaciones: Observaciones
+      inmueblespatrimonio:
+        moneda: Unidad
+        fecha: Fecha
+        patrimonio: Tipo de Patrimonio
+        tipospatrimonio_id: Concepto
+      inmueblesgestion:
+        fecha_gestion: Fecha Gestión
+        observacion: Observación
+        tipo_gestion: Tipo Gestión
+      inmueblespropietario:
+        identificacion: Identificación
+        nombre: Nombre ó Razon Social
+        telefono: Teléfono
+        direccion: Dirección
+        email: Correo Electrónico
+        porcentaje_part: Porcentaje de Titularidad
+      inmueblestramite:
+        minuta_nro: Nro de Minuta
+        minuta_fecha: Fecha Minuta
+        escritura_nro: Nro. de Escritura
+        escritura_notaria: Notaria
+        municipio_id: Municipio
+        perumunicipio_id: Municipio
+        escritura_fecha: Fecha Escritura
+        fecha_entrega: Fecha de Entrega
+        fecha_ingresoucn: UCN (inicio)
+        dias_ucn: UCN (días)
+        resultado_ucn: UCN (Compliance)
+        fecha_salidaucn: UCN (Fin)
+        seguimento_ucn: UCN (Seguimiento)
+        fecha_seguimientoucn: Fecha seguimiento UCN
+        venta_concluida: Venta Concluida
+      inmueblesarrendatario:
+        trabajo: Empresa donde labora actualmente
+        telefono: Teléfono
+        celular: Celular
+        fecha_inicio: Fecha Inicio
+        direccion: Dirección
+        tel_trabajo: Teléfono Empresa
+      personasproceso:
+        suspencion_inicio: Suspensión Inicio
+        suspencion_fin: Suspensión Fin
+        causal_terminacion: Causal Terminación
+        comentarios_prestamo: Loan / Borrower Comments
+        comentarios_colateral: Collateral Comments
+        desafias: Key Challenges / Objectives
+        estrategias: Resolution Strategy
+        number_auction: Number of auction
+        minimum_bid: Minimum Starting Bid
+        expected_date: Expected resolution date
+        discount_rate: Discount Rate VNA (%)
+        loan_underwriter: Loan Underwriter
+        collateral_underwriter: Collateral underwriter
+        exhorto: Exhorto
+        fecha: Fecha inicio proceso
+      portafolio:
+        recaudo_prorrata: Recaudo Prorrata?
+        forma_aplicacion: Forma Aplicación
+        aplicaregla1: Valida Obligación + Identificación
+        aplicaregla2: Valida solo Obligación
+        aplicaregla3: Valida solo Identificación
+        valida_cierre: Control de Recaudos por Cierre
+        aplica_recaudo: Como aplicar Recaudos por identificación?
+        bloqueo_recaudo: Bloqueo Recaudos
+        genera_mora: Liquida Mora?
+        nacional: Colombia
+        act_dash: Activar Dashboard
+        acuerdos_fechas: Permitir Acuerdos con Fechas Anteriores
+      personasinventidad:
+        tipo: Tipo
+        entidad: Entidad
+        nro_cuenta: Nro Cuenta
+        oficina: Oficina
+        saldo: Saldo
+        personascodeudor_id: Dato asociado a
+      personaslaboral:
+        entidad: Entidad
+        nit: NIT Empleador
+        direccion: Dirección
+        municipio_id: Municipio
+        cargo: Cargo
+        salario: Salario
+        nombre_rh: Nombre
+        telefono_rh: Teléfono
+        email_rh: Email
+        fecha_vinculacion: Fecha Vinculación
+        fecha_finalizacion: Fecha Financiación
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvotro:
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvempresa:
+        origen: Origen
+        nro_matricula: Nro matricula
+        nit: Nit
+        nombre: Nombre
+        camara_comercio: Camara y comercio
+        direccion: Dirección
+        municipio_id: Municipio
+        representante_legal: Representante legal
+        porc_participacion: Porc Participación
+        personascodeudor_id: Dato asociado a
+        observaciones: Observaciones
+      personasinvremanente:
+        juzgado_id: Juzgado
+        tiposproceso_id: Tipos de Proceso
+        tipo_bien: Tipo Bien
+      personasobligacion:
+        recibida_pa: Recibida PA
+        radicado_juzgado: Radicado Juzgado
+        aceptada: Aceptada
+        subida_activo: Subida a Activo
+        tasa_final: Tasa Final
+        tasa_mora: Tasa Mora
+        corte_plan: Dia Corte
+        tasa_desgravamen: Tasa Desgravamen Anual
+        tasa_igv: Tasa IGV
+        tipotitulo: Tipo de Título
+      portafolioscuenta:
+        propietario: Propietario
+        banco: Banco
+        cuenta: Cuenta
+        unidad_denominacion: Unidad denominación
+        codigo_reporte: Codigo reporte
+        portafoliossucursal_id: Sucursal
+        cod_cuenta: Codigo cuenta
+        nit_titular: Nit Titular
+        tipo_cuenta: Tipo cuenta
+        convenio: Convenio
+        portafoliosvehiculo_id: Vehiculo
+        tipospatrimonio_id: Patrimonio
+      inmueblesestado:
+        estado: Estado Reo
+        fecha_estado: Fecha
+        grupo: Grupo
+        fecha_ingresoucn: UCN (inicio)
+        dias_ucn: UCN (días)
+        resultado_ucn: UCN (Compliance)
+      tanque:
+        fecha_mov: Fecha Deposito
+        obligacion: Obligación
+        identificacion: Identificación
+        cuenta: Cuenta
+        codigo: Codigo
+        valor_recaudo: Valor Recaudo
+        unidad_denominacion: Unidad Denominación
+        nombre_archivo: Nombre del Archivo
+        parorigenespago_id: Origen del pago
+      personasacuerdosdato:
+        created_at: Fecha Aprobación
+      portafoliostasascambio:
+        hnl_dolar: Lempira por Dolar
+        soles_dolar: Soles por Dolar
+      gpsajuste:
+        patrimonio: Tipo de Patrimonio
+      personasproetapasdato:
+        strategy: Strategy
+        winning_bid: Winning bid (USD)
+        winning_bid_org: Winning bid (Original Currency)
+        winning_bid_currency: Winning bid Currency
+        tipo_toma: Tipo de toma de posesión
+        collection_date: Collection Date (Awarded by 3RD)
+        collection_amount: Collection Amount (3RD)
+        possible_collections: Possible collections date (3RD)
+        status: Status
+        comments_gps: Comments GPS
+        dpd_attimeofaction: DPD at Time of action
+        date_lastprocedural_action: Date last procedural action
+        minimun_startingbid: Minumun Starting Bid
+      personasprojudicial:
+        fecha_resol_estudio: Fecha resolución estudio
+        valor_resol_estudio: Valor resolución estudio
+        unidad_estudio: Denominación
+        fecha_resol_gps: Fecha resolución GPS
+        valor_resol_gps: Valor resolución GPS
+        unidad_gps: Denominación
+        tipo_resol: Tipo de resolución
+        tipoobs_resol: Tipo de observación resolución
+        observacion: Observación de la resolución
+        accion_inmediata: Acción inmediata
+        fecha_accion: Fecha accion inmediata
+        observacion_accion: Observación de acción inmediata
+        #AQUI VA !!!!!!!!
+    errors:
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    -
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: cerca de %{count} horas
+      about_x_months:
+        one: cerca de 1 mes
+        other: cerca de %{count} meses
+      about_x_years:
+        one: cerca de 1 año
+        other: cerca de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: "%{count} días"
+      x_minutes:
+        one: 1 minuto
+        other: "%{count} minutos"
+      x_months:
+        one: 1 mes
+        other: "%{count} meses"
+      x_seconds:
+        one: 1 segundo
+        other: "%{count} segundos"
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minuto
+      month: Mes
+      second: Segundos
+      year: Año
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: debe ser aceptado
+      blank: no puede estar en blanco
+      present: debe estar en blanco
+      confirmation: no coincide
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser un número par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluido en la lista
+      invalid: es inválido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      model_invalid: "La validación falló: %{errors}"
+      not_a_number: solo números
+      not_an_integer: debe ser un entero
+      odd: debe ser un número impar
+      required: debe existir
+      taken: ya ha sido tomado
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
+      other_than: debe ser distinto de %{count}
+    template:
+      body: 'Revise que los siguientes campos sean válidos:'
+      header:
+        one: "%{model} no pudo guardarse debido a 1 error"
+        other: "%{model} no pudo guardarse debido a %{count} errores"
+  helpers:
+    select:
+      prompt: Por favor selecciona
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    # Used in number_to_currency()
+    currency:
+      format:
+        # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
+        format: "%n %u"
+        unit: "$"
+        # These three are to override number.format and are optional
+        separator: ","
+        delímiter: "."
+        precision: 2
+    format:
+      delímiter: ","
+      precision: 2
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: mil millones
+          million:
+            one: millón
+            other: millones
+          quadrillion: mil billones
+          thousand: mil
+          trillion:
+            one: billón
+            other: billones
+          unit: ''
+      format:
+        delímiter: ","
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delímiter: ","
+        format: "%n%"
+    precision:
+      format:
+        delímiter: ","
+  support:
+    array:
+      last_word_connector: " y "
+      two_words_connector: " y "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%a, %d de %b de %Y a las %H:%M:%S %Z"
+      long: "%A, %d de %B de %Y a las %I:%M %p"
+      short: "%d de %b a las %H:%M hrs"
+    pm: pm
+
+  views:
+    pagination:
+      first: "&laquo; Primero"
+      last: "Último &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "..."
