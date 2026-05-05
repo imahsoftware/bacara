@@ -10,14 +10,14 @@ class UsershorariosController < ApplicationController
   def act
     @usershorario.estado = 'ACTIVO'
     @usershorario.save
-    flash[:notice] = "Activado"
+    flash[:notice] = I18n.t(:activated_label)
     redirect_to usershorarios_path(:id =>@usershorario.usersfecha_id)
   end
 
   def bact
     @usershorario.estado = 'INACTIVO'
     @usershorario.save
-    flash[:notice] = "Inactivado"
+    flash[:notice] = I18n.t(:inactivated_label)
     redirect_to usershorarios_path(:id =>@usershorario.usersfecha_id)
   end
 

@@ -83,7 +83,7 @@
                        data-jugadas-loaded="false">
                     <div class="text-muted">
                       <i class="fa fa-info-circle"></i>
-                      Click en pestaña para cargar jugadas.
+                      <%= t(:click_tab_to_load_plays) %>
                     </div>
                   </div>
                 <% end %>
@@ -138,7 +138,7 @@
     if(!$pane.length) return;
     if($pane.data('jugadas-loaded') === true) return;
 
-    $pane.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> Cargando jugadas...</p>');
+    $pane.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> <%= t(:loading_plays) %></p>');
 
     $.get('<%= tabla_portafolio_jugadas_path %>', { portafolio_id: portafolioId })
       .done(function(html){
@@ -147,7 +147,7 @@
         if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
-        $pane.html('<div class="alert alert-danger">No se pudo cargar jugadas de este portafolio.</div>');
+        $pane.html('<div class="alert alert-danger"><%= t(:load_plays_failed) %></div>');
       });
   }
 
@@ -158,7 +158,7 @@
   function loadSearchResults(params){
     var $results = $('#jugadas-search-results');
     if(!$results.length) return;
-    $results.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> Buscando...</p>');
+    $results.html('<p class="text-muted"><i class="fa fa-refresh fa-spin"></i> <%= t(:searching) %></p>');
 
     $.get('<%= tabla_buscar_jugadas_path %>', params || {})
       .done(function(html){
@@ -166,7 +166,7 @@
         if (window.__jugadasBootConsolidadoCharts) window.__jugadasBootConsolidadoCharts();
       })
       .fail(function(){
-        $results.html('<div class="alert alert-danger">No se pudo realizar la búsqueda.</div>');
+        $results.html('<div class="alert alert-danger"><%= t(:search_failed) %></div>');
       });
   }
 
@@ -174,7 +174,7 @@
     ev.preventDefault();
     var q = $.trim($('#jugadas-search-input').val());
     if(!q){
-      $('#jugadas-search-results').html('<div class="alert alert-warning">Ingresa un criterio de búsqueda.</div>');
+      $('#jugadas-search-results').html('<div class="alert alert-warning"><%= t(:enter_search_criteria) %></div>');
       return;
     }
     loadSearchResults({ q: q });

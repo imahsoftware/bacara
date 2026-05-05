@@ -136,7 +136,7 @@
 	      		</button>
 	      	</span>
 	        <%= file_field_tag(:file, id: 'files-input-upload', style: 'display:none', data: { toggle: 'tooltip' }, title: 'Seleccionar Archivo') %>
-	        <input type="text" id="rutaarchivo" disabled="disabled" placeholder="No has seleccionado el archivo" class="form-control">
+	        <input type="text" id="rutaarchivo" disabled="disabled" placeholder="<%= t(:no_file_selected) %>" class="form-control">
 	      	<span class="input-group-btn">
 	          <%= button_tag(type: "submit", class: "btn btn-primary", disabled: true, id: 'fake-file-button-upload', data: { toggle: 'tooltip', disable_with: "#{t :procesando}" }, title: 'Cargar Archivo') do %>
 	          	<span class="fa fa-upload"></span>

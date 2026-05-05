@@ -12,7 +12,7 @@ class UserstemporalesController < ApplicationController
     @userstemporal.user_id = is_admin
     respond_to do |format|
       if @userstemporal.save
-        flash[:notice] = "Creado con Exito."
+        flash[:notice] = I18n.t(:notice_crea_msj)
         format.js
       else
         format.js { render 'layouts/errors', locals: { object: @userstemporal } }

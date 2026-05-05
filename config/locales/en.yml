@@ -37,6 +37,13 @@ en:
   user_not_found: User not found
   no_results_found: No results found
   play_found: "Play found:"
+  searching: "Searching..."
+  search_failed: "Search could not be performed."
+  loading_plays: "Loading plays..."
+  load_plays_failed: "Could not load plays from this portfolio."
+  enter_search_criteria: "Enter a search criteria."
+  click_tab_to_load_plays: "Click on tab to load plays."
+  no_plays_in_portfolio: "No plays in this portfolio for the last 10 days."
   ingreso_al_sistema: System Login
   ingresa_credenciales: Enter your credentials to continue
   usuario: Username
@@ -1395,3 +1402,30 @@ en:
   user_activated_successfully: User activated successfully
   user_updated_successfully: User updated successfully
   position_updated_successfully: Position updated successfully
+  user_label: User
+  user_has_no_plays: User has no plays registered.
+  multiple_users_found_select_one: 'Multiple users found. Pick one:'
+  no_results_for_search: No results found for that search.
+  search_play_or_user_hint: Search by play number, name, username or ID.
+  user_not_found_with_criteria: No user found with that criteria.
+  search_user_hint: Search by name, username or ID.
+  click_tab_to_load_plays: Click on a tab to load plays.
+  document_uploaded_successfully: Document uploaded successfully.
+  document_deleted_successfully: Document deleted successfully.
+  values_recalculated_successfully: Values recalculated successfully.
+  activated_label: Activated
+  inactivated_label: Inactivated
+  cannot_access_until_process_finishes: You cannot access until you finish the process
+  unauthorized_access_session_closed: 'UNAUTHORIZED ACCESS, Session Closed'
+  email_confirmed_successfully: Email confirmed successfully
+  no_search_results: No search results found
+  user_registered_successfully: User registered successfully!
+  validation_error_check_fields: An error occurred, please validate the fields
+  email_already_registered: Email is already registered
+  user_activated_ready_for_process: User activated and ready for the process
+  registration_not_activated_contact_admin: Registration not activated, please contact the administrator
+  process_finished: Process finished
+  update_error_required_fields: An error occurred while updating, you must fill in all required fields.
+  no_file_selected: No file selected
+  detail_label: Detail
+  search_placeholder: Search...

@@ -41,7 +41,7 @@
             <%= form_tag users_path, method: :get, id: "search-form" do %>
               <div class="input-group" style="width: 550px;">
                 <%= hidden_field_tag :user_id %>
-                <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: "Buscar...", type: "search" %>
+                <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: t(:search_placeholder), type: "search" %>
               </div>
             <% end %>
             <script type="text/javascript" charset="utf-8">

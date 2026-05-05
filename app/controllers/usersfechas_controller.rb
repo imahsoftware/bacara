@@ -57,7 +57,7 @@ class UsersfechasController < ApplicationController
     @user = usersfecha.user
     @usersfecha = Usersfecha.new
     usersfecha.destroy
-    flash[:usersfecha] = "Borrado con exito"
+    flash[:usersfecha] = I18n.t(:notice_elimina_msj)
     respond_to do |format|
       format.js { render action: "usersfechas" }
     end

@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                   <label>Seleccione el usuario a copiar los permisos </label><br/>
                   <%= hidden_field_tag :user_id %>
-                  <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: "Buscar...", type: "search", autocomplete: 'off' %>
+                  <%= autocomplete_field_tag :nombre,'', autocomplete_user_nombre_users_path, class: "form-control pull-right", id_element: '#user_id', placeholder: t(:search_placeholder), type: "search", autocomplete: 'off' %>
                 </div>
                 <div class="col-md-1">
                   <%= button_tag type: 'submit', name: 'format', class: 'btn btn-primary', style: 'margin-top: 24px;', data: { toggle: 'tooltip' }, title: 'Procesar' do %>

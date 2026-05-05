@@ -817,7 +817,7 @@ class ApplicationController < ActionController::Base
     if current_user.bloqueo == 'SI'
       #puts "Fabian... #{request.path.to_s rescue nil}"
       if ['/tareas/gestion','/'].exclude?(request.path)
-        flash[:alert] = "No puedes acceder hasta que termines el proceso"
+        flash[:alert] = I18n.t(:cannot_access_until_process_finishes)
         redirect_to root_path
       end
     end

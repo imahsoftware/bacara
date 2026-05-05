@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if self.resource.bloqueo == "SI"
-      flash[:alert] = "No puedes acceder hasta que termines el proceso"
+      flash[:alert] = I18n.t(:cannot_access_until_process_finishes)
       sign_in(resource_name, resource) # lo firma igual, por si Devise necesita sesión
       redirect_to root_path and return
     end

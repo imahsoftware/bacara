@@ -12,7 +12,7 @@ class UsersregistradosController < ApplicationController
     if is_usersregistrado or is_becario
       sign_out current_user
       redirect_to root_path
-      flash[:notice] = "ACCESO NO AUTORIZADO, Sesion Cerrada"
+      flash[:notice] = I18n.t(:unauthorized_access_session_closed)
     end
     @q = Usersregistrado.where(["periodo = '#{@periodo}'"]).ransack(params[:q])
     @usersregistrados = @q.result.paginate(:page => params[:page], :per_page => 10).order("identificacion")
@@ -24,7 +24,7 @@ class UsersregistradosController < ApplicationController
     @user.activo = 'S'
     @user.confirmed_at = DateTime.now
     @user.save(validate: false)
-    flash[:notice] = 'Correo confirmado correctamente'
+    flash[:notice] = I18n.t(:email_confirmed_successfully)
     redirect_to root_path
   end
 
@@ -33,7 +33,7 @@ class UsersregistradosController < ApplicationController
     @c.identificacion = params[:identificacion]
     @usersregistrados = Usersregistrado.search(@c)
     if @usersregistrados.count == 0
-      flash[:notice] = "No hay resultados de la busqueda"
+      flash[:notice] = I18n.t(:no_search_results)
       redirect_to usersregistrados_path
     else
       if @usersregistrados.count == 1
@@ -122,14 +122,14 @@ class UsersregistradosController < ApplicationController
           ActiveRecord::Base.connection.execute("update usersregistrados set user_id = #{user.id} where id = #{@usersregistrado.id}")
         end
         UsersregistradoMailer.confirma(user,@usersregistrado).deliver_now
-        flash[:notice] = "Usuario Registrado con exito !!!"
+        flash[:notice] = I18n.t(:user_registered_successfully)
         redirect_to root_path
       else
-        flash[:alert] = "Se produjo, favor validar los campos"
+        flash[:alert] = I18n.t(:validation_error_check_fields)
         render :action => "usersregistrado_form"
       end
     else
-      flash[:alert] = 'Ya se encuentra registrado el correo electronico'
+      flash[:alert] = I18n.t(:email_already_registered)
       render :action => "usersregistrado_form"
     end
   end
@@ -205,13 +205,13 @@ class UsersregistradosController < ApplicationController
           ActiveRecord::Base.connection.execute("update usersregistrados set persona_id = #{persona.id} where id =  #{usersregistrado.id}")
           ActiveRecord::Base.connection.execute("update users set persona_id = #{persona.id}, clase='BECARIO', activo = false
                                                    where id =  #{usersregistrado.user_id}")
-          flash[:notice] = "Usuario Activado y listo para el proceso"
+          flash[:notice] = I18n.t(:user_activated_ready_for_process)
         else
-          flash[:alert] = "Registro no activado, contacte al Administrador"
+          flash[:alert] = I18n.t(:registration_not_activated_contact_admin)
         end
       end
     end
-    flash[:alert] = "Proceso Terminado"
+    flash[:alert] = I18n.t(:process_finished)
     redirect_to authenticated_root_path
   end
 
@@ -223,11 +223,11 @@ class UsersregistradosController < ApplicationController
     @usersregistrado = Usersregistrado.find(params[:id])
     params[:etapa].to_s != "" ? Usersregistrado.find(params[:id]).update_columns(etapa: params[:etapa].to_s) : nil
     if @usersregistrado.update_attributes(usersregistrado_params)
-      flash[:notice] = "Actualizado con Exito"
+      flash[:notice] = I18n.t(:notice_actualiza_msj)
       redirect_to edit_usersregistrado_path(@usersregistrado)
       #redirect_to finalizado_ausersregistrados_path(id: @ausersregistrado.id)
     else
-      flash[:alert] = "Se produjo un error al actualizar, debes diligenciar todos los campos obligatorios."
+      flash[:alert] = I18n.t(:update_error_required_fields)
       render :action => "usersregistrado_form"
     end
     #rescue
@@ -253,7 +253,7 @@ class UsersregistradosController < ApplicationController
       if @usersregistrado.user_id != is_admin
         sign_out current_user
         redirect_to root_path
-        flash[:notice] = "ACCESO NO AUTORIZADO, Sesion Cerrada"
+        flash[:notice] = I18n.t(:unauthorized_access_session_closed)
       end
     end
   end

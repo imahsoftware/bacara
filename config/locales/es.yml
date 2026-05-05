@@ -117,6 +117,13 @@ es:
   user_not_found: No se encontró usuario
   no_results_found: No se encontraron resultados
   play_found: "Jugada encontrada:"
+  searching: "Buscando..."
+  search_failed: "No se pudo realizar la búsqueda."
+  loading_plays: "Cargando jugadas..."
+  load_plays_failed: "No se pudo cargar jugadas de este portafolio."
+  enter_search_criteria: "Ingresa un criterio de búsqueda."
+  click_tab_to_load_plays: "Click en pestaña para cargar jugadas."
+  no_plays_in_portfolio: "No hay jugadas en este portafolio para los ultimos 10 dias."
   ingreso_al_sistema: System Login
   ingresa_credenciales: Enter your credentials to continue
   usuario: Username
@@ -1455,3 +1462,30 @@ es:
   user_activated_successfully: Usuario activado correctamente
   user_updated_successfully: Usuario actualizado correctamente
   position_updated_successfully: Cargo actualizado correctamente
+  user_label: Usuario
+  user_has_no_plays: El usuario no tiene jugadas registradas.
+  multiple_users_found_select_one: 'Se encontraron varios usuarios. Selecciona uno:'
+  no_results_for_search: No se encontraron resultados para esa búsqueda.
+  search_play_or_user_hint: Busca por número de jugada, nombre, username o identificación.
+  user_not_found_with_criteria: No se encontró usuario con ese criterio.
+  search_user_hint: Busca por nombre, username o identificación.
+  click_tab_to_load_plays: Haz clic en una pestaña para cargar las jugadas.
+  document_uploaded_successfully: Documento cargado correctamente.
+  document_deleted_successfully: Documento eliminado correctamente.
+  values_recalculated_successfully: Valores recalculados correctamente.
+  activated_label: Activado
+  inactivated_label: Inactivado
+  cannot_access_until_process_finishes: No puedes acceder hasta que termines el proceso
+  unauthorized_access_session_closed: 'ACCESO NO AUTORIZADO, Sesión cerrada'
+  email_confirmed_successfully: Correo confirmado correctamente
+  no_search_results: No hay resultados de la búsqueda
+  user_registered_successfully: '¡Usuario registrado con éxito!'
+  validation_error_check_fields: Se produjo un error, por favor valida los campos
+  email_already_registered: El correo electrónico ya está registrado
+  user_activated_ready_for_process: Usuario activado y listo para el proceso
+  registration_not_activated_contact_admin: Registro no activado, contacta al administrador
+  process_finished: Proceso terminado
+  update_error_required_fields: Se produjo un error al actualizar, debes diligenciar todos los campos obligatorios.
+  no_file_selected: Ningún archivo seleccionado
+  detail_label: Detalle
+  search_placeholder: Buscar...

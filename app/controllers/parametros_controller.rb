@@ -37,7 +37,7 @@ class ParametrosController < ApplicationController
   def create
     @parametro = Parametro.new(parametro_params)
     if @parametro.save
-      flash[:notice] = "Creado con Exito."
+      flash[:notice] = I18n.t(:notice_crea_msj)
       redirect_to edit_parametro_path(@parametro)
     else
       render action: "parametro_form"
@@ -46,7 +46,7 @@ class ParametrosController < ApplicationController
 
   def update
     if @parametro.update(parametro_params)
-      flash[:notice] = "Actualizado con Exito."
+      flash[:notice] = I18n.t(:notice_actualiza_msj)
       redirect_to edit_parametro_path(@parametro)
     else
       render action: "parametro_form"

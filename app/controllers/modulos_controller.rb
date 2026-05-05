@@ -69,7 +69,7 @@ class ModulosController < ApplicationController
 
   def destroy
     @modulo.destroy
-    flash['success'] = "Eliminado con exito"
+    flash['success'] = I18n.t(:notice_elimina_msj)
   end
 
   private

@@ -17,7 +17,7 @@
             <tr style="font-size: 12px;">
               <td class="text-center" width="10%"><strong>Orden</strong></td>
               <td class="text-center"><strong>Encabezado</strong></td>
-              <td class="text-center" width="20%"><strong>Detalle</strong></td>
+              <td class="text-center" width="20%"><strong><%= t(:detail_label) %></strong></td>
             </tr>
             </thead>
             <tbody>
@@ -73,7 +73,7 @@
                       </button>
                     </span>
                   <%= f.input :documentos, as: :file, label: false, input_html: { id: 'files-input-upload', style: 'display:none;', data: { toggle: 'tooltip' }, title: 'Seleccionar Archivo' } %>
-                  <input type="text" id="rutaarchivo" disabled="disabled" placeholder="Nada Seleccionado" class="form-control" style="width: 187px">
+                  <input type="text" id="rutaarchivo" disabled="disabled" placeholder="<%= t(:no_file_selected) %>" class="form-control" style="width: 187px">
                   <span class="input-group-btn">
                       <%= f.button :submit, "Cargar", class: "btn btn-primary", disabled: true, id: 'fake-file-button-upload', data: { toggle: 'tooltip', disable_with: "#{t :procesando}" }, title: 'Cargar Archivo' %>
                     </span>

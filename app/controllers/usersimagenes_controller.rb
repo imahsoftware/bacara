@@ -17,7 +17,7 @@ class UsersimagenesController < ApplicationController
     @usersimagen.user_id = @user.id
     respond_to do |format|
       if @usersimagen.save
-        flash[:notice] = "Documento Cargado con Exito."
+        flash[:notice] = I18n.t(:document_uploaded_successfully)
         format.html { redirect_to edit_user_path(@user) }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class UsersimagenesController < ApplicationController
   def destroy2
     usersimagen = Usersimagen.find(params[:id])
     usersimagen.destroy
-    flash[:notice] = "Documento Eliminado con Exito."
+    flash[:notice] = I18n.t(:document_deleted_successfully)
     redirect_to controller: "users", action: "edit", id: params[:user_id]
   end
 

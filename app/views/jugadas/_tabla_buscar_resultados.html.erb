@@ -13,7 +13,7 @@
   <%= render 'jugadas/tabla' %>
 <% elsif @selected_user.present? %>
   <div class="alert alert-info" style="margin-bottom:10px;">
-    <strong>Usuario:</strong>
+    <strong><%= t(:user_label) %>:</strong>
     <%= @selected_user.nombre %>
     <% if @selected_user.username.present? %>
       (<%= @selected_user.username %>)
@@ -27,12 +27,12 @@
     <%= render 'jugadas/tabla' %>
   <% else %>
     <div class="alert alert-warning">
-      Usuario no tiene jugadas registradas.
+      <%= t(:user_has_no_plays) %>
     </div>
   <% end %>
 <% elsif @consulta.present? && @matched_users.present? %>
   <div class="alert alert-warning" style="margin-bottom:10px;">
-    Se encontraron varios usuarios. Selecciona uno:
+    <%= t(:multiple_users_found_select_one) %>
   </div>
   <div class="list-group">
     <% @matched_users.each do |usr| %>
@@ -52,10 +52,10 @@
   </div>
 <% elsif @consulta.present? && @error.blank? %>
   <div class="alert alert-warning">
-    No se encontraron resultados para esa búsqueda.
+    <%= t(:no_results_for_search) %>
   </div>
 <% elsif @consulta.blank? && @error.blank? %>
   <div class="text-muted">
-    Busca por número de jugada, nombre, username o identificación.
+    <%= t(:search_play_or_user_hint) %>
   </div>
 <% end %>

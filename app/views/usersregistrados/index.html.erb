@@ -18,7 +18,7 @@
     <div class="box-tools pull-right">
       <%= form_tag buscador_formularios_path, :method => 'get' do %>
         <div class="input-group input-group-sm" style="width: 180px;">
-          <%= text_field_tag :identificacion, params[:identificacion], class: 'form-control pull-right', placeholder: "Identificacion" %>
+          <%= text_field_tag :identificacion, params[:identificacion], class: 'form-control pull-right', placeholder: t(:identification) %>
           <div class="input-group-btn">
             <%= button_tag(type: "submit", class: "btn btn-default") do %>
               <i class="fa fa-search"></i>

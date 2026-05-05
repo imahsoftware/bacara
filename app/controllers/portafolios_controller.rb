@@ -54,7 +54,7 @@ class PortafoliosController < ApplicationController
     @portafolio = Portafolio.new(portafolio_params)
     respond_to do |format|
       if @portafolio.save
-        format.html { redirect_to edit_portafolio_path(etapa: "A", id: @portafolio.id), notice: "El registro ha sido registrado con Exito." }
+        format.html { redirect_to edit_portafolio_path(etapa: "A", id: @portafolio.id), notice: I18n.t(:notice_crea_msj) }
         format.json { render :show, status: :created, location: @portafolio }
       else
         format.html { render :new }
@@ -65,7 +65,7 @@ class PortafoliosController < ApplicationController
 
   def update
     if @portafolio.update(portafolio_params)
-      flash[:notice] = "El registro ha sido actualizado con Exito."
+      flash[:notice] = I18n.t(:notice_actualiza_msj)
       redirect_to edit_portafolio_path(@portafolio)
     else
       @portafoliossucursal = Portafoliossucursal.new
@@ -84,7 +84,7 @@ class PortafoliosController < ApplicationController
 
   def destroy
     @portafolio.destroy
-    flash[:notice] = "El registro ha sido borrado con Exito."
+    flash[:notice] = I18n.t(:notice_elimina_msj)
     respond_to do |format|
       format.html { redirect_to(portafolios_url) }
       format.xml  { head :ok }
@@ -94,7 +94,7 @@ class PortafoliosController < ApplicationController
   def recalculargca
     @portafolio = Portafolio.find(params[:id])
     ActiveRecord::Base.connection.execute("update personassoblgcas set vmn = (capital * (#{@portafolio.vmn1.to_f}/100)), vmn2 = (capital * (#{@portafolio.vmn2.to_f}/100)), vmn3 = (capital * (#{@portafolio.vmn3.to_f}/100))")
-    flash[:notice] = "Valores recalculados correctamente."
+    flash[:notice] = I18n.t(:values_recalculated_successfully)
     redirect_to portafolios_path
   end
 
