@@ -22,6 +22,15 @@
     <div class="box-body">
       <div class="row">
         <div class="col-md-6">
+          <%= f.input :nombre, label: t(:nombre) %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :nombrecorto, label: t(:nombre_corto) %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
           <%= f.input :identificacion, label: t(:identificacion) %>
         </div>
         <div class="col-md-6">
@@ -35,6 +44,16 @@
         </div>
         <div class="col-md-6">
           <%= f.input :clave, label: t(:clave) %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <%= f.input :estado, label: t(:estado),
+                as: :select,
+                collection: select_estado_portafolios,
+                input_html: { class: 'select2', data: { width: '100%' } },
+                include_blank: false %>
         </div>
       </div>
     </div><!-- /.box-body -->

@@ -337,7 +337,7 @@ es:
   associated_permissions: Associated Permissions
   schedules_hours: Schedules - Hours
   create_play: Create Play
-  return_to_portfolios: Return to portfolios
+  return_to_portfolios: Volver a clientes
   create_company_alegra: Create company in Alegra
   service_url_create_company: Service - URL Create Company
   service_url_enable_company: Service - URL Enable Company
@@ -346,7 +346,7 @@ es:
   select_file: Select File
   no_file_selected: No file selected
   nothing_selected: Nothing Selected
-  return_to_portfolios_link: Return to portfolios
+  return_to_portfolios_link: Volver a clientes
   return_link: Return
   select_user_to_copy: Select the user to copy permissions
   quantity: Quantity
@@ -1489,3 +1489,53 @@ es:
   no_file_selected: Ningún archivo seleccionado
   detail_label: Detalle
   search_placeholder: Buscar...
+  email_optional_hint: Opcional. Si se deja en blanco, se auto-genera como username@bacwins.com
+
+  # ── Límite de acceso / expiración ──────────────────────────────
+  access_expired_title: Tu tiempo de acceso ha expirado
+  access_expired_description: El período de acceso asignado a tu cuenta ha terminado. ¿Deseas solicitar una extensión o cerrar sesión?
+  access_expired_yes: Sí, quiero continuar
+  access_expired_no: No, cerrar sesión
+  access_expired_admin_review: Un administrador revisará tu solicitud.
+  access_expired_account_inactive: Tu cuenta quedará inactiva.
+  access_expired_confirm_yes: Se le notificará a un administrador para que revise tu solicitud. Mientras tanto, tu sesión se cerrará. ¿Continuar?
+  access_expired_extension_requested: Solicitud enviada. Un administrador revisará tu caso.
+  access_expired_session_closed: Tu sesión fue cerrada.
+  access_expired_no_longer_available: Tu período de acceso ha terminado. Ya no puedes ingresar a la plataforma. Si crees que es un error, comunícate con un administrador.
+  access_expired_login_blocked: Tu período de acceso ha terminado. Comunícate con un administrador para solicitar más tiempo.
+  back_to_login: Volver al inicio de sesión
+  expired_no_response_title: Acceso expirado sin respuesta del usuario
+  expired_no_response_description: Estos usuarios tuvieron tiempo límite de acceso que venció sin que respondieran. Puedes otorgarles un nuevo tiempo o dejarlos sin límite.
+  expired_no_response_none: No hay usuarios con acceso expirado sin respuesta.
+  expired_no_response_badge: "Acceso expirado sin respuesta —"
+  expired_no_response_form_hint: "El tiempo de acceso de este usuario venció el %{fecha} sin que tomara ninguna acción. Puedes asignarle un nuevo límite o dejar el campo vacío para quitarlo."
+  access_limit_hours_label: Límite de acceso (horas)
+  access_limit_hours_placeholder: "Ej: 24 (dejar vacío = sin límite)"
+  access_limit_no_limit_hint: Dejar vacío para no asignar límite.
+  access_limit_replaces_hint: "Actualmente expira: %{fecha} — ingresar nuevo valor reemplaza el tiempo."
+  access_limit_extension_warning: Este usuario solicitó una extensión.
+  access_limit_extension_warning_hint: Ingresa nuevas horas para otorgarla, o deja vacío y guarda para dejarlo sin límite.
+  access_expiration_banner: Tu acceso expira en
+  access_expired_banner_expired: Tu acceso ha expirado.
+  access_expired_banner_click_here: Haz clic aquí
+  extension_requests_title: Solicitudes de extensión de acceso
+  extension_requests_none: No hay solicitudes de extensión pendientes.
+  extension_requests_bulk_label: "Acciones masivas — se aplican a los %{count} usuarios pendientes:"
+  extension_requests_grant_label: Otorgar
+  extension_requests_grant_hours: horas a todos
+  extension_requests_approve_all: Aprobar todos
+  extension_requests_approve_all_confirm: "¿Dar más tiempo a todos los usuarios pendientes?"
+  extension_requests_block_all: Bloquear todos
+  extension_requests_block_all_confirm: "¿Inactivar a todos los usuarios pendientes? Esta acción cerrará sus cuentas."
+  extension_requests_apply: Aplicar
+  extension_requests_apply_confirm: "¿Actualizar acceso para %{nombre}?"
+  extension_requests_updated: "Acceso actualizado para %{nombre}."
+  extension_requests_all_blocked: Todos los usuarios pendientes fueron inactivados.
+  extension_requests_all_approved: "Se otorgaron %{horas}h adicionales a todos los usuarios pendientes."
+  extension_requests_expired_at: Acceso expiró
+  extension_requests_no_record: Sin registro
+  extension_requests_pending_badge_title: Usuarios con solicitud de extensión pendiente
+  extension_requests_index_button: Solicitudes de extensión
+  unlock_all_users_confirm: "¿Desbloquear todos los usuarios?"
+  choose_file: Seleccionar archivo
+  no_file_chosen: Ningún archivo seleccionado

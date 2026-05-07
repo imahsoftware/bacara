@@ -106,6 +106,23 @@
             </div>
           </li>
 
+          <%# ── Badge de solicitudes de extensión (solo admins) ── %>
+          <% if isimah || permit == true %>
+            <% pendientes_count = (User.where(tipoconsulta: 'PERSONA', extension_requested: true).count +
+                                   User.where(tipoconsulta: 'PERSONA', extension_requested: false).where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current).count) rescue 0 %>
+            <% if pendientes_count > 0 %>
+              <li style="position: relative;">
+                <%= link_to pendientes_extension_users_path,
+                      style: 'padding: 10px 12px; display: block; position: relative;',
+                      title: t(:extension_requests_pending_badge_title),
+                      data: { toggle: 'tooltip' } do %>
+                  <i class="fa fa-clock-o" style="font-size: 16px; color: #fff;"></i>
+                  <span style="position: absolute; top: 4px; right: 2px; background:#c0392b; color:#fff; border-radius: 50%; font-size: 10px; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; font-weight: bold;"><%= pendientes_count %></span>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+
           <% if isimah or permit == true
                @modulosseguridad = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 4]).select("modulos.*").order("modulos.descripcion")
                parcount = Usersmodulo.joins(:modulo).where(["usersmodulos.user_id = ? and modulos.nivel = ?", isadmin, 4]).count
@@ -164,6 +181,62 @@
     </div>
   </nav>
 </header>
+
+<%# ── Banner de tiempo límite de acceso con botones de acción ── %>
+<% if user.persona_con_limite? && !user.access_expired? %>
+  <div id="access-expiration-banner" style="background-color: #c0392b; color: #fff; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+    <div style="font-size: 14px; font-weight: bold;">
+      <i class="fa fa-clock-o"></i>
+      <%= t(:access_expiration_banner) %> <span id="expiration-countdown" style="font-size: 16px;"><%= user.tiempo_restante %></span>
+    </div>
+
+    <% if user.extension_requested? %>
+      <%# Ya solicitó continuar — solo muestra confirmación %>
+      <div style="font-size: 13px; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 4px;">
+        <i class="fa fa-check-circle"></i> <%= t(:access_expired_extension_requested) %>
+      </div>
+    <% else %>
+      <%# Aún no ha respondido — muestra los dos botones %>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <%= form_tag solicitar_extension_access_expired_index_path, method: :post, style: "margin:0;" do %>
+          <%= submit_tag t(:access_expired_yes),
+                class: "btn btn-sm btn-success",
+                data: { confirm: t(:access_expired_confirm_yes) } %>
+        <% end %>
+        <%= form_tag rechazar_acceso_access_expired_index_path, method: :post, style: "margin:0;" do %>
+          <%= submit_tag t(:access_expired_no),
+                class: "btn btn-sm btn-default" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <script>
+    (function() {
+      var expiresAt = new Date(<%= user.access_expires_at.to_i * 1000 %>);
+      function updateCountdown() {
+        var now = new Date();
+        var diff = Math.floor((expiresAt - now) / 1000);
+        if (diff <= 0) {
+          // Tiempo agotado: redirigir a la pantalla de acceso denegado
+          window.location.href = '<%= access_expired_index_path %>';
+          clearInterval(timer);
+          return;
+        }
+        var h = Math.floor(diff / 3600);
+        var m = Math.floor((diff % 3600) / 60);
+        var s = diff % 60;
+        var parts = [];
+        if (h > 0) parts.push(h + 'h');
+        if (m > 0 || h > 0) parts.push(m + 'm');
+        parts.push(s + 's');
+        var el = document.getElementById('expiration-countdown');
+        if (el) el.textContent = parts.join(' ');
+      }
+      var timer = setInterval(updateCountdown, 1000);
+      updateCountdown();
+    })();
+  </script>
+<% end %>
 
 
 <style>

@@ -139,6 +139,10 @@ Rails.application.routes.draw do
         get 'searchall'
         get 'copyusers'
         get 'restableceyenvia'
+        get  'pendientes_extension'
+        post 'bloquear_extensiones'
+        post 'aprobar_extension'
+        patch 'set_access_expiration'
       end
       resources :usersvehiculos
       resources :usersmodulos
@@ -152,6 +156,14 @@ Rails.application.routes.draw do
       resources :usersimagenes
       resources :migracionesusers
 
+    end
+  end
+
+  # Pantalla de acceso expirado (fuera del scope /admin para que la vea el usuario PERSONA)
+  resources :access_expired, only: [:index] do
+    collection do
+      post :solicitar_extension   # "Sí, quiero continuar"
+      post :rechazar_acceso       # "No, cerrar sesión"
     end
   end
 

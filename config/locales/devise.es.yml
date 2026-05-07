@@ -95,6 +95,7 @@ es:
       signed_out: Sesión finalizada.
       user_signed_in: Ya has iniciado sesión en otro equipo
       user_status: Tu cuenta esta inactiva
+      user_status_portafolio_inactivado: Tu cuenta ha sido inactivada porque el portafolio al que perteneces fue desactivado. Comunícate con un administrador para más información.
     shared:
       links:
         back: Regresar

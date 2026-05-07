@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
 
   before_action :bloqueo_user_index
 
+  # Verifica si el acceso del usuario PERSONA expiró y lo redirige a la pantalla de expiración.
+  # Se salta a sí mismo y al AccessExpiredController para no crear un loop.
+  before_action :check_access_expiration
+
   def validatesession
     if current_user == nil
       cookies.delete(:_session_id)
@@ -821,5 +825,16 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
       end
     end
+  end
+
+  def check_access_expiration
+    return unless current_user
+    return unless current_user.access_expired?
+    # Evitar loop en destroy
+    return if controller_name == 'sessions' && action_name == 'destroy'
+    # Cerrar sesión y redirigir al login con mensaje de error
+    sign_out current_user
+    flash[:alert] = I18n.t(:access_expired_login_blocked)
+    redirect_to new_user_session_path
   end
 end

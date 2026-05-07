@@ -48,11 +48,73 @@
             <% end %>
           </div>
           <div class="row">
-            <%# El email se genera automáticamente como "<username>@bacwins.com" en el modelo (before_validation) %>
-            <div class="col-md-6"><%= f.input :username, label: t(:username) %></div>
+            <%# Email es opcional. Si se deja en blanco, el modelo lo auto-genera
+                como "<username>@bacwins.com" vía el callback set_email_from_username. %>
+            <div class="col-md-3"><%= f.input :username, label: t(:username) %></div>
+            <div class="col-md-3"><%= f.input :email, required: false, label: t(:email), hint: t(:email_optional_hint) %></div>
             <div class="col-md-3"><%= f.input :password, label: t(:password) %></div>
             <div class="col-md-3"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
           </div>
+
+          <%# ── Marcación de acceso expirado sin respuesta ── %>
+          <% if @user.persisted? && @user.access_expired? && !@user.extension_requested? %>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="alert alert-danger" style="margin-bottom: 10px;">
+                  <i class="fa fa-exclamation-circle"></i>
+                  <strong><%= t(:expired_no_response_badge) %></strong>
+                  <%= t(:expired_no_response_form_hint, fecha: @user.access_expires_at.strftime('%d/%m/%Y %H:%M')) %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+          <%# ── Límite de acceso (solo para usuarios PERSONA) ── %>
+          <% user_tipoconsulta = @user.tipoconsulta.presence || 'PERSONA' %>
+          <% if user_tipoconsulta == 'PERSONA' || !is_super_admin %>
+            <div class="row" id="access-expiration-row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>
+                    <i class="fa fa-clock-o"></i> <%= t(:access_limit_hours_label) %>
+                  </label>
+                  <%= f.input :access_expires_in_hours,
+                        required: false,
+                        label: false,
+                        input_html: { class: 'form-control', placeholder: t(:access_limit_hours_placeholder) },
+                        hint: @user.access_expires_at.present? ?
+                              t(:access_limit_replaces_hint, fecha: @user.access_expires_at.strftime('%d/%m/%Y %H:%M')) :
+                              t(:access_limit_no_limit_hint) %>
+                </div>
+              </div>
+              <% if @user.extension_requested? %>
+                <div class="col-md-4">
+                  <div class="alert alert-warning" style="margin-top: 25px;">
+                    <i class="fa fa-hand-paper-o"></i>
+                    <strong><%= t(:access_limit_extension_warning) %></strong><br>
+                    <%= t(:access_limit_extension_warning_hint) %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
+          <%# Si es super_admin, mostrar/ocultar el campo según tipoconsulta seleccionado %>
+          <% if is_super_admin %>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var tcSelect = document.querySelector('#user_tipoconsulta');
+                var expirationRow = document.getElementById('access-expiration-row');
+                if (tcSelect && expirationRow) {
+                  function toggle() {
+                    expirationRow.style.display = tcSelect.value === 'PERSONA' ? '' : 'none';
+                  }
+                  tcSelect.addEventListener('change', toggle);
+                  toggle();
+                }
+              });
+            </script>
+          <% end %>
 
 
           <div class="row">
@@ -63,7 +125,21 @@
                               alt: 'avatar',
                               style: 'width:100px; height:100px; border-radius:50%; object-fit:cover; background:#f0f0f0; border:1px solid #d8d8de;') %>
               </div>
-              <%= f.input :avatar, as: :file, label: false %>
+              <%# Input nativo oculto — el botón personalizado lo activa vía JS %>
+              <%= f.input :avatar, as: :file, label: false,
+                    input_html: { id: 'avatar_file_input', style: 'display:none;' } %>
+              <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                <button type="button" class="btn btn-default btn-sm" onclick="document.getElementById('avatar_file_input').click();">
+                  <i class="fa fa-folder-open-o"></i> <%= t(:choose_file) %>
+                </button>
+                <span id="avatar_file_name" style="font-size:12px; color:#777;"><%= t(:no_file_chosen) %></span>
+              </div>
+              <script>
+                document.getElementById('avatar_file_input').addEventListener('change', function() {
+                  var name = this.files.length > 0 ? this.files[0].name : '<%= j t(:no_file_chosen) %>';
+                  document.getElementById('avatar_file_name').textContent = name;
+                });
+              </script>
             </div>
           </div>
         </div>

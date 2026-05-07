@@ -84,6 +84,7 @@ en:
         sign_in: Sign in
       user_signed_in: You are already signed in on another device
       user_status: Your account is inactive
+      user_status_portafolio_inactivado: Your account has been deactivated because the portfolio you belong to was disabled. Please contact an administrator for more information.
     unlocks:
       send_instructions: You will receive an email with instructions for how to unlock your account in a few minutes.
       send_paranoid_instructions: If your account exists, you will receive an email with instructions for how to unlock it in a few minutes.

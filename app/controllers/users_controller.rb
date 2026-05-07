@@ -559,4 +559,60 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit!
   end
+
+  public
+
+  # ──────────────────────────────────────────────────────────────
+  # Gestión de límites de acceso y extensiones
+  # ──────────────────────────────────────────────────────────────
+
+  # GET /admin/users/pendientes_extension
+  # Lista de PERSONAs que solicitaron extensión O cuyo tiempo expiró sin respuesta
+  def pendientes_extension
+    # Usuarios que hicieron clic en "Sí, quiero continuar"
+    @pendientes = User.where(tipoconsulta: 'PERSONA', extension_requested: true).order(:nombre)
+    # Usuarios cuyo tiempo expiró sin que respondieran (acceso_expires_at pasado, sin solicitud)
+    @expirados_sin_respuesta = User.where(tipoconsulta: 'PERSONA', extension_requested: false)
+                                   .where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current)
+                                   .order(:nombre)
+    render layout: 'application_admin'
+  end
+
+  # PATCH /admin/users/set_access_expiration
+  # Asigna o quita el límite de acceso a un usuario individual desde la lista de pendientes
+  def set_access_expiration
+    @user = User.find(params[:id])
+    horas = params[:horas].to_i
+    if horas > 0
+      @user.access_expires_at  = Time.current + horas.hours
+      @user.extension_requested = false
+    else
+      @user.access_expires_at  = nil
+      @user.extension_requested = false
+    end
+    @user.save(validate: false)
+    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_updated, nombre: @user.nombre)
+  end
+
+  # POST /admin/users/bloquear_extensiones
+  # Bloquea (inactiva) a TODOS los usuarios con extension_requested = true
+  def bloquear_extensiones
+    User.where(tipoconsulta: 'PERSONA', extension_requested: true)
+        .update_all(activo: 'N', extension_requested: false, access_expires_at: nil)
+    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_all_blocked)
+  end
+
+  # POST /admin/users/aprobar_extension
+  # Da más tiempo a TODOS los usuarios con extension_requested = true
+  def aprobar_extension
+    horas = params[:horas].to_i
+    horas = 24 if horas <= 0   # default 24h si no se especifica
+    User.where(tipoconsulta: 'PERSONA', extension_requested: true).each do |u|
+      u.update_columns(
+        access_expires_at:  Time.current + horas.hours,
+        extension_requested: false
+      )
+    end
+    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_all_approved, horas: horas)
+  end
 end

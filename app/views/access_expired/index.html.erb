@@ -1,0 +1,22 @@
+<% content_for :title, t(:access_expired_title) %>
+
+<div class="wrapper" style="min-height: 100vh; background-color: #EAEAEA; display: flex; align-items: center; justify-content: center;">
+  <div class="container" style="max-width: 480px;">
+    <div class="box box-danger">
+      <div class="box-header with-border text-center" style="background-color: #c0392b; color: #fff; padding: 24px 20px;">
+        <i class="fa fa-ban fa-3x"></i>
+        <h3 class="box-title" style="display: block; margin-top: 12px; color: #fff; font-size: 22px;">
+          <%= t(:access_expired_title) %>
+        </h3>
+      </div>
+      <div class="box-body text-center" style="padding: 32px 24px;">
+        <p style="font-size: 15px; color: #666; margin: 0 0 20px 0;">
+          <%= t(:access_expired_no_longer_available) %>
+        </p>
+        <%= link_to new_user_session_path, class: 'btn btn-default' do %>
+          <i class="fa fa-arrow-left"></i> <%= t(:back_to_login) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

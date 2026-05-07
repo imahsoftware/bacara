@@ -1,6 +1,9 @@
 class Portafolio < ApplicationRecord
 	#audited
 
+	before_update :capturar_estado_anterior
+	after_update  :inactivar_usuarios_si_inactivo
+
 	has_many :usersportafolios
 	has_many :personasportafolios
 	has_many :personasvehiculos
@@ -79,6 +82,33 @@ class Portafolio < ApplicationRecord
 			return 'progescol.jpg'
 		end
 =end
+	end
+
+	private
+
+	# Cuando el portafolio pasa a INACTIVO, inactiva automáticamente
+	# a todos sus usuarios y guarda el motivo para mostrar el mensaje correcto en el login.
+	def capturar_estado_anterior
+		@estado_antes_del_update = estado_was
+	end
+
+	def inactivar_usuarios_si_inactivo
+		# Solo proceder si el estado cambió de algo distinto a INACTIVO → INACTIVO
+		return unless @estado_antes_del_update != 'INACTIVO' && estado == 'INACTIVO'
+
+		# IDs de usuarios vinculados directamente por portafolio_id
+		ids_directos = users.pluck(:id)
+
+		# IDs de usuarios vinculados via usersportafolios (tabla many-to-many)
+		ids_portafolios = Usersportafolio.where(portafolio_id: self.id).pluck(:user_id)
+
+		# Unir ambos conjuntos y eliminar duplicados
+		todos_ids = (ids_directos + ids_portafolios).uniq
+
+		User.where(id: todos_ids, activo: 'S').update_all(
+			activo:              'N',
+			motivo_inactivacion: 'portafolio_inactivado'
+		)
 	end
 
 end

@@ -13,6 +13,14 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     self.resource = warden.authenticate!(auth_options)
+
+    # Bloquear en el login si el acceso por tiempo ha expirado
+    if self.resource.access_expired?
+      sign_out(resource_name)
+      flash[:alert] = I18n.t(:access_expired_login_blocked)
+      redirect_to new_user_session_path and return
+    end
+
     if self.resource.bloqueo == "SI"
       flash[:alert] = I18n.t(:cannot_access_until_process_finishes)
       sign_in(resource_name, resource) # lo firma igual, por si Devise necesita sesión
@@ -35,8 +43,11 @@ class Users::SessionsController < Devise::SessionsController
       cookies.signed[:user_id] = self.resource.id
       cookies.signed[:username] = self.resource.username
     else
+      # Determinar mensaje según motivo de inactivación
+      motivo = self.resource.motivo_inactivacion.to_s
+      flash_key = motivo == 'portafolio_inactivado' ? :user_status_portafolio_inactivado : :user_status
       signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-      set_flash_message! :alert, :user_status if signed_out
+      flash[:alert] = I18n.t("devise.sessions.#{flash_key}") if signed_out
       yield if block_given?
       respond_to_on_destroy
     end

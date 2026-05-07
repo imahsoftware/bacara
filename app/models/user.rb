@@ -253,6 +253,49 @@ class User < ApplicationRecord
     super
   end
 
+  # ──────────────────────────────────────────────────────────────
+  # Acceso con tiempo límite (solo aplica a usuarios PERSONA)
+  # ──────────────────────────────────────────────────────────────
+
+  # ¿Es un usuario PERSONA con fecha límite de acceso configurada?
+  def persona_con_limite?
+    tipoconsulta.to_s == 'PERSONA' && access_expires_at.present?
+  end
+
+  # ¿Ya expiró el acceso?
+  def access_expired?
+    persona_con_limite? && access_expires_at < Time.current
+  end
+
+  # Tiempo restante formateado: "3h 24m" o "45m" o "menos de 1 minuto"
+  def tiempo_restante
+    return nil unless persona_con_limite?
+    segundos = (access_expires_at - Time.current).to_i
+    return "menos de 1 minuto" if segundos <= 0
+    horas   = segundos / 3600
+    minutos = (segundos % 3600) / 60
+    partes  = []
+    partes << "#{horas}h"   if horas   > 0
+    partes << "#{minutos}m" if minutos > 0 || horas == 0
+    partes.join(" ")
+  end
+
+  # Setter virtual: recibe horas desde el form y calcula access_expires_at.
+  # Si horas es blank / 0 → quita el límite (access_expires_at = nil).
+  def access_expires_in_hours=(horas)
+    h = horas.to_i
+    if h > 0
+      self.access_expires_at = Time.current + h.hours
+    else
+      self.access_expires_at = nil
+    end
+  end
+
+  # Getter virtual (necesario para que el form no rompa en edit)
+  def access_expires_in_hours
+    nil
+  end
+
   private
 
   # Genera el email automáticamente como "<username>@bacwins.com".
@@ -272,10 +315,10 @@ class User < ApplicationRecord
   # Actualiza la asociación existente o crea una nueva si no existe
   def ensure_usersportafolio_link
     return if portafolio_id.blank?
-    
+
     # Buscar si ya existe una asociación para este usuario
     existing = usersportafolios.first
-    
+
     if existing
       # Si existe, actualizar el portafolio_id
       existing.update(portafolio_id: portafolio_id) if existing.portafolio_id != portafolio_id

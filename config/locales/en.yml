@@ -878,7 +878,7 @@ en:
   associated_permissions: Associated Permissions
   schedules_hours: Schedules - Hours
   create_play: Create Play
-  return_to_portfolios: Return to portfolios
+  return_to_portfolios: Return to clients
   create_company_alegra: Create company in Alegra
   service_url_create_company: Service - URL Create Company
   service_url_enable_company: Service - URL Enable Company
@@ -887,7 +887,7 @@ en:
   select_file: Select File
   no_file_selected: No file selected
   nothing_selected: Nothing Selected
-  return_to_portfolios_link: Return to portfolios
+  return_to_portfolios_link: Return to clients
   return_link: Return
   select_user_to_copy: Select the user to copy permissions
   quantity: Quantity
@@ -1429,3 +1429,53 @@ en:
   no_file_selected: No file selected
   detail_label: Detail
   search_placeholder: Search...
+  email_optional_hint: Optional. If left blank, will be auto-generated as username@bacwins.com
+
+  # ── Access limit / expiration ───────────────────────────────────
+  access_expired_title: Your access time has expired
+  access_expired_description: The access period assigned to your account has ended. Would you like to request an extension or sign out?
+  access_expired_yes: "Yes, I want to continue"
+  access_expired_no: No, sign out
+  access_expired_admin_review: An administrator will review your request.
+  access_expired_account_inactive: Your account will become inactive.
+  access_expired_confirm_yes: An administrator will be notified to review your request. In the meantime, your session will be closed. Continue?
+  access_expired_extension_requested: Request sent. An administrator will review your case.
+  access_expired_session_closed: Your session has been closed.
+  access_expired_no_longer_available: Your access period has ended. You can no longer log in to the platform. If you think this is an error, please contact an administrator.
+  access_expired_login_blocked: Your access period has ended. Please contact an administrator to request more time.
+  back_to_login: Back to login
+  expired_no_response_title: Access expired — no user response
+  expired_no_response_description: These users had a time-limited access that expired without them taking any action. You can grant them new time or remove the limit.
+  expired_no_response_none: No users with expired access without response.
+  expired_no_response_badge: "Access expired without response —"
+  expired_no_response_form_hint: "This user's access expired on %{fecha} without any action taken. You can assign a new limit or leave the field blank to remove it."
+  access_limit_hours_label: Access limit (hours)
+  access_limit_hours_placeholder: "E.g.: 24 (leave blank = no limit)"
+  access_limit_no_limit_hint: Leave blank to set no limit.
+  access_limit_replaces_hint: "Currently expires: %{fecha} — entering a new value will replace the current time."
+  access_limit_extension_warning: This user requested an extension.
+  access_limit_extension_warning_hint: Enter new hours to grant it, or leave blank and save to set no limit.
+  access_expiration_banner: Your access expires in
+  access_expired_banner_expired: Your access has expired.
+  access_expired_banner_click_here: Click here
+  extension_requests_title: Access extension requests
+  extension_requests_none: No pending extension requests.
+  extension_requests_bulk_label: "Bulk actions — applied to all %{count} pending users:"
+  extension_requests_grant_label: Grant
+  extension_requests_grant_hours: hours to all
+  extension_requests_approve_all: Approve all
+  extension_requests_approve_all_confirm: Give more time to all pending users?
+  extension_requests_block_all: Block all
+  extension_requests_block_all_confirm: Deactivate all pending users? This action will close their accounts.
+  extension_requests_apply: Apply
+  extension_requests_apply_confirm: "Update access for %{nombre}?"
+  extension_requests_updated: "Access updated for %{nombre}."
+  extension_requests_all_blocked: All pending users have been deactivated.
+  extension_requests_all_approved: "%{horas}h granted to all pending users."
+  extension_requests_expired_at: Access expired
+  extension_requests_no_record: No record
+  extension_requests_pending_badge_title: Users with pending extension request
+  extension_requests_index_button: Extension requests
+  unlock_all_users_confirm: Unlock all users?
+  choose_file: Choose file
+  no_file_chosen: No file chosen

@@ -1,0 +1,164 @@
+<% title t(:extension_requests_title) %>
+
+<%# ── Sección 1: Usuarios que solicitaron extensión (hicieron clic en "Sí") ── %>
+<div class="box box-warning">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-hand-paper-o"></i>
+      <%= t(:extension_requests_title) %>
+      <span class="badge bg-red" style="margin-left: 6px;"><%= @pendientes.count %></span>
+    </h3>
+    <div class="box-tools pull-right">
+      <%= link_to users_path, class: 'btn btn-sm btn-default' do %>
+        <i class="fa fa-arrow-left"></i> <%= t(:back) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <% if @pendientes.any? %>
+      <%# Acciones masivas %>
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+          <div class="callout callout-warning">
+            <strong><%= t(:extension_requests_bulk_label, count: @pendientes.count) %></strong>
+            <div style="margin-top: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <%= form_tag aprobar_extension_users_path, method: :post, style: "display:inline-flex; align-items:center; gap:6px;" do %>
+                <label style="margin:0; font-weight: normal;"><%= t(:extension_requests_grant_label) %></label>
+                <%= number_field_tag :horas, 24, min: 1, max: 8760, class: 'form-control input-sm', style: 'width:80px;' %>
+                <label style="margin:0; font-weight: normal;"><%= t(:extension_requests_grant_hours) %></label>
+                <%= submit_tag t(:extension_requests_approve_all), class: "btn btn-sm btn-success",
+                      data: { confirm: t(:extension_requests_approve_all_confirm) } %>
+              <% end %>
+              <%= form_tag bloquear_extensiones_users_path, method: :post, style: "display:inline-flex;" do %>
+                <%= submit_tag t(:extension_requests_block_all), class: "btn btn-sm btn-danger",
+                      data: { confirm: t(:extension_requests_block_all_confirm) } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped">
+          <thead>
+            <tr class="thcolor">
+              <th><%= t(:username) %></th>
+              <th><%= t(:name) %></th>
+              <th><%= t(:company) %></th>
+              <th class="text-center"><%= t(:extension_requests_expired_at) %></th>
+              <th class="text-center"><%= t(:action) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @pendientes.each do |u| %>
+              <tr>
+                <td><%= u.username %></td>
+                <td><%= u.nombre %></td>
+                <td><%= u.portafolio&.nombre %></td>
+                <td class="text-center">
+                  <% if u.access_expires_at.present? %>
+                    <span class="label label-danger"><%= u.access_expires_at.strftime('%d/%m/%Y %H:%M') %></span>
+                  <% else %>
+                    <span class="label label-default"><%= t(:extension_requests_no_record) %></span>
+                  <% end %>
+                </td>
+                <td class="text-center">
+                  <%= form_tag set_access_expiration_users_path, method: :patch,
+                        style: "display:inline-flex; align-items:center; gap:6px;" do %>
+                    <%= hidden_field_tag :id, u.id %>
+                    <%= number_field_tag :horas, 24, min: 0, max: 8760, class: 'form-control input-sm',
+                          style: 'width:75px;', placeholder: 'h', title: '0 = sin límite' %>
+                    <label style="margin:0; font-size:11px; font-weight:normal;">h</label>
+                    <%= submit_tag t(:extension_requests_apply), class: "btn btn-xs btn-primary",
+                          data: { confirm: t(:extension_requests_apply_confirm, nombre: u.nombre) } %>
+                  <% end %>
+                  <%= link_to edit_user_path(etapa: 'A', id: u.id), class: 'btn btn-xs btn-default',
+                        title: t(:title_editar), data: { toggle: 'tooltip' } do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center" style="padding: 30px 0;">
+        <i class="fa fa-check-circle fa-3x text-success"></i>
+        <p style="margin-top: 12px; font-size: 15px; color: #666;"><%= t(:extension_requests_none) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# ── Sección 2: Usuarios cuyo tiempo expiró sin que respondieran ── %>
+<div class="box box-danger">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-clock-o"></i>
+      <%= t(:expired_no_response_title) %>
+      <span class="badge" style="background:#c0392b; color:#fff; margin-left:6px;"><%= @expirados_sin_respuesta.count %></span>
+    </h3>
+  </div>
+
+  <div class="box-body">
+    <% if @expirados_sin_respuesta.any? %>
+      <p class="text-muted" style="margin-bottom: 14px; font-size: 13px;">
+        <%= t(:expired_no_response_description) %>
+      </p>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped">
+          <thead>
+            <tr class="thcolor">
+              <th><%= t(:username) %></th>
+              <th><%= t(:name) %></th>
+              <th><%= t(:company) %></th>
+              <th class="text-center"><%= t(:active) %></th>
+              <th class="text-center"><%= t(:extension_requests_expired_at) %></th>
+              <th class="text-center"><%= t(:action) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @expirados_sin_respuesta.each do |u| %>
+              <tr>
+                <td><%= u.username %></td>
+                <td><%= u.nombre %></td>
+                <td><%= u.portafolio&.nombre %></td>
+                <td class="text-center">
+                  <span class="label <%= u.activo == 'S' ? 'label-success' : 'label-default' %>">
+                    <%= u.activo == 'S' ? t(:activated_label) : t(:inactivated_label) %>
+                  </span>
+                </td>
+                <td class="text-center">
+                  <span class="label label-danger"><%= u.access_expires_at.strftime('%d/%m/%Y %H:%M') %></span>
+                </td>
+                <td class="text-center">
+                  <%# Dar nuevo tiempo o quitar límite %>
+                  <%= form_tag set_access_expiration_users_path, method: :patch,
+                        style: "display:inline-flex; align-items:center; gap:6px;" do %>
+                    <%= hidden_field_tag :id, u.id %>
+                    <%= number_field_tag :horas, 24, min: 0, max: 8760, class: 'form-control input-sm',
+                          style: 'width:75px;', placeholder: 'h', title: '0 = sin límite' %>
+                    <label style="margin:0; font-size:11px; font-weight:normal;">h</label>
+                    <%= submit_tag t(:extension_requests_apply), class: "btn btn-xs btn-primary",
+                          data: { confirm: t(:extension_requests_apply_confirm, nombre: u.nombre) } %>
+                  <% end %>
+                  <%= link_to edit_user_path(etapa: 'A', id: u.id), class: 'btn btn-xs btn-default',
+                        title: t(:title_editar), data: { toggle: 'tooltip' } do %>
+                    <i class="fa fa-edit"></i>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class="text-center" style="padding: 30px 0;">
+        <i class="fa fa-check-circle fa-3x text-success"></i>
+        <p style="margin-top: 12px; font-size: 15px; color: #666;"><%= t(:expired_no_response_none) %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
