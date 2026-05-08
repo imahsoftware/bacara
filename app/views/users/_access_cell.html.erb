@@ -1,0 +1,34 @@
+<% if user.tipoconsulta.to_s == 'PERSONA' && user.access_expires_at.present? %>
+  <%
+    expired   = user.access_expires_at < Time.current
+    requested = user.extension_requested?
+  %>
+
+  <%# Badge de estado %>
+  <% if expired && requested %>
+    <span class="label label-warning" style="display:inline-block; margin-bottom:4px;">
+      <i class="fa fa-hand-paper-o"></i> <%= t(:access_cell_requested) %>
+    </span><br>
+  <% elsif expired %>
+    <span class="label label-danger" style="display:inline-block; margin-bottom:4px;">
+      <i class="fa fa-clock-o"></i> <%= t(:access_cell_expired) %>
+    </span><br>
+  <% else %>
+    <span class="label label-default" style="display:inline-block; margin-bottom:4px;">
+      <i class="fa fa-clock-o"></i> <%= user.access_expires_at.strftime('%d/%m/%Y %H:%M') %>
+    </span><br>
+  <% end %>
+
+  <%# Mini formulario para dar horas %>
+  <%= form_tag set_access_expiration_users_path, method: :patch,
+        style: "display:inline-flex; align-items:center; gap:4px; margin-top:2px;" do %>
+    <%= hidden_field_tag :id, user.id %>
+    <%= number_field_tag :horas, 24, min: 0, max: 8760,
+          class: 'form-control input-sm',
+          style: 'width:60px; padding:2px 4px; height:24px; font-size:11px;',
+          placeholder: 'h', title: t(:access_cell_hours_hint) %>
+    <label style="margin:0; font-size:11px; font-weight:normal;">h</label>
+    <%= submit_tag t(:extension_requests_apply), class: "btn btn-xs btn-primary",
+          data: { confirm: t(:extension_requests_apply_confirm, nombre: user.nombre) } %>
+  <% end %>
+<% end %>
