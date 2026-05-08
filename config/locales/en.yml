@@ -1472,6 +1472,10 @@ en:
   extension_requests_updated: "Access updated for %{nombre}."
   extension_requests_all_blocked: All pending users have been deactivated.
   extension_requests_all_approved: "%{horas}h granted to all pending users."
+  access_column_header: Access
+  access_cell_requested: Extension requested
+  access_cell_expired: Expired
+  access_cell_hours_hint: "0 = no limit"
   extension_requests_expired_at: Access expired
   extension_requests_no_record: No record
   extension_requests_pending_badge_title: Users with pending extension request
@@ -1479,3 +1483,20 @@ en:
   unlock_all_users_confirm: Unlock all users?
   choose_file: Choose file
   no_file_chosen: No file chosen
+  usersdoc_section_title: Documents
+  usersdoc_description: Description
+  usersdoc_filename: File
+  usersdoc_size: Size
+  usersdoc_uploaded_at: Date
+  usersdoc_none: No documents uploaded yet.
+  usersdoc_upload_new: Upload new document
+  usersdoc_description_placeholder: Document description...
+  usersdoc_upload_btn: Upload
+  usersdoc_delete: Delete document
+  usersdoc_confirm_delete: Are you sure you want to delete this document?
+  usersdoc_uploaded_successfully: Document uploaded successfully.
+  usersdoc_deleted_successfully: Document deleted successfully.
+  usersdoc_file_required: You must select a file.
+  usersdoc_file_too_large: File size cannot exceed 10 MB.
+  usersdoc_file_invalid_type: "Allowed types: PDF, images, Word, Excel."
+  usersdoc_allowed_types: "Accepted formats: PDF, JPG, PNG, Word, Excel. Max size: 10 MB."

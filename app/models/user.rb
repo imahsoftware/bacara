@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :usersportafolios, dependent: :destroy
   has_many :usersfechas, dependent: :destroy
   has_many :usersimagenes, dependent: :destroy
+  has_many :usersdocs, dependent: :destroy
   has_many :usersvehiculos
   has_many :usersreportes
   has_many :usersvisitas

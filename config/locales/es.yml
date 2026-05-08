@@ -1533,9 +1533,30 @@ es:
   extension_requests_all_blocked: Todos los usuarios pendientes fueron inactivados.
   extension_requests_all_approved: "Se otorgaron %{horas}h adicionales a todos los usuarios pendientes."
   extension_requests_expired_at: Acceso expiró
+  access_column_header: Acceso
+  access_cell_requested: Solicitó extensión
+  access_cell_expired: Expirado
+  access_cell_hours_hint: "0 = sin límite"
   extension_requests_no_record: Sin registro
   extension_requests_pending_badge_title: Usuarios con solicitud de extensión pendiente
   extension_requests_index_button: Solicitudes de extensión
   unlock_all_users_confirm: "¿Desbloquear todos los usuarios?"
   choose_file: Seleccionar archivo
   no_file_chosen: Ningún archivo seleccionado
+  usersdoc_section_title: Documentos
+  usersdoc_description: Descripción
+  usersdoc_filename: Archivo
+  usersdoc_size: Tamaño
+  usersdoc_uploaded_at: Fecha
+  usersdoc_none: Aún no hay documentos cargados.
+  usersdoc_upload_new: Cargar nuevo documento
+  usersdoc_description_placeholder: Descripción del documento...
+  usersdoc_upload_btn: Cargar
+  usersdoc_delete: Eliminar documento
+  usersdoc_confirm_delete: "¿Estás seguro de que deseas eliminar este documento?"
+  usersdoc_uploaded_successfully: Documento cargado exitosamente.
+  usersdoc_deleted_successfully: Documento eliminado exitosamente.
+  usersdoc_file_required: Debes seleccionar un archivo.
+  usersdoc_file_too_large: El archivo no puede superar los 10 MB.
+  usersdoc_file_invalid_type: "Tipos permitidos: PDF, imágenes, Word, Excel."
+  usersdoc_allowed_types: "Formatos aceptados: PDF, JPG, PNG, Word, Excel. Tamaño máximo: 10 MB."

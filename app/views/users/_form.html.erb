@@ -143,6 +143,81 @@
             </div>
           </div>
         </div>
+        <%# ── Sección de documentos dentro del mismo box (form separado) ── %>
+        <% unless @user.new_record? %>
+          <div class="box-body" style="border-top: 2px solid #d2d6de; padding-top: 12px;">
+
+            <%# Encabezado + form de carga en la misma fila %>
+            <%= form_for Usersdoc.new, url: user_usersdocs_path(@user),
+                  html: { multipart: true } do |df| %>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                <strong style="font-size:14px; margin-right:4px;">
+                  <i class="fa fa-paperclip"></i> <%= t(:usersdoc_section_title) %>
+                </strong>
+                <%= df.text_field :descripcion,
+                      class: 'form-control input-sm',
+                      placeholder: t(:usersdoc_description_placeholder),
+                      style: 'width: 180px;',
+                      required: true %>
+                <%= df.file_field :documento, id: 'usersdoc_file_input', style: 'display:none;' %>
+                <button type="button" class="btn btn-default btn-sm" onclick="document.getElementById('usersdoc_file_input').click();">
+                  <i class="fa fa-folder-open-o"></i> <%= t(:choose_file) %>
+                </button>
+                <span id="usersdoc_file_name" style="font-size:12px; color:#777;"><%= t(:no_file_chosen) %></span>
+                <%= df.submit t(:usersdoc_upload_btn), class: 'btn btn-sm btn-primary' %>
+              </div>
+            <% end %>
+
+            <%# Lista de documentos existentes %>
+            <% if @user.usersdocs.any? %>
+              <div class="table-responsive">
+                <table class="table table-bordered table-condensed table-striped">
+                  <thead>
+                    <tr class="thcolor">
+                      <th><%= t(:usersdoc_description) %></th>
+                      <th><%= t(:usersdoc_filename) %></th>
+                      <th class="text-center"><%= t(:usersdoc_size) %></th>
+                      <th class="text-center"><%= t(:usersdoc_uploaded_at) %></th>
+                      <th class="text-center" width="60"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @user.usersdocs.order(created_at: :desc).each do |doc| %>
+                      <tr>
+                        <td><%= doc.descripcion %></td>
+                        <td>
+                          <%= link_to doc.documento.url, target: '_blank', rel: 'noopener' do %>
+                            <i class="fa fa-<%= doc.documento_content_type == 'application/pdf' ? 'file-pdf-o text-danger' : 'file-o' %>"></i>
+                            <%= doc.documento_file_name %>
+                          <% end %>
+                        </td>
+                        <td class="text-center">
+                          <% size_kb = (doc.documento_file_size.to_f / 1024).round(1) %>
+                          <%= size_kb > 1024 ? "#{(size_kb / 1024).round(2)} MB" : "#{size_kb} KB" %>
+                        </td>
+                        <td class="text-center"><%= doc.created_at.strftime('%d/%m/%Y') %></td>
+                        <td class="text-center">
+                          <%= link_to user_usersdoc_path(@user, doc),
+                                method: :delete,
+                                data: { confirm: t(:usersdoc_confirm_delete) },
+                                class: 'btn btn-xs btn-danger',
+                                title: t(:usersdoc_delete) do %>
+                            <i class="fa fa-trash"></i>
+                          <% end %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            <% else %>
+              <p class="text-muted" style="font-size: 13px;">
+                <i class="fa fa-info-circle"></i> <%= t(:usersdoc_none) %>
+              </p>
+            <% end %>
+          </div>
+        <% end %>
+
         <div class="box-footer">
           <div class="box-tools pull-right">
             <%= f.button :submit, t(:accept), class: 'btn-flat btn-danger' %>
@@ -152,4 +227,26 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  (function() {
+    var inp = document.getElementById('usersdoc_file_input');
+    if (inp) {
+      inp.addEventListener('change', function() {
+        var lbl = document.getElementById('usersdoc_file_name');
+        lbl.textContent = this.files.length > 0 ? this.files[0].name : '<%= j t(:no_file_chosen) %>';
+      });
+    }
+  })();
+</script>
+
+<script>
+  var usdInput = document.getElementById('usersdoc_file_input');
+  if (usdInput) {
+    usdInput.addEventListener('change', function() {
+      var name = this.files.length > 0 ? this.files[0].name : '<%= j t(:no_file_chosen) %>';
+      document.getElementById('usersdoc_file_name').textContent = name;
+    });
+  }
+</script>
 

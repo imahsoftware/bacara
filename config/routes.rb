@@ -154,6 +154,7 @@ Rails.application.routes.draw do
       resources :usersvisitas
       resources :usersfechas
       resources :usersimagenes
+      resources :usersdocs, only: [:create, :destroy]
       resources :migracionesusers
 
     end

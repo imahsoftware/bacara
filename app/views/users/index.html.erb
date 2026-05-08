@@ -9,13 +9,12 @@
       <%= link_to desbloquearusuariof_users_path, data: { toggle: 'tooltip', confirm: t(:seguro) }, title: t(:unlock_all_users), class: 'btn btn-sm btn-warning' do %>
         <i class="fa fa-unlock-alt"> </i> <span><%= t :unlock_all_users %></span>
       <% end %>
-      <% pendientes_ext = (User.where(tipoconsulta: 'PERSONA', extension_requested: true).count +
-                           User.where(tipoconsulta: 'PERSONA', extension_requested: false).where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current).count) rescue 0 %>
-      <%= link_to pendientes_extension_users_path, class: "btn btn-sm #{pendientes_ext > 0 ? 'btn-danger' : 'btn-default'}" do %>
-        <i class="fa fa-clock-o"></i> <%= t(:extension_requests_index_button) %>
-        <% if pendientes_ext > 0 %>
+      <% pendientes_ext = (@pendientes.count + @expirados_sin_respuesta.count) rescue 0 %>
+      <% if pendientes_ext > 0 %>
+        <span class="btn btn-sm btn-danger" style="cursor:default;">
+          <i class="fa fa-clock-o"></i> <%= t(:extension_requests_index_button) %>
           <span class="badge" style="background:#fff; color:#c0392b;"><%= pendientes_ext %></span>
-        <% end %>
+        </span>
       <% end %>
       <%= link_to new_user_path, class: 'btn btn-sm btn-info' do %>
         <i class="fa fa-plus-square"> </i> <span><%= t :new_user %></span>
@@ -52,6 +51,7 @@
                   <th><%= t :name %></th>
                   <th><%= t :email %></th>
                   <th class="text-center"><%= t :active %></th>
+                  <th class="text-center"><%= t(:access_column_header) %></th>
                 </tr>
               </thead>
               <tbody>
@@ -104,6 +104,7 @@
                       <td><%= user.nombre %></td>
                       <td><%= user.email %></td>
                       <td class="text-center"><%= user.activo %></td>
+                      <td class="text-center"><%= render 'access_cell', user: user %></td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -170,6 +171,7 @@
                     <td><%= user.nombre %></td>
                     <td><%= user.email %></td>
                     <td class="text-center"><%= user.activo %></td>
+                    <td class="text-center"><%= render 'access_cell', user: user %></td>
                   </tr>
                 <% end %>
               </tbody>

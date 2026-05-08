@@ -210,6 +210,12 @@ class UsersController < ApplicationController
       end
     else
     end
+
+    # Secciones de extensiones de acceso (PERSONA)
+    @pendientes = User.where(tipoconsulta: 'PERSONA', extension_requested: true).order(:nombre)
+    @expirados_sin_respuesta = User.where(tipoconsulta: 'PERSONA', extension_requested: false)
+                                   .where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current)
+                                   .order(:nombre)
   end
 
   def new
@@ -591,7 +597,7 @@ class UsersController < ApplicationController
       @user.extension_requested = false
     end
     @user.save(validate: false)
-    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_updated, nombre: @user.nombre)
+    redirect_to users_path, notice: I18n.t(:extension_requests_updated, nombre: @user.nombre)
   end
 
   # POST /admin/users/bloquear_extensiones
@@ -599,7 +605,7 @@ class UsersController < ApplicationController
   def bloquear_extensiones
     User.where(tipoconsulta: 'PERSONA', extension_requested: true)
         .update_all(activo: 'N', extension_requested: false, access_expires_at: nil)
-    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_all_blocked)
+    redirect_to users_path, notice: I18n.t(:extension_requests_all_blocked)
   end
 
   # POST /admin/users/aprobar_extension
@@ -613,6 +619,6 @@ class UsersController < ApplicationController
         extension_requested: false
       )
     end
-    redirect_to pendientes_extension_users_path, notice: I18n.t(:extension_requests_all_approved, horas: horas)
+    redirect_to users_path, notice: I18n.t(:extension_requests_all_approved, horas: horas)
   end
 end
