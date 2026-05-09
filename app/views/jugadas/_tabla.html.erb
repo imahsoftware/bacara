@@ -2,8 +2,8 @@
   jugadas_by_day = @jugadas.order(created_at: :desc).group_by { |j| j.created_at.to_date }
   today = Date.current
   show_player_col = current_user.tipoconsulta.to_s != 'PERSONA'
-  total_cols      = show_player_col ? 6 : 5
-  total_colspan   = show_player_col ? 5 : 4
+  total_cols      = show_player_col ? 7 : 6
+  total_colspan   = show_player_col ? 6 : 5
   profit_by_jugada = Jugadasdetalle.where(jugada_id: @jugadas.map(&:id)).group(:jugada_id).sum(:acumuladof)
 %>
 

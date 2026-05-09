@@ -61,5 +61,20 @@
     end %>
     <%= estado_text %>
   </td>
+  <%
+    diff = (jugada.updated_at - jugada.created_at).to_i
+    dur_text = if diff <= 0
+      '—'
+    elsif diff < 60
+      "#{diff}s"
+    elsif diff < 3600
+      "%dm %02ds" % [diff / 60, diff % 60]
+    else
+      h = diff / 3600
+      m = (diff % 3600) / 60
+      "%dh %02dm" % [h, m]
+    end
+  %>
+  <td class="text-center" style="font-size:12px; color:#666; white-space:nowrap;"><%= dur_text %></td>
   <td class="text-right <%= profit_class %>"><strong><%= profit_text %></strong></td>
 </tr>

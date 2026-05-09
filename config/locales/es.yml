@@ -1380,6 +1380,7 @@ es:
   new_shoe: "Nueva SHOE"
   hand_number: "Mano"
   play_number: "Shoe"
+  play_duration: "Tiempo"
   datepicker:
     dformat: '%d/%m/%Y'
     pformat: DD/MM/YYYY
