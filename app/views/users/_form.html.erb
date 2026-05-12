@@ -107,7 +107,8 @@
                 var expirationRow = document.getElementById('access-expiration-row');
                 if (tcSelect && expirationRow) {
                   function toggle() {
-                    expirationRow.style.display = tcSelect.value === 'PERSONA' ? '' : 'none';
+                    var v = tcSelect.value;
+                    expirationRow.style.display = (v === 'PERSONA' || v === '') ? '' : 'none';
                   }
                   tcSelect.addEventListener('change', toggle);
                   toggle();
