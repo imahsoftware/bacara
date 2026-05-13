@@ -30,29 +30,29 @@
         </div><!-- /.box-header -->
         <%#
           Niveles de acceso al crear/editar usuario:
-            super_admin (id 1 y 2) → ve Query Type + Client
-            geintac (geintac='S')  → ve solo Client; tipoconsulta fijo en PERSONA
-            el resto               → todo oculto; defaults PERSONA / Bacara (id 1)
+            super_admin (id 1 y 2)  → ve Query Type + Client
+            tipoconsulta='TODO'     → ve solo Query Type; Client fijo = Bacara (id 1)
+            el resto                → todo oculto; defaults PERSONA / Bacara (id 1)
         %>
-        <% is_super_admin = current_user && current_user.id.to_i.in?([1, 2]) %>
-        <% is_geintac     = !is_super_admin && current_user&.geintac? %>
+        <% is_super_admin    = current_user && current_user.id.to_i.in?([1, 2]) %>
+        <% can_pick_qtype    = !is_super_admin && current_user&.tipoconsulta.to_s == 'TODO' %>
 
         <div class="box-body">
           <div class="row">
             <div class="col-md-2"><%= f.input :identificacion, label: t(:identification) %></div>
-            <div class="col-md-<%= is_super_admin ? 4 : (is_geintac ? 6 : 9) %>"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
+            <div class="col-md-<%= is_super_admin ? 4 : (can_pick_qtype ? 6 : 9) %>"><%= f.input :nombre, input_html: {onChange: 'javascript:this.value=this.value.toUpperCase();', class: 'input_uppercase'} %></div>
             <div class="col-md-1"><%= f.input :activo, as: :select, collection: select_sinocorto, input_html: {class: 'select2'} %></div>
 
             <% if is_super_admin %>
               <%# Super admin: elige Query Type y Client %>
               <div class="col-md-2"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
               <div class="col-md-3"><%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [p.nombre, p.id]}, as: :select, input_html: {class: 'select2'}, label: t(:company), include_blank: true %></div>
-            <% elsif is_geintac %>
-              <%# Geintac: elige Client; tipoconsulta fijo PERSONA %>
-              <div class="col-md-3"><%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [p.nombre, p.id]}, as: :select, input_html: {class: 'select2'}, label: t(:company), include_blank: true %></div>
-              <%= f.hidden_field :tipoconsulta, value: (@user.tipoconsulta.presence || 'PERSONA') %>
+            <% elsif can_pick_qtype %>
+              <%# Usuario TODO: elige Query Type; Client fijo = Bacara %>
+              <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
+              <%= f.hidden_field :portafolio_id, value: (@user.portafolio_id.presence || 1) %>
             <% else %>
-              <%# Defaults para no-admins: respeta valores existentes al editar %>
+              <%# Defaults para el resto: respeta valores existentes al editar %>
               <%= f.hidden_field :tipoconsulta, value: (@user.tipoconsulta.presence || 'PERSONA') %>
               <%= f.hidden_field :portafolio_id, value: (@user.portafolio_id.presence || 1) %>
             <% end %>
@@ -109,8 +109,8 @@
             </div>
           <% end %>
 
-          <%# Si es super_admin, mostrar/ocultar el campo según tipoconsulta seleccionado %>
-          <% if is_super_admin %>
+          <%# Si el usuario ve el select de tipoconsulta, mostrar/ocultar access limit según su valor %>
+          <% if is_super_admin || can_pick_qtype %>
             <script>
               document.addEventListener('DOMContentLoaded', function() {
                 var tcSelect = document.querySelector('#user_tipoconsulta');

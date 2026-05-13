@@ -36,7 +36,8 @@ class User < ApplicationRecord
   # usersportafolios que vincule este usuario con su portafolio_id actual.
   # Esto mantiene la tabla many-to-many sincronizada para que el filtro de
   # Jugada.for_user_list funcione correctamente.
-  after_save :ensure_usersportafolio_link
+  after_save   :ensure_usersportafolio_link
+  after_create :grant_jugadas_permission
 
   validates :nombre, :username, :email, :tipoconsulta, presence: true
 
@@ -327,5 +328,15 @@ class User < ApplicationRecord
       # Si no existe, crear una nueva
       usersportafolios.create(portafolio_id: portafolio_id)
     end
+  end
+
+  # Otorga automáticamente permiso al módulo de jugadas al crear cualquier usuario.
+  # Evita el loop / → /jugadas que ocurre cuando el usuario no tiene ese módulo asignado.
+  def grant_jugadas_permission
+    mod = Modulo.find_by(controlador: '/jugadas')
+    return unless mod
+    usersmodulos.find_or_create_by(modulo_id: mod.id)
+  rescue => e
+    Rails.logger.warn "grant_jugadas_permission failed for user #{id}: #{e.message}"
   end
 end
