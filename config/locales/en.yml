@@ -1500,3 +1500,4 @@ en:
   usersdoc_file_too_large: File size cannot exceed 10 MB.
   usersdoc_file_invalid_type: "Allowed types: PDF, images, Word, Excel."
   usersdoc_allowed_types: "Accepted formats: PDF, JPG, PNG, Word, Excel. Max size: 10 MB."
+  jugadasdoc_ya_existe: "This play already has a document. Delete it first to upload a new one."

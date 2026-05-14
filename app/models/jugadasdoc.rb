@@ -18,4 +18,14 @@ class Jugadasdoc < ApplicationRecord
     message: I18n.t(:usersdoc_file_invalid_type)
 
   validates :descripcion, presence: true
+  validate :solo_un_documento_por_jugada
+
+  private
+
+  def solo_un_documento_por_jugada
+    return unless jugada.present?
+    if jugada.jugadasdocs.where.not(id: id).exists?
+      errors.add(:base, I18n.t(:jugadasdoc_ya_existe))
+    end
+  end
 end

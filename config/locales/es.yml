@@ -1561,3 +1561,4 @@ es:
   usersdoc_file_too_large: El archivo no puede superar los 10 MB.
   usersdoc_file_invalid_type: "Tipos permitidos: PDF, imágenes, Word, Excel."
   usersdoc_allowed_types: "Formatos aceptados: PDF, JPG, PNG, Word, Excel. Tamaño máximo: 10 MB."
+  jugadasdoc_ya_existe: "Esta jugada ya tiene un documento cargado. Elimínalo primero para subir uno nuevo."
