@@ -6,9 +6,11 @@
   profit_text = profit > 0 ? "+#{iv_str}" : iv_str
 
   # Locales opcionales para el agrupado por día
-  row_day_class    = local_assigns[:day_class].to_s
+  row_day_class        = local_assigns[:day_class].to_s
   row_initially_hidden = local_assigns[:initially_hidden] == true
-  show_player_col  = local_assigns[:show_player_col] == true
+  show_player_col      = local_assigns[:show_player_col] == true
+  docs                 = local_assigns[:docs] || []
+  docs_count           = docs.size
 %>
 <tr id="jugada_<%= jugada.id %>"
     class="jugada-row <%= row_day_class %>"
@@ -76,5 +78,37 @@
     end
   %>
   <td class="text-center" style="font-size:12px; color:#666; white-space:nowrap;"><%= dur_text %></td>
+  <td class="text-center" style="white-space:nowrap;">
+    <% if docs.any? %>
+      <div class="dropdown jugada-docs-dropdown" style="display:inline-block;">
+        <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+           style="color:#337ab7; text-decoration:none; font-size:12px;"
+           title="<%= docs_count %> documento<%= docs_count == 1 ? '' : 's' %>">
+          <i class="fa fa-paperclip"></i> <small><strong><%= docs_count %></strong></small>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right jugada-docs-menu" style="min-width:220px; font-size:12px;">
+          <li class="dropdown-header" style="font-size:11px;">
+            <i class="fa fa-paperclip"></i> Documentos (<%= docs_count %>)
+          </li>
+          <% docs.each do |doc| %>
+            <li>
+              <%= link_to doc.documento.url, target: '_blank', rel: 'noopener',
+                    style: 'display:flex; align-items:center; gap:6px; padding:6px 14px;' do %>
+                <i class="fa fa-<%= doc.documento_content_type.to_s.include?('pdf') ? 'file-pdf-o text-danger' : 'file-image-o text-info' %>"
+                   style="flex-shrink:0;"></i>
+                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:160px;"
+                      title="<%= h doc.descripcion.presence || doc.documento_file_name %>">
+                  <%= doc.descripcion.presence || doc.documento_file_name %>
+                </span>
+                <i class="fa fa-download text-muted" style="margin-left:auto; flex-shrink:0;"></i>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <span class="text-muted">—</span>
+    <% end %>
+  </td>
   <td class="text-right <%= profit_class %>"><strong><%= profit_text %></strong></td>
 </tr>

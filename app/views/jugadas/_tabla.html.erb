@@ -2,9 +2,11 @@
   jugadas_by_day = @jugadas.order(created_at: :desc).group_by { |j| j.created_at.to_date }
   today = Date.current
   show_player_col = current_user.tipoconsulta.to_s != 'PERSONA'
-  total_cols      = show_player_col ? 7 : 6
-  total_colspan   = show_player_col ? 6 : 5
-  profit_by_jugada = Jugadasdetalle.where(jugada_id: @jugadas.map(&:id)).group(:jugada_id).sum(:acumuladof)
+  total_cols      = show_player_col ? 8 : 7
+  total_colspan   = show_player_col ? 7 : 6
+  jugada_ids = @jugadas.map(&:id)
+  profit_by_jugada = Jugadasdetalle.where(jugada_id: jugada_ids).group(:jugada_id).sum(:acumuladof)
+  docs_by_jugada   = Jugadasdoc.where(jugada_id: jugada_ids).order(:id).group_by(&:jugada_id)
 %>
 
 <table class="table table-bordered table-condensed table-striped jugadas-table">
@@ -33,7 +35,7 @@
                  day_class: nil,
                  initially_hidden: false %>
       <% jugadas_del_dia.each do |jugada| %>
-        <%= render 'jugadas/tr', jugada: jugada, show_player_col: show_player_col %>
+        <%= render 'jugadas/tr', jugada: jugada, show_player_col: show_player_col, docs: docs_by_jugada[jugada.id] || [] %>
       <% end %>
       <tr class="jugadas-day-total <%= total_class %>">
         <td colspan="<%= total_colspan %>" class="text-right">
@@ -85,6 +87,7 @@
         <%= render 'jugadas/tr',
                    jugada: jugada,
                    show_player_col: show_player_col,
+                   docs: docs_by_jugada[jugada.id] || [],
                    day_class: "day-#{day_id}",
                    initially_hidden: true %>
       <% end %>

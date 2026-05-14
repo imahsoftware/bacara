@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'tabla_usuario'
       get 'tabla_buscar'
     end
+    resources :jugadasdocs, only: [:create, :destroy]
   end
 
   post 'jugadas/nueva_shoe', to: 'jugadas#nueva_shoe', as: :nueva_shoe_jugada

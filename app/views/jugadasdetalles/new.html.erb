@@ -133,6 +133,71 @@
             <strong><%= t(:stop_playing_this_shoe) %></strong>
           </div>
         <% end %>
+
+        <%# ── Documentos de la jugada (solo cuando está CERRADA) ── %>
+        <% if !jd_pendiente && @jugada.present? %>
+          <div class="jd-bw-docs" style="margin-top:14px; padding:12px; background:#f9f9f9; border:1px solid #e0e0e0; border-radius:6px;">
+            <p style="font-size:13px; font-weight:bold; margin-bottom:8px;">
+              <i class="fa fa-paperclip"></i> <%= t(:usersdoc_section_title) %>
+            </p>
+
+            <%= form_for Jugadasdoc.new, url: jugada_jugadasdocs_path(@jugada),
+                  html: { multipart: true } do |df| %>
+              <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:8px;">
+                <%= df.text_field :descripcion,
+                      class: 'form-control input-sm',
+                      placeholder: t(:usersdoc_description_placeholder),
+                      required: true %>
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <%= df.file_field :documento, id: 'jugadasdoc_file_input', style: 'display:none;' %>
+                  <button type="button" class="btn btn-default btn-sm"
+                          onclick="document.getElementById('jugadasdoc_file_input').click();">
+                    <i class="fa fa-folder-open-o"></i> <%= t(:choose_file) %>
+                  </button>
+                  <span id="jugadasdoc_file_name" style="font-size:11px; color:#777;"><%= t(:no_file_chosen) %></span>
+                </div>
+                <%= df.submit t(:usersdoc_upload_btn), class: 'btn btn-sm btn-primary btn-block' %>
+              </div>
+            <% end %>
+
+            <% if @jugada.jugadasdocs.any? %>
+              <ul style="list-style:none; padding:0; margin:0; font-size:12px;">
+                <% @jugada.jugadasdocs.order(created_at: :desc).each do |doc| %>
+                  <li style="display:flex; align-items:center; justify-content:space-between; padding:4px 0; border-top:1px solid #eee;">
+                    <span>
+                      <i class="fa fa-<%= doc.documento_content_type == 'application/pdf' ? 'file-pdf-o text-danger' : 'file-o' %>"></i>
+                      <%= link_to doc.descripcion.presence || doc.documento_file_name,
+                            doc.documento.url, target: '_blank', rel: 'noopener',
+                            style: 'color:#333;' %>
+                    </span>
+                    <%= link_to jugada_jugadasdoc_path(@jugada, doc),
+                          method: :delete,
+                          data: { confirm: t(:usersdoc_confirm_delete) },
+                          class: 'btn btn-xs btn-danger' do %>
+                      <i class="fa fa-trash"></i>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="text-muted" style="font-size:12px; margin:0;">
+                <i class="fa fa-info-circle"></i> <%= t(:usersdoc_none) %>
+              </p>
+            <% end %>
+          </div>
+
+          <script>
+            (function() {
+              var inp = document.getElementById('jugadasdoc_file_input');
+              if (inp) {
+                inp.addEventListener('change', function() {
+                  var lbl = document.getElementById('jugadasdoc_file_name');
+                  if (lbl) lbl.textContent = this.files.length > 0 ? this.files[0].name : '<%= j t(:no_file_chosen) %>';
+                });
+              }
+            })();
+          </script>
+        <% end %>
       </div>
 
       <footer class="jd-bw-foot jd-bw-foot--sidebar">
@@ -160,6 +225,7 @@
           </div>
         </div>
       </section>
+
     </div>
   </div>
 </div>

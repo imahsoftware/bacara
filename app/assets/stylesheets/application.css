@@ -104,6 +104,19 @@ body.persona-no-sidebar .main-footer {
 .vsp-main { padding-top: 66px; padding-bottom: 40px; min-height: 100vh; }
 .vsp-container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
 
+/* ── Flash messages en viewspecial ───────────────────────── */
+.vsp-flash {
+    position: fixed;
+    top: 52px; /* justo debajo del topbar */
+    left: 0; right: 0;
+    z-index: 1050;
+    margin: 0;
+    border-radius: 0;
+    border-left: none; border-right: none;
+    font-size: 13px;
+    padding: 10px 40px 10px 16px;
+}
+
 /* ══════════════════════════════════════════════════════════════
    VARIABLES
 ══════════════════════════════════════════════════════════════ */

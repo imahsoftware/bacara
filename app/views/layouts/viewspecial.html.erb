@@ -71,6 +71,20 @@
 
 </div>
 
+<!-- ── Flash messages ─────────────────────────────────────── -->
+<% if flash[:notice].present? %>
+  <div class="alert alert-success alert-dismissible vsp-flash" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger alert-dismissible vsp-flash" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <!-- ── Contenido ──────────────────────────────────────────── -->
 <div class="vsp-main">
   <div class="vsp-container">
