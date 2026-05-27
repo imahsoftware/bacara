@@ -1,0 +1,45 @@
+<%= simple_form_for @parametro, remote: true do |f| %>
+  <table style="width:100%; table-layout:fixed; border:none;">
+    <colgroup>
+      <col style="width:4%">   <%# # %>
+      <col style="width:33%">  <%# Description %>
+      <col style="width:38%">  <%# Value %>
+      <col style="width:12%">  <%# Controlled %>
+      <col style="width:13%">  <%# Actions %>
+    </colgroup>
+    <tbody>
+      <tr style="background:transparent;">
+        <td style="padding:4px 6px; vertical-align:middle; border:none;">
+          <small class="text-muted"><%= @parametro.id %></small>
+        </td>
+        <td style="padding:4px 6px; border:none;">
+          <%= f.input :descripcion, label: false, placeholder: 'Description',
+                input_html: { class: 'form-control input-sm' } %>
+        </td>
+        <td style="padding:4px 6px; border:none;">
+          <%= f.input :valor, label: false, placeholder: 'Value',
+                input_html: { class: 'form-control input-sm' } %>
+        </td>
+        <td style="padding:4px 6px; border:none;">
+          <%= f.input :controlado, label: false,
+                as: :select,
+                collection: [['Yes', 'SI'], ['No', 'NO']],
+                include_blank: false,
+                selected: @parametro.controlado.to_s.upcase.presence || 'NO',
+                input_html: { class: 'form-control input-sm select2', data: { width: '100%' } } %>
+        </td>
+        <td style="padding:4px 6px; vertical-align:middle; border:none; white-space:nowrap; text-align:center;">
+          <% if @parametro.new_record? %>
+            <%= button_tag 'Cancel', type: 'button',
+                  data: { target: '#parametro_form' },
+                  class: 'cancel_button btn btn-xs btn-default' %>
+          <% else %>
+            <%= link_to 'Cancel', parametro_path(@parametro),
+                  class: 'btn btn-xs btn-default', remote: true %>
+          <% end %>
+          <%= f.button :submit, 'Save', class: 'btn btn-xs btn-primary' %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,9 @@
+<% if @active_record.present? %>
+  $("#parametro_<%= @active_record.id %>").replaceWith("<%= j render 'tr', parametro: @active_record %>");
+<% end %>
+// Insertar fila de nuevo formulario al inicio del tbody
+var $newRow = $("<tr id='parametro_new'><td colspan='5'><%= j render 'form' %></td></tr>");
+$("#tbody_parametros").prepend($newRow);
+$(".select2").select2();
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

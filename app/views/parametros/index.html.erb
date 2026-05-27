@@ -1,0 +1,46 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-sliders"></i> Parameters</h3>
+    <div class="box-tools pull-right">
+      <%= link_to new_parametro_path, remote: true, class: 'btn btn-sm btn-success' do %>
+        <i class="fa fa-plus"></i> <%= t(:new) %>
+      <% end %>
+    </div>
+  </div>
+
+  <% if flash[:notice].present? %>
+    <div class="alert alert-success alert-dismissible" style="margin:10px 15px 0;">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger alert-dismissible" style="margin:10px 15px 0;">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <div class="flash_messages"></div>
+
+  <div class="box-body">
+    <div id="parametros">
+    <% if @parametros.present? %>
+      <%= render 'parametros/tabla' %>
+    <% else %>
+      <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i> No parameters configured.
+      </div>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).on('click', '.cancel_button', function() {
+    var $row = $(this).closest('tr');
+    if ($row.attr('id') === 'parametro_new') {
+      $row.remove();
+    }
+  });
+</script>

@@ -1,0 +1,18 @@
+<tr id="parametro_<%= parametro.id %>">
+  <td><%= parametro.id %></td>
+  <td><%= parametro.descripcion %></td>
+  <td><%= parametro.valor %></td>
+  <td class="text-center"><%= parametro.controlado.to_s.upcase == 'SI' ? 'Yes' : 'No' %></td>
+  <td class="text-center" style="width:80px;">
+    <%= link_to edit_parametro_path(parametro), remote: true,
+          class: 'btn btn-xs btn-warning', title: t(:edit),
+          data: { toggle: 'tooltip' } do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+    <%= link_to parametro, method: :delete, remote: true,
+          data: { confirm: t(:elimina_confirma), toggle: 'tooltip' },
+          class: 'btn btn-xs btn-danger', title: t(:title_elimina) do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  </td>
+</tr>

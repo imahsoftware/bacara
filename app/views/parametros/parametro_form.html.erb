@@ -1,0 +1,47 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-sliders"></i>
+      <%= @parametro.new_record? ? t(:new) : t(:edit) %> <%= t(:parametro) %>
+    </h3>
+  </div>
+
+  <div class="box-body">
+    <%= link_to parametros_path, class: 'btn btn-sm btn-default', style: 'margin-bottom:14px;' do %>
+      <i class="fa fa-arrow-left"></i> <%= t(:regresar) %>
+    <% end %>
+
+    <% if @parametro.errors.any? %>
+      <div class="alert alert-danger">
+        <ul style="margin:0; padding-left:16px;">
+          <% @parametro.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= simple_form_for @parametro do |f| %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :descripcion, label: 'Descripción', input_html: { class: 'form-control' } %>
+        </div>
+        <div class="col-md-6">
+          <%= f.input :valor, label: 'Valor', input_html: { class: 'form-control' } %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.input :nombre_imagen, label: 'Nombre imagen', required: false,
+                input_html: { class: 'form-control' } %>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:10px;">
+        <%= f.submit t(:guardar), class: 'btn btn-primary' %>
+        <%= link_to t(:cancelar), parametros_path, class: 'btn btn-default' %>
+      </div>
+    <% end %>
+  </div>
+</div>

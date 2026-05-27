@@ -1,0 +1,16 @@
+<table class="table table-bordered table-condensed table-striped">
+  <thead>
+    <tr class="thcolor">
+      <th>#</th>
+      <th>Description</th>
+      <th>Value</th>
+      <th class="text-center">Controlled</th>
+      <th class="text-center"><%= t(:actions) %></th>
+    </tr>
+  </thead>
+  <tbody id="tbody_parametros">
+    <% @parametros.each do |parametro| %>
+      <%= render 'parametros/tr', parametro: parametro %>
+    <% end %>
+  </tbody>
+</table>

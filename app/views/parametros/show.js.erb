@@ -1,0 +1,3 @@
+$("#parametro_<%= @parametro.id %>").replaceWith("<%= j render 'tr', parametro: @parametro %>");
+$(".tooltip").tooltip("hide");
+$('[data-toggle="tooltip"]').tooltip();

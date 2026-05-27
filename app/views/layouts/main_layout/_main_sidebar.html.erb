@@ -36,7 +36,14 @@
               <li>
                 <%= link_to item.controlador do %>
                     <span style="font-size: 12px !important;">
-                      <%= item.descripcion == 'Jugadas' ? t(:jugadas) : item.descripcion %>
+                      <%
+                        menu_label = case item.descripcion
+                          when 'Jugadas'    then t(:jugadas)
+                          when 'Parametros' then 'Parameters'
+                          else item.descripcion
+                        end
+                      %>
+                      <%= menu_label %>
                     </span>
                 <% end %>
               </li>
@@ -58,7 +65,7 @@
               <% end %>
               <li>
                 <%= link_to item.controlador, method: item.metodo.to_s do %>
-                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                  <span style="font-size: 12px !important; "><%= item.descripcion == 'Parametros' ? 'Parameters' : item.descripcion %></span>
                 <% end %>
               </li>
             <% end %>
@@ -79,7 +86,7 @@
               <% end %>
               <li>
                 <%= link_to item.controlador do %>
-                  <span style="font-size: 12px !important; "><%= item.descripcion %></span>
+                  <span style="font-size: 12px !important; "><%= item.descripcion == 'Parametros' ? 'Parameters' : item.descripcion %></span>
                 <% end %>
               </li>
             <% end %>

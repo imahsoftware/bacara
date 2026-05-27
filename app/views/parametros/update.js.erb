@@ -1,0 +1,10 @@
+$(".alert_flash").fadeOut(1000, function() { $(this).remove(); });
+
+$("#parametro_<%= @parametro.id %>").replaceWith("<%= j render 'tr', parametro: @parametro %>");
+
+$(".flash_messages").html("<%= j render 'layouts/flash_messages' %>");
+$('[data-toggle="tooltip"]').tooltip();
+
+setTimeout(function() {
+  $(".alert_flash").fadeOut(1000, function() { $(this).remove(); });
+}, 5000);

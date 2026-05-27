@@ -1,5 +1,5 @@
 class ParametrosController < ApplicationController
-  before_action :set_parametro, only: [:edit, :update, :destroy]
+  before_action :set_parametro, only: [:show, :edit, :update, :destroy]
   layout :d_layout
   before_action :checkaccess
 
@@ -7,49 +7,51 @@ class ParametrosController < ApplicationController
     return is_permit('parametros')
   end
 
+  def show
+    respond_to { |format| format.js }
+  end
+
   def index
     if is_sygma
-      @parametros = Parametro.all.order('id')
+      @parametros = Parametro.where(controlado: 'SI').order('id')
     else
       redirect_to root_path
     end
   end
 
   def new
-    if is_sygma
-      @parametro = Parametro.new
-      render "parametro_form"
-    else
-      redirect_to root_path
-    end
+    return redirect_to root_path unless is_sygma
+    @active_record = Parametro.find(params[:active_id]) if params[:active_id].present?
+    @parametro = Parametro.new
+    respond_to { |format| format.js }
   end
 
   def edit
-    if is_sygma
-      respond_to do |format|
-        format.html { render "parametro_form" }
-      end
-    else
-      redirect_to root_path
-    end
+    return redirect_to root_path unless is_sygma
+    @active_record = Parametro.find(params[:active_id]) if params[:active_id].present?
+    respond_to { |format| format.js }
   end
 
   def create
     @parametro = Parametro.new(parametro_params)
-    if @parametro.save
-      flash[:notice] = I18n.t(:notice_crea_msj)
-      redirect_to edit_parametro_path(@parametro)
-    else
-      render action: "parametro_form"
+    respond_to do |format|
+      if @parametro.save
+        flash[:notice] = I18n.t(:notice_crea_msj)
+        format.js
+      else
+        format.js { render 'layouts/errors', locals: { object: @parametro } }
+      end
     end
   end
 
   def update
-    if @parametro.update(parametro_params)
-      flash[:notice] = I18n.t(:notice_actualiza_msj)
-      redirect_to edit_parametro_path(@parametro)
-    else
-      render action: "parametro_form"
+    respond_to do |format|
+      if @parametro.update(parametro_params)
+        flash[:notice] = I18n.t(:notice_actualiza_msj)
+        format.js
+      else
+        format.js { render 'layouts/errors', locals: { object: @parametro } }
+      end
     end
   end
 
@@ -57,6 +59,7 @@ class ParametrosController < ApplicationController
     @parametro.destroy
     respond_to do |format|
       format.html { redirect_to parametros_url }
+      format.js
     end
   end
 
