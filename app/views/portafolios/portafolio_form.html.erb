@@ -2,7 +2,6 @@
   <%# Siempre usamos _geintac (el form limpio de 4 campos: identificación, email, username, clave).
       _nogeintac está obsoleto y referencia helpers que ya no existen (select_forma_vmn, etc.). %>
   <%= render partial: "geintac", locals: { portafolio: @portafolio } %>
-<br/>
 <% elsif @portafolio.etapa.to_s == "B" %>
   <%= render 'portafoliospersonas/portafoliospersonas' %>
 <% end %>

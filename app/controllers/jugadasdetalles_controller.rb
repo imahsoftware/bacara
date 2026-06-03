@@ -85,7 +85,8 @@ class JugadasdetallesController < ApplicationController
   def reset
     # Eliminar todos los registros asociados a esta jugada
     Jugadasdetalle.where(jugada_id: @jugada_id).delete_all
-
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+    @jugada.update(protocoloix: 'N', protocolodx: 'N', controlesp: 0)
     @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
     @jugadasdetalles   = []

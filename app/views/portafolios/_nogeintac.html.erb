@@ -16,8 +16,6 @@
         <div class="col-md-2"><%= f.input :estado, collection: select_estado_portafolios, as: :select, input_html: { data: { width: '100%' }, class: 'select2' }, disabled: true%></div>
       </div>
       <div class="row">
-        <div class="col-md-4"><%= f.input :forma_vmn, collection: select_forma_vmn, as: :select, input_html: { data: { width: '100%' }, class: 'select2' }, disabled: true%></div>
-        <div class="col-md-3"><%= f.input :maximo_ajustes, as: :moneda, label: 'Máximo de ajustes al Mes', disabled: true %></div>
         <div class="col-md-2"><%= f.input :logo, as: :file %></div>
       </div>
     </div>
