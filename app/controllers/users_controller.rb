@@ -194,13 +194,13 @@ class UsersController < ApplicationController
   def index
     @blockedusers = User.where(failed_attempts: 3).where.not(id: [1, 2])
     @q = User.ransack(params[:q])
-    @users = @q.result.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
+    @users = @q.result.where.not(id: [1, 2]).order("id desc").paginate(:page => params[:page], :per_page => 10)
     @q = User.ransack(params[:q])
 
     if @q == nil
-      @users = User.all.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
+      @users = User.all.where.not(id: [1, 2]).order("id desc").paginate(:page => params[:page], :per_page => 10)
     else
-      @users = @q.result.where.not(id: [1, 2]).paginate(:page => params[:page], :per_page => 10)
+      @users = @q.result.where.not(id: [1, 2]).order("id desc").paginate(:page => params[:page], :per_page => 10)
     end
     if params[:nombre]
       @users = User.name_like("%#{params[:nombre].upcase}%").where.not(id: [1, 2]).order(:nombre).paginate(:page => params[:page], :per_page => 10)
@@ -212,10 +212,10 @@ class UsersController < ApplicationController
     end
 
     # Secciones de extensiones de acceso (PERSONA)
-    @pendientes = User.where(tipoconsulta: 'PERSONA', extension_requested: true).order(:nombre)
+    @pendientes = User.where(tipoconsulta: 'PERSONA', extension_requested: true).order("id desc")
     @expirados_sin_respuesta = User.where(tipoconsulta: 'PERSONA', extension_requested: false)
                                    .where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current)
-                                   .order(:nombre)
+                                    .order("id desc")
   end
 
   def new
