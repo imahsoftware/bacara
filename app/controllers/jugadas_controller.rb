@@ -198,7 +198,7 @@ class JugadasController < ApplicationController
     respond_to do |format|
       if @jugada.save
         @jugada.update(jugador: "SHOE#{@jugada.id}") if @jugada.jugador.blank?
-        flash[:notice] = "#{t :notice_crea_msj}"
+        #flash[:notice] = "#{t :notice_crea_msj}"
         format.js { render inline: "window.location = #{new_jugadasdetalle_path(jugada_id: @jugada.to_param).to_json};" }
       else
         format.js { render 'layouts/errors', locals: { object: @jugada } }

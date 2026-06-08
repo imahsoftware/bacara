@@ -308,7 +308,9 @@ class User < ApplicationRecord
   def set_email_from_username
     return if username.blank?
     return unless new_record? || email.blank?
-    self.email = "#{username.to_s.strip.downcase}@bacwins.com"
+    if !self.email.present?
+      self.email = "#{username.to_s.strip.downcase}@bacwins.com"
+    end
   end
 
   # Crea la fila en usersportafolios si no existe ya.

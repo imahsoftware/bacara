@@ -49,7 +49,7 @@
               <div class="col-md-3"><%= f.input :portafolio_id, collection: Portafolio.order(:nombre).collect {|p| [p.nombre, p.id]}, as: :select, input_html: {class: 'select2'}, label: t(:company), include_blank: true %></div>
             <% elsif can_pick_qtype %>
               <%# Usuario TODO: elige Query Type; Client fijo = Bacara %>
-              <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsulta, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
+              <div class="col-md-3"><%= f.input :tipoconsulta, as: :select, collection: select_tipoconsultad, input_html: {data: {width: '100%'}, class: 'select2', include_blank: true}, label: t(:query_type) %></div>
               <%= f.hidden_field :portafolio_id, value: (@user.portafolio_id.presence || 1) %>
             <% else %>
               <%# Defaults para el resto: respeta valores existentes al editar %>

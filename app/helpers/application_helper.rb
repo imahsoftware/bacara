@@ -395,6 +395,12 @@ module ApplicationHelper
     ]
   end
 
+  def select_tipoconsultad
+    [
+      [I18n.t(:helper_persona), "PERSONA"]
+    ]
+  end
+
   def select_estado
     [
       [I18n.t(:helper_activo), "ACTIVO"],
