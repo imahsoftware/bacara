@@ -1,0 +1,68 @@
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <i class="fa fa-bullseye"></i> Connection Log — <%= @user.nombre %>
+    </h3>
+    <div class="box-tools pull-right">
+      <% if @user.current_sign_in_ip.present? %>
+        <span class="label label-info" style="font-size:12px;">
+          <i class="fa fa-circle"></i> Current IP: <strong><%= @user.current_sign_in_ip %></strong>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="box-body">
+    <% activities = @user.login_activities.limit(50) %>
+    <% if activities.any? %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-condensed table-striped">
+          <thead>
+            <tr class="thcolor">
+              <th class="text-center"><i class="fa fa-calendar"></i> Date / Time</th>
+              <th class="text-center"><i class="fa fa-map-marker"></i> IP Address</th>
+              <th class="text-center"><i class="fa fa-check-circle"></i> Result</th>
+              <th><i class="fa fa-desktop"></i> Browser / Device</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% activities.each do |a| %>
+              <tr>
+                <td class="text-center" style="white-space:nowrap;">
+                  <%= a.created_at.strftime('%d/%m/%Y %H:%M:%S') %>
+                </td>
+                <td class="text-center">
+                  <% if a.ip.present? %>
+                    <code style="font-size:13px;"><%= a.ip %></code>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </td>
+                <td class="text-center">
+                  <% if a.success %>
+                    <span class="label label-success"><i class="fa fa-check"></i> Success</span>
+                  <% else %>
+                    <span class="label label-danger" title="<%= a.failure_reason %>">
+                      <i class="fa fa-times"></i> Failed
+                    </span>
+                  <% end %>
+                </td>
+                <td style="font-size:12px; color:#555; max-width:400px; word-break:break-all;">
+                  <%= a.user_agent.to_s.truncate(120) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted" style="font-size:12px; margin-top:6px;">
+        <i class="fa fa-info-circle"></i> Showing last 50 logins. Total: <%= @user.login_activities.count %>
+      </p>
+    <% else %>
+      <div class="text-center" style="padding: 30px 0;">
+        <i class="fa fa-info-circle fa-3x text-muted"></i>
+        <p style="margin-top:12px; color:#888;">No connection records yet.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

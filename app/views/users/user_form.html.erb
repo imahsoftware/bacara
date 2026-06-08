@@ -17,15 +17,37 @@
     <% end %>
   <% end %>
 <% elsif @user.etapa.to_s == "B" %>
-  <%= render 'usersmodulos/usersmodulos' %>
+  <% if is_auth_c('botonesusuarios') %>
+    <%= render 'usersmodulos/usersmodulos' %>
+  <% else %>
+    <%= render 'layouts/not_authorized' %>
+  <% end %>
 <% elsif @user.etapa.to_s == "C" %>
-  <%= render 'userspermisos/userspermisos' %>
+  <% if is_auth_c('botonesusuarios') %>
+    <%= render 'userspermisos/userspermisos' %>
+  <% else %>
+    <%= render 'layouts/not_authorized' %>
+  <% end %>
 <% elsif @user.etapa.to_s == "I" %>
-  <%= render 'usersreportes/usersreportes' %>
+  <% if is_auth_c('botonesusuarios') %>
+    <%= render 'usersreportes/usersreportes' %>
+  <% else %>
+    <%= render 'layouts/not_authorized' %>
+  <% end %>
 <% elsif @user.etapa.to_s == "E" %>
     <% @usersimagenes.each do |p| %>
       <%= render '/usersimagenes/usersimagenes', :p, p %>
     <% end %>
 <% elsif @user.etapa.to_s == "K" %>
-  <%= render 'usersparametros/usersparametros' %>
+  <% if is_auth_c('botonesusuarios') %>
+    <%= render 'usersparametros/usersparametros' %>
+  <% else %>
+    <%= render 'layouts/not_authorized' %>
+  <% end %>
+<% elsif @user.etapa.to_s == "L" %>
+  <% if is_auth_c('botonesusuarios') %>
+    <%= render 'users/conexiones' %>
+  <% else %>
+    <%= render 'layouts/not_authorized' %>
+  <% end %>
 <% end %>

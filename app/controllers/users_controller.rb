@@ -590,10 +590,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     horas = params[:horas].to_i
     if horas > 0
-      @user.access_expires_at  = Time.current + horas.hours
+      @user.access_expires_at   = Time.current + horas.hours
+      @user.access_started_at   = Time.current
       @user.extension_requested = false
     else
-      @user.access_expires_at  = nil
+      @user.access_expires_at   = nil
+      @user.access_started_at   = nil
       @user.extension_requested = false
     end
     @user.save(validate: false)
@@ -615,7 +617,8 @@ class UsersController < ApplicationController
     horas = 24 if horas <= 0   # default 24h si no se especifica
     User.where(tipoconsulta: 'PERSONA', extension_requested: true).each do |u|
       u.update_columns(
-        access_expires_at:  Time.current + horas.hours,
+        access_expires_at:   Time.current + horas.hours,
+        access_started_at:   Time.current,
         extension_requested: false
       )
     end
