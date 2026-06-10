@@ -52,7 +52,7 @@
                   <th><%= t :email %></th>
                   <th class="text-center"><%= t :active %></th>
                   <th class="text-center"><%= t(:access_column_header) %></th>
-                  <th class="text-center"><i class="fa fa-map-marker"></i> Last IP</th>
+                  <th class="text-center">Last IP</th>
                 </tr>
               </thead>
               <tbody>
@@ -180,6 +180,13 @@
                     <td><%= user.email %></td>
                     <td class="text-center"><%= user.activo %></td>
                     <td class="text-center"><%= render 'access_cell', user: user %></td>
+                    <td class="text-center" style="white-space:nowrap; font-size:12px;">
+                      <% if user.current_sign_in_ip.present? %>
+                        <code><%= user.current_sign_in_ip %></code>
+                      <% else %>
+                        <span class="text-muted">—</span>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
