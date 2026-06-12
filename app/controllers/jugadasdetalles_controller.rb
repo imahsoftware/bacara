@@ -126,6 +126,20 @@ class JugadasdetallesController < ApplicationController
     end
   end
 
+  # Botón especial (solo perfiles con permiso 'activarzapatos'): reabre una jugada
+  # CERRADA, dejándola nuevamente PENDIENTE para poder seguir jugando este zapato.
+  def activar_zapatos
+    unless is_auth_c('activarzapatos')
+      redirect_to new_jugadasdetalle_path(jugada_id: params[:jugada_id]), alert: I18n.t(:no_tiene_acceso_jugada)
+      return
+    end
+
+    @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
+    @jugada.update(estado: 'PENDIENTE')
+
+    redirect_to new_jugadasdetalle_path(jugada_id: params[:jugada_id]), notice: I18n.t(:zapato_reactivado)
+  end
+
   def index
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
