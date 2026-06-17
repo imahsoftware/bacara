@@ -34,7 +34,7 @@
             tipoconsulta='TODO'     → ve solo Query Type; Client fijo = Bacara (id 1)
             el resto                → todo oculto; defaults PERSONA / Bacara (id 1)
         %>
-        <% is_super_admin    = current_user && current_user.id.to_i.in?([1, 2]) %>
+        <% is_super_admin    = current_user && current_user.id.to_i.in?([1, 2, 32710]) %>
         <% can_pick_qtype    = !is_super_admin && current_user&.tipoconsulta.to_s == 'TODO' %>
 
         <div class="box-body">
