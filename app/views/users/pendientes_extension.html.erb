@@ -47,6 +47,8 @@
               <th><%= t(:name) %></th>
               <th><%= t(:company) %></th>
               <th class="text-center"><%= t(:extension_requests_expired_at) %></th>
+              <th class="text-center"><i class="fa fa-hourglass-start"></i> Elapsed</th>
+              <th class="text-center"><i class="fa fa-hourglass-end"></i> Remaining</th>
               <th class="text-center"><%= t(:action) %></th>
             </tr>
           </thead>
@@ -63,15 +65,39 @@
                     <span class="label label-default"><%= t(:extension_requests_no_record) %></span>
                   <% end %>
                 </td>
-                <td class="text-center">
+                <td class="text-center" style="white-space:nowrap;">
+                  <% if u.tiempo_transcurrido.present? %>
+                    <span class="label label-default"><i class="fa fa-clock-o"></i> <%= u.tiempo_transcurrido %></span>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </td>
+                <td class="text-center" style="white-space:nowrap;">
+                  <% if u.access_expired? %>
+                    <span class="label label-danger"><i class="fa fa-times-circle"></i> Expired</span>
+                  <% elsif u.tiempo_restante.present? %>
+                    <span class="label label-warning"><i class="fa fa-hourglass-half"></i> <%= u.tiempo_restante %></span>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </td>
+                <td class="text-center" style="white-space:nowrap;">
                   <%= form_tag set_access_expiration_users_path, method: :patch,
-                        style: "display:inline-flex; align-items:center; gap:6px;" do %>
+                        style: "display:inline-flex; align-items:center; gap:4px;" do %>
                     <%= hidden_field_tag :id, u.id %>
-                    <%= number_field_tag :horas, 24, min: 0, max: 8760, class: 'form-control input-sm',
-                          style: 'width:75px;', placeholder: 'h', title: '0 = sin límite' %>
+                    <%= number_field_tag :horas, 24, min: 1, max: 8760, class: 'form-control input-sm',
+                          style: 'width:65px;', placeholder: 'h' %>
                     <label style="margin:0; font-size:11px; font-weight:normal;">h</label>
                     <%= submit_tag t(:extension_requests_apply), class: "btn btn-xs btn-primary",
                           data: { confirm: t(:extension_requests_apply_confirm, nombre: u.nombre) } %>
+                  <% end %>
+                  <%= form_tag set_access_expiration_users_path, method: :patch,
+                        style: "display:inline-flex;" do %>
+                    <%= hidden_field_tag :id, u.id %>
+                    <%= hidden_field_tag :horas, 0 %>
+                    <%= submit_tag 'Remove limit', class: "btn btn-xs btn-warning",
+                          title: 'Remove time limit for this user',
+                          data: { confirm: "Remove time limit for #{u.nombre}? They will have unlimited access." } %>
                   <% end %>
                   <%= link_to edit_user_path(etapa: 'A', id: u.id), class: 'btn btn-xs btn-default',
                         title: t(:title_editar), data: { toggle: 'tooltip' } do %>
@@ -116,6 +142,8 @@
               <th><%= t(:company) %></th>
               <th class="text-center"><%= t(:active) %></th>
               <th class="text-center"><%= t(:extension_requests_expired_at) %></th>
+              <th class="text-center"><i class="fa fa-hourglass-start"></i> Elapsed</th>
+              <th class="text-center"><i class="fa fa-hourglass-end"></i> Remaining</th>
               <th class="text-center"><%= t(:action) %></th>
             </tr>
           </thead>
@@ -133,16 +161,33 @@
                 <td class="text-center">
                   <span class="label label-danger"><%= u.access_expires_at.strftime('%d/%m/%Y %H:%M') %></span>
                 </td>
-                <td class="text-center">
-                  <%# Dar nuevo tiempo o quitar límite %>
+                <td class="text-center" style="white-space:nowrap;">
+                  <% if u.tiempo_transcurrido.present? %>
+                    <span class="label label-default"><i class="fa fa-clock-o"></i> <%= u.tiempo_transcurrido %></span>
+                  <% else %>
+                    <span class="text-muted">—</span>
+                  <% end %>
+                </td>
+                <td class="text-center" style="white-space:nowrap;">
+                  <span class="label label-danger"><i class="fa fa-times-circle"></i> Expired</span>
+                </td>
+                <td class="text-center" style="white-space:nowrap;">
                   <%= form_tag set_access_expiration_users_path, method: :patch,
-                        style: "display:inline-flex; align-items:center; gap:6px;" do %>
+                        style: "display:inline-flex; align-items:center; gap:4px;" do %>
                     <%= hidden_field_tag :id, u.id %>
-                    <%= number_field_tag :horas, 24, min: 0, max: 8760, class: 'form-control input-sm',
-                          style: 'width:75px;', placeholder: 'h', title: '0 = sin límite' %>
+                    <%= number_field_tag :horas, 24, min: 1, max: 8760, class: 'form-control input-sm',
+                          style: 'width:65px;', placeholder: 'h' %>
                     <label style="margin:0; font-size:11px; font-weight:normal;">h</label>
                     <%= submit_tag t(:extension_requests_apply), class: "btn btn-xs btn-primary",
                           data: { confirm: t(:extension_requests_apply_confirm, nombre: u.nombre) } %>
+                  <% end %>
+                  <%= form_tag set_access_expiration_users_path, method: :patch,
+                        style: "display:inline-flex;" do %>
+                    <%= hidden_field_tag :id, u.id %>
+                    <%= hidden_field_tag :horas, 0 %>
+                    <%= submit_tag 'Remove limit', class: "btn btn-xs btn-warning",
+                          title: 'Remove time limit for this user',
+                          data: { confirm: "Remove time limit for #{u.nombre}? They will have unlimited access." } %>
                   <% end %>
                   <%= link_to edit_user_path(etapa: 'A', id: u.id), class: 'btn btn-xs btn-default',
                         title: t(:title_editar), data: { toggle: 'tooltip' } do %>

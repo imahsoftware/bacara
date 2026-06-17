@@ -1385,6 +1385,9 @@ en:
   finish_session: "Finish"
   finishing: "Finishing..."
   new_shoe: "New SHOE"
+  activar_zapato: "Activate Shoe"
+  activar_zapato_confirm: "Are you sure you want to reactivate this shoe? This will set the play back to PENDING status."
+  zapato_reactivado: "The shoe was reactivated successfully."
   hand_number: "Hand"
   play_number: "Shoe"
   datepicker:

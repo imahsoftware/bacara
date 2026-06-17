@@ -105,6 +105,19 @@
             <%= link_to new_jugada_path(active_id: @jugada_id), remote: true, class: 'btn btn-success btn-block', id: 'jd-new-shoe-modal-link' do %>
               <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_shoe) %>
             <% end %>
+
+            <%# Botón especial: solo perfiles con permiso 'activarzapatos'.
+                Reabre la jugada (estado -> PENDIENTE) para seguir jugando este zapato. %>
+            <% if is_auth_c('activarzapatos') %>
+              <%= button_to '/jugadasdetalles/activar_zapatos',
+                    params: { jugada_id: params[:jugada_id] },
+                    method: :post,
+                    class: 'btn btn-warning btn-block',
+                    form: { style: 'display:block; width:100%; margin-top:8px;' },
+                    data: { confirm: t(:activar_zapato_confirm) } do %>
+                <i class="fa fa-unlock-alt" aria-hidden="true"></i> <%= t(:activar_zapato) %>
+              <% end %>
+            <% end %>
           <% end %>
           <% if jd_muestra_regresar %>
             <%= link_to t(:regresar), jugadas_path, class: 'jd-back-btn', id: 'jd-back-default' %>

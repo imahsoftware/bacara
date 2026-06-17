@@ -7,7 +7,7 @@ class User < ApplicationRecord
   devise :recoverable, :trackable, :validatable, :timeoutable, :lockable, :session_limitable,
          :ssl_session_verifiable
 
-  has_many :login_activities, as: :user
+  has_many :login_activities, -> { order(created_at: :desc) }, as: :user, class_name: 'LoginActivity'
   has_many :registros
   belongs_to :persona
   belongs_to :portafolio
@@ -282,14 +282,29 @@ class User < ApplicationRecord
     partes.join(" ")
   end
 
+  # Tiempo transcurrido desde que se otorgó el acceso. Formateado igual que tiempo_restante.
+  def tiempo_transcurrido
+    return nil unless access_started_at.present?
+    segundos = (Time.current - access_started_at).to_i
+    return "menos de 1 minuto" if segundos < 60
+    horas   = segundos / 3600
+    minutos = (segundos % 3600) / 60
+    partes  = []
+    partes << "#{horas}h"   if horas   > 0
+    partes << "#{minutos}m" if minutos > 0 || horas == 0
+    partes.join(" ")
+  end
+
   # Setter virtual: recibe horas desde el form y calcula access_expires_at.
   # Si horas es blank / 0 → quita el límite (access_expires_at = nil).
   def access_expires_in_hours=(horas)
     h = horas.to_i
     if h > 0
-      self.access_expires_at = Time.current + h.hours
+      self.access_expires_at  = Time.current + h.hours
+      self.access_started_at  = Time.current
     else
-      self.access_expires_at = nil
+      self.access_expires_at  = nil
+      self.access_started_at  = nil
     end
   end
 

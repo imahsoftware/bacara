@@ -62,9 +62,38 @@
                 como "<username>@bacwins.com" vía el callback set_email_from_username. %>
             <div class="col-md-3"><%= f.input :username, label: t(:username) %></div>
             <div class="col-md-3"><%= f.input :email, required: false, label: t(:email), hint: t(:email_optional_hint) %></div>
-            <div class="col-md-3"><%= f.input :password, label: t(:password) %></div>
-            <div class="col-md-3"><%= f.input :password_confirmation, label: t(:confirm_password) %></div>
+            <div class="col-md-3">
+              <div style="position:relative;">
+                <%= f.input :password, label: t(:password), input_html: { id: 'user_password_input', style: 'padding-right:32px;' } %>
+                <span class="password-toggle-icon" data-target="user_password_input" style="position:absolute; right:10px; bottom:9px; cursor:pointer; color:#999;">
+                  <i class="fa fa-eye"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div style="position:relative;">
+                <%= f.input :password_confirmation, label: t(:confirm_password), input_html: { id: 'user_password_confirmation_input', style: 'padding-right:32px;' } %>
+                <span class="password-toggle-icon" data-target="user_password_confirmation_input" style="position:absolute; right:10px; bottom:9px; cursor:pointer; color:#999;">
+                  <i class="fa fa-eye"></i>
+                </span>
+              </div>
+            </div>
           </div>
+          <script type="text/javascript" charset="utf-8">
+            $(function() {
+              $('.password-toggle-icon').on('click', function() {
+                var target = $('#' + $(this).data('target'));
+                var icon = $(this).find('i');
+                if (target.attr('type') === 'password') {
+                  target.attr('type', 'text');
+                  icon.removeClass('fa-eye').addClass('fa-eye-slash');
+                } else {
+                  target.attr('type', 'password');
+                  icon.removeClass('fa-eye-slash').addClass('fa-eye');
+                }
+              });
+            });
+          </script>
 
           <%# ── Marcación de acceso expirado sin respuesta ── %>
           <% if @user.persisted? && @user.access_expired? && !@user.extension_requested? %>

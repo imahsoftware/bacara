@@ -428,6 +428,10 @@ body.persona-no-sidebar .main-footer {
 .tr-finalizar-ok td    { background-color: #86efac !important; }
 .tr-finalizar-ok:hover td { background-color: #4ade80 !important; }
 
+/* Fila finalizada Z — amarillo claro */
+.tr-finalizar-z td    { background-color: #fef08a !important; }
+.tr-finalizar-z:hover td { background-color: #fde047 !important; }
+
 /* ══════════════════════════════════════════════════════════════
    HEADER JUGADOR
 ══════════════════════════════════════════════════════════════ */
@@ -1381,10 +1385,10 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-page .bac-table tbody tr:nth-child(odd) td {
     background: #fff;
 }
-/* Última fila en blanco salvo filas finalizar (Y/N): tr-finalizar-* pierde sin :not por especificidad vs tr:last-child */
-.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td,
-.jd-bw-page .bac-scorecard-right table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td,
-.jd-bw-page .bac-table-central-bottom tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td {
+/* Última fila en blanco salvo filas finalizar (Y/N/Z): tr-finalizar-* pierde sin :not por especificidad vs tr:last-child */
+.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar):not(.tr-finalizar-z) td,
+.jd-bw-page .bac-scorecard-right table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar):not(.tr-finalizar-z) td,
+.jd-bw-page .bac-table-central-bottom tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar):not(.tr-finalizar-z) td {
     background: #fff !important;
     border-bottom-color: #e9ecef;
 }
@@ -1396,7 +1400,7 @@ body.vsp-body:has(.jd-bw-page) {
 .jd-bw-page .bac-table tbody tr:last-child td {
     border-bottom: 2px solid #e9ecef;
 }
-.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar) td.td-num {
+.jd-bw-page .bac-scorecard-left table tbody tr:last-child:not(.tr-finalizar-ok):not(.tr-finalizar):not(.tr-finalizar-z) td.td-num {
     background: #f1f3f5 !important;
 }
 .jd-bw-page .bac-chip-p {

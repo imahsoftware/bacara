@@ -5,7 +5,14 @@
   clases = []
   clases << 'jd-row-new' if defined?(nuevo_detalle) && nuevo_detalle&.id == d.id
   if d.respond_to?(:finalizar) && d.finalizar.present?
-    clases << (d.finalizar.to_s.upcase == 'Y' ? 'tr-finalizar-ok' : 'tr-finalizar')
+    case d.finalizar.to_s.upcase
+    when 'Y'
+      clases << 'tr-finalizar-ok'
+    when 'Z'
+      clases << 'tr-finalizar-z'
+    else
+      clases << 'tr-finalizar'
+    end
   end
   clases.join(' ')
 end %>

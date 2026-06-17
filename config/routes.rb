@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'jugadasdetalles/undo',   to: 'jugadasdetalles#undo'
   post 'jugadasdetalles/reset',  to: 'jugadasdetalles#reset'
   post 'jugadasdetalles/finish', to: 'jugadasdetalles#finish'
+  post 'jugadasdetalles/activar_zapatos', to: 'jugadasdetalles#activar_zapatos'
 
   resources :jugadasdetalles, only: [:index, :new, :create] do
     collection do

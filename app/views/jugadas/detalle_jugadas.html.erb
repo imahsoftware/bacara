@@ -104,9 +104,10 @@
   }
   .pdf-phase-b tr.pdf-row-transition > th.col-p-head { color: #7fb2ff !important; }
   .pdf-phase-b tr.pdf-row-transition > th.col-b-head { color: #ff8d8d !important; }
-  /* No pintar encabezados con verde/rojo finalizar */
+  /* No pintar encabezados con verde/rojo/amarillo finalizar */
   .pdf-phase-b tr.pdf-row-transition.tr-finalizar-ok > th,
-  .pdf-phase-b tr.pdf-row-transition.tr-finalizar > th {
+  .pdf-phase-b tr.pdf-row-transition.tr-finalizar > th,
+  .pdf-phase-b tr.pdf-row-transition.tr-finalizar-z > th {
     background: #191d26 !important;
     color: #fff !important;
   }
@@ -189,8 +190,10 @@
   .pdf-unified tbody.pdf-hand-block tr.pdf-row-b td { background: #dfe7e3; }
   .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-ok td { background: #9dd9ad !important; }
   .pdf-unified tbody.pdf-hand-block tr.tr-finalizar td { background: #f5bcbc !important; }
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-z td { background: #fbf0a8 !important; }
   .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-ok td.pdf-empty-zone,
-  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar td.pdf-empty-zone {
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar td.pdf-empty-zone,
+  .pdf-unified tbody.pdf-hand-block tr.tr-finalizar-z td.pdf-empty-zone {
     background: #fff !important;
   }
 
@@ -297,7 +300,11 @@
   pdf_phase_b = pdf_rows.drop(5)
   pdf_fin_row_class = lambda do |d|
     fv = d.respond_to?(:finalizar) ? d.finalizar.to_s.strip.upcase : ''
-    fv == 'Y' ? 'tr-finalizar-ok' : (fv.present? ? 'tr-finalizar' : '')
+    case fv
+    when 'Y' then 'tr-finalizar-ok'
+    when 'Z' then 'tr-finalizar-z'
+    else (fv.present? ? 'tr-finalizar' : '')
+    end
   end
   # Anchos iguales fase A / B → columna P|B alineada en todo el bloque (mockup imagen 2)
   pdf_mid_col_w  = 7.0

@@ -1,21 +1,18 @@
 <aside class="main-sidebar">
   <section class="sidebar">
-    <!-- <%= image_tag 'logo.png', class: 'user-image', size: '230x100', alt: 'BacWins' %> -->
-    <!--  Sidebar Menu -->
-    <% if current_user && current_user.geintac.to_s == 'S' %>
-      <ul class="sidebar-menu" data-widget="tree">
-        <li>
-          <%= link_to users_path do %>
-            <i class="fa fa-arrow-left text-success"></i> <%= t :regresar_usuarios %>
-          <% end %>
-        </li>
-        <li class="header"><%=t :menu%></li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="<%= active_class(edit_user_path(etapa: "A", id: @user.id)) %>">
-          <%= link_to edit_user_path(etapa: "A", id: @user.id) do %>
-            <i class="fa fa-bullseye"></i> <span><%= t :datos_basicos %></span>
-          <% end %>
-        </li>
+    <ul class="sidebar-menu" data-widget="tree">
+      <li>
+        <%= link_to users_path do %>
+          <i class="fa fa-arrow-left text-success"></i> <%= t :regresar_usuarios %>
+        <% end %>
+      </li>
+      <li class="header"><%=t :menu%></li>
+      <li class="<%= active_class(edit_user_path(etapa: "A", id: @user.id)) %>">
+        <%= link_to edit_user_path(etapa: "A", id: @user.id) do %>
+          <i class="fa fa-bullseye"></i> <span><%= t :datos_basicos %></span>
+        <% end %>
+      </li>
+      <% if is_auth_c('botonesusuarios') %>
         <li class="<%= active_class(edit_user_path(etapa: "B", id: @user.id)) %>">
           <%= link_to edit_user_path(etapa: "B", id: @user.id) do %>
             <i class="fa fa-bullseye"></i> <span><%= t :modulos %></span>
@@ -36,7 +33,12 @@
             <i class="fa fa-bullseye"></i> <span><%= t :parametros %></span>
           <% end %>
         </li>
-      </ul>
-    <% end %>
+        <li class="<%= active_class(edit_user_path(etapa: "L", id: @user.id)) %>">
+          <%= link_to edit_user_path(etapa: "L", id: @user.id) do %>
+            <i class="fa fa-bullseye"></i> <span>Connections</span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </section>
 </aside>
