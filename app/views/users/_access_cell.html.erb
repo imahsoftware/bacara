@@ -2,6 +2,7 @@
   <%
     expired   = user.access_expires_at < Time.current
     requested = user.extension_requested?
+    transcurrido = user.tiempo_transcurrido
   %>
 
   <%# Badge de estado %>
@@ -16,6 +17,22 @@
   <% else %>
     <span class="label label-default" style="display:inline-block; margin-bottom:4px;">
       <i class="fa fa-clock-o"></i> <%= user.access_expires_at.strftime('%d/%m/%Y %H:%M') %>
+    </span><br>
+  <% end %>
+
+  <%# Tiempo transcurrido desde que se otorgó el acceso %>
+  <% if transcurrido.present? %>
+    <%
+      tiempo_label_class = if expired && !requested
+        'label-danger'
+      elsif expired && requested
+        'label-warning'
+      else
+        'label-info'
+      end
+    %>
+    <span class="label <%= tiempo_label_class %>" style="display:inline-block; margin-bottom:4px; font-size:10px;">
+      <i class="fa fa-hourglass-half"></i> <%= transcurrido %>
     </span><br>
   <% end %>
 

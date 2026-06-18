@@ -77,29 +77,6 @@
                 <% end %>
                 <% if isimah or permit == true %>
                   <% if params[:controller].to_s != 'users' %>
-                    <li class="dropdown messages-menu">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                        <span class="glyphicon glyphicon-search"></span>
-                      </a>
-                      <ul class="dropdown-menu" style="margin-top: 3px;">
-                        <li>
-                          <% if isimah == true and current_user.user2_id.to_s == "" %>
-                            <%= form_tag cambiousuario_users_path, method: :get, id: "search-form", class: 'navbar-form navbar-left', role: 'search' do %>
-                              <%= hidden_field_tag :user_id %>
-                              <div class="input-group">
-                                <%= autocomplete_field_tag :nombre, '', autocomplete_cambio_user2_users_path(portafolio_id: isportafolio), class: "form-control", id: 'navbar-search-input', id_element: '#user_id', placeholder: t('buscar'), type: "search" %>
-                              </div>
-                            <% end %>
-                            <script type="text/javascript" charset="utf-8">
-                                $('#navbar-search-input').bind('railsAutocomplete.select', function (event, data) {
-                                    $('#search-form').submit()
-                                });
-                            </script>
-                          <% end %>
-
-                        </li>
-                      </ul>
-                    </li>
                   <% end %>
                 <% end %>
               </ul>

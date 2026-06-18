@@ -216,6 +216,10 @@ class UsersController < ApplicationController
     @expirados_sin_respuesta = User.where(tipoconsulta: 'PERSONA', extension_requested: false)
                                    .where('access_expires_at IS NOT NULL AND access_expires_at < ?', Time.current)
                                     .order("id desc")
+
+    # Auto-desactivar: usuarios PERSONA cuyas 24h expiraron sin que aprobaran continuar
+    ids_a_inactivar = @expirados_sin_respuesta.where(activo: 'S').pluck(:id)
+    User.where(id: ids_a_inactivar).update_all(activo: 'N') if ids_a_inactivar.any?
   end
 
   def new
