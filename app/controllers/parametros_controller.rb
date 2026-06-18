@@ -1,7 +1,7 @@
 class ParametrosController < ApplicationController
   before_action :set_parametro, only: [:show, :edit, :update, :destroy]
   layout :d_layout
-  before_action :checkaccess
+  #before_action :checkaccess
 
   def checkaccess
     return is_permit('parametros')
