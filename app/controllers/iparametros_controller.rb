@@ -12,14 +12,14 @@ class IparametrosController < ApplicationController
     if Usersparametro.where("user_id = #{is_admin}").present?
       @parametro = 'ASIGNADO'
       @q = Iparametro.where("campo in (select campo from usersparametros where user_id = #{is_admin})").ransack(params[:q])
-      @iparametros = @q.result.paginate(:page => params[:page], :per_page => 50)
+      @iparametros = @q.result.order("descripcion asc").paginate(:page => params[:page], :per_page => 50)
       respond_to do |format|
         format.html
       end
     elsif is_sygma
       @parametro = 'ADMIN'
       @q = Iparametro.ransack(params[:q])
-      @iparametros = @q.result.paginate(:page => params[:page], :per_page => 50)
+      @iparametros = @q.result.order("descripcion asc").paginate(:page => params[:page], :per_page => 50)
       respond_to do |format|
         format.html
       end

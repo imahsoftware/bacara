@@ -597,10 +597,16 @@ class UsersController < ApplicationController
       @user.access_expires_at   = Time.current + horas.hours
       @user.access_started_at   = Time.current
       @user.extension_requested = false
+      # Al asignar tiempo de prueba, mover automáticamente al portafolio Baccarat-test
+      portafolio_test = Portafolio.find_by(nombre: 'Baccarat-test')
+      @user.portafolio_id = portafolio_test.id if portafolio_test
     else
       @user.access_expires_at   = nil
       @user.access_started_at   = nil
       @user.extension_requested = false
+      # Sin tiempo de prueba → volver al portafolio normal Bacara
+      portafolio_normal = Portafolio.find_by(nombre: 'Bacara')
+      @user.portafolio_id = portafolio_normal.id if portafolio_normal
     end
     @user.save(validate: false)
     redirect_to users_path, notice: I18n.t(:extension_requests_updated, nombre: @user.nombre)
@@ -619,12 +625,15 @@ class UsersController < ApplicationController
   def aprobar_extension
     horas = params[:horas].to_i
     horas = 24 if horas <= 0   # default 24h si no se especifica
+    portafolio_test = Portafolio.find_by(nombre: 'Baccarat-test')
     User.where(tipoconsulta: 'PERSONA', extension_requested: true).each do |u|
-      u.update_columns(
+      attrs = {
         access_expires_at:   Time.current + horas.hours,
         access_started_at:   Time.current,
         extension_requested: false
-      )
+      }
+      attrs[:portafolio_id] = portafolio_test.id if portafolio_test
+      u.update_columns(attrs)
     end
     redirect_to users_path, notice: I18n.t(:extension_requests_all_approved, horas: horas)
   end
