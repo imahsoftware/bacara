@@ -1382,6 +1382,8 @@ en:
   undoing: "Undoing..."
   clear_session: "Clear Session"
   clearing: "Clearing..."
+  undo_limit_reached: "You have reached the limit of 2 allowed undos."
+  clear_session_admin_only: "Only administrators can clear the session."
   finish_session: "Finish"
   finishing: "Finishing..."
   new_shoe: "New SHOE"

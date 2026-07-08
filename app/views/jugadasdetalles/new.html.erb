@@ -80,18 +80,24 @@
 
         <div class="jd-bw-row-btns">
           <% if jd_pendiente %>
+          <%# Undo: visible para todos; no-admins limitados a 2 usos por sesión %>
           <button type="button" class="jd-undo-btn jd-undo-btn--bw" id="btn-undo"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="<%= t(:undo_last_hand) %>"
-                  data-label-loading="<%= t(:undoing) %>">
+                  data-label-loading="<%= t(:undoing) %>"
+                  data-undo-count="<%= @undo_count.to_i %>"
+                  data-undo-max="<%= is_sygma ? '' : 2 %>">
             <%= t(:undo_last_hand) %>
           </button>
+          <%# Clear Session: solo administradores (geintac == 'S') %>
+          <% if is_sygma %>
           <button type="button" class="jd-reset-btn" id="btn-reset"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="<%= t(:clear_session) %>"
                   data-label-loading="<%= t(:clearing) %>">
             <%= t(:clear_session) %>
           </button>
+          <% end %>
           <button type="button" class="jd-finish-btn jd-finish-btn--bw" id="btn-finish"
                   data-jugada-id="<%= @jugada_id %>"
                   data-label-default="<%= t(:finish_session) %>"

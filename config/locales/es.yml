@@ -1375,6 +1375,8 @@ es:
   undoing: "Deshaciendo..."
   clear_session: "Limpiar sesión"
   clearing: "Limpiando..."
+  undo_limit_reached: "Has alcanzado el límite de 2 deshaceres permitidos."
+  clear_session_admin_only: "Solo los administradores pueden limpiar la sesión."
   finish_session: "Finalizar"
   finishing: "Finalizando..."
   new_shoe: "Nueva SHOE"

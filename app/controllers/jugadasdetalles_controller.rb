@@ -10,6 +10,7 @@ class JugadasdetallesController < ApplicationController
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
+    @undo_count        = undo_count_for_jugada
   end
 
   def create
@@ -54,6 +55,18 @@ class JugadasdetallesController < ApplicationController
   end
 
   def undo
+    # Limitar undo a 2 para usuarios no-admin
+    unless is_sygma
+      if undo_count_for_jugada >= 2
+        respond_to do |format|
+          format.js   { render js: "alert('#{I18n.t(:undo_limit_reached)}');" }
+          format.json { render json: { status: 'error', message: I18n.t(:undo_limit_reached) }, status: :forbidden }
+        end
+        return
+      end
+      increment_undo_count_for_jugada
+    end
+
     # Borrar el slot del PRC (último registro con r_player=0, r_banker=0)
     slot_prc = Jugadasdetalle
                  .where(jugada_id: @jugada_id)
@@ -75,14 +88,24 @@ class JugadasdetallesController < ApplicationController
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
     @total_movimientos = @jugadasdetalles.count
     @proximo_bet       = calcular_proximo_bet(@jugada_id)
+    @undo_count        = undo_count_for_jugada
 
     respond_to do |format|
       format.js
-      format.json { render json: { status: "ok", total: @total_movimientos } }
+      format.json { render json: { status: "ok", total: @total_movimientos, undo_count: @undo_count } }
     end
   end
 
   def reset
+    # Solo administradores (geintac == 'S') pueden limpiar la sesión
+    unless is_sygma
+      respond_to do |format|
+        format.js   { render js: "alert('#{I18n.t(:clear_session_admin_only)}');" }
+        format.json { render json: { status: 'error', message: I18n.t(:clear_session_admin_only) }, status: :forbidden }
+      end
+      return
+    end
+
     # Eliminar todos los registros asociados a esta jugada
     Jugadasdetalle.where(jugada_id: @jugada_id).delete_all
     @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
@@ -235,6 +258,18 @@ class JugadasdetallesController < ApplicationController
 
   def set_layout
     'viewspecial'
+  end
+
+  # ── Tracking de undos por jugada (para límite de no-admins) ─────────────────
+  UNDO_MAX_NON_ADMIN = 2
+
+  def undo_count_for_jugada
+    (session[:undo_counts] ||= {})[@jugada_id.to_s].to_i
+  end
+
+  def increment_undo_count_for_jugada
+    session[:undo_counts] ||= {}
+    session[:undo_counts][@jugada_id.to_s] = undo_count_for_jugada + 1
   end
 
   def block_unless_pendiente

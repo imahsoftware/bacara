@@ -1,6 +1,6 @@
 //= require jquery
 //= require bootstrap-sprockets
-//= require jquery.remotipart
+// DISABLED: //= require jquery.remotipart
 //= require jquery_ujs
 //= require jquery-ui/widgets/datepicker
 //= require jquery-ui/widgets/autocomplete
@@ -25,11 +25,11 @@
 //= require highcharts/modules/offline-exporting
 //= require Chart.min
 //= require dist/js/app.min
-//= require bootstrap-wysihtml5
+// DISABLED: //= require bootstrap-wysihtml5
 //= require underscore
 //= require gmaps/google
-//= require best_in_place
-//= require signature-pad
+// DISABLED: //= require best_in_place
+// DISABLED: //= require signature-pad
 //= require_tree .
 //= require notifications
 
@@ -670,6 +670,17 @@ $(document).ready(function () {
             var $btn     = $(this);
             var jugadaId = $btn.data('jugada-id');
 
+            // Verificación client-side del límite de undos para no-admins
+            var undoMax   = $btn.data('undo-max');
+            var undoCount = parseInt($btn.attr('data-undo-count') || '0', 10);
+            if (undoMax !== '' && undoMax !== undefined && undoMax !== null) {
+                var maxInt = parseInt(undoMax, 10);
+                if (!isNaN(maxInt) && undoCount >= maxInt) {
+                    alert('Has alcanzado el límite de ' + maxInt + ' undo(s) permitidos.');
+                    return;
+                }
+            }
+
             $btn.prop('disabled', true).text($btn.data('label-loading') || 'Undoing...');
             showSpinner();
 
@@ -681,7 +692,13 @@ $(document).ready(function () {
                 data:     { jugada_id: jugadaId },
                 error:    function () { alert('Error al deshacer.'); },
                 complete: function () {
-                    $btn.prop('disabled', false).text($btn.data('label-default') || 'Undo Last Hand');
+                    var newCount = parseInt($btn.attr('data-undo-count') || '0', 10);
+                    var max      = $btn.data('undo-max');
+                    if (max !== '' && max !== undefined && max !== null && !isNaN(parseInt(max, 10)) && newCount >= parseInt(max, 10)) {
+                        $btn.prop('disabled', true).addClass('disabled');
+                    } else {
+                        $btn.prop('disabled', false).text($btn.data('label-default') || 'Undo Last Hand');
+                    }
                     hideSpinner();
                 }
             });

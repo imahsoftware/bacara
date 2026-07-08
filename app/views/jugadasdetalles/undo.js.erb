@@ -1,5 +1,18 @@
 // app/views/jugadasdetalles/undo.js.erb
 
+// Actualizar contador de undos en el botón (para feedback visual en no-admins)
+(function(){
+  var $btn = $('#btn-undo');
+  if ($btn.length) {
+    var newCount = parseInt('<%= @undo_count.to_i %>', 10);
+    var max      = $btn.data('undo-max');
+    $btn.attr('data-undo-count', newCount);
+    if (max !== '' && max !== undefined && newCount >= parseInt(max, 10)) {
+      $btn.prop('disabled', true).addClass('disabled');
+    }
+  }
+})();
+
 $('#tabla-movimientos').html('<%= j render("tabla_movimientos", jugadasdetalles: @jugadasdetalles || []) %>');
 $('#mov-count').text('<%= @total_movimientos %>');
 $('#badge-count').text('<%= @total_movimientos %>');
