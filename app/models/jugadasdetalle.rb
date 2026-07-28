@@ -16,7 +16,8 @@ class Jugadasdetalle < ApplicationRecord
   def self.sum_acumuladof_for_jugada(jugada_id)
     return 0 if jugada_id.blank?
 
-    where(jugada_id: jugada_id).sum(:acumuladof)
+    #where(jugada_id: jugada_id).sum(:acumuladof)
+    where(jugada_id: jugada_id).sum(:final)
   end
 
   def self.formatted_profit_for_jugada(jugada_id)
