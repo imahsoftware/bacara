@@ -15,32 +15,47 @@ class JugadasdetallesController < ApplicationController
 
   def create
     tipo = params[:tipo]  # "P" o "B"
+    error_guardando = false
 
-    # Buscar el último registro de esta jugada (el que dejó el PRC con r_player=0, r_banker=0)
-    ultimo = Jugadasdetalle.where(jugada_id: @jugada_id).last
+    # Bloqueo por jugada: serializa clics concurrentes (doble clic, clics muy rápidos
+    # alternando P/B, etc.) para que dos peticiones nunca lean/escriban a la vez el
+    # mismo "último registro" ni corran el PRC dos veces sobre el mismo detalle.
+    ActiveRecord::Base.transaction do
+      Jugada.lock.find(@jugada_id)
 
-    if ultimo && ultimo.r_player == 0 && ultimo.r_banker == 0
+      # Buscar el último registro de esta jugada (el que dejó el PRC con r_player=0, r_banker=0)
+      ultimo = Jugadasdetalle.where(jugada_id: @jugada_id).last
 
-      ultimo.update!(r_player: tipo == "P" ? 1 : 0, r_banker: tipo == "B" ? 1 : 0)
-      @detalle = ultimo
-    else
-      # No hay slot del PRC — insertar nuevo registro (primeros movimientos)
-      @detalle = Jugadasdetalle.new(
-        jugada_id: @jugada_id,
-        r_player:  tipo == "P" ? 1 : 0,
-        r_banker:  tipo == "B" ? 1 : 0
-      )
-      unless @detalle.save
-        respond_to do |format|
-          format.js   { render js: "alert('Error al guardar el movimiento.');" }
-          format.json { render json: { status: "error", errors: @detalle.errors.full_messages }, status: :unprocessable_entity }
+      if ultimo && ultimo.r_player == 0 && ultimo.r_banker == 0
+
+        ultimo.update!(r_player: tipo == "P" ? 1 : 0, r_banker: tipo == "B" ? 1 : 0)
+        @detalle = ultimo
+      else
+        # No hay slot del PRC — insertar nuevo registro (primeros movimientos)
+        @detalle = Jugadasdetalle.new(
+          jugada_id: @jugada_id,
+          r_player:  tipo == "P" ? 1 : 0,
+          r_banker:  tipo == "B" ? 1 : 0
+        )
+        unless @detalle.save
+          error_guardando = true
+          raise ActiveRecord::Rollback
         end
-        return
       end
+
+      # Correr el PRC con el id del registro actualizado/insertado, todavía dentro
+      # del lock, para que el siguiente clic no pueda leer un estado a medio calcular.
+      ejecutar_prc_calculo_automatico(@detalle.id)
     end
 
-    # Correr el PRC con el id del registro actualizado/insertado
-    ejecutar_prc_calculo_automatico(@detalle.id)
+    if error_guardando
+      respond_to do |format|
+        format.js   { render js: "alert('Error al guardar el movimiento.');" }
+        format.json { render json: { status: "error", errors: @detalle.errors.full_messages }, status: :unprocessable_entity }
+      end
+      return
+    end
+
     @jugada = Jugada.for_user_list(current_user).find(@jugada_id)
 
     @jugadasdetalles   = Jugadasdetalle.jugadas(@jugada_id)
@@ -67,13 +82,21 @@ class JugadasdetallesController < ApplicationController
       increment_undo_count_for_jugada
     end
 
-    # Borrar el slot del PRC (último registro con r_player=0, r_banker=0)
-    slot_prc = Jugadasdetalle
-                 .where(jugada_id: @jugada_id)
-                 .order(id: :desc)
-                 .first
-    ActiveRecord::Base.connection.execute("CALL prc_reversion_automatico(#{slot_prc.id.to_i})")
-    slot_prc.destroy if slot_prc
+    # Mismo bloqueo por jugada que en create: evita que un undo choque con un
+    # create concurrente sobre el mismo slot del PRC.
+    ActiveRecord::Base.transaction do
+      Jugada.lock.find(@jugada_id)
+
+      # Borrar el slot del PRC (último registro con r_player=0, r_banker=0)
+      slot_prc = Jugadasdetalle
+                   .where(jugada_id: @jugada_id)
+                   .order(id: :desc)
+                   .first
+      if slot_prc
+        ActiveRecord::Base.connection.execute("CALL prc_reversion_automatico(#{slot_prc.id.to_i})")
+        slot_prc.destroy
+      end
+    end
 =begin
     # Borrar el último movimiento confirmado por el usuario
     ultimo = Jugadasdetalle

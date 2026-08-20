@@ -637,15 +637,26 @@ $(document).ready(function () {
     }
 
     // ── Clic en P o B ────────────────────────────────────────────
+    // jdCreateInFlight evita que clics rápidos/alternados en P y B disparen
+    // varias peticiones POST /jugadasdetalles en paralelo: antes solo el botón
+    // clicado quedaba con pointer-events:none (jd-loading), así que darle a P y
+    // luego, sin esperar, a B, sí lograba mandar dos peticiones concurrentes
+    // para la misma jugada, causando datos/estados inconsistentes en pantalla.
+    var jdCreateInFlight = false;
+
     $(document).off('click.jd', '#btn-player, #btn-banker')
         .on ('click.jd', '#btn-player, #btn-banker', function (e) {
+            if (jdCreateInFlight) return;
+
             var $btn     = $(this);
+            var $circles = $('#btn-player, #btn-banker');
             var tipo     = $btn.data('tipo');
             var jugadaId = $btn.data('jugada-id');
             var baseBet  = $('#jd-base-bet').val() || 10;
 
             addRipple($btn, e);
-            setLoading($btn, true);
+            jdCreateInFlight = true;
+            $circles.addClass('jd-loading');
             showSpinner();
 
             $.ajax({
@@ -658,7 +669,8 @@ $(document).ready(function () {
                     alert('Error al registrar movimiento: ' + (xhr.responseText || 'desconocido'));
                 },
                 complete: function () {
-                    setLoading($btn, false);
+                    jdCreateInFlight = false;
+                    $circles.removeClass('jd-loading');
                     hideSpinner();
                 }
             });
