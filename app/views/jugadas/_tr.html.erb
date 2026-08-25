@@ -1,6 +1,8 @@
 <%
   cerrada = jugada.estado.to_s.strip.upcase == 'CERRADA'
-  profit  = Jugadasdetalle.where(jugada_id: jugada.id).sum(:acumuladof).to_f
+  # Mismo cálculo que el PROFIT de la pantalla de juego (Jugadasdetalle.sum_acumuladof_for_jugada,
+  # que suma :final) — antes este listado sumaba :acumuladof y quedaba desalineado.
+  profit  = Jugadasdetalle.sum_acumuladof_for_jugada(jugada.id).to_f
   profit_class = profit > 0 ? 'jd-profit-pos' : (profit < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
   iv_str   = profit == profit.to_i ? profit.to_i.to_s : sprintf('%.1f', profit)
   profit_text = profit > 0 ? "+#{iv_str}" : iv_str

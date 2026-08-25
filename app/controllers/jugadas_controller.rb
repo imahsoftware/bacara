@@ -26,6 +26,16 @@ class JugadasController < ApplicationController
     @persona_bloquea_nueva_jugada = Jugada.persona_tiene_jugada_abierta?(current_user)
     @persona_ultima_cerrada = Jugada.ultima_cerrada_para_nueva_shoe(current_user)
 
+    # Pre-cargar el primer tab para que no necesite AJAX al cargar la página
+    if @portafolio_tabs.present?
+      @first_portafolio_id = @portafolio_tabs.first[:id]
+      @jugadas = @jugadas_base
+                 .joins(:user)
+                 .where(users: { portafolio_id: @first_portafolio_id })
+                 .order(id: :desc)
+      @daily_totals = compute_daily_totals(@jugadas)
+    end
+
     respond_to do |format|
       format.html
     end
@@ -144,11 +154,13 @@ class JugadasController < ApplicationController
       jugadas_scope = Jugada.where(id: jugada_ids)
     end
 
+    # :final, no :acumuladof — mismo campo que usa el PROFIT en la pantalla de juego
+    # (Jugadasdetalle.sum_acumuladof_for_jugada), para que los totales coincidan.
     rows = Jugadasdetalle
            .joins(:jugada)
            .merge(jugadas_scope.except(:order))
            .group('DATE(jugadas.created_at)')
-           .sum(:acumuladof)
+           .sum(:final)
 
     rows.each_with_object({}) do |(day, amount), out|
       out[day.to_date] = amount.to_f
@@ -235,7 +247,8 @@ class JugadasController < ApplicationController
 
     respond_to do |format|
       format.pdf { render pdf: pdf_filename,
-                          template: "jugadas/detalle_jugadas.html.erb",
+                          template: "jugadas/detalle_jugadas",
+                          formats: [:html],
                           encoding: "UTF-8",
                           page_size: 'Letter',
                           orientation: 'Portrait',

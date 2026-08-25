@@ -246,7 +246,9 @@
 </div>
 
 <%
-  pdf_profit_val = @jugadasdetalles.sum { |d| d.acumuladof.to_f }
+  # :final, no :acumuladof — mismo campo que usa el PROFIT en la pantalla de juego
+  # (Jugadasdetalle.sum_acumuladof_for_jugada), para que el PDF coincida con la pantalla.
+  pdf_profit_val = @jugadasdetalles.sum { |d| d.final.to_f }
   pdf_profit_str = if pdf_profit_val == pdf_profit_val.to_i
                      pdf_profit_val.to_i.to_s
                    else

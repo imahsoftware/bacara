@@ -5,7 +5,9 @@
   total_cols      = show_player_col ? 8 : 7
   total_colspan   = show_player_col ? 7 : 6
   jugada_ids = @jugadas.map(&:id)
-  profit_by_jugada = Jugadasdetalle.where(jugada_id: jugada_ids).group(:jugada_id).sum(:acumuladof)
+  # :final, no :acumuladof — mismo campo que usa el PROFIT en la pantalla de juego
+  # (Jugadasdetalle.sum_acumuladof_for_jugada), para que el total del listado coincida.
+  profit_by_jugada = Jugadasdetalle.where(jugada_id: jugada_ids).group(:jugada_id).sum(:final)
   docs_by_jugada   = Jugadasdoc.where(jugada_id: jugada_ids).order(:id).group_by(&:jugada_id)
 %>
 
