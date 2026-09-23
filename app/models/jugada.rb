@@ -1,9 +1,11 @@
 class Jugada < ApplicationRecord
   belongs_to :user, optional: true
+  belongs_to :denominacion, optional: true
   has_many :jugadasdetalles
   has_many :jugadasdocs, dependent: :destroy
 
   validates_presence_of :monto_apostar
+  validates_presence_of :denominacion_id
 
   # ── UUID público para URLs ─────────────────────────────────────
   # Se genera automáticamente al crear; el integer id sigue siendo PK

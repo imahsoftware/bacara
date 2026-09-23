@@ -70,6 +70,7 @@ en:
       jugada:
         jugador: Player
         monto_apostar: Bet Amount
+        denominacion_id: Denomination
       comite:
         temas: Topics
         fecha: Date
@@ -1085,6 +1086,17 @@ en:
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: New Shoe
   bet_amount: Bet Amount
+  denomination: Denomination
+  denominations: Denominations
+  select_denomination: Select the denomination
+  denomination_required_to_play: You must select the denomination (currency) before starting the play.
+  denomination_name: Name
+  denomination_code: Code
+  denomination_symbol: Symbol
+  denomination_status: Status
+  new_denomination: New denomination
+  edit_denomination: Edit denomination
+  denomination_in_use_cannot_delete: Cannot delete; it already has plays associated. Deactivate it instead.
   stop_playing_this_shoe: STOP PLAYING THIS SHOE, START A NEW SHOE
   clear_session_and_start_new_shoe: STOP PLAYING THIS SHOE, START A NEW SHOE
   player_owner: Player

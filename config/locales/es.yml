@@ -543,6 +543,17 @@ es:
   create_new_shoe_from_closed_play: Create a new session (SHOE) from the closed play
   new_play: Nuevo Shoe
   bet_amount: Bet Amount
+  denomination: Denominación
+  denominations: Denominaciones
+  select_denomination: Seleccione la denominación
+  denomination_required_to_play: Debe seleccionar la denominación (moneda) antes de iniciar la partida.
+  denomination_name: Nombre
+  denomination_code: Código
+  denomination_symbol: Símbolo
+  denomination_status: Estado
+  new_denomination: Nueva denominación
+  edit_denomination: Editar denominación
+  denomination_in_use_cannot_delete: No se puede eliminar; ya tiene jugadas asociadas. Desactívela en su lugar.
   stop_playing_this_shoe: DETENGA ESTE SHOE, INICIE UN NUEVO SHOE
   clear_session_and_start_new_shoe: DETENGA ESTE SHOE, INICIE UN NUEVO SHOE
   player_owner: Jugador
@@ -627,6 +638,7 @@ es:
       jugada:
         jugador: Jugador
         monto_apostar: Monto a apostar
+        denominacion_id: Denominación
       comite:
         temas: Temas
         fecha: Fecha

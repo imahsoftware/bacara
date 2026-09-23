@@ -1,0 +1,59 @@
+<% title t(:denominations) %>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"><%= t(:denominations) %></h3>
+    <div class="box-tools pull-right">
+      <%= link_to new_denominacion_path, class: 'btn btn-sm btn-success' do %>
+        <i class="fa fa-plus" aria-hidden="true"></i> <%= t(:new_denomination) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="flash_messages"></div>
+  <div class="box-body">
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+        <tr>
+          <th><%= t(:denomination_name) %></th>
+          <th><%= t(:denomination_code) %></th>
+          <th><%= t(:denomination_symbol) %></th>
+          <th><%= t(:denomination_status) %></th>
+          <th class="text-center"><%= t(:acciones) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @denominaciones.each do |d| %>
+          <tr>
+            <td><%= d.nombre %></td>
+            <td><%= d.codigo %></td>
+            <td><%= d.simbolo %></td>
+            <td>
+              <% if d.activo? %>
+                <span class="label label-success"><%= t(:activated_label) %></span>
+              <% else %>
+                <span class="label label-default"><%= t(:inactivated_label) %></span>
+              <% end %>
+            </td>
+            <td class="text-center" style="white-space: nowrap;">
+              <%= link_to edit_denominacion_path(d), class: 'btn btn-xs btn-primary', title: t(:editar) do %>
+                <i class="fa fa-pencil"></i>
+              <% end %>
+              <% if d.activo? %>
+                <%= link_to bact_denominacion_path(d), method: :patch, class: 'btn btn-xs btn-warning', title: t(:inactivated_label) do %>
+                  <i class="fa fa-ban"></i>
+                <% end %>
+              <% else %>
+                <%= link_to act_denominacion_path(d), method: :patch, class: 'btn btn-xs btn-success', title: t(:activated_label) do %>
+                  <i class="fa fa-check"></i>
+                <% end %>
+              <% end %>
+              <%= link_to denominacion_path(d), method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: t(:elimina_confirma) }, title: t(:title_elimina) do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

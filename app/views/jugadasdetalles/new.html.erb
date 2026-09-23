@@ -5,6 +5,9 @@
 <% jd_pendiente = @jugada.estado.to_s.upcase == 'PENDIENTE' %>
 <% jd_muestra_new_shoe = @jugada.present? && @jugada.estado.to_s.upcase == 'CERRADA' %>
 <% jd_muestra_regresar = current_user.tipoconsulta.to_s != 'PERSONA' %>
+<% jd_denominacion = @jugada.denominacion %>
+<% jd_currency_symbol = jd_denominacion&.simbolo.presence || '$' %>
+<% jd_currency_title  = jd_denominacion&.nombre.presence || t(:usd_title) %>
 
 <input type="hidden" id="jd-base-bet" value="10" />
 
@@ -18,7 +21,7 @@
         <p class="jd-bw-profit <%= jd_profit_class %>" id="jd-bw-profit-wrap">
           <span class="jd-bw-profit__label"><%= t(:profit_label) %></span>
           <span class="jd-bw-profit__wrap">
-            <span class="jd-bw-profit__currency" title="<%= t(:usd_title) %>">$</span><span id="jd-profit-amount"><%= jd_profit_display %></span>
+            <span class="jd-bw-profit__currency" title="<%= jd_currency_title %>"><%= jd_currency_symbol %></span><span id="jd-profit-amount"><%= jd_profit_display %></span>
           </span>
         </p>
 
@@ -231,7 +234,12 @@
             <span class="jd-badge jd-badge--ft" id="badge-count"><%= @total_movimientos %></span>
           </h2>
           <% if @jugada.present? %>
-            <p class="jd-bw-sub--ft"><%= t(:play_number) %> #<%= @jugada_id %></p>
+            <p class="jd-bw-sub--ft">
+              <%= t(:play_number) %> #<%= @jugada_id %>
+              <% if jd_denominacion.present? %>
+                &middot; <%= jd_denominacion.codigo %> (<%= jd_currency_symbol %>)
+              <% end %>
+            </p>
           <% end %>
         </div>
 

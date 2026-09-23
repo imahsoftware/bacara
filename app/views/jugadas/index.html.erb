@@ -29,6 +29,11 @@
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i> <%= t(:new_play) %>
         <% end %>
       <% end %>
+      <% if is_sygma %>
+        <%= link_to denominaciones_path, class: 'btn btn-sm btn-default', data: { toggle: 'tooltip' }, title: t(:denominations) do %>
+          <i class="fa fa-money" aria-hidden="true"></i> <%= t(:denominations) %>
+        <% end %>
+      <% end %>
     </div>
   </div><!-- /.box-header -->
   <div class="flash_messages"></div>
@@ -80,11 +85,15 @@
                   <div role="tabpanel"
                        class="tab-pane <%= 'active' if idx.zero? %>"
                        id="jugadas-portafolio-<%= tab[:id] %>"
-                       data-jugadas-loaded="false">
-                    <div class="text-muted">
-                      <i class="fa fa-info-circle"></i>
-                      <%= t(:click_tab_to_load_plays) %>
-                    </div>
+                       data-jugadas-loaded="<%= idx.zero? && @first_portafolio_id.present? ? 'true' : 'false' %>">
+                    <% if idx.zero? && @first_portafolio_id.present? %>
+                      <%= render 'jugadas/tabla_portafolio' %>
+                    <% else %>
+                      <div class="text-muted">
+                        <i class="fa fa-info-circle"></i>
+                        <%= t(:click_tab_to_load_plays) %>
+                      </div>
+                    <% end %>
                   </div>
                 <% end %>
                 <div role="tabpanel"
@@ -126,9 +135,7 @@
 
 <script>
 (function(){
-  if (window.__jugadasPortafolioTabsBound) return;
-  window.__jugadasPortafolioTabsBound = true;
-
+  // ── Definir loadTab globalmente para que autoLoad pueda llamarla ──
   function loadTab($tabLink){
     var portafolioId = $tabLink.data('portafolio-id');
     var target = $tabLink.attr('href');
@@ -151,10 +158,6 @@
       });
   }
 
-  $(document).on('shown.bs.tab', '.jugadas-portafolio-tab', function(e){
-    loadTab($(e.target));
-  });
-
   function loadSearchResults(params){
     var $results = $('#jugadas-search-results');
     if(!$results.length) return;
@@ -170,26 +173,51 @@
       });
   }
 
-  $(document).on('submit', '#jugadas-search-form', function(ev){
-    ev.preventDefault();
-    var q = $.trim($('#jugadas-search-input').val());
-    if(!q){
-      $('#jugadas-search-results').html('<div class="alert alert-warning"><%= t(:enter_search_criteria) %></div>');
-      return;
-    }
-    loadSearchResults({ q: q });
-  });
+  // ── Registrar event handlers solo una vez por sesión de JS ──
+  if (!window.__jugadasPortafolioTabsBound) {
+    window.__jugadasPortafolioTabsBound = true;
 
-  $(document).on('click', '.jugadas-user-pick', function(ev){
-    ev.preventDefault();
-    var userId = $(this).data('user-id');
-    if(!userId) return;
-    loadSearchResults({ user_id: userId });
-  });
+    $(document).on('shown.bs.tab', '.jugadas-portafolio-tab', function(e){
+      loadTab($(e.target));
+    });
 
-  $(function(){
+    $(document).on('submit', '#jugadas-search-form', function(ev){
+      ev.preventDefault();
+      var q = $.trim($('#jugadas-search-input').val());
+      if(!q){
+        $('#jugadas-search-results').html('<div class="alert alert-warning"><%= t(:enter_search_criteria) %></div>');
+        return;
+      }
+      loadSearchResults({ q: q });
+    });
+
+    $(document).on('click', '.jugadas-user-pick', function(ev){
+      ev.preventDefault();
+      var userId = $(this).data('user-id');
+      if(!userId) return;
+      loadSearchResults({ user_id: userId });
+    });
+  }
+
+  // ── Auto-carga del primer tab: siempre intentar, en cada carga de página ──
+  function autoLoadFirstTab(){
     var $first = $('.jugadas-portafolio-tab').first();
-    if($first.length) loadTab($first);
-  });
+    if (!$first.length) return;
+    var $pane = $($first.attr('href'));
+    if ($pane.length && $pane.data('jugadas-loaded') !== true) {
+      loadTab($first);
+    }
+  }
+
+  // DOM ready normal
+  $(function(){ autoLoadFirstTab(); });
+
+  // Respaldo: si el DOM ya estaba listo cuando el script corrió (p.ej. pjax/navegación)
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(autoLoadFirstTab, 0);
+  }
+
+  // Compatibilidad con jquery_ujs page:load (pjax)
+  $(document).on('page:load', autoLoadFirstTab);
 })();
 </script>

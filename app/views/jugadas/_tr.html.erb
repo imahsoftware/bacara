@@ -5,7 +5,9 @@
   profit  = Jugadasdetalle.sum_acumuladof_for_jugada(jugada.id).to_f
   profit_class = profit > 0 ? 'jd-profit-pos' : (profit < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
   iv_str   = profit == profit.to_i ? profit.to_i.to_s : sprintf('%.1f', profit)
+  currency_symbol = jugada.denominacion&.simbolo
   profit_text = profit > 0 ? "+#{iv_str}" : iv_str
+  profit_text = "#{currency_symbol} #{profit_text}" if currency_symbol.present?
 
   # Locales opcionales para el agrupado por día
   row_day_class        = local_assigns[:day_class].to_s

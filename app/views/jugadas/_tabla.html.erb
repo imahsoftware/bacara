@@ -20,6 +20,12 @@
       day_id       = day.strftime("%Y%m%d")
       day_total    = jugadas_del_dia.sum { |j| profit_by_jugada[j.id].to_f }
       total_class  = day_total > 0 ? 'jd-profit-pos' : (day_total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+      # Si todas las jugadas del día usan la misma denominación, mostrar su símbolo en el total.
+      # Si hay varias monedas mezcladas ese día, no se antepone símbolo (sumar monedas distintas no tiene sentido).
+      day_denominaciones   = jugadas_del_dia.map { |j| j.denominacion&.simbolo }.compact.uniq
+      day_currency_symbol  = day_denominaciones.size == 1 ? day_denominaciones.first : nil
+      day_total_text = format_jugada_profit_value(day_total)
+      day_total_text = "#{day_currency_symbol} #{day_total_text}" if day_currency_symbol.present?
     %>
 
     <% if es_hoy %>
@@ -44,7 +50,7 @@
           <strong><%= t(:daily_total) %>:</strong>
         </td>
         <td class="text-right">
-          <strong><%= format_jugada_profit_value(day_total) %></strong>
+          <strong><%= day_total_text %></strong>
         </td>
       </tr>
 
@@ -66,7 +72,7 @@
               </span>
             </div>
             <div class="jugadas-day-header__right">
-              <%= format_jugada_profit_value(day_total) %>
+              <%= day_total_text %>
             </div>
           </div>
         </td>

@@ -44,6 +44,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :denominaciones do
+    member do
+      patch 'act'
+      patch 'bact'
+    end
+  end
+
   resources :iparametrosusers
   resources :ejecuciones
   resources :municipios
