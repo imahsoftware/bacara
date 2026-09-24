@@ -259,12 +259,13 @@
 %>
 
 <div style="margin-top: 12px; display: table; width: 100%;">
-  <table class="pdf-mini" style="display: table; width: auto; margin-left: 60px;">
+  <table class="pdf-mini" style="display: table; width: auto; margin-right: 10px;">
     <thead>
       <tr>
         <th><%= t(:shoes) %></th>
         <th><%= t(:date_time) %></th>
         <th><%= t(:status) %></th>
+        <th><%= t(:denomination) %></th>
         <th><%= t(:profit) %></th>
       </tr>
     </thead>
@@ -280,6 +281,10 @@
             else @jugada.estado
           end %>
           <%= estado_text %>
+        </td>
+        <td>
+          <% jugada_den = @jugada.denominacion %>
+          <%= jugada_den ? "#{jugada_den.codigo} (#{jugada_den.simbolo})" : '—' %>
         </td>
         <td class="text-right <%= pdf_profit_cls %>"><%= pdf_profit_txt %></td>
       </tr>
