@@ -6,7 +6,6 @@
  *= require dist/css/skins/_all-skins.min
  *= require jquery-ui/datepicker
  *= require select
- *= require signature-pad
  *= require_tree .
 *= require datatables
  *= require_self
@@ -825,6 +824,23 @@ body.vsp-body:has(.jd-bw-page) {
 .jugadas-table tr.jugadas-day-header--collapsible.jd-profit-neg .jugadas-day-header__right { color: #fca5a5; }
 .jugadas-table tr.jugadas-day-header--collapsible.jd-profit-zero .jugadas-day-header__right { color: #d1d5db; }
 
+/* Día con varias monedas: un badge por moneda en vez de un único total coloreado por fila */
+.jugadas-day-total-badge {
+    display: inline-block;
+    white-space: nowrap;
+}
+.jugadas-day-total-badge + .jugadas-day-total-badge {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+.jugadas-table tr.jugadas-day-header--collapsible .jugadas-day-header__right .jugadas-day-total-badge.jd-profit-pos { color: #5eead4; }
+.jugadas-table tr.jugadas-day-header--collapsible .jugadas-day-header__right .jugadas-day-total-badge.jd-profit-neg { color: #fca5a5; }
+.jugadas-table tr.jugadas-day-header--collapsible .jugadas-day-header__right .jugadas-day-total-badge.jd-profit-zero { color: #d1d5db; }
+.jugadas-table tr.jugadas-day-header--collapsible .jugadas-day-header__right .jugadas-day-total-badge + .jugadas-day-total-badge {
+    border-left-color: rgba(255, 255, 255, 0.25);
+}
+
 /* Footer con el total del día */
 .jugadas-table tr.jugadas-day-total > td {
     background: #f3f4f6;
@@ -841,6 +857,41 @@ body.vsp-body:has(.jd-bw-page) {
     background: #f9fafb;
     padding: 10px 12px !important;
     vertical-align: top;
+}
+
+/* Pestañas por moneda: solo aparecen cuando el día tuvo más de una denominación,
+   para no alargar la página con un panel completo por cada una. */
+.jugadas-currency-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0 0 10px;
+    padding: 0;
+}
+.jugadas-currency-tab {
+    cursor: pointer;
+    user-select: none;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #d8dde4;
+    color: #4b5563;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.jugadas-currency-tab:hover {
+    border-color: #4a5f7a;
+    color: #374151;
+}
+.jugadas-currency-tab.active {
+    background: #4a5f7a;
+    border-color: #4a5f7a;
+    color: #fff;
+}
+.jugadas-currency-tab-panes {
+    width: 100%;
 }
 .jugadas-consolidado-dia-layout {
     display: grid;

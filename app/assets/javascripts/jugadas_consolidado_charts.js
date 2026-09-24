@@ -2,11 +2,24 @@
 // Vive en asset (no solo en partial) para que AJAX $.html() siga teniendo boot disponible.
 
 (function () {
+  // Oculto por fila colapsada de día (display inline) o por pestaña de moneda no activa
+  // (panel con display:none) — en ambos casos no tiene sentido montar el chart todavía.
+  function isHostVisible(host) {
+    var tr = host.closest('tr');
+    if (tr && tr.style.display === 'none') return false;
+    var pane = host.closest('.jugadas-currency-tab-pane');
+    if (pane && pane.style.display === 'none') return false;
+    return true;
+  }
+
   function initHostsInRow(row) {
     if (!row || typeof row.querySelectorAll !== 'function') return;
     var fn = window.__jugadasInitConsolidadoChartHost;
     if (typeof fn !== 'function') return;
-    row.querySelectorAll('.jugadas-consolidado-chart-host').forEach(fn);
+    row.querySelectorAll('.jugadas-consolidado-chart-host').forEach(function (host) {
+      if (!isHostVisible(host)) return;
+      fn(host);
+    });
   }
 
   function toggleDay(headerEl) {
@@ -25,11 +38,44 @@
     }
   }
 
+  // Pestañas de moneda dentro del consolidado del día (Summary by user / Management view).
+  // Markup propio (no Bootstrap tabs) para no depender de que jQuery ya haya cargado.
+  function toggleCurrencyTab(tabEl) {
+    var group = tabEl.closest('.jugadas-currency-tabs');
+    var wrap = group && group.nextElementSibling;
+    if (!wrap || !wrap.classList.contains('jugadas-currency-tab-panes')) return;
+    var targetId = tabEl.getAttribute('data-currency-tab');
+    if (!targetId) return;
+
+    group.querySelectorAll('.jugadas-currency-tab').forEach(function (t) {
+      var active = t === tabEl;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    wrap.querySelectorAll('.jugadas-currency-tab-pane').forEach(function (p) {
+      var active = p.id === targetId;
+      p.classList.toggle('active', active);
+      p.style.display = active ? '' : 'none';
+    });
+
+    var pane = document.getElementById(targetId);
+    if (pane) {
+      setTimeout(function () {
+        initHostsInRow(pane);
+      }, 30);
+    }
+  }
+
   if (!window.__jugadasDayToggleBound) {
     window.__jugadasDayToggleBound = true;
     document.addEventListener('click', function (ev) {
       var header = ev.target.closest('.jugadas-day-header--collapsible');
-      if (header) toggleDay(header);
+      if (header) {
+        toggleDay(header);
+        return;
+      }
+      var tab = ev.target.closest('.jugadas-currency-tab');
+      if (tab) toggleCurrencyTab(tab);
     });
     document.addEventListener('keydown', function (ev) {
       if (ev.key !== 'Enter' && ev.key !== ' ') return;
@@ -37,6 +83,12 @@
       if (header) {
         ev.preventDefault();
         toggleDay(header);
+        return;
+      }
+      var tab = ev.target.closest('.jugadas-currency-tab');
+      if (tab) {
+        ev.preventDefault();
+        toggleCurrencyTab(tab);
       }
     });
   }
@@ -44,8 +96,7 @@
   function bootVisibleConsolidadoCharts() {
     requestAnimationFrame(function () {
       document.querySelectorAll('.jugadas-consolidado-chart-host').forEach(function (host) {
-        var tr = host.closest('tr');
-        if (tr && tr.style.display === 'none') return;
+        if (!isHostVisible(host)) return;
         window.__jugadasInitConsolidadoChartHost(host);
       });
     });
@@ -191,8 +242,7 @@
       });
       return;
     }
-    var tr = host.closest('tr');
-    if (tr && tr.style.display === 'none') return;
+    if (!isHostVisible(host)) return;
 
     var payload = parseConsolidadoPayload(host);
     if (!payload || !payload.categories || !payload.categories.length) return;

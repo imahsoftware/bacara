@@ -18,21 +18,23 @@
     <%
       es_hoy       = (day == today)
       day_id       = day.strftime("%Y%m%d")
-      day_total    = jugadas_del_dia.sum { |j| profit_by_jugada[j.id].to_f }
-      total_class  = day_total > 0 ? 'jd-profit-pos' : (day_total < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
-      # Si todas las jugadas del día usan la misma denominación, mostrar su símbolo en el total.
-      # Si hay varias monedas mezcladas ese día, no se antepone símbolo (sumar monedas distintas no tiene sentido).
-      day_denominaciones   = jugadas_del_dia.map { |j| j.denominacion&.simbolo }.compact.uniq
-      day_currency_symbol  = day_denominaciones.size == 1 ? day_denominaciones.first : nil
-      day_total_text = format_jugada_profit_value(day_total)
-      day_total_text = "#{day_currency_symbol} #{day_total_text}" if day_currency_symbol.present?
+      # Con varias monedas el mismo día no tiene sentido sumar sus totales juntos: se separa
+      # un subtotal por denominación y se muestra cada uno como su propio badge coloreado.
+      day_totals_by_currency = jugadas_day_totals_by_currency(jugadas_del_dia, profit_by_jugada)
+      day_total_badges       = jugadas_day_total_badges(day_totals_by_currency)
+      total_class = if day_totals_by_currency.size == 1
+        amt = day_totals_by_currency.first[:amt]
+        amt > 0 ? 'jd-profit-pos' : (amt < 0 ? 'jd-profit-neg' : 'jd-profit-zero')
+      else
+        ''
+      end
     %>
 
     <% if es_hoy %>
       <%# ─── HOY: consolidado del día + filas + footer Daily Total ── %>
       <% if show_player_col %>
         <%= render 'jugadas/consolidado_por_dia',
-                   rows: jugadas_consolidado_rows_for_dia(jugadas_del_dia, profit_by_jugada),
+                   groups: jugadas_consolidado_groups_for_dia(jugadas_del_dia, profit_by_jugada),
                    total_cols: total_cols,
                    show_player_col: show_player_col,
                    day_class: nil,
@@ -50,7 +52,7 @@
           <strong><%= t(:daily_total) %>:</strong>
         </td>
         <td class="text-right">
-          <strong><%= day_total_text %></strong>
+          <strong><%= day_total_badges %></strong>
         </td>
       </tr>
 
@@ -72,7 +74,7 @@
               </span>
             </div>
             <div class="jugadas-day-header__right">
-              <%= day_total_text %>
+              <%= day_total_badges %>
             </div>
           </div>
         </td>
@@ -80,7 +82,7 @@
 
       <% if show_player_col %>
         <%= render 'jugadas/consolidado_por_dia',
-                   rows: jugadas_consolidado_rows_for_dia(jugadas_del_dia, profit_by_jugada),
+                   groups: jugadas_consolidado_groups_for_dia(jugadas_del_dia, profit_by_jugada),
                    total_cols: total_cols,
                    show_player_col: show_player_col,
                    day_class: "day-#{day_id}",
