@@ -3,17 +3,15 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-# Add additional assets to the asset load path
-# Rails.application.config.assets.paths << Emoji.images_path
+# FIX Rails 7 / Ruby 3.3: Rails.root.join devuelve Pathname, Sprockets 4 necesita String → .to_s
+Rails.application.config.assets.paths << Rails.root.join('node_modules').to_s
+Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "AdminLTE").to_s
+Rails.application.config.assets.paths << Rails.root.join("app", "assets").to_s
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'images').to_s
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'logos').to_s
 
-# Precompile additional assets.
-# application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
-#Rails.application.config.assets.precompile += %w( bootstrap/css/bootstrap.css )
-#Rails.application.config.assets.precompile += %w( bootstrap/css/bootstrap.min.css )
-#Rails.application.config.assets.precompile += %w( bootstrap.min.js )
-#Rails.application.config.assets.precompile += %w( jquery.min.js )
-Rails.application.config.assets.paths << Rails.root.join('node_modules')
-Rails.application.config.assets.paths << Rails.root.join('node_modules')
-Rails.application.config.assets.paths << Rails.root.join("vendor", "assets", "AdminLTE")
-Rails.application.config.assets.paths << Rails.root.join("app", "assets")
+# FIX 2026-09-24: sprockets-rails no estaba agregando application.css/application.js
+# a la lista de precompilación en producción (versión vieja de sprockets-rails no
+# incluye ese default), causando ActionView::Template::Error (application.css) / 500
+# en jugadas#index. Se agregan explícitamente para que assets:precompile los genere.
+Rails.application.config.assets.precompile += %w( application.css application.js )

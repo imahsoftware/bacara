@@ -35,7 +35,13 @@
 
 $(function () {
     $(".select2").select2();
-    $('.wysihtml5').wysihtml5();
+    // bootstrap-wysihtml5-rails está deshabilitado (incompatible con Rails 7), así que
+    // $.fn.wysihtml5 no existe. Sin este guard, esta línea lanzaba un TypeError no
+    // capturado dentro del primer $(document).ready, lo que abortaba el resto de la cola
+    // de "ready" de jQuery — incluyendo el auto-scroll de jugadasdetalles/new.html.erb.
+    if (typeof $.fn.wysihtml5 === 'function' && $('.wysihtml5').length) {
+        $('.wysihtml5').wysihtml5();
+    }
     $('[data-toggle="popover"]').popover();
 });
 
