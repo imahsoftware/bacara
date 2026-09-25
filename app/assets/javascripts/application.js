@@ -46,7 +46,12 @@ $(function () {
 });
 
 $(document).ready(function () {
-    jQuery(".best_in_place").best_in_place();
+    // best_in_place también está deshabilitado (mismo motivo que wysihtml5 arriba):
+    // sin este guard, esta línea tronaba en TODAS las páginas y podía seguir
+    // bloqueando cualquier otro $(document).ready registrado después de este.
+    if (typeof jQuery.fn.best_in_place === 'function' && jQuery(".best_in_place").length) {
+        jQuery(".best_in_place").best_in_place();
+    }
 });
 
 $("a[data-popover-title]").each(function (e, elem) {
@@ -457,7 +462,11 @@ function copiarAlPortapapeles(id_elemento) {
 
 $(document).ready(function () {
     var canvas = document.querySelector("canvas");
-    if (canvas) {
+    // signature-pad también está deshabilitado (mismo motivo): sin este guard,
+    // cualquier página con un <canvas> (aunque no sea de firma, p.ej. un gráfico)
+    // tronaba aquí con "SignaturePad is not defined" y podía bloquear el resto
+    // de la cola de $(document).ready de esa página.
+    if (canvas && typeof SignaturePad === 'function') {
         canvas.height = canvas.offsetHeight;
         canvas.width = canvas.offsetWidth;
         window.onresize = resizeCanvas(canvas);
